@@ -1,0 +1,430 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
+		532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849B1F7E827500756E8A /* AppDelegate.swift */; };
+		532D849E1F7E827500756E8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849D1F7E827500756E8A /* ViewController.swift */; };
+		532D84A11F7E827500756E8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D849F1F7E827500756E8A /* Main.storyboard */; };
+		532D84A31F7E827600756E8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532D84A21F7E827600756E8A /* Assets.xcassets */; };
+		532D84A61F7E827600756E8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D84A41F7E827600756E8A /* LaunchScreen.storyboard */; };
+		537EF9981F885FD7004CED83 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EF9971F885FD7004CED83 /* Extensions.swift */; };
+		537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 537EF9991F894916004CED83 /* GoogleService-Info.plist */; };
+		537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EF99B1F8DB613004CED83 /* MainTabBarController.swift */; };
+		537EF99E1F8DB8B9004CED83 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		532D84981F7E827500756E8A /* CaffeNapoli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffeNapoli.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		532D849B1F7E827500756E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		532D849D1F7E827500756E8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		532D84A01F7E827500756E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		532D84A21F7E827600756E8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		532D84A51F7E827600756E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		532D84A71F7E827600756E8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		537EF9971F885FD7004CED83 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		537EF9991F894916004CED83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		537EF99B1F8DB613004CED83 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaffeNapoli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A64E0A2148CD716B003738C2 /* Pods-CaffeNapoli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaffeNapoli.release.xcconfig"; path = "Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli.release.xcconfig"; sourceTree = "<group>"; };
+		F0D5B11F5CC86F77A3BDF081 /* Pods-CaffeNapoli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaffeNapoli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		532D84951F7E827500756E8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		532D848F1F7E827500756E8A = {
+			isa = PBXGroup;
+			children = (
+				532D849A1F7E827500756E8A /* CaffeNapoli */,
+				532D84991F7E827500756E8A /* Products */,
+				E2DA67F95523E4F50C0E0DCF /* Pods */,
+				56BEB7A63FC08BA9D4DA5EB6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		532D84991F7E827500756E8A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				532D84981F7E827500756E8A /* CaffeNapoli.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		532D849A1F7E827500756E8A /* CaffeNapoli */ = {
+			isa = PBXGroup;
+			children = (
+				537EF9961F885FA2004CED83 /* Utils */,
+				532D849B1F7E827500756E8A /* AppDelegate.swift */,
+				537EF99B1F8DB613004CED83 /* MainTabBarController.swift */,
+				537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */,
+				532D849D1F7E827500756E8A /* ViewController.swift */,
+				532D849F1F7E827500756E8A /* Main.storyboard */,
+				532D84A21F7E827600756E8A /* Assets.xcassets */,
+				532D84A41F7E827600756E8A /* LaunchScreen.storyboard */,
+				532D84A71F7E827600756E8A /* Info.plist */,
+				537EF9991F894916004CED83 /* GoogleService-Info.plist */,
+			);
+			path = CaffeNapoli;
+			sourceTree = "<group>";
+		};
+		537EF9961F885FA2004CED83 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				537EF9971F885FD7004CED83 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		56BEB7A63FC08BA9D4DA5EB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2DA67F95523E4F50C0E0DCF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0D5B11F5CC86F77A3BDF081 /* Pods-CaffeNapoli.debug.xcconfig */,
+				A64E0A2148CD716B003738C2 /* Pods-CaffeNapoli.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		532D84971F7E827500756E8A /* CaffeNapoli */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 532D84AA1F7E827600756E8A /* Build configuration list for PBXNativeTarget "CaffeNapoli" */;
+			buildPhases = (
+				5855CE9643114831FA5C915F /* [CP] Check Pods Manifest.lock */,
+				532D84941F7E827500756E8A /* Sources */,
+				532D84951F7E827500756E8A /* Frameworks */,
+				532D84961F7E827500756E8A /* Resources */,
+				3BA65458A67B8C987837C1F1 /* [CP] Embed Pods Frameworks */,
+				682C75167470328899F98072 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CaffeNapoli;
+			productName = CaffeNapoli;
+			productReference = 532D84981F7E827500756E8A /* CaffeNapoli.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		532D84901F7E827500756E8A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = Kev1;
+				TargetAttributes = {
+					532D84971F7E827500756E8A = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 532D84931F7E827500756E8A /* Build configuration list for PBXProject "CaffeNapoli" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 532D848F1F7E827500756E8A;
+			productRefGroup = 532D84991F7E827500756E8A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				532D84971F7E827500756E8A /* CaffeNapoli */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		532D84961F7E827500756E8A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				532D84A61F7E827600756E8A /* LaunchScreen.storyboard in Resources */,
+				537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */,
+				532D84A31F7E827600756E8A /* Assets.xcassets in Resources */,
+				532D84A11F7E827500756E8A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BA65458A67B8C987837C1F1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5855CE9643114831FA5C915F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		682C75167470328899F98072 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		532D84941F7E827500756E8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				532D849E1F7E827500756E8A /* ViewController.swift in Sources */,
+				537EF9981F885FD7004CED83 /* Extensions.swift in Sources */,
+				537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */,
+				537EF99E1F8DB8B9004CED83 /* UserProfileController.swift in Sources */,
+				532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		532D849F1F7E827500756E8A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				532D84A01F7E827500756E8A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		532D84A41F7E827600756E8A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				532D84A51F7E827600756E8A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		532D84A81F7E827600756E8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		532D84A91F7E827600756E8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		532D84AB1F7E827600756E8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0D5B11F5CC86F77A3BDF081 /* Pods-CaffeNapoli.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoli/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		532D84AC1F7E827600756E8A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A64E0A2148CD716B003738C2 /* Pods-CaffeNapoli.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoli/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		532D84931F7E827500756E8A /* Build configuration list for PBXProject "CaffeNapoli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				532D84A81F7E827600756E8A /* Debug */,
+				532D84A91F7E827600756E8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		532D84AA1F7E827600756E8A /* Build configuration list for PBXNativeTarget "CaffeNapoli" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				532D84AB1F7E827600756E8A /* Debug */,
+				532D84AC1F7E827600756E8A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 532D84901F7E827500756E8A /* Project object */;
+}
