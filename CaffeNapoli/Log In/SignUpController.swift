@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // plus Photo Button
     let addPhotoButton : UIButton = {
@@ -72,7 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }()
     @objc func handleTextInputChange(){
         // validate email
-        let isFormValid = emailTextField.text?.characters.count ?? 0 > 0 && usersnameTextField.text?.characters.count ?? 0 > 0 && passwordTextField.text?.characters.count ?? 0 > 0//
+        let isFormValid = emailTextField.text?.count ?? 0 > 0 && usersnameTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0//
         if isFormValid {
             // enable signup button
             signupButton.isEnabled = true
@@ -129,6 +129,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         button.isEnabled = false
         return button
     }()
+    //
+    
+    
+    
     
     @objc func handleSignUp() {
         //print(123)
@@ -136,13 +140,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 //        let email = "dummy0@gmail.com"
 //        let password = "123123"
         
-        guard let email = emailTextField.text, email.characters.count > 0 else { return }
-        guard let username = usersnameTextField.text, username.characters.count > 0 else { return }
-        guard let password = passwordTextField.text, password.characters.count > 0 else { return }
+        guard let email = emailTextField.text, email.count > 0 else { return }
+        guard let username = usersnameTextField.text, username.count > 0 else { return }
+        guard let password = passwordTextField.text, password.count > 0 else { return }
         
         
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error: Error?) in
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
             // user and error is passed bak to  us after the user is created
             // 1: Check if there was an error
             if let err = error {
@@ -217,10 +221,37 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
         
     }
-    
+    //
+    //
+    let alreadyHasAccountButton : UIButton = {
+        let button = UIButton(type: .system)
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account with Caffe Napoli?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        // add the sign up
+        attributedTitle.append(NSMutableAttributedString(string: "Sign In", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)])
+        )
+        //        button.setTitle("Dont have an account with Caffe Napoli? Sign up.", for: .normal)
+        //transition to signup controller. push sign up on to navigationaln stack
+        button.addTarget(self, action: #selector(handelAlreadyHaveAccount), for: .touchUpInside)
+        return button
+    }()
+    @objc func handelAlreadyHaveAccount() {
+//print(123)
+        //We need to pop the controller off the stack
+        navigationController?.popViewController(animated: true)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // add already have account button
+        view.addSubview(alreadyHasAccountButton)
+        alreadyHasAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+        
+        
+        
+        
+        view.backgroundColor = .white
         view.addSubview(addPhotoButton)
      //   view.addSubview(emailTextField)
         setupViews()

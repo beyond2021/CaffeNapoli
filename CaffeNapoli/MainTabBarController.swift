@@ -7,11 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabBarController: UITabBarController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        //HERE WE WILL CHECK IF THE USER IS LOGGED IN
+        
+        //PUT THE VIEW IN THE HIEARCHY
+        DispatchQueue.main.async {
+            //
+            // THE USER IS NOT LOGGED IN, PRESENT LOGIN
+            let loginController = LoginController()
+            let navigationController = UINavigationController(rootViewController: loginController)
+            self.present(navigationController, animated: true, completion: nil)
+            
+        }
+        
+        if Auth.auth().currentUser == nil {
+        
+            return // Stop here and get out
+        }
+        
+        
         //set bgcolor
         view.backgroundColor = .blue
         // UITabarcontrooler has a property called viewControllers

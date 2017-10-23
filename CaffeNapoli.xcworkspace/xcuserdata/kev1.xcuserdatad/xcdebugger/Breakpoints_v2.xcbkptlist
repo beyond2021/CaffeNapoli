@@ -10,12 +10,91 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/ViewController.swift"
-            timestampString = "529383640.106875"
+            timestampString = "530334785.941125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/UserProfile/UserProfileController.swift"
+            timestampString = "530332543.338176"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "fetchUser()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CaffeNapoli.UserProfileController.(fetchUser in _79C92E1FA343F42305B935179BA63B0C)() -&gt; ()"
+                  moduleName = "CaffeNapoli"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kev1/Desktop/CaffeNapoli/CaffeNapoli/UserProfile/UserProfileController.swift"
+                  timestampString = "529723765.818443"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "1021">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.DataSnapshot) -&gt; () in CaffeNapoli.UserProfileController.(fetchUser in _79C92E1FA343F42305B935179BA63B0C)() -&gt; ()"
+                  moduleName = "CaffeNapoli"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kev1/Desktop/CaffeNapoli/CaffeNapoli/UserProfile/UserProfileController.swift"
+                  timestampString = "529723765.823961"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "2024">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Error) -&gt; () in CaffeNapoli.UserProfileController.(fetchUser in _79C92E1FA343F42305B935179BA63B0C)() -&gt; ()"
+                  moduleName = "CaffeNapoli"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kev1/Desktop/CaffeNapoli/CaffeNapoli/UserProfile/UserProfileController.swift"
+                  timestampString = "529723765.826662"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/Log In/LoginController.swift"
+            timestampString = "530436983.274483"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "handelShowSignUp()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
