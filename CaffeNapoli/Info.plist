@@ -4,9 +4,10 @@
 <dict>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
+	<key>NSPhotoLibraryUsageDescription</key>
 	<string>CaffeNapoli will like access to your photos</string>
-	<key>CFBundleIdentifier</key>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>CaffeNapoli will like access to your photos</string>	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>

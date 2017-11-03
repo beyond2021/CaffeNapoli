@@ -14,10 +14,11 @@ class UserProfileHeader: UICollectionViewCell {
     var user : User? {
         // To know when they are set because they are empty in the begining
         didSet {
-            print("Did set \(String(describing: user?.username))")
+//            print("Did set \(String(describing: user?.username))")
             // SINCE ITS SET WE WILL MAKE THE URLSESSION CALL
-            setUpProfileImage() // AFTER WE OBTAIN THE USER FROM THE USERPROFILECONTROLLER
-            // Setup the username here
+ 
+            guard let profileImageUrl = user?.profileImageURL else { return }
+            profileImageView.loadImage(urlString: profileImageUrl)
             usernameLabel.text = user?.username
             
         }
@@ -26,8 +27,9 @@ class UserProfileHeader: UICollectionViewCell {
     
     
     //Let manually add our views
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        
+        let iv = CustomImageView()
         ////iv.backgroundColor = .red
         return iv
         
@@ -187,36 +189,7 @@ class UserProfileHeader: UICollectionViewCell {
         
     }
     
-    
-    fileprivate func setUpProfileImage(){
-        
-        guard let profileImageURL = user?.profileImageURL else { return }
-        
-        guard let url = URL(string: profileImageURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, err) in
-            // You must check for the error, then construct the im age using data
-            if let err = err {
-                print("Failed to fetch profile image:", err)
-                return
-            }
-            //With urlsession u should check for response status of 200 [HTTP OK]
-            
-            //                print(data)
-            guard let data = data else { return }
-            
-            let image = UIImage(data: data)
-            // I need to get back to the main UI thread
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-            
-            }.resume()
-        
 
-        
-        
-    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -9,12 +9,33 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    // This method comes from UITabBarControllerDelegate protocol
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        // Figure which index you are selecting
+        let index = viewControllers?.index(of: viewController) // viewController - selected one
+        print(index ?? 0)
+        // will perform custom logic at index 2
+        if index == 2 {
+            let layout = UICollectionViewFlowLayout()
+            let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
+            let navController = UINavigationController(rootViewController: photoSelectorController)
+            present(navController, animated: true, completion: nil)
+            return false
+        }
+        
+        //
+        return true // stops u from selecting all the tabbar items but must set the delegate in viewDidLoad
+    }
+    
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        //HERE WE WILL CHECK IF THE USER IS LOGGED IN
+        self.delegate = self //- disables tabbar selections
         
+        //HERE WE WILL CHECK IF THE USER IS LOGGED IN
+if Auth.auth().currentUser == nil {
         //PUT THE VIEW IN THE HIEARCHY
         DispatchQueue.main.async {
             //
@@ -25,32 +46,57 @@ class MainTabBarController: UITabBarController {
             
         }
         
-        if Auth.auth().currentUser == nil {
+//        if Auth.auth().currentUser == nil {
         
             return // Stop here and get out
-        }
-        
-        
+       }
+        setupViewControllers()
         //set bgcolor
-        view.backgroundColor = .blue
+//        view.backgroundColor = .blue
         // UITabarcontrooler has a property called viewControllers
 //        let redVC = UIViewController()
 //        redVC.view.backgroundColor = .red
         
+       
+    }
+     func setupViewControllers(){
+ 
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
+        // Search icon
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))
+        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
+        let likeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"))
         let layout = UICollectionViewFlowLayout()
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
+        
         //Add a navigationbar on the top
-        let navController = UINavigationController(rootViewController: userProfileController)
+        let userProfileNavController = UINavigationController(rootViewController: userProfileController)
         // items in the tabs
-        navController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
-        navController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
+        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
+        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
         
         // Color the tabBar
         tabBar.tintColor = .black
-        viewControllers = [navController, UIViewController()]
+//        viewControllers = [navController, UIViewController()]
+        viewControllers = [homeNavController, searchNavController,plusNavController, likeNavController, userProfileNavController]
+        // Tomove the images to center of tabbar - insets here - Modify tabbar insets
+        guard let items = tabBar.items else { return }
+        for item in items {
+            item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
+            
+        }
         
+    }
+    fileprivate func templateNavController(unselectedImage : UIImage, selectedImage : UIImage, rootViewController : UIViewController = UIViewController()) -> UINavigationController {
+        // Home icon
+        let viewController = rootViewController
+        let navController = UINavigationController(rootViewController: viewController)
+        //To add the icons
+        viewController.tabBarItem.image = unselectedImage
+        navController.tabBarItem.selectedImage = selectedImage
+        return navController
     }
     
 }

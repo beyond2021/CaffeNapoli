@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import  Firebase
 
 class LoginController: UIViewController {
     // LogoContainerView
@@ -37,7 +38,7 @@ class LoginController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.borderStyle = .roundedRect
         // textfield listener
-//        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         
         return textField
     }()
@@ -51,9 +52,28 @@ class LoginController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.borderStyle = .roundedRect
         // textfield listener
-//        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return textField
     }()
+    //
+    @objc func handleTextInputChange(){
+        // validate email
+        let isFormValid = emailTextField.text?.count ?? 0 > 0  && passwordTextField.text?.count ?? 0 > 0//
+        if isFormValid {
+            // enable signup button
+            loginButton.isEnabled = true
+            // sign up button color change
+            loginButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)
+            
+        } else {
+            // disable signup button
+            loginButton.isEnabled = false
+            loginButton.backgroundColor = UIColor.rgb(displayP3Red: 149, green: 204, blue: 244)
+        }
+        
+        
+    }
+    
     let loginButton : UIButton = {
         let button = UIButton(type: .system)
         //        button.translatesAutoresizingMaskIntoConstraints = false
@@ -65,13 +85,34 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
         // Action
-//        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         
         // Disable the signup button by default
         button.isEnabled = false
         return button
     }()
     
+    @objc func handleLogin(){
+       // print(123)
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            // handle Error
+            if let error = error {
+                print("Failed to sign in with email", error)
+                return
+            }
+            // successful
+            print("Successfully logged back in with user", user?.uid ?? "")
+            //To show the main controller and reset the UI
+            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            
+            mainTabbarController.setupViewControllers()
+            self.dismiss(animated: true, completion: nil)
+            
+        }
+        
+    }
     
     //
     let dontHaveAccountButton: UIButton = {

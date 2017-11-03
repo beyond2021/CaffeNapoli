@@ -195,6 +195,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                     }
                     // success
                     print("Successfully saved user info into db")
+                    //To show the main controller and reset the UI
+                    guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                    
+                    mainTabbarController.setupViewControllers()
+                    self.dismiss(animated: true, completion: nil)
                 })
                 //
             })
@@ -308,36 +313,4 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
 
 }
 
-extension UIView {
-    func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?,paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width : CGFloat, height: CGFloat ){
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        if let top = top {
-            self.topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
-            
-        }
-        
-//        self.topAnchor.constraint(equalTo: top!, constant: paddingTop).isActive = true
-        if let left = left {
-            self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
-        }
-        
-        if let right = right {
-            self.rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
-        }
-        
-        if let bottom = bottom {
-            self.bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
-        }
-        if width != 0 {
-           widthAnchor.constraint(equalToConstant: width).isActive = true
-            
-        }
-        if height != 0 {
-            heightAnchor.constraint(equalToConstant: height).isActive = true
-            
-        }
-    }
-    
-}
+
