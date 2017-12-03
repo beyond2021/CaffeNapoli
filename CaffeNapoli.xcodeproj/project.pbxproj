@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
+		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
+		5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6211FB46E2800563B1C /* FirebaseUtils.swift */; };
+		5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6241FB473F600563B1C /* UserSearchController.swift */; };
+		5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6261FB47E0700563B1C /* UserSearchCell.swift */; };
 		532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849B1F7E827500756E8A /* AppDelegate.swift */; };
 		532D849E1F7E827500756E8A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849D1F7E827500756E8A /* SignUpController.swift */; };
 		532D84A11F7E827500756E8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D849F1F7E827500756E8A /* Main.storyboard */; };
@@ -23,6 +27,10 @@
 		539A5C231FA815AC007947B0 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A5C221FA815AC007947B0 /* Posts.swift */; };
 		539A5C251FA81BE3007947B0 /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A5C241FA81BE3007947B0 /* UserProfilePhotoCell.swift */; };
 		539A5C271FA880A0007947B0 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A5C261FA880A0007947B0 /* CustomImageView.swift */; };
+		53A03F861FC2247300ACB034 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A03F851FC2247300ACB034 /* CameraController.swift */; };
+		53A03F881FCA525900ACB034 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A03F871FCA525900ACB034 /* PreviewPhotoContainerView.swift */; };
+		53A03F8A1FCA6E6E00ACB034 /* CustomAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A03F891FCA6E6E00ACB034 /* CustomAnimationPresenter.swift */; };
+		53A03F8C1FCA76A800ACB034 /* CustomAnimationDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A03F8B1FCA76A800ACB034 /* CustomAnimationDismisser.swift */; };
 		53B1A41B1F91F408002E3421 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A41A1F91F408002E3421 /* UserProfileHeader.swift */; };
 		53B1A41E1F9C3F9F002E3421 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A41D1F9C3F9F002E3421 /* LoginController.swift */; };
 		53B1A4211F9EFAEB002E3421 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A4201F9EFAEB002E3421 /* PhotoSelectorController.swift */; };
@@ -31,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5324F61F1FB4583A00563B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5324F6211FB46E2800563B1C /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
+		5324F6241FB473F600563B1C /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
+		5324F6261FB47E0700563B1C /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		532D84981F7E827500756E8A /* CaffeNapoli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffeNapoli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532D849B1F7E827500756E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532D849D1F7E827500756E8A /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -48,6 +60,10 @@
 		539A5C221FA815AC007947B0 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		539A5C241FA81BE3007947B0 /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		539A5C261FA880A0007947B0 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		53A03F851FC2247300ACB034 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		53A03F871FCA525900ACB034 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
+		53A03F891FCA6E6E00ACB034 /* CustomAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationPresenter.swift; sourceTree = "<group>"; };
+		53A03F8B1FCA76A800ACB034 /* CustomAnimationDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationDismisser.swift; sourceTree = "<group>"; };
 		53B1A41A1F91F408002E3421 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		53B1A41D1F9C3F9F002E3421 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		53B1A4201F9EFAEB002E3421 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
@@ -70,6 +86,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5324F6231FB473B600563B1C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5324F6241FB473F600563B1C /* UserSearchController.swift */,
+				5324F6261FB47E0700563B1C /* UserSearchCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		532D848F1F7E827500756E8A = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +116,8 @@
 		532D849A1F7E827500756E8A /* CaffeNapoli */ = {
 			isa = PBXGroup;
 			children = (
+				53A03F841FC2242E00ACB034 /* Camera */,
+				5324F6231FB473B600563B1C /* Search */,
 				53DE0A1E1FA954AE00C2323D /* Home */,
 				539A5C211FA81582007947B0 /* Models */,
 				539A5C201FA80A8D007947B0 /* User Profile */,
@@ -115,6 +142,7 @@
 			children = (
 				537EF9971F885FD7004CED83 /* Extensions.swift */,
 				539A5C261FA880A0007947B0 /* CustomImageView.swift */,
+				5324F6211FB46E2800563B1C /* FirebaseUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -150,8 +178,20 @@
 			isa = PBXGroup;
 			children = (
 				539A5C221FA815AC007947B0 /* Posts.swift */,
+				5324F61F1FB4583A00563B1C /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		53A03F841FC2242E00ACB034 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				53A03F851FC2247300ACB034 /* CameraController.swift */,
+				53A03F871FCA525900ACB034 /* PreviewPhotoContainerView.swift */,
+				53A03F891FCA6E6E00ACB034 /* CustomAnimationPresenter.swift */,
+				53A03F8B1FCA76A800ACB034 /* CustomAnimationDismisser.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		53B1A4191F91F398002E3421 /* UserProfile */ = {
@@ -329,18 +369,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */,
+				53A03F8C1FCA76A800ACB034 /* CustomAnimationDismisser.swift in Sources */,
 				539A5C1F1FA58A13007947B0 /* SharePhotoController.swift in Sources */,
 				532D849E1F7E827500756E8A /* SignUpController.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,
 				539A5C271FA880A0007947B0 /* CustomImageView.swift in Sources */,
 				537EF9981F885FD7004CED83 /* Extensions.swift in Sources */,
+				53A03F8A1FCA6E6E00ACB034 /* CustomAnimationPresenter.swift in Sources */,
+				5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */,
 				537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */,
 				53B1A41B1F91F408002E3421 /* UserProfileHeader.swift in Sources */,
+				53A03F861FC2247300ACB034 /* CameraController.swift in Sources */,
+				5324F6201FB4583A00563B1C /* User.swift in Sources */,
 				537EF99E1F8DB8B9004CED83 /* UserProfileController.swift in Sources */,
 				539A5C231FA815AC007947B0 /* Posts.swift in Sources */,
+				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
 				532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */,
 				53B1A41E1F9C3F9F002E3421 /* LoginController.swift in Sources */,
 				539A5C1C1FA18F78007947B0 /* PhotoSelectorHeader.swift in Sources */,
+				53A03F881FCA525900ACB034 /* PreviewPhotoContainerView.swift in Sources */,
 				53DE0A221FA9591800C2323D /* HomePostCell.swift in Sources */,
 				53B1A4211F9EFAEB002E3421 /* PhotoSelectorController.swift in Sources */,
 				539A5C251FA81BE3007947B0 /* UserProfilePhotoCell.swift in Sources */,

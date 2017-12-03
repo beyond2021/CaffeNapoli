@@ -18,15 +18,21 @@ class CustomImageView: UIImageView {
     func loadImage(urlString: String){
 //        print("Loading image....")
         
-
-
-        guard let url = URL(string: urlString) else { return }
-                    lastUrlUsedToLoadImage = urlString
+        self.image = nil
+        
         // CHECK THE IMAGECACHE FOR THE IMAGE, WE WILL USE IUT AND AVOID THE URLSESSION TASK
         if let cachedImage = imageCache[urlString] {
             self.image = cachedImage
             // it will stop here
         }
+
+
+        guard let url = URL(string: urlString) else { return }
+                    lastUrlUsedToLoadImage = urlString
+        
+        
+        
+        
         
        
                     URLSession.shared.dataTask(with: url) { (data, response, err) in

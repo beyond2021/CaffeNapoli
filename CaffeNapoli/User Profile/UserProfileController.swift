@@ -11,16 +11,12 @@ import Firebase
 
 class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let cellID = "cellID"
+    var userID:  String? // to show correct user from UserSearchController
     //
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
-        //navigationItem.title = "Caffe Napoli User Profile"
-        //Fetch the user title
-        //1: get ur user id -> Auth.auth().currentUser?.uid
-        
-        navigationItem.title = Auth.auth().currentUser?.uid
-        
+       
         //Fetch User
         fetchUser()
         // We need to registewrb the collectionview with a header
@@ -33,56 +29,20 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         setupLogoutButton()
         // Fetch Posts from database
         // fetchPosts()
-        fetchOrderedPosts()
+        //fetchOrderedPosts()
         
     }
     //
     var posts = [Post]() // An empty array to hold our posts we get from FB
+    /*
     
-    // Fetch Posts from database for this user
-    fileprivate func fetchPosts(){
-    print("attempting to fetch post from firebase")
-        // Method 1: Observe what is happening at this node (posts-node then uid-node)
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let postReference = Database.database().reference().child("posts").child(uid)
-        
-        // because we need all thew valuse at this point
-        postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
-            //print(postsSnapshot.value)
-            // For us to user our postSnapshot dictionary we get back . we have to cast it from type ANY to Type [String:Any]
-            guard let dictionaries =  postsSnapshot.value as? [String: Any] else { return } //we are optionally binding this dictionary to postsSnapshot.value
-            // to get each dictionary
-            dictionaries.forEach({ (key, value) in
-             //   print("key \(key), Value \(value)")
-                // we get
-//                key -KxhmnGwV2C_WG3kFf9L, Value {
-//                    imageUrl = "https://firebasestorage.googleapis.com/v0/b/caffenapoli-8774f.appspot.com/o/posts%2F24312562-EBBA-4751-BF53-F108038141CF?alt=media&token=f2ac34ed-9974-4326-80b1-71b04c23d92f";
-//                }
-                
-                //first cast dictionar as? []
-                guard let dictionary = value as? [String: Any] else { return }
-    
-                
-                let post = Post(dictionary: dictionary)// here we create each post with a snapshot dictionary we get from firebase
-//                // Start filling up post array by appending
-                self.posts.append(post)
-                
-            })
-            //After we fill up the posts array we can reset the UI ()
-            self.collectionView?.reloadData()
-            
-            
-            
-        }) { (error) in
-            // get the error from the cancel block if there is any
-            print("Failed to fetch posts", error)
-        }
-    
-    
-    }
+ */
     //
     fileprivate func fetchOrderedPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        guard let uid = user?.uid else { return }
+        
         let postReference = Database.database().reference().child("posts").child(uid)
         // order post by creation date .queryOrdered(byChild: "creationDate")
         
@@ -94,10 +54,12 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
             
             guard let dictionary = snapshot.value as? [String : Any] else { return }
               
+            guard let user = self.user else { return }
             
+            let post = Post(user: user, dictionary: dictionary)
+            self.posts.insert(post, at: 0) // puts it in the front
+//            self.posts.append(post)// append goes to the back of the array
             
-            let post = Post(dictionary: dictionary)
-            self.posts.append(post)
             self.collectionView?.reloadData()
             
         }) { (error) in
@@ -200,45 +162,24 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         // .child("users") -> gets u to the Node
         // 2nd -> .child(Auth.auth().currentUser?.uid)
         // To unwrap
-        guard let uid = Auth.auth().currentUser?.uid else { return } // return if we cant get the user id
+        //Correct use select logic
+        let uid = userID ?? (Auth.auth().currentUser?.uid ?? "")
+        //1: check if userID(the one set it in UserSearchController) is not nil use it else user current user id
+        //
+        //guard let uid = Auth.auth().currentUser?.uid else { return }
         //.observeSingleEvent(of: .value, with: { (snapshot) in.-> observe this one event and stop
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.fetchUserWithUIUD(uid: uid) { (user) in
             //
-//            print(snapshot.value ?? "")
-            /*
-             {
-             profileImageURL = "https://firebasestorage.googleapis.com/v0/b/caffenapoli-8774f.appspot.com/o/profile_Images%2F22B102FC-E48C-40C8-8FD1-F384560D9BF8?alt=media&token=3149813c-e942-4b70-ad99-71d3aca7669e";
-             username = Dummy13;
-             }
-            */
-            //snapshot is a dictionary?
-            guard let dictionary = snapshot.value as? [String: Any] else { return } //
-            
-            //NOW WITH USER STRUCT
-            self.user = User(dictionary: dictionary) // loading user dic with snapshot dictionary from above
+            self.user = user
             self.navigationItem.title = self.user?.username
             
             // TO STOP FECTHING DICTIONARY TWICE
             self.collectionView?.reloadData()
-            
-        }) { (err) in
-            //
-            print("Failed to fetch user:", err)
+            // now we fetch the posts
+            self.fetchOrderedPosts()
         }
         
         
     }
 }
-// TO STOP FECTHING DICTIONARY TWICE
-struct User {
-    //
-    let username : String
-    let profileImageURL : String
-    
-    //Constructor to setup these properties
-    init(dictionary: [String:Any]) {
-        // to get them out and cast them beca they r of type Any and if its not able to do so empty string
-        self.username = dictionary["username"] as? String ?? ""
-        self.profileImageURL = dictionary["profileImageURL"] as? String ?? ""
-    }
-}
+

@@ -20,10 +20,117 @@ class UserProfileHeader: UICollectionViewCell {
             guard let profileImageUrl = user?.profileImageURL else { return }
             profileImageView.loadImage(urlString: profileImageUrl)
             usernameLabel.text = user?.username
+            // Follow / Unfollow
+
+            setupEditFolloewButton()
             
         }
     }
+    //LOGIC
+    fileprivate func setupEditFolloewButton() {
+        // Current user or not check
+        //!: get the current user
+        guard let currentLoggedUserId = Auth.auth().currentUser?.uid else {
+            return
+        }
+        //2: get the user we pass into the header
+        guard let userId = user?.uid else { return }
+        // chcek button for follow
+       
+        //3: check for equality since we have both here
+        if currentLoggedUserId == userId {
+              //  editProfileButton.setTitle("Edit Profile", for: .normal)
+        } else {
+            //check if following
+            //1: get to following node
+            Database.database().reference().child("following").child(currentLoggedUserId).child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
+                //
+//                print(snapshot.value)
+                // checking for 1
+                if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
+                    
+//                    self.setupUnfollowStyle()
+                    self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                    
+                    
+                    
+                    
+                } else {
+                   self.setupFollowStyle()
+                    
+                }
+                
+                
+            }, withCancel: { (err) in
+                //
+               
+                    print("Failed to check if following:", err)
+                
+            })
+            
+       
+            
+        }
+      
+    }
     
+    @objc func handleEditProfileOrFollow() {
+        print("Execute edit profile / follow / unfollow logic")
+        // Follow User Logic
+        guard let currentLoggedInUserId = Auth.auth().currentUser?.uid else { return }
+        guard let userId = user?.uid else { return }
+        //1: introduce a following node. .database() gets us to the root of the tree. We are building out a little branch
+        if editProfileFollowButton.titleLabel?.text == "Unfollow" {
+            // do unfollow here
+            Database.database().reference().child("following").child(currentLoggedInUserId).child(userId).removeValue(completionBlock: { (error, ref) in
+                //
+                if let err = error {
+                    print("Failed to unfollow user:", err)
+                    return
+                }
+                //success
+                print("Successfully unfollowed user: ", self.user?.username ?? "")
+                //button logic
+                self.setupFollowStyle()
+            })
+            
+        } else {
+            
+            // do follow here
+            let followingRef = Database.database().reference().child("following").child(currentLoggedInUserId)
+            let values = [userId : 1 ]
+            followingRef.updateChildValues(values) { (error, ref) in
+                //
+                if let err = error {
+                    print("Fail to follow user :", err)
+                    return // get out of completion block
+                }
+                //success
+                print("Successfully followed user: ", self.user?.username ?? "")
+                self.setupUnfollowStyle()
+                
+            }
+            
+            
+        }
+        
+       
+    }
+    
+    fileprivate func setupFollowStyle() {
+        self.editProfileFollowButton.setTitle("Follow", for: .normal)
+        self.editProfileFollowButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237) //bg
+        self.editProfileFollowButton.setTitleColor(.white, for: .normal)// text color
+        self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+    }
+    
+    fileprivate func setupUnfollowStyle() {
+        self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+        self.editProfileFollowButton.backgroundColor = .white //bg
+        self.editProfileFollowButton.setTitleColor(.black, for: .normal)// text color
+        self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+        
+    }
     
     
     //Let manually add our views
@@ -104,7 +211,7 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     //EDIT PROFILE BUTTON
-    let editProfileButton : UIButton = {
+    lazy var editProfileFollowButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Edit Profile", for: .normal)
         button.setTitleColor(.black, for: .normal)// Text color for the button
@@ -113,10 +220,12 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 3
+        button.addTarget(self, action: #selector(handleEditProfileOrFollow), for: .touchUpInside)
         
         return button
     }()
     
+  
     
     
 
@@ -141,8 +250,8 @@ class UserProfileHeader: UICollectionViewCell {
         //
         setupUserStatsView()
         //EDIT PROFILE BUTTON
-        addSubview(editProfileButton)
-        editProfileButton.anchor(top: postLabel.bottomAnchor, left: postLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
+        addSubview(editProfileFollowButton)
+        editProfileFollowButton.anchor(top: postLabel.bottomAnchor, left: postLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
         
     }
     fileprivate func setupUserStatsView(){

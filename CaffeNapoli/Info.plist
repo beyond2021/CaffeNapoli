@@ -2,12 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>priva</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Caffe Napoli would like to access your camera to take photos</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>CaffeNapoli will like access to your photos</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>CaffeNapoli will like access to your photos</string>	<key>CFBundleIdentifier</key>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>CaffeNapoli will like access to your photos</string>
+	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>

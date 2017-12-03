@@ -14,16 +14,47 @@ class HomePostCell: UICollectionViewCell {
            // print(post?.imageUrl)
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
+//            usernameLabel.text = "TEST USERNAME"
+            usernameLabel.text = post?.user.username
             
+            guard let profileImageUrl = post?.user.profileImageURL else { return }
+            userProfileImageView.loadImage(urlString: profileImageUrl)
+//            captionLabel.text = post?.caption
+            setupAttributedCaption()
+            
+
         }
     } //needs to be nil in the beginning
+    
+    fileprivate func setupAttributedCaption() {
+        guard let post = self.post else { return }
+        //Attributed text
+        let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
+        
+        
+        
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 4)]))
+        
+        let timeAgoDisplay = post.creationDate.timeAgoDisplay()
+        
+        // date
+        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.gray]))
+//        label.attributedText = attributedText
+        
+        
+//        captionLabel.text = post?.caption
+        captionLabel.attributedText = attributedText
+    }
+    
+    
     //MARK: - Profile ImageView
     //
     let userProfileImageView : CustomImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .blue
+//        iv.backgroundColor = .blue
         return iv
         
     }()
@@ -89,18 +120,18 @@ class HomePostCell: UICollectionViewCell {
     // MARK:- Caption Label
     let captionLabel: UILabel = {
         let label = UILabel()
-        //Attributed text
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: " Some cation text that will perhaps wrap on to the next line", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
-        
-        
-        
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 4)]))
-            
-            
-            // date
-        attributedText.append(NSAttributedString(string: "1 week ago ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.gray]))
-        label.attributedText = attributedText
+//        //Attributed text
+//        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+//        attributedText.append(NSAttributedString(string: " Some cation text that will perhaps wrap on to the next line", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
+//
+//
+//
+//        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 4)]))
+//
+//
+//            // date
+//        attributedText.append(NSAttributedString(string: "1 week ago ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.gray]))
+//        label.attributedText = attributedText
 //        label.text = "SOMETHING FOR NOW"
        // label.font = UIFont.boldSystemFont(ofSize: 14)
         label.numberOfLines = 0
