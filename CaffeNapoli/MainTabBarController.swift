@@ -51,12 +51,7 @@ if Auth.auth().currentUser == nil {
             return // Stop here and get out
        }
         setupViewControllers()
-        //set bgcolor
-//        view.backgroundColor = .blue
-        // UITabarcontrooler has a property called viewControllers
-//        let redVC = UIViewController()
-//        redVC.view.backgroundColor = .red
-        
+
        
     }
      func setupViewControllers(){

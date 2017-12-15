@@ -66,6 +66,7 @@ class SharePhotoController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    //MARK:- POSTS
     // Handle Share
     @objc func handleShare(){
 //       print("Handling Shares")

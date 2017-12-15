@@ -10,17 +10,18 @@ import UIKit
 import Firebase
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     //
     var posts = [Post]()
     //
     let cellID = "cellID"
     //
     //iOS9
-    // let refreshControl = UIRefreshControl
+//    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .white
+//        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor.napoliGold()
         //Setup to catch updateField notification from SharePhotoController
 //        let name = NSNotification.Name("UpdateFeed")
         //using the class property from SharePhotoController
@@ -36,15 +37,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.refreshControl = refreshControl
         //title
         setUpNavigationItems()
-        // get the posts
-//        fetchPosts()
-        // the follow a certain user / Appending post to list
-//        Database.fetchUserWithUIUD(uid: "kcrwzqypLKXrbFdzgBqYvm39Noh2") { (user) in
-//            self.fetchPostsWithUser(user: user)
-//        }
-//        Database.fetchUserWithUIUD(uid: "nldfN1xNBtUr7MEv0tHvbYTKhxA2") { (user) in
-//            self.fetchPostsWithUser(user: user)
-//        }
+  
         
         fetchAllPosts()
        
@@ -56,8 +49,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     @objc func handleRefresh() {
         print("Handling refresh...")
         posts.removeAll()
+        collectionView?.reloadData() // stops index out of bounds crash
         fetchAllPosts()
-
+        
+      
     }
     //
     fileprivate func fetchAllPosts(){
@@ -65,7 +60,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         fetchFollowingUserIds()
     }
     
-    
+    //MARK:- Get the usee ids of all the people that i am following
     fileprivate func fetchFollowingUserIds() {
         //LOGIC
         //1: get to following node user ids
@@ -95,7 +90,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
   
-    //Fetch Posts
+    //MARK:- Get the id of the loggen in user
     // Fetch Posts from database for this user
     fileprivate func fetchPosts(){
 //        print("attempting to fetch post from firebase")
@@ -108,7 +103,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         
     }
-  
+    //MARK:- Fetch all posts of the people that this logged in user is folowing
     fileprivate func fetchPostsWithUser(user: User) {
         
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -129,22 +124,55 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let dictionary = value as? [String: Any] else { return }
                 //                    let dummyUser = User(dictionary: ["username" : "Keevin"])
                 
-                let post = Post(user: user, dictionary: dictionary)
+                var post = Post(user: user, dictionary: dictionary)//var because styrcts need to be a var to change properties
+                post.id = key
                 
                 //                let post = Post(dictionary: dictionary)// here we create each post with a snapshot dictionary we get from firebase
                 //                // Start filling up post array by appending
+                //LIKES from Firebase
+                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
                 
+                Database.database().reference().child("likes").child(key).child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
+
+                    
+//                    print(snapshot) // expecting 1
+                    //creating a like
+                    if let value = snapshot.value as? Int, value == 1 {
+                        //post has been liked
+                        post.hasLiked = true
+                    } else {
+                        post.hasLiked = false
+                        
+                    }
+                    self.posts.append(post)
+                    //
+                    self.posts.sort(by: { (post1, post2) -> Bool in
+                        //
+                        return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
+                    })
+                    // stop refreshing
+                    if self.posts.count < 1 {
+                        self.isFinishedRefreshing = true
+                        
+                    }
+                    // UI
+                    self.collectionView?.reloadData()
+                    //
+                }, withCancel: { (err) in
+                    //
+                    print("could not get like info for post", err)
+                })
                
-                self.posts.append(post)
+//                self.posts.append(post)
                 
             })
-            self.posts.sort(by: { (post1, post2) -> Bool in
-                //
-                return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
-            })
+//            self.posts.sort(by: { (post1, post2) -> Bool in
+//                //
+//                return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
+//            })
             
             //After we fill up the posts array we can reset the UI ()
-            self.collectionView?.reloadData()
+//            self.collectionView?.reloadData()
             
             
             
@@ -159,7 +187,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-      
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "shopping-cart-50").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
+    }
+    @objc func handleCart(){
+        print("handling cart....")
+        let shoppingCartController = ShoppingCartController()
+        present(shoppingCartController, animated: true, completion: nil)
+        
     }
     
     @objc func handleCamera(){
@@ -175,15 +210,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //
         return posts.count
     }
+    //
+    var isFinishedRefreshing = false
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
-        //cell.backgroundColor = .purple
-        // Set up post in custom cell here
-        cell.post = posts[indexPath.item]
+        
+            cell.post = posts[indexPath.item]
+            cell.delegate = self
         
         return cell
+     
     }
+    
+    
     //Cell sizes
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //How tall the cell is
@@ -196,6 +236,51 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         return CGSize(width: view.frame.width, height: height)
     }
-    //
+    // HomePostCellDelegate Methjods
+    func didTapComment(post: Post) {
+       
+        //
+        print(post.caption)
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        //pass the post to the commentscontroller here
+        commentsController.post = post
+        
+        // Push new viewcontroller on to the stack here
+        navigationController?.pushViewController(commentsController, animated: true)
+        
+    }
+    //MARK:- Saving the like state logic
+    func didLike(for cell: HomePostCell) {
+       
+        guard let indexpath = collectionView?.indexPath(for: cell) else { return }
+        // we can now get the post
+        var post = self.posts[indexpath.item]
+        //check
+       // print(post.caption)
+        // Introduce a 5th node in firebase called likes
+        guard let postId = post.id else { return }
+        //current user uid
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+      
+        
+        let values = [uid:post.hasLiked == true ? 0 : 1] // me liking or unliking this post
+        Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
+            //
+            if let err = error {
+                print("Could not like post", err)
+                return
+              
+            }
+            // success
+//            print("Successfully liked post")
+            post.hasLiked = !post.hasLiked // toggle like button
+            self.posts[indexpath.item] = post // because of structs
+            self.collectionView?.reloadItems(at: [indexpath])
+            
+        }
+
+        
+        
+    }
     
 }

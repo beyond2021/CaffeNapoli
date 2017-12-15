@@ -12,6 +12,23 @@ extension UIColor {
        return UIColor(displayP3Red: displayP3Red/255, green: green/255, blue: blue/255, alpha: 1)
         
     }
+    static func napoliGold() -> UIColor {
+        return UIColor.rgb(displayP3Red: 138, green: 118, blue: 76)
+    }
+    static func napoliGreen() -> UIColor {
+        return UIColor.rgb(displayP3Red: 2, green: 144, blue: 72)
+    }
+    
+    static func mainBlue() -> UIColor {
+        
+        return UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)
+       
+        
+    }
+    static func buttonUnselected() -> UIColor {
+        return UIColor(white: 0, alpha: 0.2)
+        
+    }
     
 }
 extension UIView {
@@ -85,3 +102,18 @@ extension Date {
         
     }
 }
+
+extension UIImage {
+    func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(
+            CGSize(width: self.size.width + insets.left + insets.right,
+                   height: self.size.height + insets.top + insets.bottom), false, self.scale)
+        let _ = UIGraphicsGetCurrentContext()
+        let origin = CGPoint(x: insets.left, y: insets.top)
+        self.draw(at: origin)
+        let imageWithInsets = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageWithInsets
+    }
+}
+

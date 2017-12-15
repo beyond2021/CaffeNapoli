@@ -96,7 +96,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     var users = [User]()
     
     
-    //Get the users
+    //MARK:- GET ALL USERS
     fileprivate func fetchUsers(){
         print("Fetching users...")
         //fetching all users from the users node

@@ -9,10 +9,13 @@
 import Foundation
 struct Post {
     //
+    var id: String?
     let user : User
     let imageUrl : String
     let caption : String
     let creationDate: Date
+    //
+    var hasLiked  = false
     
     //initializer takes in a dictionary of snapshot type [String : Any]
     //  this is the initial setup when a Post is built

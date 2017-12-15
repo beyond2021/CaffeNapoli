@@ -21,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Setting up the root view
         window = UIWindow()
         window?.rootViewController = MainTabBarController()
+        //
+        UITabBar.appearance().barTintColor = UIColor.black
+        UITabBar.appearance().tintColor = UIColor.napoliGold()
+        
+        //
+        UINavigationBar.appearance().barTintColor = UIColor.napoliGold()
+        
+        
         return true
     }
 

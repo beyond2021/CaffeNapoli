@@ -77,7 +77,9 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
             // enable signup button
             signupButton.isEnabled = true
          // sign up button color change
-            signupButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)
+//            signupButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)
+            
+            signupButton.backgroundColor = .mainBlue()
             
         } else {
             // disable signup button
@@ -132,7 +134,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     //
     
     
-    
+    //MARK:- Sign up User
     
     @objc func handleSignUp() {
         //print(123)

@@ -10,6 +10,8 @@ import UIKit
 import Photos
 
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+   
+    
     // constants
     let cellID = "cellID"
     let headerID = "headerID"
@@ -112,6 +114,9 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     // This method reders out the header for us
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! PhotoSelectorHeader
+        
+//        header.user = self.user //TODO
+       
         
         self.header = header
         //header.backgroundColor = .red
