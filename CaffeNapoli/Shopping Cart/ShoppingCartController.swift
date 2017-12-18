@@ -39,7 +39,7 @@ class ShoppingCartController: UIViewController {
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = UIColor.napoliGold()
         view.addSubview(cartLabel)
         cartLabel.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 20, height: 50)
         cartLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

@@ -57,58 +57,41 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //MARK:- PAGINATION
     fileprivate func paginatePosts(){
         print("Start paging for more posts")
-        // Fetch all the posts for this user.
-        //1: Get uid for this user
+        
         guard let uid = self.user?.uid else { return }
-        //2: hold a reference to the post node and get the post of this user
+        
         let ref = Database.database().reference().child("posts").child(uid)
-        //2a:
-        //Query with a limit
-//        let value = "-L-u46FMz556pZ4oox5W"
-//        let query = ref.queryOrderedByKey().queryStarting(atValue: value).queryLimited(toFirst: 5)
-        var query = ref.queryOrderedByKey()
-        //3: observe the entire node with .value
-        //ref.observe(.value, with: { (snapshot) in // all posts
-        //query.observe(.value, with: { (snapshot) in //5 posts
-        
-        
-        
-        
-        
-        
-        
+     
+//        var query = ref.queryOrderedByKey() // this query works but out of order.
+        var query = ref.queryOrdered(byChild: "creationDate")
         if posts.count > 0 {
-            let value = posts.last?.id //last post
-            
-           query = query.queryStarting(atValue: value)
+//            let value = posts.last?.id //last post
+            let value = posts.last?.creationDate.timeIntervalSince1970 // order posts by date
+           query = query.queryEnding(atValue: value) // this is a query from the front of the list
         }
         
-        query.queryLimited(toFirst: 4).observe(.value, with: { (snapshot) in
-            //
-            
-            
-//            print(snapshot.value)
-            //4: All of the remaining objects in order and cast into an array
+//        query.queryLimited(toFirst: 4).observe(.value, with: { (snapshot) in // this is a query from the front of the list
+        
+        query.queryLimited(toLast: 4).observe(.value, with: { (snapshot) in
+          
             guard var allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
             
-            // stop paging checkn switch
+            allObjects.reverse()
+            
             if allObjects.count < 4 {
                 self.isFinishedPaging = true
                
             }
             
-            if self.posts.count > 0 {
+            if self.posts.count > 0 && allObjects.count > 0 {
                 allObjects.removeFirst()
-                
+             
             }
            
-            
-            //5: go thru the objects keys
             allObjects.forEach({ (snapshot) in
-                //
+               
                 print(snapshot.key) // AnyObject
-                //paging = get data in smaller chunks = query using some kind of limit
-                // turn snapshots into posts
+               
                 guard let user = self.user else { return }
                 guard let dictionary = snapshot.value as? [String: Any] else { return }
                 var post = Post(user: user, dictionary: dictionary)
@@ -117,7 +100,6 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
                 
                 self.posts.append(post)
                 
-                
             })
             // pagination logic
             self.posts.forEach({ (post) in
@@ -125,8 +107,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
             })
             
             self.collectionView?.reloadData()
-            
-            
+           
         }) { (err) in
             //
             print("Failed to paginate for posts:", err)

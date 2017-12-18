@@ -182,9 +182,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                 
                 
                 guard let uid = user?.uid else { return}
+                // Getb token from the messaging of Firebase
+                guard let fcmToken = Messaging.messaging().fcmToken else { return }
                 
                 //to save the username
-                let dictionaryValues = ["username": username, "profileImageURL" : profileImageURL]
+                let dictionaryValues = ["username": username, "profileImageURL" : profileImageURL, "fcmToken": fcmToken]
                 let values = [uid : dictionaryValues ]
                 
                 //this appends new users  on server
