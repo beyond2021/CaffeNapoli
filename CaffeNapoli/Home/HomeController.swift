@@ -11,6 +11,29 @@ import Firebase
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
+    
+    let noPostsAvailableLabel: UILabel = {
+        let label = UILabel()
+        label.text = " No posts available "
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = .white
+        return label
+    }()
+    
+    let howToSeePostsLabel: UILabel = {
+        let label = UILabel()
+        label.text = " Please create a post by clicking the + button at the bottom or search for and follow users with the search button below "
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .white
+        return label
+    }()
+    
+    
+    
+    
     //
     var posts = [Post]()
     //
@@ -20,6 +43,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //    let refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupLabels()
+       
 //        collectionView?.backgroundColor = .white
         collectionView?.backgroundColor = UIColor.napoliGold()
         //Setup to catch updateField notification from SharePhotoController
@@ -38,10 +64,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //title
         setUpNavigationItems()
   
-        
         fetchAllPosts()
        
     }
+    
+    private func  setupLabels() {
+        noPostsAvailableLabel.alpha = 1
+        howToSeePostsLabel.alpha = 1
+        
+        collectionView?.addSubview(noPostsAvailableLabel)
+        collectionView?.addSubview(howToSeePostsLabel)
+        noPostsAvailableLabel.anchor(top: collectionView?.topAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 40)
+        noPostsAvailableLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
+        
+        howToSeePostsLabel.anchor(top: noPostsAvailableLabel.bottomAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 60)
+        howToSeePostsLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
+        
+    }
+    
+    
     @objc func handleUpdateFeed() {
         handleRefresh()
     }
@@ -207,6 +248,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if posts.count > 0 {
+            noPostsAvailableLabel.alpha = 0
+            howToSeePostsLabel.alpha = 0
+            
+        }
+        
         //
         return posts.count
     }

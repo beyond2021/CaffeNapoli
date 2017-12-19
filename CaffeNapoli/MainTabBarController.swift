@@ -60,14 +60,21 @@ if Auth.auth().currentUser == nil {
         // Search
 //        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))
 //
-        let searchNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsUnsellected"), selectedImage: #imageLiteral(resourceName: "friendsSelected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         
         let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
-        let likeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"))
+//        let likeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"))
+        
+//        let reservationsController = templateNavController(unselectedImage: #imageLiteral(resourceName: "reserveUnfilled"), selectedImage: #imageLiteral(resourceName: "reserveUnfilled"))
+        
+        let root = AddReservationViewController()
+        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "reserveUnfilled"), selectedImage: #imageLiteral(resourceName: "reserveUnfilled"), rootViewController: root)
+        
         let layout = UICollectionViewFlowLayout()
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
+        
         
         
         //Add a navigationbar on the top
@@ -79,7 +86,7 @@ if Auth.auth().currentUser == nil {
         // Color the tabBar
         tabBar.tintColor = .black
 //        viewControllers = [navController, UIViewController()]
-        viewControllers = [homeNavController, searchNavController,plusNavController, likeNavController, userProfileNavController]
+        viewControllers = [homeNavController, searchNavController,plusNavController, addReservationController, userProfileNavController]
         // Tomove the images to center of tabbar - insets here - Modify tabbar insets
         guard let items = tabBar.items else { return }
         for item in items {
