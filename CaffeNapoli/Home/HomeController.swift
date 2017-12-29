@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
@@ -41,16 +42,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     //
     //iOS9
 //    let refreshControl = UIRefreshControl()
+//    let curvedView = CurvedView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //
         setupLabels()
-       
-//        collectionView?.backgroundColor = .white
-        collectionView?.backgroundColor = UIColor.napoliGold()
-        //Setup to catch updateField notification from SharePhotoController
-//        let name = NSNotification.Name("UpdateFeed")
-        //using the class property from SharePhotoController
+       //
+        collectionView?.backgroundColor = .white
+        //
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
 , object: nil)
@@ -63,6 +63,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.refreshControl = refreshControl
         //title
         setUpNavigationItems()
+        //animation
+//        let curvedView = CurvedView(frame: view.frame)
+//        curvedView.backgroundColor = .green
   
         fetchAllPosts()
        
@@ -89,6 +92,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleRefresh() {
         print("Handling refresh...")
+        playAudio(sound: "Smiling Face With Heart-Shaped Eyes", ext: "wav")
         posts.removeAll()
         collectionView?.reloadData() // stops index out of bounds crash
         fetchAllPosts()
@@ -233,8 +237,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     @objc func handleCart(){
         print("handling cart....")
-        let shoppingCartController = ShoppingCartController()
-        present(shoppingCartController, animated: true, completion: nil)
+        let shoppingCartController = ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout())
+        let navController = UINavigationController(rootViewController: shoppingCartController)
+//        navController.pushViewController(shoppingCartController, animated: true)
+//
+        present(navController, animated: true, completion: nil)
         
     }
     
@@ -298,6 +305,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     //MARK:- Saving the like state logic
     func didLike(for cell: HomePostCell) {
+//        animateLikes()
        
         guard let indexpath = collectionView?.indexPath(for: cell) else { return }
         // we can now get the post
@@ -311,6 +319,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
       
         
         let values = [uid:post.hasLiked == true ? 0 : 1] // me liking or unliking this post
+        
+        print("like :", post.hasLiked)
+        if post.hasLiked == false {
+            animateLikes()
+            playAudio(sound: "OK Hand Sign", ext: "wav")
+        }
+        
         Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
             //
             if let err = error {
@@ -330,4 +345,74 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
     }
     
+    fileprivate func animateLikes() {
+        (0...10).forEach { (_) in
+            generateAnimatedViews()
+        }
+       
+    }
+    private func generateAnimatedViews() {
+        let image = drand48() > 0.5 ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "thumbsUp")
+        let imageView = UIImageView(image: image)
+        let dimensions = 20 + drand48() * 10
+        imageView.frame = CGRect(x: 0, y: 0, width: dimensions, height: 30)
+        let animation = CAKeyframeAnimation(keyPath: "position")
+        animation.path = customPath().cgPath
+        animation.duration = 2 + drand48() * 3
+        animation.fillMode = kCAFillModeForwards //removes from view
+        animation.isRemovedOnCompletion = false
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        
+        imageView.layer.add(animation, forKey: nil)
+        view?.addSubview(imageView)
+    }
+    // MARK:- Sound
+    var bombSoundEffect: AVAudioPlayer?
+    
+    func playAudio(sound: String, ext: String) {
+        let url = Bundle.main.url(forResource: sound, withExtension: ext)!
+        
+        do {
+            bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+            guard let bombSound = bombSoundEffect else { return }
+            
+            bombSound.prepareToPlay()
+            bombSound.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+
+
+func customPath() -> UIBezierPath {
+    let path = UIBezierPath()
+    //starting point
+    path.move(to: CGPoint(x: 20, y: 480))
+    let endPoint = CGPoint(x: 400, y: 480)
+    //        path.addLine(to: endPoint)
+    let randonYShift = 200 + drand48() * 300
+    let cp1 = CGPoint(x: 120, y: 380 - randonYShift)
+    let cp2 = CGPoint(x: 200, y: 580 + randonYShift)
+    
+    path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
+    return path
+    
+}
+
+class CurvedView : UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func draw(_ rect: CGRect) {
+        // we will do some fancy drawing
+        let path = customPath()
+        path.lineWidth = 3
+        path.stroke()
+    }
 }

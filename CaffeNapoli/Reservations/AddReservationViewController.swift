@@ -17,7 +17,7 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
     let eventNameLabel: UILabel = {
         let label = UILabel()
         label.text = " Event Name"
-//        label.textColor = .white
+        label.textColor = .red
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
@@ -44,15 +44,15 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
     let partyNumberLabel: UILabel = {
         let label = UILabel()
         label.text = " Number Of Guests"
-//        label.textColor = .white
+        label.textColor = .red
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
     
     let eventDateLabel: UILabel = {
         let label = UILabel()
-        label.text = " Number Of Guests"
-        //        label.textColor = .white
+        label.text = " Date Of Party"
+        label.textColor = .red
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
@@ -66,17 +66,24 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
         return picker
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 //        navigationItem.rightBarButtonItem?.isEnabled = false
+//        animateLabel()
     }
     
+    let napoliLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Caffe Napoli"
+        label.textAlignment = .center
+        label.textColor = UIColor.napoliGreen()
+        label.font = UIFont.boldSystemFont(ofSize: 55)
+        return label
+        
+    }()
+  
     
-    
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
-//        view.endEditing(true)
-//        super.touchesBegan(touches, withEvent: event)
-//    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +94,10 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
         
         navigationItem.title = " Resevations"
         setupBarbuttonItems()
+        view.addSubview(napoliLabel)
+        
+//
+        
         view.addSubview(eventNameLabel)
         view.addSubview(eventNameTextField)
         view.addSubview(partyNumberLabel)
@@ -95,7 +106,7 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
         view.addSubview(eventDateLabel)
         view.addSubview(eventDatePicker)
         
-        eventDateLabel.anchor(top: partyNumberPicker.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 8, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 40)
+        eventDateLabel.anchor(top: partyNumberPicker.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 2, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 40)
         
         
         
@@ -109,19 +120,28 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
         eventDatePicker.anchor(top: eventDateLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 8, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 200)
 //        eventDatePicker.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        eventNameTextField.anchor(top: eventNameLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 2, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 40)
-        eventNameLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 80, paddingLeft: 20, paddingBottom: 0, paddingRight: 0, width: 0, height: 40)
+        eventNameTextField.anchor(top: eventNameLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 2, paddingLeft: 25, paddingBottom: 0, paddingRight: 25, width: 0, height: 40)
+        eventNameLabel.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 80, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 40)
 //        eventNameLabel.alpha = 0
+        napoliLabel.anchor(top: eventDatePicker.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 60)
         
+        animateLabel()
         
+    }
+    fileprivate func animateLabel(){
+        UIView.animate(withDuration: 2, delay: 0, options: [.curveEaseOut],
+                       animations: {
+                        self.napoliLabel.center.y -= self.view.bounds.height - 100
+                        self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     private func setupBarbuttonItems() {
        navigationController?.navigationBar.tintColor = .black
-       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add Event", style: .plain, target: self, action: #selector(addEvent))
+       navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(addEvent))
     }
     @objc func addEvent() {
-        print(" adding event ...")
+       
         let mailComposeViewController = configureMailController()
         if MFMailComposeViewController.canSendMail(){
             self.present(mailComposeViewController, animated: true, completion: nil)
@@ -174,8 +194,7 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
             let newI = i+1
             persons.append("\(newI)")
         }
-        
-        
+       
     }
     
     
@@ -196,9 +215,7 @@ class AddReservationViewController : UIViewController, MFMailComposeViewControll
         return persons[row % persons.count]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        let currentIndex = row % persons.count
-//        partyNumberPicker.selectRow((loopingMargin / 2) * persons.count + currentIndex, inComponent: 0, animated: false)
-//        print(row)
+
         eventNameTextField.resignFirstResponder()
         numberPicked = row
     }

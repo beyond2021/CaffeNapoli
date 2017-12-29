@@ -16,7 +16,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         let button = UIButton(type: .system)
         //  button.backgroundColor = .red
  //       button.translatesAutoresizingMaskIntoConstraints = false
-        let image = #imageLiteral(resourceName: "if_add_96_2074812")
+        let image = #imageLiteral(resourceName: "avatar2")
         button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         

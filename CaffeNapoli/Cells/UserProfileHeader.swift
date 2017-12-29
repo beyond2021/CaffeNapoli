@@ -145,9 +145,9 @@ class UserProfileHeader: UICollectionViewCell {
     
     //Let manually add our views
     let profileImageView: CustomImageView = {
-        
         let iv = CustomImageView()
         ////iv.backgroundColor = .red
+//        iv.image = #imageLiteral(resourceName: "avatar2")
         return iv
         
     }()
