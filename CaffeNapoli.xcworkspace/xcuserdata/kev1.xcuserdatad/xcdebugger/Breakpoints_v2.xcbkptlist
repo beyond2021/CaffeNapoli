@@ -105,7 +105,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Add A Photo/PhotoSelectorController.swift"
-            timestampString = "535367522.59911"
+            timestampString = "535858471.680553"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "124"
@@ -121,7 +121,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Add A Photo/Share Photo/SharePhotoController.swift"
-            timestampString = "534571861.225624"
+            timestampString = "535706520.094137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -137,12 +137,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/User Profile/UserProfileController.swift"
-            timestampString = "534957705.425155"
+            timestampString = "536258399.916292"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "161"
             endingLineNumber = "161"
-            landmarkName = "fetchOrderedPosts()"
+            landmarkName = "handleLogout()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,28 +153,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Add A Photo/PhotoSelectorController.swift"
-            timestampString = "535367522.599225"
+            timestampString = "535858471.681046"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
             endingLineNumber = "140"
             landmarkName = "collectionView(_:viewForSupplementaryElementOfKind:at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CaffeNapoli/Home/HomeController.swift"
-            timestampString = "535308538.20258"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "fetchPosts()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -265,11 +249,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Home/HomeController.swift"
-            timestampString = "535308538.203206"
+            timestampString = "536560242.911621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "fetchPostsWithUser(user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -281,7 +265,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Home/CommentsController.swift"
-            timestampString = "535308538.203573"
+            timestampString = "535633582.858802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -297,7 +281,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Home/CommentsController.swift"
-            timestampString = "535308538.203633"
+            timestampString = "535633582.85887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -313,11 +297,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Home/HomeController.swift"
-            timestampString = "535308538.203691"
+            timestampString = "536560242.91181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "fetchPostsWithUser(user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -329,7 +313,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Cells/UserProfileHeader.swift"
-            timestampString = "535308538.204058"
+            timestampString = "536258399.917459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
@@ -345,7 +329,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/Cells/UserProfileHeader.swift"
-            timestampString = "535308538.20413"
+            timestampString = "536258399.917674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
@@ -361,13 +345,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/User Profile/UserProfileController.swift"
-            timestampString = "534957705.425965"
+            timestampString = "536258399.917736"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "256"
             endingLineNumber = "256"
-            landmarkName = "collectionView(_:cellForItemAt:)"
-            landmarkType = "7">
+            landmarkName = "UserProfileController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -377,7 +361,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/User Profile/UserProfileController.swift"
-            timestampString = "534957705.42603"
+            timestampString = "536258399.917794"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
@@ -393,7 +377,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/AppDelegate.swift"
-            timestampString = "535361444.158758"
+            timestampString = "536081418.839886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
@@ -409,7 +393,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/AppDelegate.swift"
-            timestampString = "535361444.158837"
+            timestampString = "536081418.840523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
@@ -425,7 +409,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/AppDelegate.swift"
-            timestampString = "535361444.158901"
+            timestampString = "536081418.840834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -441,7 +425,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/AppDelegate.swift"
-            timestampString = "535361444.158967"
+            timestampString = "536081418.841143"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
@@ -457,12 +441,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CaffeNapoli/AppDelegate.swift"
-            timestampString = "535361444.159026"
+            timestampString = "536081418.841398"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
             endingLineNumber = "47"
             landmarkName = "userNotificationCenter(_:didReceive:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/Home/HomeController.swift"
+            timestampString = "536560242.912365"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "generateAnimatedViews()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/Home/HomeController.swift"
+            timestampString = "536560242.912437"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "animateLikes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/Add A Photo/PhotoSelectorController.swift"
+            timestampString = "535858471.682307"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CaffeNapoli/Shopping Cart/ProductDetatilTableViewController.swift"
+            timestampString = "536560242.912566"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "init(frame:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

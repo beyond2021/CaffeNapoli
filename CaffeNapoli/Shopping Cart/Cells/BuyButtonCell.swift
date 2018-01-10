@@ -7,7 +7,14 @@
 //
 
 import UIKit
+protocol BuyButtonCellDelegate {
+    func didBuyProduct(for cell: BuyButtonCell) // parameter tell which post we are clicking on
+}
+
+
 class BuyButtonCell : UITableViewCell {
+     var delegate : BuyButtonCellDelegate?
+    
     lazy var buyButton : UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("BUY $120", for: .normal)
@@ -21,6 +28,9 @@ class BuyButtonCell : UITableViewCell {
     }()
     @objc fileprivate func handleBuy() {
         print("Trying to buy product")
+//        delegate?.didBuyProduct()
+        delegate?.didBuyProduct(for: self)
+        
     }
     
     
@@ -33,6 +43,11 @@ class BuyButtonCell : UITableViewCell {
 //        backgroundColor = .green
         addSubview(buyButton)
         buyButton.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 12, paddingRight: 12, width: 0, height: 40.5)
+        
+//        let cv = CartCurvedView(frame: frame)
+//        cv.backgroundColor = .yellow
+//        buyButton.addSubview(cv)
+//        cv.anchor(top: buyButton.topAnchor, left: buyButton.leftAnchor, bottom: buyButton.bottomAnchor, right: buyButton.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
     }
 

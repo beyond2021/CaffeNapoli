@@ -7,7 +7,13 @@
 //
 
 import UIKit
-class ProductDetatilTableViewController: UITableViewController {
+class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDelegate {
+    func didBuyProduct(for cell: BuyButtonCell) {
+//         print("Buying product", cell)
+    }
+    
+    
+    
     let shoeDetailCell = "shoeDetailCell"
     let buyButtonCell = "buyButtonCell"
     let productDetailCell = "productDetailCell"
@@ -23,6 +29,23 @@ class ProductDetatilTableViewController: UITableViewController {
         return hv
     }()
     
+    //
+    lazy var floationgShoppingCartButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(viewCart), for: .touchUpInside)
+        button.setImage(#imageLiteral(resourceName: "shoppingBagEmpty").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.layer.cornerRadius = 100/2
+        button.backgroundColor = .clear
+        button.clipsToBounds = true
+        return button
+    }()
+    
+    @objc fileprivate func viewCart() {
+        print("Trying to view cart...")
+        let shoppingBagTableViewController = ShoppingBagTableViewController()
+        self.navigationController?.pushViewController(shoppingBagTableViewController, animated: true)
+      
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +53,17 @@ class ProductDetatilTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = self.tableView.rowHeight
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.tableHeaderView = headerView
-//        headerView.anchor(top: self.tableView.tableHeaderView?.topAnchor, left: self.tableView.tableHeaderView?.leftAnchor, bottom: self.tableView.tableHeaderView?.bottomAnchor, right: self.tableView.tableHeaderView?.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 533)
-        
-        
-//        view.backgroundColor = .red
-        //
         tableView.register(ShoeDetailCell.self, forCellReuseIdentifier:shoeDetailCell)
         tableView.register(BuyButtonCell.self, forCellReuseIdentifier: buyButtonCell)
         tableView.register(ProductDetailCell.self, forCellReuseIdentifier: productDetailCell)
         tableView.register(SuggestionCell.self, forCellReuseIdentifier: suggestionCell)
-//        tableView.register(SuggestionCollectionViewCell.self, forCellReuseIdentifier: suggestionCollectionViewCell)
+        self.navigationController?.view.addSubview(floationgShoppingCartButton)
+        floationgShoppingCartButton.anchor(top: nil, left: nil, bottom: self.navigationController?.view.bottomAnchor, right: self.navigationController?.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 20, width: 100, height: 100)
+
+        let cv = CartCurvedView(frame: view.frame)
+        cv.backgroundColor = .yellow
+//        UIApplication.shared.keyWindow?.addSubview(cv)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -85,6 +109,9 @@ extension ProductDetatilTableViewController
             return cell
         } else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: buyButtonCell, for: indexPath) as! BuyButtonCell
+            cell.delegate = self
+            
+
             
             return cell
         } else if indexPath.row == 2 {
@@ -146,5 +173,69 @@ extension ProductDetatilTableViewController : UICollectionViewDelegate, UICollec
         layout.minimumInteritemSpacing = 2.5
         let itemWidth = (collectionView.bounds.width - 5.0) / 2.0
         return CGSize(width: itemWidth, height: itemWidth)
+    }
+}
+
+
+func shoppingBagCustomPath() -> UIBezierPath {
+//        let indexPath = IndexPath(row: 1, section: 0)
+//        let rectOfCell = tableView.rectForRow(at: indexPath)
+//        let rectOfCellInSuperview = tableView.convert(rectOfCell, to: tableView.superview)
+//        print(rectOfCellInSuperview)
+//
+    let bounds = UIScreen.main.bounds
+    let width = bounds.size.width
+    let height = bounds.size.height
+    
+    
+        let path = UIBezierPath()
+        //starting point
+        path.move(to: CGPoint(x: 20, y: 480))
+//        let cellRect = rectOfCellInSuperview
+        let startingPoint = CGPoint(x:width / 2, y: height / 2)
+        path.move(to: startingPoint)
+        //
+        let shoppingBag = CGPoint(x:height - 70, y: width - 70)
+        
+        let endPoint = shoppingBag
+        //        path.addLine(to: endPoint)
+       let xDistance = (width - 70) - (width / 2)
+        let arcTop = CGPoint(x: xDistance, y: 100)
+        let cp1 = arcTop
+        let cp2 = endPoint
+        path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
+        return path
+        
+    }
+
+class CartCurvedView : UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func draw(_ rect: CGRect) {
+        // we will do some fancy drawing
+     
+//        let path = shoppingBagCustomPath()
+//        path.lineWidth = 3
+//        path.stroke()
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        let height = bounds.size.height
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: width / 2, y: height / 2 + 290))
+        let endPoint = CGPoint(x: width - 70, y: height + 470)
+        let cp1 = CGPoint(x: (width / 3) * 2, y: -100)
+        let cp2 = CGPoint(x: width - 70, y: height / 2 + 290)
+        
+        path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
+//        path.addLine(to: endPoint)
+        UIColor.lightGray.setStroke()
+        path.lineWidth = 5
+        path.stroke()
+        
     }
 }

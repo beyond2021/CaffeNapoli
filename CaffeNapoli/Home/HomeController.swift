@@ -32,9 +32,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return label
     }()
     
-    
-    
-    
     //
     var posts = [Post]()
     //
@@ -46,15 +43,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
         setupLabels()
-       //
         collectionView?.backgroundColor = .white
-        //
-        
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
 , object: nil)
-        
         // register custom cell
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: cellID)
         //Refresh Control
@@ -63,26 +55,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.refreshControl = refreshControl
         //title
         setUpNavigationItems()
-        //animation
-//        let curvedView = CurvedView(frame: view.frame)
-//        curvedView.backgroundColor = .green
-  
         fetchAllPosts()
-       
     }
     
     private func  setupLabels() {
         noPostsAvailableLabel.alpha = 1
         howToSeePostsLabel.alpha = 1
-        
         collectionView?.addSubview(noPostsAvailableLabel)
         collectionView?.addSubview(howToSeePostsLabel)
         noPostsAvailableLabel.anchor(top: collectionView?.topAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 40)
         noPostsAvailableLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
-        
         howToSeePostsLabel.anchor(top: noPostsAvailableLabel.bottomAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 60)
         howToSeePostsLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
-        
     }
     
     
@@ -96,8 +80,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         posts.removeAll()
         collectionView?.reloadData() // stops index out of bounds crash
         fetchAllPosts()
-        
-      
     }
     //
     fileprivate func fetchAllPosts(){
@@ -121,19 +103,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     // fetch posts
                     self.fetchPostsWithUser(user: user)
                 })
-                
-                
             })
-                
-            
-            
         }) { (error) in
             //
             print("Failed to fetch following user ids:", error)
         }
     }
-    
-    
   
     //MARK:- Get the id of the loggen in user
     // Fetch Posts from database for this user
@@ -141,12 +116,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        print("attempting to fetch post from firebase")
         // Method 1: Observe what is happening at this node (posts-node then uid-node)
         guard let uid = Auth.auth().currentUser?.uid else { return }
-     
         Database.fetchUserWithUIUD(uid: uid) { (user) in
             //
             self.fetchPostsWithUser(user: user)
         }
-        
     }
     //MARK:- Fetch all posts of the people that this logged in user is folowing
     fileprivate func fetchPostsWithUser(user: User) {
@@ -154,7 +127,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
         let postReference = Database.database().reference().child("posts").child(user.uid)
         
-        // because we need all thew valuse at this point
+        // because we need all new values at this point
         postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
             // stop spinner
             self.collectionView?.refreshControl?.endRefreshing() //iOS 10
@@ -207,19 +180,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     //
                     print("could not get like info for post", err)
                 })
-               
-//                self.posts.append(post)
-                
+
             })
-//            self.posts.sort(by: { (post1, post2) -> Bool in
-//                //
-//                return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
-//            })
-            
-            //After we fill up the posts array we can reset the UI ()
-//            self.collectionView?.reloadData()
-            
-            
+
             
         }) { (error) in
             // get the error from the cancel block if there is any
@@ -232,23 +195,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "shopping-cart-50").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     @objc func handleCart(){
         print("handling cart....")
         let shoppingCartController = ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout())
         let navController = UINavigationController(rootViewController: shoppingCartController)
-//        navController.pushViewController(shoppingCartController, animated: true)
-//
         present(navController, animated: true, completion: nil)
-        
     }
     
     @objc func handleCamera(){
-        
-        print("Showing Camera")
-        
+//        print("Showing Camera")
         let cameraController = CameraController()
         present(cameraController, animated: true, completion: nil)
     }
@@ -258,10 +215,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if posts.count > 0 {
             noPostsAvailableLabel.alpha = 0
             howToSeePostsLabel.alpha = 0
-            
         }
-        
-        //
         return posts.count
     }
     //
@@ -269,10 +223,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
-        
             cell.post = posts[indexPath.item]
             cell.delegate = self
-        
         return cell
      
     }
@@ -287,69 +239,53 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         height += 50// for bottom buttons
         // Caption label
         height += 60
-        
         return CGSize(width: view.frame.width, height: height)
     }
     // HomePostCellDelegate Methjods
     func didTapComment(post: Post) {
-       
         //
         print(post.caption)
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
         //pass the post to the commentscontroller here
         commentsController.post = post
-        
         // Push new viewcontroller on to the stack here
         navigationController?.pushViewController(commentsController, animated: true)
-        
     }
     //MARK:- Saving the like state logic
     func didLike(for cell: HomePostCell) {
-//        animateLikes()
-       
         guard let indexpath = collectionView?.indexPath(for: cell) else { return }
         // we can now get the post
         var post = self.posts[indexpath.item]
         //check
-       // print(post.caption)
+        // print(post.caption)
         // Introduce a 5th node in firebase called likes
         guard let postId = post.id else { return }
         //current user uid
         guard let uid = Auth.auth().currentUser?.uid else { return }
-      
-        
         let values = [uid:post.hasLiked == true ? 0 : 1] // me liking or unliking this post
-        
         print("like :", post.hasLiked)
         if post.hasLiked == false {
             animateLikes()
             playAudio(sound: "OK Hand Sign", ext: "wav")
         }
-        
         Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
             //
             if let err = error {
                 print("Could not like post", err)
                 return
-              
             }
             // success
 //            print("Successfully liked post")
             post.hasLiked = !post.hasLiked // toggle like button
             self.posts[indexpath.item] = post // because of structs
             self.collectionView?.reloadItems(at: [indexpath])
-            
         }
-
-        
-        
     }
     
     fileprivate func animateLikes() {
         (0...10).forEach { (_) in
             generateAnimatedViews()
         }
-       
     }
     private func generateAnimatedViews() {
         let image = drand48() > 0.5 ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "thumbsUp")
@@ -362,20 +298,16 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         animation.fillMode = kCAFillModeForwards //removes from view
         animation.isRemovedOnCompletion = false
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-        
         imageView.layer.add(animation, forKey: nil)
         view?.addSubview(imageView)
     }
     // MARK:- Sound
     var bombSoundEffect: AVAudioPlayer?
-    
     func playAudio(sound: String, ext: String) {
         let url = Bundle.main.url(forResource: sound, withExtension: ext)!
-        
         do {
             bombSoundEffect = try AVAudioPlayer(contentsOf: url)
             guard let bombSound = bombSoundEffect else { return }
-            
             bombSound.prepareToPlay()
             bombSound.play()
         } catch let error {
@@ -383,8 +315,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
 }
-
-
 
 func customPath() -> UIBezierPath {
     let path = UIBezierPath()
@@ -395,7 +325,6 @@ func customPath() -> UIBezierPath {
     let randonYShift = 200 + drand48() * 300
     let cp1 = CGPoint(x: 120, y: 380 - randonYShift)
     let cp2 = CGPoint(x: 200, y: 580 + randonYShift)
-    
     path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
     return path
     
@@ -405,7 +334,6 @@ class CurvedView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

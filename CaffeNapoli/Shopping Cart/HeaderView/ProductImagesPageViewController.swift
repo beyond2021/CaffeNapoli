@@ -9,6 +9,7 @@
 import UIKit
 
 protocol ProductImagesPageViewControllerDelegate: class
+    
 {
     func setupPageController(numberOfPages: Int)
     func turnPageController(to index: Int)
@@ -24,30 +25,24 @@ class ProductImagesPageViewController: UIPageViewController {
     
     //
     var images: [UIImage]? = Product.fetchShoes().first!.images
-     weak var pageViewControllerDelegate: ProductImagesPageViewControllerDelegate?
+    weak var pageViewControllerDelegate: ProductImagesPageViewControllerDelegate?
     
     lazy var controllers: [UIViewController] = {
-        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let productImagesViewController = ProductImagesViewController()
         var controllers = [UIViewController]()
-        
         if let images = self.images {
             for image in images {
-
                 let productImagesViewController = ProductImagesViewController()
                 controllers.append(productImagesViewController)
             }
         }
-        
         self.pageViewControllerDelegate?.setupPageController(numberOfPages: controllers.count)
-        
         return controllers
     }()
     
+    
     override init(transitionStyle style: UIPageViewControllerTransitionStyle, navigationOrientation: UIPageViewControllerNavigationOrientation, options: [String : Any]? = nil) {
-         super.init(transitionStyle: UIPageViewControllerTransitionStyle.scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal, options: options)
-        
+        super.init(transitionStyle: UIPageViewControllerTransitionStyle.scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.horizontal, options: options)
     }
     
     required init?(coder: NSCoder) {
@@ -56,30 +51,22 @@ class ProductImagesPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        automaticallyAdjustsScrollViewInsets = false
         dataSource = self
         delegate = self
-        
-        
         self.turnToPage(index: 0)
-        
     }
     
     func turnToPage(index: Int)
     {
         let controller = controllers[index]
         var direction = UIPageViewControllerNavigationDirection.forward
-        
         if let currentVC = viewControllers?.first {
             let currentIndex = controllers.index(of: currentVC)!
             if currentIndex > index {
                 direction = .reverse
             }
         }
-        
         self.configureDisplaying(viewController: controller)
-        
         setViewControllers([controller], direction: direction, animated: true, completion: nil)
     }
     
@@ -95,8 +82,6 @@ class ProductImagesPageViewController: UIPageViewController {
             }
         }
     }
-    
-    
 }
 
 // MARK: - UIPageViewControllerDataSource
@@ -110,7 +95,6 @@ extension ProductImagesPageViewController : UIPageViewControllerDataSource
                 return controllers[index-1]
             }
         }
-        
         return controllers.last
     }
     
@@ -121,7 +105,6 @@ extension ProductImagesPageViewController : UIPageViewControllerDataSource
                 return controllers[index + 1]
             }
         }
-        
         return controllers.first
     }
 }
