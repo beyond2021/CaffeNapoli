@@ -27,8 +27,6 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         label.textAlignment = .center
         label.numberOfLines = 0
         return label
-        
-        
     }()
     
     
@@ -45,24 +43,31 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         collectionView?.backgroundColor = .white
         collectionView?.register(ShoppingCartCell.self, forCellWithReuseIdentifier: cellId)
         navigationItem.title = "FOR SALE"
+        let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.tabBarBlue()]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        
 //        navigationController?.navigationBar.prefersLargeTitles = true
         
         products = Product.fetchShoes()
+//        print("Proucts are:", products)
+        
         collectionView?.reloadData()
+        self.navigationItem.hidesBackButton = true
         
-        
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.tabBarBlue()
 //        self.tableView.estimatedRowHeight = tableView.rowHeight
 //        self.tableView.rowHeight = UITableViewAutomaticDimension
 //
         collectionView?.addSubview(dismissButton)
         dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 24, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 50)
+        
+        
     }
     
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "dismiss").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissCart))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "dismissGreen").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissCart))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.tabBarBlue()
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "shopping-cart-50").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     
@@ -78,23 +83,30 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShoppingCartCell
+        
+        
         cell.product = self.products?[indexPath.row]
+        
+        print(cell.product)
         
         return cell
     }
     //MARK:- Delegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = view.frame.width + 24 + 31 + 8
+        let height = view.frame.width + 24 + 31 + 8 + 10
         return CGSize(width: view.frame.width, height: height)
     }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //    print("preseeing ...", indexPath.item)
+        guard let myProduct = products?[indexPath.item] else { return }
+        //    print("products are :", myProduct.images?.count)
         let detailViewController = ProductDetatilTableViewController()
-//        let nav = UINavigationController()
+        detailViewController.images = myProduct.images
+        detailViewController.product = myProduct
         self.navigationController?.pushViewController(detailViewController, animated: true)
-
-        let product = products![indexPath.item]
-        detailViewController.product = product
     }
     
     

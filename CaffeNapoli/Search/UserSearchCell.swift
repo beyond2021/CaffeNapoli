@@ -38,7 +38,7 @@ class UserSearchCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        backgroundColor = .yellow
-        backgroundColor = .white
+        backgroundColor = UIColor.cellBGColor()
         addSubview(profileImageView)
         addSubview(usernameLabel)
         // How to center Image in cell

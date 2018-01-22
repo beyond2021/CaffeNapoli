@@ -21,7 +21,8 @@ class BuyButtonCell : UITableViewCell {
         button.titleLabel?.font = UIFont.init(name: "Avenir Next Condensed ", size: 15)
         button.titleLabel?.textColor = .white
         button.tintColor = .white
-        button.backgroundColor = UIColor.darkText
+//        button.backgroundColor = UIColor.darkText
+        button.backgroundColor = UIColor.tabBarBlue()
         button.addTarget(self, action: #selector(handleBuy), for: .touchUpInside)
         return button
         

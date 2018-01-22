@@ -21,7 +21,7 @@ class HomePostCell: UICollectionViewCell {
     var post: Post?{
         didSet {
             // like button
-            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "likeRedFi").withRenderingMode(.alwaysOriginal) : #imageLiteral(resourceName: "likeRedUn").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
+            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "blLikeSel").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "blLikeUn").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
             // This says if hasLiked is true use image selected else use image unselected
             
            // print(post?.imageUrl)
@@ -41,15 +41,16 @@ class HomePostCell: UICollectionViewCell {
         //Attributed text
         let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor : UIColor.red])
 //        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14),NSAttributedStringKey.foregroundColor : UIColor.white]))
-         attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
+//         attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
         
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14),NSAttributedStringKey.foregroundColor : UIColor.tabBarBlue()]))
         
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 4)]))
         
         let timeAgoDisplay = post.creationDate.timeAgoDisplay()
         
         // date
-        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.gray]))
+        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor : UIColor.cellButtonsColor()]))
 
         captionLabel.attributedText = attributedText
     }
@@ -59,7 +60,8 @@ class HomePostCell: UICollectionViewCell {
     //
     let userProfileImageView : CustomImageView = {
         let iv = CustomImageView()
-        iv.layer.borderColor = UIColor.white.cgColor
+//        iv.layer.borderColor = UIColor.white.cgColor
+        iv.layer.borderColor = UIColor.NavBarYellow().cgColor
         iv.layer.borderWidth = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -80,6 +82,7 @@ class HomePostCell: UICollectionViewCell {
         label.text = "Username"
         label.font = UIFont.boldSystemFont(ofSize: 16)
 //        label.textColor = .white
+        label.textColor = UIColor.tabBarBlue()
         return label
     }()
     //
@@ -87,7 +90,7 @@ class HomePostCell: UICollectionViewCell {
     let optionsButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.setTitle("•••", for: .normal)
-        button.setImage(#imageLiteral(resourceName: "flag").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "blMore").withRenderingMode(.alwaysOriginal), for: .normal)
         
 //        button.setTitleColor(.black, for: .normal)
         return button
@@ -100,7 +103,7 @@ class HomePostCell: UICollectionViewCell {
 //        button.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
 //
 //        button.setTitleColor(.black, for: .normal)
-      button.setImage(#imageLiteral(resourceName: "likeRedUn").withRenderingMode(.alwaysOriginal), for: .normal)
+      button.setImage(#imageLiteral(resourceName: "blLikeUn").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handlelike), for: .touchUpInside)
         
         button.setTitleColor(.white, for: .normal)
@@ -112,7 +115,7 @@ class HomePostCell: UICollectionViewCell {
     lazy var commentButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.setImage(#imageLiteral(resourceName: "comment").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.setImage( #imageLiteral(resourceName: "commentRedUn").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage( #imageLiteral(resourceName: "blMessUn").withRenderingMode(.alwaysOriginal), for: .normal)
         
         button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         
@@ -125,7 +128,7 @@ class HomePostCell: UICollectionViewCell {
     let sendMessageButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.setImage(#imageLiteral(resourceName: "send2").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.setImage( #imageLiteral(resourceName: "shareRedUn").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "blShareUn").withRenderingMode(.alwaysOriginal), for: .normal)
         
 //        button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -134,7 +137,7 @@ class HomePostCell: UICollectionViewCell {
     //
     let bookmarkButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "ribbon").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "blBookmarkUn").withRenderingMode(.alwaysOriginal), for: .normal)
         
         button.setTitleColor(.black, for: .normal)
         return button
@@ -185,9 +188,8 @@ class HomePostCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
  
-        
-       
-        backgroundColor = .white
+        backgroundColor = UIColor.cellBGColor()
+//        backgroundColor = .white
         //
         addSubview(userProfileImageView)
         addSubview(usernameLabel)
@@ -200,7 +202,7 @@ class HomePostCell: UICollectionViewCell {
         //
         userProfileImageView.anchor(top: topAnchor, left: nil, bottom: photoImageView.topAnchor, right: nil, paddingTop: 6, paddingLeft: 6, paddingBottom: 8, paddingRight: 0, width: 60, height: 60)
         userProfileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userProfileImageView.layer.cornerRadius = 60 / 2
+        userProfileImageView.layer.cornerRadius = 8 //60 / 2
         userProfileImageView.layer.masksToBounds = true
         
         //

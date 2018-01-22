@@ -21,17 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         FirebaseApp.configure()
         //Setting up the root view
         window = UIWindow()
-        window?.rootViewController = MainTabBarController()
+        window?.rootViewController = SplashScreenViewController()
+//        window?.rootViewController = MainTabBarController()
         //
-        UITabBar.appearance().barTintColor = UIColor.black
-        UITabBar.appearance().tintColor = .white
+//        UITabBar.appearance().barTintColor = UIColor.black
+//        UITabBar.appearance().tintColor = .white
+        
+        UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
+        UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
         
         //
 //        UINavigationBar.appearance().barTintColor = UIColor.napoliGold()
-        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
         
         attemptRegisterForNotifications(application: application)
         
+        UIApplication.shared.statusBarStyle = .lightContent
+
         
         return true
     }

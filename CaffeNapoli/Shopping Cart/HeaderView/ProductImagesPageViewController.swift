@@ -22,11 +22,19 @@ class ProductImagesPageViewController: UIPageViewController {
     struct Constant {
         static let productsImageViewController = "ProductsImageViewController"
     }
-    
     //
-    var images: [UIImage]? = Product.fetchShoes().first!.images
+    //    var aNum  : Int? {
+    //        didSet {
+    //            guard let n = aNum else { return }
+    //
+    //            print("Anum is now set ...",n)
+    //            images?.removeAll()
+    //            images = Product.fetchShoes()[aNum!].images
+    //            print(images?.count)
+    //        }
+    //    }
+    var images: [UIImage]?
     weak var pageViewControllerDelegate: ProductImagesPageViewControllerDelegate?
-    
     lazy var controllers: [UIViewController] = {
         let productImagesViewController = ProductImagesViewController()
         var controllers = [UIViewController]()
@@ -49,8 +57,11 @@ class ProductImagesPageViewController: UIPageViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.backgroundColor = UIColor.tabBarBlue()
         dataSource = self
         delegate = self
         self.turnToPage(index: 0)

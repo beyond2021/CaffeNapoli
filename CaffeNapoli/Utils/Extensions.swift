@@ -12,6 +12,28 @@ extension UIColor {
        return UIColor(displayP3Red: displayP3Red/255, green: green/255, blue: blue/255, alpha: 1)
         
     }
+    static func tabBarBlue() -> UIColor {
+        return UIColor.rgb(displayP3Red: 46, green: 76, blue: 88)
+        
+    }
+    static func NavBarYellow() -> UIColor {
+        return UIColor.rgb(displayP3Red: 211, green: 203, blue: 145)
+        
+    }
+    static func cellBGColor() -> UIColor {
+        return UIColor.rgb(displayP3Red: 230, green: 225, blue: 197)
+        
+    }
+    static func tabBarButtonColor() -> UIColor {
+        return UIColor.rgb(displayP3Red: 188, green: 211, blue: 241)
+        
+    }
+    
+    static func cellButtonsColor() -> UIColor {
+        return UIColor.rgb(displayP3Red: 127, green: 163, blue: 236)
+        
+    }
+    
     static func napoliGold() -> UIColor {
         return UIColor.rgb(displayP3Red: 138, green: 118, blue: 76)
     }

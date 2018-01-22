@@ -9,9 +9,29 @@
 import UIKit
 import Firebase
 import AVFoundation
+import Lottie
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
+class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        //
+        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition1", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
+        return animationController
+        
+    }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        //
+        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition2", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
+        return animationController
+        
+    }
+}
+
+
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate{
     
     let noPostsAvailableLabel: UILabel = {
         let label = UILabel()
@@ -44,7 +64,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLabels()
-        collectionView?.backgroundColor = .white
+//        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor.cellBGColor()
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
 , object: nil)
         // register custom cell
@@ -193,14 +214,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //
     fileprivate func setUpNavigationItems() {
-        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera3").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "shopping-cart-50").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
+//        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
+//        let navController = CustomNavigationController()
+        navigationItem.title = "FOODIE"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue(), NSAttributedStringKey.font:UIFont(name:"HelveticaNeue", size: 40) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue()]
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "blShoppingCartEmpty").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
+    
+  
+    
     @objc func handleCart(){
-        print("handling cart....")
         let shoppingCartController = ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout())
-        let navController = UINavigationController(rootViewController: shoppingCartController)
+        let navController = CustomNavigationController(rootViewController: shoppingCartController)
         present(navController, animated: true, completion: nil)
     }
     
@@ -315,6 +345,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
 }
+
+
 
 func customPath() -> UIBezierPath {
     let path = UIBezierPath()

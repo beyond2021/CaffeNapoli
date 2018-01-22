@@ -25,8 +25,6 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         print("did change to grid view")
          isGridView = true // toggle to true
         collectionView?.reloadData() // UI
-        
-        
     }
     
     
@@ -37,8 +35,8 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = .white
-      
+//        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor.cellBGColor()
         // We need to registewrb the collectionview with a header
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
       

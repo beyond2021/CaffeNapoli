@@ -41,7 +41,7 @@ if Auth.auth().currentUser == nil {
             //
             // THE USER IS NOT LOGGED IN, PRESENT LOGIN
             let loginController = LoginController()
-            let navigationController = UINavigationController(rootViewController: loginController)
+            let navigationController = CustomNavigationController(rootViewController: loginController)
             self.present(navigationController, animated: true, completion: nil)
             
         }
@@ -56,32 +56,25 @@ if Auth.auth().currentUser == nil {
     }
      func setupViewControllers(){
         //Home
-        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "home_unselected"), selectedImage: #imageLiteral(resourceName: "home_selected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
         // Search
-//        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "search_unselected"), selectedImage: #imageLiteral(resourceName: "search_selected"))
 //
-        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsUnsellected"), selectedImage: #imageLiteral(resourceName: "friendsSelected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsYUnselected"), selectedImage: #imageLiteral(resourceName: "friendsYSelected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
         
-        
-        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus_unselected"), selectedImage: #imageLiteral(resourceName: "plus_unselected"))
-//        let likeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "like_unselected"), selectedImage: #imageLiteral(resourceName: "like_selected"))
-        
-//        let reservationsController = templateNavController(unselectedImage: #imageLiteral(resourceName: "reserveUnfilled"), selectedImage: #imageLiteral(resourceName: "reserveUnfilled"))
-        
+        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "addNewUnselected"), selectedImage: #imageLiteral(resourceName: "addNewSelected"))
+
         let root = AddReservationViewController()
-        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "reserveUnfilled"), selectedImage: #imageLiteral(resourceName: "reserveUnfilled"), rootViewController: root)
+        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "resUnselected"), selectedImage: #imageLiteral(resourceName: "resSelected"), rootViewController: root)
         
         let layout = UICollectionViewFlowLayout()
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
-        
-        
         //Add a navigationbar on the top
         let userProfileNavController = UINavigationController(rootViewController: userProfileController)
         // items in the tabs
-        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "profile_unselected")
-        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile_selected")
+        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "userYUnselected")
+        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "userYSelected")
         
         // Color the tabBar
         tabBar.tintColor = .black
@@ -91,9 +84,7 @@ if Auth.auth().currentUser == nil {
         guard let items = tabBar.items else { return }
         for item in items {
             item.imageInsets = UIEdgeInsets(top: 4, left: 0, bottom: -4, right: 0)
-            
         }
-        
     }
     fileprivate func templateNavController(unselectedImage : UIImage, selectedImage : UIImage, rootViewController : UIViewController = UIViewController()) -> UINavigationController {
         // Home icon

@@ -8,19 +8,23 @@
 
 import UIKit
 class ProductImagesHeaderView : UIView {
+    var images : [UIImage]?
     
     lazy var pageViewController : ProductImagesPageViewController = {
         let pvc = ProductImagesPageViewController()
         pvc.pageViewControllerDelegate = self
+//        pvc.images = images
         pvc.view.backgroundColor = .clear
         return pvc
-        
+
     }()
-    
+
+  
+//    
     let pageControl : UIPageControl = {
         let pc = UIPageControl()
         pc.backgroundColor = .clear
-        pc.numberOfPages = 5
+//        pc.numberOfPages = 5
         pc.pageIndicatorTintColor = UIColor.rgb(displayP3Red: 185, green: 185, blue: 185)
         pc.currentPageIndicatorTintColor = UIColor.rgb(displayP3Red: 104, green: 104, blue: 104)
         return pc
@@ -34,8 +38,8 @@ class ProductImagesHeaderView : UIView {
         pageViewController.view.addSubview(pageControl)
         pageControl.anchor(top: nil, left: nil, bottom:pageViewController.view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 39, height: 37)
         pageControl.centerXAnchor.constraint(equalTo:pageViewController.view.centerXAnchor).isActive = true
-        let prodImagesViewController = ProductImagesPageViewController()
-        prodImagesViewController.pageViewControllerDelegate = self
+//        let prodImagesViewController = ProductImagesPageViewController()
+//        prodImagesViewController.pageViewControllerDelegate = self
     }
     
     

@@ -13,7 +13,9 @@ class ShoppingCartCell: UICollectionViewCell {
     let productImageView : CustomImageView = {
         let iv = CustomImageView ()
         iv.contentMode = .scaleAspectFill
-        iv.backgroundColor = .red
+        iv.clipsToBounds = true
+//        iv.backgroundColor = .red
+        iv.backgroundColor = UIColor.cellBGColor()
         iv.image = #imageLiteral(resourceName: "s1")
         return  iv
         
@@ -22,6 +24,7 @@ class ShoppingCartCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "NIKE FREE RN FLKNIT 2017"
         label.font = UIFont.init(name: "Avenir Next Condensed Regular", size: 16)
+        label.textColor = UIColor.tabBarBlue()
         return label
     
     }()
@@ -29,6 +32,7 @@ class ShoppingCartCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.init(name: "Avenir Next Regular ", size: 13)
         label.text = "$120"
+        label.textColor = UIColor.tabBarBlue()
         return label
     }()
     
@@ -55,12 +59,15 @@ class ShoppingCartCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.rgb(displayP3Red: 227, green: 227, blue: 227)
+//        backgroundColor = UIColor.rgb(displayP3Red: 227, green: 227, blue: 227)
+        backgroundColor = UIColor.cellBGColor()
         addSubview(productImageView)
         addSubview(productNameLabel)
         addSubview(productPriceLabel)
         productPriceLabel.anchor(top: productNameLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 4, paddingLeft: 4, paddingBottom: 0, paddingRight: 0, width: 0, height: 18)
+        
         productNameLabel.anchor(top: productImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 4, paddingLeft: 4, paddingBottom: 0, paddingRight: 0, width: 0, height: 24)
+        
         productImageView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: frame.width)
         
     }

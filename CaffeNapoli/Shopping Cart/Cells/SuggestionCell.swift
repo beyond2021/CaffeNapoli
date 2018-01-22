@@ -20,6 +20,7 @@ class SuggestionCell: UITableViewCell {
         label.text = "YOU MIGHT ALSO LIKE"
         label.textAlignment = .center
         label.font = UIFont.init(name: "Avenir Next Condensed Demi Bold", size: 15)
+        label.textColor = UIColor.tabBarBlue()
         return label
     }()
     

@@ -21,7 +21,7 @@ class ShoppingBagTableViewController: UITableViewController {
     var products: [Product]? = Product.fetchShoes()
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = UIColor.tabBarBlue()
         self.tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(NumberOfItemsCell.self, forCellReuseIdentifier: Constant.numberOfItemsCell)
