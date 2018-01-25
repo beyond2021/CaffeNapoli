@@ -346,6 +346,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 }
 
+//func playAudio(sound: String, ext: String) {
+//    let url = Bundle.main.url(forResource: sound, withExtension: ext)!
+//    do {
+//        bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+//        guard let bombSound = bombSoundEffect else { return }
+//        bombSound.prepareToPlay()
+//        bombSound.play()
+//    } catch let error {
+//        print(error.localizedDescription)
+//    }
+//}
 
 
 func customPath() -> UIBezierPath {

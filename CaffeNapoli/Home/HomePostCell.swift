@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import HCSStarRatingView
+import  AVFoundation
 protocol HomePostCellDelegate {
     func didTapComment(post: Post) // parameter tell which post we are clicking on
     // likes
@@ -76,6 +78,25 @@ class HomePostCell: UICollectionViewCell {
        return iv
     }()
     //
+    
+    let ratingsView : HCSStarRatingView = {
+        let view = HCSStarRatingView()
+        view.maximumValue = 5
+        view.minimumValue = 0
+        view.backgroundColor = .clear
+        view.value = 0
+        view.tintColor = UIColor.cellButtonsColor()
+        view.addTarget(self, action: #selector(ratingsValueChanged), for: .valueChanged)
+        
+        
+        return view
+    }()
+    
+    @objc func ratingsValueChanged() {
+        print("ratings value changed...")
+//        playAudio(sound: "star", ext: "wav")
+    }
+    
     //MARK: - Username label
     let usernameLabel : UILabel = {
         let label = UILabel()
@@ -226,7 +247,8 @@ class HomePostCell: UICollectionViewCell {
         //Caption
         addSubview(captionLabel)
         captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
-        
+        addSubview(ratingsView)
+        ratingsView.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 200, height: 30)
         
     }
     fileprivate func setupActionButtons(){
@@ -235,13 +257,29 @@ class HomePostCell: UICollectionViewCell {
         addSubview(stackView)
         stackView.anchor(top: photoImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 120, height: 50)
         //
-        addSubview(bookmarkButton)
-        bookmarkButton.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 50)
+//        addSubview(bookmarkButton)
+//        bookmarkButton.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 40, height: 50)
         
     }
     
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    var bombSoundEffect: AVAudioPlayer?
+}
+
+extension HomePostCell {
+    
+    func playAudio(sound: String, ext: String) {
+        let url = Bundle.main.url(forResource: sound, withExtension: ext)!
+        do {
+            bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+            guard let bombSound = bombSoundEffect else { return }
+            bombSound.prepareToPlay()
+            bombSound.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 }

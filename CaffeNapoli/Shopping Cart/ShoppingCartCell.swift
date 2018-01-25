@@ -50,7 +50,8 @@ class ShoppingCartCell: UICollectionViewCell {
         productImageView.image = product.images?.first
         productNameLabel.text = product.name
         if let price = product.price {
-            productPriceLabel.text = "$\(price)"
+            productPriceLabel.text = "$\(price)" // "$" + swag.priceString
+            
         } else {
             productPriceLabel.text = ""
         }

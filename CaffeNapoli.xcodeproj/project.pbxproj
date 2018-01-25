@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
+		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
 		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
 		5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6211FB46E2800563B1C /* FirebaseUtils.swift */; };
 		5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6241FB473F600563B1C /* UserSearchController.swift */; };
@@ -65,11 +66,13 @@
 		53C630A11FE8FF2D00023FBB /* AddReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */; };
 		53DB447420156D3300754BD6 /* drink.json in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447320156D3300754BD6 /* drink.json */; };
 		53DB447620157C5A00754BD6 /* glasses.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447520157C5900754BD6 /* glasses.wav */; };
+		53DB447A201609E600754BD6 /* star.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53DB4479201609E600754BD6 /* star.wav */; };
 		53DE0A201FA954E000C2323D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE0A1F1FA954E000C2323D /* HomeController.swift */; };
 		53DE0A221FA9591800C2323D /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE0A211FA9591800C2323D /* HomePostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53045B432019CA4800E9C6A7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		5324F61F1FB4583A00563B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5324F6211FB46E2800563B1C /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		5324F6241FB473F600563B1C /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReservationViewController.swift; sourceTree = "<group>"; };
 		53DB447320156D3300754BD6 /* drink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = drink.json; sourceTree = "<group>"; };
 		53DB447520157C5900754BD6 /* glasses.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glasses.wav; sourceTree = "<group>"; };
+		53DB4479201609E600754BD6 /* star.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = star.wav; sourceTree = "<group>"; };
 		53DE0A1F1FA954E000C2323D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		53DE0A211FA9591800C2323D /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaffeNapoli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +153,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53045B422019CA2A00E9C6A7 /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				53045B432019CA4800E9C6A7 /* Address.swift */,
+			);
+			path = Address;
+			sourceTree = "<group>";
+		};
 		5324F6231FB473B600563B1C /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +221,7 @@
 		5333CE3F1FE2BD7400E3AB21 /* Shopping Cart */ = {
 			isa = PBXGroup;
 			children = (
+				53045B422019CA2A00E9C6A7 /* Address */,
 				5376C7331FF9CCAD005F2C21 /* SHOPPING BAG */,
 				535713141FF445A100CCB70F /* HeaderView */,
 				535713091FF2869400CCB70F /* Cells */,
@@ -371,6 +384,7 @@
 		53DE0A1E1FA954AE00C2323D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				53DB4479201609E600754BD6 /* star.wav */,
 				53DE0A1F1FA954E000C2323D /* HomeController.swift */,
 				53DE0A211FA9591800C2323D /* HomePostCell.swift */,
 				53A03F8D1FD4C5A300ACB034 /* CommentsController.swift */,
@@ -475,6 +489,7 @@
 				533AE03E2005E6FB000920A9 /* like.json in Resources */,
 				537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */,
 				533AE044200891B4000920A9 /* spinner.json in Resources */,
+				53DB447A201609E600754BD6 /* star.wav in Resources */,
 				532D84A31F7E827600756E8A /* Assets.xcassets in Resources */,
 				5395FF711FED34430061FA2E /* OK Hand Sign.wav in Resources */,
 				532D84A11F7E827500756E8A /* Main.storyboard in Resources */,
@@ -495,6 +510,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -503,6 +519,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -586,6 +603,7 @@
 				53A03F901FD7E26400ACB034 /* CommentsCell.swift in Sources */,
 				5376C7381FF9CE74005F2C21 /* NumberOfItemsCell.swift in Sources */,
 				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
+				53045B442019CA4800E9C6A7 /* Address.swift in Sources */,
 				533AE03C2005E4B0000920A9 /* SplashScreenViewController.swift in Sources */,
 				53510DF4201405630001A352 /* ProductImagesHeaderView.swift in Sources */,
 				535713041FF2627B00CCB70F /* ShoppingCartCell.swift in Sources */,

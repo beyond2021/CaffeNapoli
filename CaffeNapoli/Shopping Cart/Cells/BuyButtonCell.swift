@@ -7,30 +7,43 @@
 //
 
 import UIKit
+import PassKit
+
 protocol BuyButtonCellDelegate {
-    func didBuyProduct(for cell: BuyButtonCell) // parameter tell which post we are clicking on
+    func didBuyProduct(for cell: BuyButtonCell, product: Product) // parameter tell which post we are clicking on
 }
 
 
 class BuyButtonCell : UITableViewCell {
      var delegate : BuyButtonCellDelegate?
     
-    lazy var buyButton : UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("BUY $120", for: .normal)
-        button.titleLabel?.font = UIFont.init(name: "Avenir Next Condensed ", size: 15)
-        button.titleLabel?.textColor = .white
-        button.tintColor = .white
-//        button.backgroundColor = UIColor.darkText
-        button.backgroundColor = UIColor.tabBarBlue()
-        button.addTarget(self, action: #selector(handleBuy), for: .touchUpInside)
+    var product: Product? {
+        didSet {
+            guard let product = product else { return }
+            print("product price is:",product.price ?? "")
+           
+        }
+    }
+    
+    
+    lazy var buyButton : PKPaymentButton = {
+        let button = PKPaymentButton(type: .system)
+//        button.setTitle("BUY $120", for: .normal)
+//        button.titleLabel?.font = UIFont.init(name: "Avenir Next Condensed ", size: 15)
+//        button.titleLabel?.textColor = .white
+//        button.tintColor = .white
+
+//        button.backgroundColor = UIColor.tabBarBlue()
+        button.setImage(#imageLiteral(resourceName: "ApplePayBTN_64pt__black_textLogo_"), for: .normal)
+        button.addTarget(self, action: #selector(handleBuyWithApplePay), for: .touchUpInside)
         return button
         
     }()
-    @objc fileprivate func handleBuy() {
+    @objc fileprivate func handleBuyWithApplePay() {
         print("Trying to buy product")
 //        delegate?.didBuyProduct()
-        delegate?.didBuyProduct(for: self)
+        guard let product = product else { return }
+        delegate?.didBuyProduct(for: self, product: product)
         
     }
     
@@ -43,7 +56,10 @@ class BuyButtonCell : UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 //        backgroundColor = .green
         addSubview(buyButton)
-        buyButton.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 12, paddingRight: 12, width: 0, height: 40.5)
+        buyButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 12, paddingRight: 12, width: 160, height: 34)
+        
+        buyButton.centerXAnchor .constraint(equalTo: centerXAnchor).isActive = true
+        buyButton.centerYAnchor .constraint(equalTo: centerYAnchor).isActive = true
         
 //        let cv = CartCurvedView(frame: frame)
 //        cv.backgroundColor = .yellow

@@ -11,4 +11,5 @@ target 'CaffeNapoli' do
    pod ‘Firebase/Storage’
    pod 'Firebase/Messaging'
    pod 'lottie-ios'
+   pod 'HCSStarRatingView', '~> 1.5'
 end

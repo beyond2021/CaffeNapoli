@@ -7,10 +7,51 @@
 //
 
 import UIKit
+import PassKit
 class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDelegate {
-    func didBuyProduct(for cell: BuyButtonCell) {
-        //         print("Buying product", cell)
+
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectPaymentMethod paymentMethod: PKPaymentMethod, handler completion: @escaping (PKPaymentRequestPaymentMethodUpdate) -> Void) {
+        //
     }
+
+    let SupportedPaymentNetworks = [PKPaymentNetwork.visa, PKPaymentNetwork.masterCard, PKPaymentNetwork.amex, PKPaymentNetwork.discover]
+    let ApplePaySwagMerchantID = "merchant.com.caffeNapoli" // Fill in your merchant ID here!
+    
+    func didBuyProduct(for cell: BuyButtonCell, product: Product) {
+        if   PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: SupportedPaymentNetworks) && PKPaymentAuthorizationController.canMakePayments() {
+            // Pay is available!
+            print("ready for apple pay")
+            let request = PKPaymentRequest()
+                    request.merchantIdentifier = ApplePaySwagMerchantID
+                    request.supportedNetworks = SupportedPaymentNetworks
+                    request.merchantCapabilities = PKMerchantCapability.capability3DS
+                    request.countryCode = "US"
+                    request.currencyCode = "USD"
+            var summaryItems = [PKPaymentSummaryItem]()
+            summaryItems.append(PKPaymentSummaryItem(label: product.name!, amount: product.price!))
+            
+            if (product.productType == .Delivered) {
+                summaryItems.append(PKPaymentSummaryItem(label: "Shipping", amount: product.shippingPrice))
+            }
+            
+            summaryItems.append(PKPaymentSummaryItem(label: "Caffe Napoli", amount: product.total()))
+            request.paymentSummaryItems = summaryItems
+             switch (product.productType) {
+            case ProductType.Delivered:
+                request.requiredShippingContactFields = [PKContactField.postalAddress,PKContactField.phoneNumber]
+            case ProductType.Electronic:
+                request.requiredShippingContactFields = [PKContactField.emailAddress]
+            }
+            
+            
+            guard let applePayController = PKPaymentAuthorizationViewController(paymentRequest: request) else { return }
+            applePayController.delegate = self
+            present(applePayController, animated: true, completion: nil)
+        } else {
+            print("NOT ready for apple pay")
+        }
+    }
+    
     var images : [UIImage]? {
         didSet {
             let pageController = ProductImagesPageViewController()
@@ -125,6 +166,8 @@ extension ProductDetatilTableViewController
         } else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: buyButtonCell, for: indexPath) as! BuyButtonCell
             cell.delegate = self
+            cell.product = product //applePayButton.hidden = !PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(SupportedPaymentNetworks)
+            cell.buyButton.isHidden = !PKPaymentAuthorizationController.canMakePayments(usingNetworks: SupportedPaymentNetworks)
             return cell
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: productDetailMoreCell, for: indexPath) as! ProductDetailMoreCell
@@ -251,4 +294,21 @@ extension ProductDetatilTableViewController : ProductImagesPageViewControllerDel
         pageControl.currentPage = index
     }
 }
-
+extension ProductDetatilTableViewController: PKPaymentAuthorizationViewControllerDelegate {
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
+        completion(PKPaymentAuthorizationStatus.success)
+    }
+    
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelectShippingContact contact: PKContact, handler completion: @escaping (PKPaymentRequestShippingContactUpdate) -> Void) {
+        //
+//        completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
+        completion(PKPaymentRequestShippingContactUpdate(errors: nil, paymentSummaryItems: [], shippingMethods: []))
+    }
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelect shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {
+        //
+    }
+    
+}
