@@ -8,8 +8,11 @@
 
 import UIKit
 import PassKit
+import Stripe
+import Contacts
 class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDelegate {
-
+    
+    //MARK:- ApplePay
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didSelectPaymentMethod paymentMethod: PKPaymentMethod, handler completion: @escaping (PKPaymentRequestPaymentMethodUpdate) -> Void) {
         //
     }
@@ -22,11 +25,11 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
             // Pay is available!
             print("ready for apple pay")
             let request = PKPaymentRequest()
-                    request.merchantIdentifier = ApplePaySwagMerchantID
-                    request.supportedNetworks = SupportedPaymentNetworks
-                    request.merchantCapabilities = PKMerchantCapability.capability3DS
-                    request.countryCode = "US"
-                    request.currencyCode = "USD"
+            request.merchantIdentifier = ApplePaySwagMerchantID
+            request.supportedNetworks = SupportedPaymentNetworks
+            request.merchantCapabilities = PKMerchantCapability.capability3DS
+            request.countryCode = "US"
+            request.currencyCode = "USD"
             var summaryItems = [PKPaymentSummaryItem]()
             summaryItems.append(PKPaymentSummaryItem(label: product.name!, amount: product.price!))
             
@@ -36,7 +39,7 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
             
             summaryItems.append(PKPaymentSummaryItem(label: "Caffe Napoli", amount: product.total()))
             request.paymentSummaryItems = summaryItems
-             switch (product.productType) {
+            switch (product.productType) {
             case ProductType.Delivered:
                 request.requiredShippingContactFields = [PKContactField.postalAddress,PKContactField.phoneNumber]
             case ProductType.Electronic:
@@ -166,7 +169,7 @@ extension ProductDetatilTableViewController
         } else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: buyButtonCell, for: indexPath) as! BuyButtonCell
             cell.delegate = self
-            cell.product = product //applePayButton.hidden = !PKPaymentAuthorizationViewController.canMakePaymentsUsingNetworks(SupportedPaymentNetworks)
+            cell.product = product
             cell.buyButton.isHidden = !PKPaymentAuthorizationController.canMakePayments(usingNetworks: SupportedPaymentNetworks)
             return cell
         } else if indexPath.row == 2 {
@@ -210,6 +213,7 @@ extension ProductDetatilTableViewController: UICollectionViewDataSource
         return cell
     }
     
+    
 }
 
 extension ProductDetatilTableViewController : UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -221,6 +225,15 @@ extension ProductDetatilTableViewController : UICollectionViewDelegate, UICollec
         layout.minimumInteritemSpacing = 2.5
         let itemWidth = (collectionView.bounds.width - 5.0) / 2.0
         return CGSize(width: itemWidth, height: itemWidth)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let products = Product.fetchShoes()
+        guard let thisItem = products[indexPath.item].name  else {return}
+        print("You have selected \(thisItem)")
+        let alert = UIAlertController(title: thisItem, message: "Would You Like to purchace this item?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue shopping", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil) 
+        
     }
 }
 
@@ -295,20 +308,95 @@ extension ProductDetatilTableViewController : ProductImagesPageViewControllerDel
     }
 }
 extension ProductDetatilTableViewController: PKPaymentAuthorizationViewControllerDelegate {
-    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
-        completion(PKPaymentAuthorizationStatus.success)
-    }
+   
     
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        controller.dismiss(animated: true, completion: nil)
+         controller.dismiss(animated: true, completion: nil)
     }
-    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelectShippingContact contact: PKContact, handler completion: @escaping (PKPaymentRequestShippingContactUpdate) -> Void) {
-        //
-//        completion(status: PKPaymentAuthorizationStatus.Success, shippingMethods: nil, summaryItems: nil)
-        completion(PKPaymentRequestShippingContactUpdate(errors: nil, paymentSummaryItems: [], shippingMethods: []))
+    
+    
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping ((PKPaymentAuthorizationStatus) -> Void)) {
+//        completion(PKPaymentAuthorizationStatus.success)
+        // 1
+        //        let shippingAddress = createShippingAddressFromRef(address: (payment.shippingContact as? PKContact)!)
+        Stripe.setDefaultPublishableKey("sk_live_re1sxO5hvmLEGVvsQtTuaQk1")  // Replace With Your Own Key!
+        // 3
+        STPAPIClient.shared().createToken(with: payment) {
+            (token, error) -> Void in
+            
+            if (error != nil) {
+                print(error as Any)
+                completion(PKPaymentAuthorizationStatus.failure)
+                return
+            }
+            // 4
+            let shippingAddress = self.createShippingAddressFromRef(address: (payment.shippingContact )!)
+            // 5
+            let url = NSURL(string: "http://192.168.1.3:5000/pay")  // Replace with computers local IP Address!
+            let request = NSMutableURLRequest(url: url! as URL)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            
+            // 6
+            let body = ["stripeToken": token?.tokenId ?? "",
+                        "amount": self.product!.total().multiplying(by: NSDecimalNumber(string: "100")),
+                        "description": self.product!.name as Any,
+                        "shipping": [
+                            "city": shippingAddress.City!,
+                            "state": shippingAddress.State!,
+                            "firstName": shippingAddress.FirstName!,
+                            "lastName": shippingAddress.LastName!]
+                ] as [String : Any]
+            
+            // 7
+            do {
+                
+                try request.httpBody = JSONSerialization.data(withJSONObject: body, options: JSONSerialization.WritingOptions())
+                let session = URLSession.shared
+                let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) in
+                    // do stuff with response, data & error here
+                    if let error = error {
+                        completion(PKPaymentAuthorizationStatus.failure)
+                        print("Payment failure:", error)
+                        return
+                    }
+                    
+                    completion(PKPaymentAuthorizationStatus.success)
+                    print("Payment success")
+                    
+                })
+                task.resume()
+            } catch  {
+                print("address failed ...",error)
+            }
+        }
+        
     }
+    
+    //MARK:- Shipping Address
+    
+    func createShippingAddressFromRef(address: PKContact) -> Address {
+        var shippingAddress: Address = Address()
+        let contact = address.name
+        shippingAddress.FirstName = contact?.givenName
+        shippingAddress.LastName = contact?.familyName
+        let contactAddress = address.postalAddress
+        shippingAddress.Street = contactAddress?.street
+        shippingAddress.City = contactAddress?.city
+        shippingAddress.State = contactAddress?.state
+        return shippingAddress
+        
+    }
+    
+    //Shipping Method
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didSelect shippingMethod: PKShippingMethod, handler completion: @escaping (PKPaymentRequestShippingMethodUpdate) -> Void) {
         //
     }
+ 
+    
     
 }
+
+
+

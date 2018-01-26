@@ -63,7 +63,7 @@ class Product
         for i in 1...6 {
             product4Images.append(UIImage(named: "to\(i)")!)
         }
-        let product4 = Product(uid: "805144-852", name: "REAL AUTHENTIC ITALIAN TOMATO SAUCE", images: product4Images, price: 20, description: "Bolognese-- rich meat sauce flavored with chicken livers, wine, vegetables and nutmeg. Served with butter and grated cheese; sometimes cream is added to the sauce. Also called ragu in parts of Italy other than Bologna;", detail: "This homemade spaghetti sauce recipe was passed down from my Sicilian grandma. It has been used for generations and you can't mess it up! It is really easy and tastes SO much better than the store bought sauce. You can do this in a crockpot too – in fact it is one of our favorite dump recipes.", productType: .Delivered)
+        let product4 = Product(uid: "805144-852", name: "REAL AUTHENTIC ITALIAN TOMATO SAUCE", images: product4Images, price: 1, description: "Bolognese-- rich meat sauce flavored with chicken livers, wine, vegetables and nutmeg. Served with butter and grated cheese; sometimes cream is added to the sauce. Also called ragu in parts of Italy other than Bologna;", detail: "This homemade spaghetti sauce recipe was passed down from my Sicilian grandma. It has been used for generations and you can't mess it up! It is really easy and tastes SO much better than the store bought sauce. You can do this in a crockpot too – in fact it is one of our favorite dump recipes.", productType: .Delivered)
         products.append(product4)
         
         return products
@@ -83,6 +83,20 @@ class Product
             return price
         }
     }
+    struct ShippingMethod {
+        let price: NSDecimalNumber
+        let title: String
+        let description: String
+        
+        init(price: NSDecimalNumber, title: String, description: String) {
+            self.price = price
+            self.title = title
+            self.description = description
+        }
+        
+        
+    }
+    
 }
 
 
@@ -100,6 +114,10 @@ func ==(lhs: ProductType, rhs: ProductType) -> Bool {
         return true
     default: return false
     }
+    
+    
+    
+    
 }
 
 

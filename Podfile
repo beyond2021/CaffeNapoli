@@ -12,4 +12,5 @@ target 'CaffeNapoli' do
    pod 'Firebase/Messaging'
    pod 'lottie-ios'
    pod 'HCSStarRatingView', '~> 1.5'
+   pod 'Stripe/ApplePay'
 end

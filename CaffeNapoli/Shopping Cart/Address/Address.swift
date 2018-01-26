@@ -19,30 +19,7 @@ struct Address {
     init() {
     }
     //
-    func createShippingAddressFromRef(address: CNContact!) -> Address {
-        if let address = address.value as? CNPostalAddress {
-            
-            let city = address.city
-            ...
-        }
-        
-        var shippingAddress: CNContact = Address()
-        
-        shippingAddress.
-        
-        shippingAddress.FirstName = ABRecordCopyValue(address, kABPersonFirstNameProperty)?.takeRetainedValue() as? String
-        shippingAddress.LastName = ABRecordCopyValue(address, kABPersonLastNameProperty)?.takeRetainedValue() as? String
-        
-        let addressProperty : ABMultiValueRef = ABRecordCopyValue(address, kABPersonAddressProperty).takeUnretainedValue() as ABMultiValueRef
-        if let dict : NSDictionary = ABMultiValueCopyValueAtIndex(addressProperty, 0).takeUnretainedValue() as? NSDictionary {
-            shippingAddress.Street = dict[String(kABPersonAddressStreetKey)] as? String
-            shippingAddress.City = dict[String(kABPersonAddressCityKey)] as? String
-            shippingAddress.State = dict[String(kABPersonAddressStateKey)] as? String
-            shippingAddress.Zip = dict[String(kABPersonAddressZIPKey)] as? String
-        }
-        
-        return shippingAddress
-    }
+   
     
     
 }
