@@ -61,7 +61,8 @@ class ShoppingCartCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        backgroundColor = UIColor.rgb(displayP3Red: 227, green: 227, blue: 227)
-        backgroundColor = UIColor.cellBGColor()
+//        backgroundColor = UIColor.cellBGColor()
+        backgroundColor = .white
         addSubview(productImageView)
         addSubview(productNameLabel)
         addSubview(productPriceLabel)

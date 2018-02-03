@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import Stripe
 
 
 @UIApplicationMain
@@ -18,14 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        //
         FirebaseApp.configure()
-        //Setting up the root view
+        //
+//        STPPaymentConfiguration.shared().publishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
-//        window?.rootViewController = MainTabBarController()
-        //
-//        UITabBar.appearance().barTintColor = UIColor.black
-//        UITabBar.appearance().tintColor = .white
+
         
         UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
         UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()

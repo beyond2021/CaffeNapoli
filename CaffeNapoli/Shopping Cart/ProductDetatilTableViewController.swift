@@ -52,6 +52,9 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
             present(applePayController, animated: true, completion: nil)
         } else {
             print("NOT ready for apple pay")
+            let alert = UIAlertController(title: "This device is not ready for Apple Pay?", message: "Please use regular checkout.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -92,8 +95,15 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
         return pvc
     }()
     
-    lazy var headerView: ProductImagesHeaderView = {
-        let hv = ProductImagesHeaderView()
+//    lazy var headerView: ProductImagesHeaderView = {
+//        let hv = ProductImagesHeaderView()
+//        hv.backgroundColor = UIColor.tabBarBlue()
+//        hv.frame = CGRect(x: 0, y: 0, width: 375, height: 507)
+//        return hv
+//    }()
+    
+    lazy var headerView: UIView = {
+        let hv = UIView()
         hv.backgroundColor = UIColor.tabBarBlue()
         hv.frame = CGRect(x: 0, y: 0, width: 375, height: 507)
         return hv

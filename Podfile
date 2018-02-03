@@ -13,4 +13,5 @@ target 'CaffeNapoli' do
    pod 'lottie-ios'
    pod 'HCSStarRatingView', '~> 1.5'
    pod 'Stripe/ApplePay'
+   pod 'Stripe'
 end

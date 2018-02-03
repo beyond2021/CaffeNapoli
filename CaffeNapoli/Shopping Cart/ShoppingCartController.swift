@@ -40,7 +40,8 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationItems()
-        collectionView?.backgroundColor = .white
+//        collectionView?.backgroundColor = .white
+        collectionView?.backgroundColor = UIColor.tabBarBlue()
         collectionView?.register(ShoppingCartCell.self, forCellWithReuseIdentifier: cellId)
         navigationItem.title = "FOR SALE"
         let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.tabBarBlue()]
@@ -108,6 +109,7 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         detailViewController.product = myProduct
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
+    
     
     
 }
