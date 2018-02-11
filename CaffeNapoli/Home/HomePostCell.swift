@@ -223,8 +223,9 @@ class HomePostCell: UICollectionViewCell {
         //
         userProfileImageView.anchor(top: topAnchor, left: nil, bottom: photoImageView.topAnchor, right: nil, paddingTop: 6, paddingLeft: 6, paddingBottom: 8, paddingRight: 0, width: 60, height: 60)
         userProfileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        userProfileImageView.layer.cornerRadius = 8 //60 / 2
-        userProfileImageView.layer.masksToBounds = true
+//        userProfileImageView.layer.cornerRadius = 8 //60 / 2
+//        userProfileImageView.layer.masksToBounds = true
+        userProfileImageView.layoutCornerRadiusAndShadow(cornerRadius: 60/2)
         
         //
         

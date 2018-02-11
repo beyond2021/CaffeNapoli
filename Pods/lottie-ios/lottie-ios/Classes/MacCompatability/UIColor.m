@@ -6,7 +6,9 @@
 //  Copyright © 2017 Airbnb. All rights reserved.
 //
 
-#if !TARGET_OS_IPHONE && !TARGET_IPHONE_SIMULATOR
+#include <TargetConditionals.h>
+
+#if !TARGET_OS_IPHONE && !TARGET_OS_SIMULATOR
 #import "UIColor.h"
 #import <AppKit/AppKit.h>
 

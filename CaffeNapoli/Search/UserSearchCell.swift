@@ -44,7 +44,8 @@ class UserSearchCell: UICollectionViewCell {
         // How to center Image in cell
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
         profileImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        profileImageView.layer.cornerRadius = 50 / 2 // round the corner
+//        profileImageView.layer.cornerRadius = 50 / 2 // round the corner
+        profileImageView.layoutCornerRadiusAndShadow(cornerRadius: 50/2)
         usernameLabel.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         //separator line
         let separatorView = UIView()

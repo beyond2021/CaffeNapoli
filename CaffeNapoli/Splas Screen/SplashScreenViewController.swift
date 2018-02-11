@@ -63,3 +63,6 @@ class SplashScreenViewController: UIViewController {
     
     
 }
+
+// Block implicitly retains 'self'; explicitly mention 'self' to indicate this is intended behavior
+

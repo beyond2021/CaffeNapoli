@@ -153,11 +153,11 @@ exports.sendPushNotifications = functions.https.onRequest((request, response) =>
 
   // Admin.message().sendToDevice(token, payload)
 
-  var uid = '5WuxELWlevPKQCdOzwHEurhZWPi2';
+  var uid = 'I9iTrgGY5igIYE4L22wzLNbHlOl1';
 
   return admin.database().ref('/users/' + uid).once('value', snapshot => {
     var user = snapshot.val();
-    console.log("User username:  " + user.username + "fcmToken: " + user.fcmToken)
+    console.log("User username: " + user.username + " fcmToken: " + user.fcmToken);
 
     var payload = {
           notification : {

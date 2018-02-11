@@ -16,18 +16,19 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        //
-        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition1", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
-        return animationController
-        
-    }
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        //
-        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition2", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
-        return animationController
-        
-    }
+//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        //
+////        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition1", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
+//        let animationController = Lot
+//        return animationController
+//        
+//    }
+//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        //
+//        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition2", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
+//        return animationController
+//        
+//    }
 }
 
 
@@ -223,7 +224,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "blShoppingCartEmpty").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     
   

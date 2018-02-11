@@ -21,24 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //
         FirebaseApp.configure()
+        //Stripe
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
+        //Stripe + ApplePay
+        STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.caffeNapoli"
+        
         //
-//        STPPaymentConfiguration.shared().publishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
-
-        
         UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
         UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
-        
-        //
-//        UINavigationBar.appearance().barTintColor = UIColor.napoliGold()
         UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
-        
         attemptRegisterForNotifications(application: application)
-        
         UIApplication.shared.statusBarStyle = .lightContent
-
-        
         return true
     }
     //MARK:- receive alert open profile

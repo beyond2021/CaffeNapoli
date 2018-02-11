@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LOTAsset : NSObject
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-                  withBounds:(CGRect)bounds
-               withFramerate:(NSNumber * _Nullable)framerate
-              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup;
+              withAssetGroup:(LOTAssetGroup * _Nullable)assetGroup
+             withAssetBundle:(NSBundle *_Nonnull)bundle
+               withFramerate:(NSNumber *)framerate;
 
 @property (nonatomic, readonly, nullable) NSString *referenceID;
 @property (nonatomic, readonly, nullable) NSNumber *assetWidth;
@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, nullable) LOTLayerGroup *layerGroup;
 
 @property (nonatomic, readwrite) NSString *rootDirectory;
+@property (nonatomic, readonly) NSBundle *assetBundle;
 @end
 
 NS_ASSUME_NONNULL_END

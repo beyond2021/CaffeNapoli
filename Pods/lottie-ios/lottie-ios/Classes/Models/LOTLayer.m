@@ -9,10 +9,6 @@
 #import "LOTLayer.h"
 #import "LOTAsset.h"
 #import "LOTAssetGroup.h"
-#import "LOTAnimatableColorValue.h"
-#import "LOTAnimatablePointValue.h"
-#import "LOTAnimatableNumberValue.h"
-#import "LOTAnimatableScaleValue.h"
 #import "LOTShapeGroup.h"
 #import "LOTComposition.h"
 #import "LOTHelpers.h"
@@ -22,25 +18,21 @@
 @implementation LOTLayer
 
 - (instancetype)initWithJSON:(NSDictionary *)jsonDictionary
-              withCompBounds:(CGRect)compBounds
-               withFramerate:(NSNumber *)framerate
-              withAssetGroup:(LOTAssetGroup *)assetGroup {
+              withAssetGroup:(LOTAssetGroup *)assetGroup
+               withFramerate:(NSNumber *)framerate {
   self = [super init];
   if (self) {
     [self _mapFromJSON:jsonDictionary
-        withCompBounds:compBounds
-         withFramerate:framerate
-     withAssetGroup:assetGroup];
+     withAssetGroup:assetGroup
+     withFramerate:framerate];
   }
   return self;
 }
 
 - (void)_mapFromJSON:(NSDictionary *)jsonDictionary
-      withCompBounds:(CGRect)compBounds
-       withFramerate:(NSNumber *)framerate
-      withAssetGroup:(LOTAssetGroup *)assetGroup{
-  
-  _parentCompBounds = compBounds;
+      withAssetGroup:(LOTAssetGroup *)assetGroup
+       withFramerate:(NSNumber *)framerate {
+
   _layerName = [jsonDictionary[@"nm"] copy];
   _layerID = [jsonDictionary[@"ind"] copy];
   
@@ -53,20 +45,24 @@
   
   _parentID = [jsonDictionary[@"parent"] copy];
   
+  if (jsonDictionary[@"st"]) {
+    _startFrame = [jsonDictionary[@"st"] copy];
+  }
   _inFrame = [jsonDictionary[@"ip"] copy];
   _outFrame = [jsonDictionary[@"op"] copy];
-  _framerate = framerate;
-  
+
+  if (jsonDictionary[@"sr"]) {
+    _timeStretch = [jsonDictionary[@"sr"] copy];
+  } else {
+    _timeStretch = @1;
+  }
+
   if (_layerType == LOTLayerTypePrecomp) {
     _layerHeight = [jsonDictionary[@"h"] copy];
     _layerWidth = [jsonDictionary[@"w"] copy];
-    [assetGroup buildAssetNamed:_referenceID
-                     withBounds:CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue)
-                   andFramerate:_framerate];
+    [assetGroup buildAssetNamed:_referenceID withFramerate:framerate];
   } else if (_layerType == LOTLayerTypeImage) {
-    [assetGroup buildAssetNamed:_referenceID
-                     withBounds:CGRectZero
-                   andFramerate:_framerate];
+    [assetGroup buildAssetNamed:_referenceID withFramerate:framerate];
     _imageAsset = [assetGroup assetModelForID:_referenceID];
     _layerWidth = [_imageAsset.assetWidth copy];
     _layerHeight = [_imageAsset.assetHeight copy];
@@ -75,9 +71,6 @@
     _layerHeight = jsonDictionary[@"sh"];
     NSString *solidColor = jsonDictionary[@"sc"];
     _solidColor = [UIColor LOT_colorWithHexString:solidColor];
-  } else {
-    _layerWidth = @(compBounds.size.width);
-    _layerHeight = @(compBounds.size.height);
   }
   
   _layerBounds = CGRectMake(0, 0, _layerWidth.floatValue, _layerHeight.floatValue);
@@ -86,8 +79,18 @@
   
   NSDictionary *opacity = ks[@"o"];
   if (opacity) {
-    _opacity = [[LOTAnimatableNumberValue alloc] initWithNumberValues:opacity frameRate:_framerate];
-    [_opacity remapValuesFromMin:@0 fromMax:@100 toMin:@0 toMax:@1];
+    _opacity = [[LOTKeyframeGroup alloc] initWithData:opacity];
+    [_opacity remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, 0, 100, 0, 1);
+    }];
+  }
+
+  NSDictionary *timeRemap = jsonDictionary[@"tm"];
+  if (timeRemap) {
+    _timeRemapping = [[LOTKeyframeGroup alloc] initWithData:timeRemap];
+    [_timeRemapping remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return inValue * framerate.doubleValue;
+    }];
   }
   
   NSDictionary *rotation = ks[@"r"];
@@ -95,8 +98,8 @@
     rotation = ks[@"rz"];
   }
   if (rotation) {
-    _rotation = [[LOTAnimatableNumberValue alloc] initWithNumberValues:rotation frameRate:_framerate];
-    [_rotation remapValueWithBlock:^CGFloat(CGFloat inValue) {
+    _rotation = [[LOTKeyframeGroup alloc] initWithData:rotation];
+    [_rotation remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
       return LOT_DegreesToRadians(inValue);
     }];
   }
@@ -104,22 +107,23 @@
   NSDictionary *position = ks[@"p"];
   if ([position[@"s"] boolValue]) {
     // Separate dimensions
-    _positionX = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"x"] frameRate:_framerate];
-    _positionY = [[LOTAnimatableNumberValue alloc] initWithNumberValues:position[@"y"] frameRate:_framerate];
+    _positionX = [[LOTKeyframeGroup alloc] initWithData:position[@"x"]];
+    _positionY = [[LOTKeyframeGroup alloc] initWithData:position[@"y"]];
   } else {
-    _position = [[LOTAnimatablePointValue alloc] initWithPointValues:position frameRate:_framerate];
+    _position = [[LOTKeyframeGroup alloc] initWithData:position ];
   }
   
   NSDictionary *anchor = ks[@"a"];
   if (anchor) {
-    _anchor = [[LOTAnimatablePointValue alloc] initWithPointValues:anchor frameRate:_framerate];
-    [_anchor remapPointsFromBounds:_layerBounds toBounds:CGRectMake(0, 0, 1, 1)];
-    _anchor.usePathAnimation = NO;
+    _anchor = [[LOTKeyframeGroup alloc] initWithData:anchor];
   }
   
   NSDictionary *scale = ks[@"s"];
   if (scale) {
-    _scale = [[LOTAnimatableScaleValue alloc] initWithScaleValues:scale frameRate:_framerate];
+    _scale = [[LOTKeyframeGroup alloc] initWithData:scale];
+    [_scale remapKeyframesWithBlock:^CGFloat(CGFloat inValue) {
+      return LOT_RemapValue(inValue, -100, 100, -1, 1);
+    }];
   }
   
   _matteType = [jsonDictionary[@"tt"] integerValue];
@@ -127,14 +131,14 @@
   
   NSMutableArray *masks = [NSMutableArray array];
   for (NSDictionary *maskJSON in jsonDictionary[@"masksProperties"]) {
-    LOTMask *mask = [[LOTMask alloc] initWithJSON:maskJSON frameRate:_framerate];
+    LOTMask *mask = [[LOTMask alloc] initWithJSON:maskJSON];
     [masks addObject:mask];
   }
   _masks = masks.count ? masks : nil;
   
   NSMutableArray *shapes = [NSMutableArray array];
   for (NSDictionary *shapeJSON in jsonDictionary[@"shapes"]) {
-    id shapeItem = [LOTShapeGroup shapeItemWithJSON:shapeJSON frameRate:_framerate compBounds:_layerBounds];
+    id shapeItem = [LOTShapeGroup shapeItemWithJSON:shapeJSON];
     if (shapeItem) {
       [shapes addObject:shapeItem];
     }
@@ -167,36 +171,9 @@
       }
     }
   }
-  
-  
-  _hasInAnimation = _inFrame.integerValue > 0;
-  
-  NSMutableArray *keys = [NSMutableArray array];
-  NSMutableArray *keyTimes = [NSMutableArray array];
-  CGFloat layerLength = _outFrame.integerValue;
-  _layerDuration = (layerLength / _framerate.floatValue);
-  
-  if (_hasInAnimation) {
-    [keys addObject:@1];
-    [keyTimes addObject:@0];
-    [keys addObject:@0];
-    CGFloat inTime = _inFrame.floatValue / layerLength;
-    [keyTimes addObject:@(inTime)];
-  } else {
-    [keys addObject:@0];
-    [keyTimes addObject:@0];
-  }
-  
-  [keys addObject:@1];
-  [keyTimes addObject:@1];
-
-  
-  
-  _inOutKeyTimes = keyTimes;
-  _inOutKeyframes = keys;
 }
 
-- (NSString*)description {
+- (NSString *)description {
     NSMutableString *text = [[super description] mutableCopy];
     [text appendFormat:@" %@ id: %d pid: %d frames: %d-%d", _layerName, (int)_layerID.integerValue, (int)_parentID.integerValue,
      (int)_inFrame.integerValue, (int)_outFrame.integerValue];

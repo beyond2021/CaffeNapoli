@@ -45,10 +45,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
             addPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         // Lets get the image
-        
 //        print(originalImage?.size)
 //        print(editedImage?.size)
-        
         // round the button
         addPhotoButton.layer.masksToBounds = true
         addPhotoButton.layer.cornerRadius = addPhotoButton.frame.width/2
@@ -61,13 +59,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     let emailTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "Email"
-       // textField.backgroundColor = UIColor.lightGray
         textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
         textField.font = UIFont.systemFont(ofSize: 14)
         textField.borderStyle = .roundedRect
         // textfield listener
         textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
- 
         return textField
     }()
     @objc func handleTextInputChange(){
@@ -76,18 +72,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         if isFormValid {
             // enable signup button
             signupButton.isEnabled = true
-         // sign up button color change
-//            signupButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)
-            
             signupButton.backgroundColor = .mainBlue()
-            
         } else {
             // disable signup button
             signupButton.isEnabled = false
              signupButton.backgroundColor = UIColor.rgb(displayP3Red: 149, green: 204, blue: 244)
         }
-       
-        
     }
     //
     let passwordTextField : UITextField = {

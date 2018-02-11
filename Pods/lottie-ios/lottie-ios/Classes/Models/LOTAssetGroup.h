@@ -13,14 +13,15 @@
 @class LOTLayerGroup;
 @interface LOTAssetGroup : NSObject
 @property (nonatomic, readwrite) NSString * _Nullable rootDirectory;
+@property (nonatomic, readonly, nullable) NSBundle *assetBundle;
 
-- (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray;
+- (instancetype _Nonnull)initWithJSON:(NSArray * _Nonnull)jsonArray
+                      withAssetBundle:(NSBundle *_Nullable)bundle
+                        withFramerate:(NSNumber * _Nonnull)framerate;
 
-- (void)buildAssetNamed:(NSString * _Nonnull)refID
-             withBounds:(CGRect)bounds
-           andFramerate:(NSNumber * _Nullable)framerate;
+- (void)buildAssetNamed:(NSString * _Nonnull)refID withFramerate:(NSNumber * _Nonnull)framerate;
 
-- (void)finalizeInitialization;
+- (void)finalizeInitializationWithFramerate:(NSNumber * _Nonnull)framerate;
 
 - (LOTAsset * _Nullable)assetModelForID:(NSString * _Nonnull)assetID;
 
