@@ -16,9 +16,10 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
         //
         print("ready to buy from detailTV")
 //        let product = Array(self.productsAndPrices.keys)[(indexPath as NSIndexPath).row]
-        let product = product.name
-        let price = 2000
-        let checkoutViewController = CheckoutViewController(product: product!,
+        guard let productName = product.name else { return}
+//        print("Product is:",product)
+        let price = Int(Int(truncating: product.price!) * 100)
+        let checkoutViewController = CheckoutViewController(product: productName,
                                                             price: price,
                                                             settings: self.settingsVC.settings)
         self.navigationController?.pushViewController(checkoutViewController, animated: true)
@@ -161,7 +162,7 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 4 {
+        if indexPath.row == 3 {
             return self.tableView.bounds.width + 68
         } else {
             return UITableViewAutomaticDimension
@@ -176,7 +177,7 @@ extension ProductDetatilTableViewController
         // 1 - buy button
         // 2 - shoe full details button cell
         // 3 - you might like this cell
-        return 5
+        return 4
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
@@ -186,18 +187,12 @@ extension ProductDetatilTableViewController
             cell.product = product
             cell.selectionStyle = .none
             return cell
-        } else if indexPath.row == 1{
-            let cell = tableView.dequeueReusableCell(withIdentifier: buyButtonCell, for: indexPath) as! BuyButtonCell
-            cell.delegate = self
-            cell.product = product
-            cell.buyButton.isHidden = !PKPaymentAuthorizationController.canMakePayments(usingNetworks: SupportedPaymentNetworks)
-            return cell
-        } else if indexPath.row == 2{
+        }  else if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: checkoutButtonCell, for: indexPath) as! CheckoutButtonCell
             cell.delegate = self
             cell.product = product
             return cell
-        }  else if indexPath.row == 3 {
+        }  else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: productDetailMoreCell, for: indexPath) as! ProductDetailMoreCell
             cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             return cell
@@ -209,7 +204,7 @@ extension ProductDetatilTableViewController
     //
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     {
-        if indexPath.row == 4 {
+        if indexPath.row == 3 {
             if let cell = cell as? SuggestionCell {
                 cell.suggestionCollectionView.register(SuggestionCollectionViewCell.self, forCellWithReuseIdentifier: "suggestionCollectionViewCell")
                 cell.suggestionCollectionView.dataSource = self
@@ -256,8 +251,12 @@ extension ProductDetatilTableViewController : UICollectionViewDelegate, UICollec
         guard let thisItem = products[indexPath.item].name  else {return}
         print("You have selected \(thisItem)")
         let alert = UIAlertController(title: thisItem, message: "Would You Like to purchace this item?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue shopping", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil) 
+//        alert.addAction(UIAlertAction(title: "Continue shopping", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Continue Shopping", style: .cancel, handler: { (_) in
+            //
+            self.navigationController?.popViewController(animated: true)
+        }))
+        present(alert, animated: true, completion: nil)
         
     }
 }

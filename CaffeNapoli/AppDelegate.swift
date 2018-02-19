@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import UserNotifications
 import Stripe
+import FBSDKCoreKit
 
 
 @UIApplicationMain
@@ -25,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         STPPaymentConfiguration.shared().publishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
         //Stripe + ApplePay
         STPPaymentConfiguration.shared().appleMerchantIdentifier = "merchant.com.caffeNapoli"
-        
+        // facebook
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
@@ -61,33 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         }
     }
     
-    /*
-     (lldb) po userInfo
-     ▿ 3 elements
-     ▿ 0 : 2 elements
-     ▿ key : AnyHashable("gcm.message_id")
-     - value : "gcm.message_id"
-     - value : 0:1513569869182170%389b04e1389b04e1
-     ▿ 1 : 2 elements
-     ▿ key : AnyHashable("aps")
-     - value : "aps"
-     ▿ value : 1 element
-     ▿ 0 : 2 elements
-     - key : alert
-     ▿ value : 2 elements
-     ▿ 0 : 2 elements
-     - key : title
-     - value : You now have a new follower
-     ▿ 1 : 2 elements
-     - key : body
-     - value : Jenny is now following you
-     ▿ 2 : 2 elements
-     ▿ key : AnyHashable("followerId")
-     - value : "followerId"
-     - value : 8gkpBx01gegRC6vKHA6fjscIry12
-     
-
- */
+  
+   
+    //Facebook
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return true
+    }
+    
     
     
    
@@ -95,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         //
         print("Registered with fcm with token:", fcmToken)
     }
+    
     // listen for user notifications -= UNUserNotificationCenterDelegate
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         //
@@ -102,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
     
     //MARK:- Notification methods
+   
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //
         print("Registered for notifications", deviceToken)

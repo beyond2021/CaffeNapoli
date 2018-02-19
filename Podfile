@@ -15,5 +15,5 @@ target 'CaffeNapoli' do
    pod 'HCSStarRatingView', '~> 1.5'
    pod 'Stripe'
    pod 'Alamofire', '~> 4.5'
-
+   pod 'FBSDKLoginKit'
 end

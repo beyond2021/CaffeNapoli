@@ -9,7 +9,7 @@
 import Foundation
 import Stripe
 import Alamofire
-
+import  Firebase
 class MyAPIClient: NSObject, STPEphemeralKeyProvider {
 
     static let sharedClient = MyAPIClient()
@@ -28,8 +28,10 @@ class MyAPIClient: NSObject, STPEphemeralKeyProvider {
                         shippingMethod: PKShippingMethod?,
                         completion: @escaping STPErrorBlock) {
         let url = self.baseURL.appendingPathComponent("charge")
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         var params: [String: Any] = [
 //            "source": result.source.stripeID,
+            //get the logged in user id
             "customer" : "cus_CHRTujZSQrA9d7",
             "amount": amount,
             "currency" : "USD"
@@ -49,9 +51,10 @@ class MyAPIClient: NSObject, STPEphemeralKeyProvider {
 
     func createCustomerKey(withAPIVersion apiVersion: String, completion: @escaping STPJSONResponseCompletionBlock) {
         let url = self.baseURL.appendingPathComponent("ephemeral_keys")
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         Alamofire.request(url, method: .post, parameters: [
             "api_version": apiVersion,
-            "customer_id": "cus_CHRTujZSQrA9d7"
+            "customer_id": "cus_CHRTujZSQrA9d7",
             ])
             .validate(statusCode: 200..<300)
             .responseJSON { responseJSON in

@@ -13,21 +13,21 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 
     // 1) To get started with this demo, first head to https://dashboard.stripe.com/account/apikeys
     // and copy your "Test Publishable Key" (it looks like pk_test_abcdef) into the line below.
-    let stripePublishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
+    let stripePublishableKey = "pk_live_G4cILUIEl2E4iIlgyKXzmN0s"
     
     // 2) Next, optionally, to have this demo save your user's payment details, head to
     // https://github.com/stripe/example-ios-backend , click "Deploy to Heroku", and follow
     // the instructions (don't worry, it's free). Replace nil on the line below with your
     // Heroku URL (it looks like https://blazing-sunrise-1234.herokuapp.com ).
 //    https://aqueous-bastion-22045.herokuapp.com
-    let backendBaseURL: String? = "https://sleepy-stream-15919.herokuapp.com"
+    let backendBaseURL: String? = "https://caffenapoli.herokuapp.com"
 
     // 3) Optionally, to enable Apple Pay, follow the instructions at https://stripe.com/docs/mobile/apple-pay
     // to create an Apple Merchant ID. Replace nil on the line below with it (it looks like merchant.com.yourappname).
-    let appleMerchantID: String? = "merchant.com.applePayKev"
+    let appleMerchantID: String? = "merchant.com.caffeNapoli"
     
     // These values will be shown to the user when they purchase with Apple Pay.
-    let companyName = "Beyond2021"
+    let companyName = "Caffe Napoli"
     let paymentCurrency = "usd"
 
     let paymentContext: STPPaymentContext
@@ -38,6 +38,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     let totalRow: CheckoutRowView
     let buyButton: BuyButton
     let rowHeight: CGFloat = 44
+    let moveDown: CGFloat = 200
     let productImage = UILabel()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     let numberFormatter: NumberFormatter
@@ -156,9 +157,9 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         var red: CGFloat = 0
         self.theme.primaryBackgroundColor.getRed(&red, green: nil, blue: nil, alpha: nil)
         self.activityIndicator.activityIndicatorViewStyle = red < 0.5 ? .white : .gray
-        self.navigationItem.title = "Emoji Apparel"
+        self.navigationItem.title = "Caffe Napoli"
 
-        self.productImage.font = UIFont.systemFont(ofSize: 40)
+        self.productImage.font = UIFont.systemFont(ofSize: 16)
         self.view.addSubview(self.totalRow)
         self.view.addSubview(self.paymentRow)
         self.view.addSubview(self.shippingRow)
@@ -186,18 +187,18 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         let width = self.view.bounds.width - (insets.left + insets.right)
         self.productImage.sizeToFit()
         self.productImage.center = CGPoint(x: width/2.0,
-                                           y: self.productImage.bounds.height/2.0 + rowHeight)
+                                           y: self.productImage.bounds.height/2.0 + rowHeight + moveDown)
         self.paymentRow.frame = CGRect(x: insets.left, y: self.productImage.frame.maxY + rowHeight,
                                        width: width, height: rowHeight)
-        self.shippingRow.frame = CGRect(x: insets.left, y: self.paymentRow.frame.maxY,
+        self.shippingRow.frame = CGRect(x: insets.left, y: self.paymentRow.frame.maxY ,
                                         width: width, height: rowHeight)
-        self.totalRow.frame = CGRect(x: insets.left, y: self.shippingRow.frame.maxY,
+        self.totalRow.frame = CGRect(x: insets.left, y: self.shippingRow.frame.maxY ,
                                      width: width, height: rowHeight)
         self.buyButton.frame = CGRect(x: insets.left, y: 0, width: 88, height: 44)
-        self.buyButton.center = CGPoint(x: width/2.0, y: self.totalRow.frame.maxY + rowHeight*1.5)
+        self.buyButton.center = CGPoint(x: width/2.0, y: self.totalRow.frame.maxY + rowHeight*1.5 )
         self.activityIndicator.center = self.buyButton.center
-        self.applePayButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 60, paddingRight: 0, width: view.frame.width - 100, height: rowHeight)
-        self.applePayButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        self.applePayButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 60, paddingRight: 0, width: view.frame.width - 100, height: rowHeight)
+//        self.applePayButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
     @objc func didTapBuy() {
@@ -208,6 +209,7 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     // MARK: STPPaymentContextDelegate
     
     func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPErrorBlock) {
+        //Tells api to complete charge// need to call this in index.js
         MyAPIClient.sharedClient.completeCharge(paymentResult,
                                                 amount: self.paymentContext.paymentAmount,
                                                 shippingAddress: self.paymentContext.shippingAddress,

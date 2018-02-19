@@ -32,7 +32,37 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
 }
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate{
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate {
+    
+    func showMore(post: Post, sender : HomePostCell) {
+        print("showing more from home controller")
+
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+        actionSheet.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (_) in
+            print("facebook Action")
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Share on Instagram", style: .default, handler: { (_) in
+            print("Instagram Action")
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Copy Link", style: .default, handler: { (_) in
+            print("Copy  Action")
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Report", style: .default, handler: { (_) in
+            print("Report Action")
+        }))
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+            print("Cancel button tapped")
+        }
+        
+        
+        
+        actionSheet.addAction(cancel)
+        present(actionSheet, animated: true, completion: nil)
+    }
+       
+    
+    
     
     let noPostsAvailableLabel: UILabel = {
         let label = UILabel()
@@ -45,7 +75,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let howToSeePostsLabel: UILabel = {
         let label = UILabel()
-        label.text = " Please create a post by clicking the + button at the bottom or search for and follow users with the search button below "
+        label.text = " Please make sure that you are connected to the internet and create a post by clicking the + button at the bottom or search for and follow users with the search button below "
         label.numberOfLines = 0
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -224,15 +254,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     
   
     
     @objc func handleCart(){
-        let shoppingCartController = ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout())
-        let navController = CustomNavigationController(rootViewController: shoppingCartController)
-        present(navController, animated: true, completion: nil)
+        
     }
     
     @objc func handleCamera(){

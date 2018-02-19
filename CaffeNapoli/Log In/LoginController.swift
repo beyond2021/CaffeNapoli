@@ -8,8 +8,12 @@
 
 import UIKit
 import  Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LoginController: UIViewController {
+class LoginController: UIViewController,FBSDKLoginButtonDelegate{
+    
+    
     // LogoContainerView
     let logoContainerView : UIView = {
         let view = UIView()
@@ -28,7 +32,57 @@ class LoginController: UIViewController {
         return view
         
     }()
+    //MARK: Facebook
     
+    lazy var facebookLoginButton : FBSDKLoginButton = {
+        let button = FBSDKLoginButton()
+        button.delegate = self
+        return button
+    }()
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        // ...
+        print("Trying to log in with facebook")
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            if let error = error {
+                // ...
+                print("Unable to login with Facebook", error)
+                return
+            }
+            // User is signed in
+            if user  == nil {
+                //create user from facebook credentials
+                print("signed in but no user")
+                
+            } else {
+                print("signed in with user", user?.uid)
+                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                
+                mainTabbarController.setupViewControllers()
+                self.dismiss(animated: true, completion: nil)
+                
+            }
+            
+            
+            // ...
+           
+            
+        }
+        
+        
+    }
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
     //TextFields
     let emailTextField : UITextField = {
         let textField = UITextField()
@@ -145,6 +199,10 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(logoContainerView)
+        view.addSubview(facebookLoginButton)
+        
+        
+        
         logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
         //Remove the navigation bar
         navigationController?.isNavigationBarHidden = true
@@ -163,7 +221,8 @@ class LoginController: UIViewController {
         // Add stackView into the view
         view.addSubview(stackView)
         stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
-        
+        facebookLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 60)
+        facebookLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
     }
 }

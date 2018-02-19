@@ -13,6 +13,9 @@ protocol HomePostCellDelegate {
     func didTapComment(post: Post) // parameter tell which post we are clicking on
     // likes
     func didLike(for cell: HomePostCell) // to hold like state
+    //show more
+    func showMore(post: Post, sender : HomePostCell)
+    
 }
 
 
@@ -108,28 +111,27 @@ class HomePostCell: UICollectionViewCell {
     }()
     //
     //MARK: - Options Button
-    let optionsButton : UIButton = {
+    lazy var optionsButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.setTitle("•••", for: .normal)
         button.setImage(#imageLiteral(resourceName: "blMore").withRenderingMode(.alwaysOriginal), for: .normal)
-        
-//        button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action: #selector(showMore), for: .touchUpInside)
         return button
         
     }()
+    @objc private func showMore(){
+       print("showing more")
+        guard let post = self.post else { return }
+        delegate?.showMore(post: post, sender:self)
+        
+    }
     //
     // Like Button
     lazy var likeButton : UIButton = {
         let button = UIButton(type: .system)
-//        button.setImage(#imageLiteral(resourceName: "like_unselected").withRenderingMode(.alwaysOriginal), for: .normal)
-//
-//        button.setTitleColor(.black, for: .normal)
       button.setImage(#imageLiteral(resourceName: "blLikeUn").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handlelike), for: .touchUpInside)
-        
         button.setTitleColor(.white, for: .normal)
-        
-        
         return button
     }()
     //

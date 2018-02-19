@@ -21,6 +21,7 @@ class SuggestionCollectionViewCell: UICollectionViewCell {
     let imageView : UIImageView = {
         let iv = CustomImageView()
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         iv.backgroundColor = .red
         
        return iv
