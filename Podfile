@@ -16,4 +16,5 @@ target 'CaffeNapoli' do
    pod 'Stripe'
    pod 'Alamofire', '~> 4.5'
    pod 'FBSDKLoginKit'
+   pod 'GoogleSignIn'
 end
