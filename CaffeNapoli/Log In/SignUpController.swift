@@ -127,11 +127,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     //MARK:- Sign up User
     
     @objc func handleSignUp() {
-        //print(123)
-        // Create a new user
-//        let email = "dummy0@gmail.com"
-//        let password = "123123"
-        
+     
         guard let email = emailTextField.text, email.count > 0 else { return }
         guard let username = usersnameTextField.text, username.count > 0 else { return }
         guard let password = passwordTextField.text, password.count > 0 else { return }

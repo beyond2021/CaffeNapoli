@@ -8,5 +8,9 @@
 	<array>
 		<string>merchant.com.caffeNapoli</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.beyond2021.CaffeNapoli</string>
+	</array>
 </dict>
 </plist>

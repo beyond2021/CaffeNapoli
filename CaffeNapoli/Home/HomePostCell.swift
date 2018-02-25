@@ -32,7 +32,15 @@ class HomePostCell: UICollectionViewCell {
            // print(post?.imageUrl)
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
-            usernameLabel.text = post?.user.username
+//            print("Fb user is :", post?.user.fbUsername)
+            
+            if post?.user.username == "" {
+                usernameLabel.text = post?.user.fbUsername
+            } else {
+                usernameLabel.text = post?.user.username
+                
+            }
+//            usernameLabel.text = post?.user.username
             guard let profileImageUrl = post?.user.profileImageURL else { return }
             userProfileImageView.loadImage(urlString: profileImageUrl)
 //            captionLabel.text = post?.caption
@@ -44,7 +52,19 @@ class HomePostCell: UICollectionViewCell {
     fileprivate func setupAttributedCaption() {
         guard let post = self.post else { return }
         //Attributed text
-        let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor : UIColor.red])
+//        print("Fb user is :", post.user.fbUsername)
+        var attrText = ""
+        if post.user.username == "" {
+//            print("Facebook user", post.user.fbUsername)
+            attrText = post.user.fbUsername!
+            
+        } else {
+            print("Regular user", post.user.username)
+            attrText = post.user.username
+            
+        }
+        
+        let attributedText = NSMutableAttributedString(string: attrText, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor : UIColor.red])
 //        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14),NSAttributedStringKey.foregroundColor : UIColor.white]))
 //         attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
         

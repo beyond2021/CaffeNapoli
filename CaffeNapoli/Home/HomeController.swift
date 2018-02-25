@@ -91,9 +91,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     //iOS9
 //    let refreshControl = UIRefreshControl()
 //    let curvedView = CurvedView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         print("viewDidLoad")
         setupLabels()
 //        collectionView?.backgroundColor = .white
         collectionView?.backgroundColor = UIColor.cellBGColor()
@@ -137,6 +148,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchAllPosts(){
                 fetchPosts()
         fetchFollowingUserIds()
+//        fetchFacebookUserPost()
     }
     
     //MARK:- Get the usee ids of all the people that i am following
@@ -161,6 +173,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             print("Failed to fetch following user ids:", error)
         }
     }
+    var myPosts = 0
   
     //MARK:- Get the id of the loggen in user
     // Fetch Posts from database for this user
@@ -177,6 +190,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPostsWithUser(user: User) {
         
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        print("Facebook user:", user.uid)
+        
         let postReference = Database.database().reference().child("posts").child(user.uid)
         
         // because we need all new values at this point
@@ -194,7 +210,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let dictionary = value as? [String: Any] else { return }
                 //                    let dummyUser = User(dictionary: ["username" : "Keevin"])
                 
-                var post = Post(user: user, dictionary: dictionary)//var because styrcts need to be a var to change properties
+                var post = Post(user: user, dictionary: dictionary)//var because structs need to be a var to change properties
                 post.id = key
                 
                 //                let post = Post(dictionary: dictionary)// here we create each post with a snapshot dictionary we get from firebase

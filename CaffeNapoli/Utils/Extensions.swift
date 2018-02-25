@@ -12,6 +12,11 @@ extension UIColor {
        return UIColor(displayP3Red: displayP3Red/255, green: green/255, blue: blue/255, alpha: 1)
         
     }
+    static func facebookBlue() -> UIColor {
+        return UIColor.rgb(displayP3Red: 67, green: 103, blue: 178)
+        
+    }
+
     static func tabBarBlue() -> UIColor {
         return UIColor.rgb(displayP3Red: 46, green: 76, blue: 88)
         

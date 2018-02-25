@@ -12,6 +12,7 @@ struct User {
     //
     let uid : String
     let username : String
+    let fbUsername : String?
     let profileImageURL : String
     
     //Constructor to setup these properties
@@ -19,6 +20,7 @@ struct User {
         self.uid = uid
         // to get them out and cast them beca they r of type Any and if its not able to do so empty string
         self.username = dictionary["username"] as? String ?? ""
+        self.fbUsername = dictionary["name"] as? String ?? ""
         self.profileImageURL = dictionary["profileImageURL"] as? String ?? ""
         
     }

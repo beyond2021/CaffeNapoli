@@ -33,33 +33,110 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
         
     }()
     //MARK: Facebook
+    let fbCustomButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.facebookBlue()
+        button.setTitle("Custom Facebook Login Here", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleFBLogin), for: .touchUpInside)
+        return button
+    }()
     
+    @objc fileprivate func handleFBLogin() {
+      //call login on fb manager
+        FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, err) in
+            //
+            if let error = err{
+                print(error.localizedDescription)
+                return
+            }
+//            print(result?.token.tokenString ?? "")
+             self.showEmailAddress()
+            
+        }
+        
+    }
+    
+    // Facebook Button
     lazy var facebookLoginButton : FBSDKLoginButton = {
         let button = FBSDKLoginButton()
+        button.readPermissions = ["email", "public_profile"]
         button.delegate = self
         return button
     }()
+    // Custom Button
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if let error = error {
-            print(error.localizedDescription)
+            print("Custom FB login failed:", error.localizedDescription)
             return
         }
         // ...
-        print("Trying to log in with facebook")
-        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        Auth.auth().signIn(with: credential) { (user, error) in
-            if let error = error {
-                // ...
-                print("Unable to login with Facebook", error)
+        print("Successfully logged in to facebook")
+         self.showEmailAddress()
+
+}
+    private func showEmailAddress(){
+        // log in to Firebase with this Facebook user.
+         // This how we get the access token
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else { return }
+        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        Auth.auth().signIn(with: credentials) { (user, error) in
+            if error != nil {
+                print("Something went wrong with our FB user:", error ?? "")
                 return
             }
-            // User is signed in
-            if user  == nil {
-                //create user from facebook credentials
-                print("signed in but no user")
+            print("Successfully logged in  with our FB user:", user ?? "")
+            
+  
+            
+            // adding a reference to our firebase database
+            let ref = Database.database().reference(fromURL: "https://caffenapoli-8774f.firebaseio.com/")
+            
+            // guard for user id
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            // create a child reference - uid will let us wrap each users data in a unique user id for later reference
+            let usersReference = ref.child("users").child(uid)
+            
+            //
+            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+                //
                 
-            } else {
-                print("signed in with user", user?.uid)
+                if err != nil {
+                    print("Failed to start graph request:", err ?? "")
+                    return
+                    
+                }
+                print(result ?? "")
+                
+                guard let data = result as? [String:Any]  else { return }
+                
+                guard let name = data["name"] as? String else { return }
+                guard let email = data["email"]as? String else { return }
+                guard let id = data["id"]as? String else { return }
+//                guard let profilePicURL = data["profile_pic"] else { return }
+                print( name)
+                print( email)
+                print( id)
+//                print(profilePicURL)
+                
+                let values: [String:AnyObject] = result as! [String : AnyObject]
+                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    // if there's an error in saving to our firebase database
+                    if err != nil {
+                        print(err)
+                        return
+                    }
+                    // no error, so it means we've saved the user into our firebase database successfully
+                    print("Save the user successfully into Firebase database")
+                })
+                
                 guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
                 
                 mainTabbarController.setupViewControllers()
@@ -67,14 +144,107 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
                 
             }
             
-            
+        }
+
+    }
+    
+    
+    
+    //Update a user's profile
+    private func updateUsersProfile(with uid:String, displayName:String?, photoURL: URL?) {
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = displayName
+        changeRequest?.photoURL = photoURL
+        
+        changeRequest?.commitChanges { (error) in
             // ...
-           
-            
+            if (error != nil) {
+                print("Could not update user profile", error!)
+            } else {
+                print("Successfully updated User profile")
+            }
         }
         
-        
     }
+    //Set a user's email address
+    private func setUserEmailAddress(email : String) {
+        Auth.auth().currentUser?.updateEmail(to: email) { (error) in
+            if (error != nil) {
+                print("Could not update email", error!)
+            } else {
+                print("Successfully updated email")
+            }
+            
+            
+        }
+    }
+    //Send a user a verification email
+    private func sendVerificationEmail(){
+        Auth.auth().currentUser?.sendEmailVerification { (error) in
+            if (error != nil) {
+                print("Could not send verification email", error!)
+            } else {
+                print("Successfully sent verification email")
+            }
+        }
+    }
+    //Set a user's password
+    private func updatePassword(to password:String) {
+        Auth.auth().currentUser?.updatePassword(to: password) { (error) in
+            if (error != nil) {
+                print("Could not update password", error!)
+            } else {
+                print("Successfully updated password")
+            }
+        }
+    }
+    //Send a password reset email
+    private func sendPasswordResetEmail(to email:String){
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if (error != nil) {
+                print("Failed to send password reset to email", error!)
+            } else {
+                print("Successfully sent password reset to email")
+            }
+        }
+
+    }
+    //Delete a user
+    private func deleteAUser(){
+        let user = Auth.auth().currentUser
+        
+        user?.delete { error in
+            if let error = error {
+                print("Could not delete user", error)
+            } else {
+                // Account deleted.
+                print("Account deleted.")
+                
+            }
+        }
+    }
+    //Re-authenticate a user | need to do this before deleting an account, setting a primary email address, and changing a password—
+    private func reAuthenticateUser(){
+        let user = Auth.auth().currentUser
+        let credential: AuthCredential
+        
+        // Prompt the user to re-provide their sign-in credentials
+        credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        //
+        user?.reauthenticate(with: credential) { error in
+            if let error = error {
+                // An error happened.
+                print("Failed to reAuthenticate user", error)
+            } else {
+                // User re-authenticated.
+                print("User is re-authenticated")
+                
+            }
+        }
+
+    }
+    
+    
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         let firebaseAuth = Auth.auth()
         do {
@@ -200,6 +370,7 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
         super.viewDidLoad()
         view.addSubview(logoContainerView)
         view.addSubview(facebookLoginButton)
+        view.addSubview(fbCustomButton)
         
         
         
@@ -221,8 +392,11 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
         // Add stackView into the view
         view.addSubview(stackView)
         stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
-        facebookLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 60)
+        facebookLoginButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 80, height: 50)
         facebookLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        facebookLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //
+        fbCustomButton.anchor(top: facebookLoginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
         
     }
 }
