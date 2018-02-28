@@ -10,8 +10,9 @@ import UIKit
 import  Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleSignIn
 
-class LoginController: UIViewController,FBSDKLoginButtonDelegate{
+class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
     
     // LogoContainerView
@@ -32,6 +33,38 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
         return view
         
     }()
+    // Credential
+    var credential : AuthCredential? = nil
+    //Google Sign In
+    lazy var googleButton : GIDSignInButton = {
+        let button = GIDSignInButton()
+        
+        return button
+    }()
+    let GoogleCustomButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor.facebookBlue()
+        button.setTitle("Custom Google Login Here", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.textColor = .white
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleGoogleLogin), for: .touchUpInside)
+        return button
+    }()
+    @objc fileprivate func handleGoogleLogin() {
+        
+        GIDSignIn.sharedInstance().signIn()
+        //Dissmiss signin screen
+        guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+        
+        mainTabbarController.setupViewControllers()
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    //
+    //Google Sign in
+    
     //MARK: Facebook
     let fbCustomButton: UIButton = {
         let button = UIButton(type: .system)
@@ -78,76 +111,77 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
          self.showEmailAddress()
 
 }
-    private func showEmailAddress(){
-        // log in to Firebase with this Facebook user.
-         // This how we get the access token
-        let accessToken = FBSDKAccessToken.current()
-        guard let accessTokenString = accessToken?.tokenString else { return }
-        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
-        Auth.auth().signIn(with: credentials) { (user, error) in
-            if error != nil {
-                print("Something went wrong with our FB user:", error ?? "")
-                return
-            }
-            print("Successfully logged in  with our FB user:", user ?? "")
-            
-  
-            
-            // adding a reference to our firebase database
-            let ref = Database.database().reference(fromURL: "https://caffenapoli-8774f.firebaseio.com/")
-            
-            // guard for user id
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            // create a child reference - uid will let us wrap each users data in a unique user id for later reference
-            let usersReference = ref.child("users").child(uid)
-            
-            //
-            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
-                //
-                
-                if err != nil {
-                    print("Failed to start graph request:", err ?? "")
-                    return
-                    
-                }
-                print(result ?? "")
-                
-                guard let data = result as? [String:Any]  else { return }
-                
-                guard let name = data["name"] as? String else { return }
-                guard let email = data["email"]as? String else { return }
-                guard let id = data["id"]as? String else { return }
-//                guard let profilePicURL = data["profile_pic"] else { return }
-                print( name)
-                print( email)
-                print( id)
-//                print(profilePicURL)
-                
-                let values: [String:AnyObject] = result as! [String : AnyObject]
-                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                    // if there's an error in saving to our firebase database
-                    if err != nil {
-                        print(err)
-                        return
-                    }
-                    // no error, so it means we've saved the user into our firebase database successfully
-                    print("Save the user successfully into Firebase database")
-                })
-                
-                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-                
-                mainTabbarController.setupViewControllers()
-                self.dismiss(animated: true, completion: nil)
-                
-            }
-            
-        }
-
-    }
-    
+//    private func showEmailAddress(){
+//        // log in to Firebase with this Facebook user.
+//         // This how we get the access token
+//        let accessToken = FBSDKAccessToken.current()
+//        guard let accessTokenString = accessToken?.tokenString else { return }
+//        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+//        Auth.auth().signIn(with: credentials) { (user, error) in
+//            if error != nil {
+//                print("Something went wrong with our FB user:", error ?? "")
+//                // todo if error = Error Domain=FIRAuthErrorDomain Code=17012 "An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address."
+//                return
+//            }
+//            print("Successfully logged in  with our FB user:", user ?? "")
+//
+//
+//
+//            // adding a reference to our firebase database
+//            let ref = Database.database().reference(fromURL: "https://caffenapoli-8774f.firebaseio.com/")
+//
+//            // guard for user id
+//            guard let uid = user?.uid else {
+//                return
+//            }
+//
+//            // create a child reference - uid will let us wrap each users data in a unique user id for later reference
+//            let usersReference = ref.child("users").child(uid)
+//
+//            //
+//            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+//                //
+//
+//                if err != nil {
+//                    print("Failed to start graph request:", err ?? "")
+//                    return
+//
+//                }
+//                print(result ?? "")
+//
+//                guard let data = result as? [String:Any]  else { return }
+//
+//                guard let name = data["name"] as? String else { return }
+//                guard let email = data["email"]as? String else { return }
+//                guard let id = data["id"]as? String else { return }
+////                guard let profilePicURL = data["profile_pic"] else { return }
+//                print( name)
+//                print( email)
+//                print( id)
+////                print(profilePicURL)
+//
+//                let values: [String:AnyObject] = result as! [String : AnyObject]
+//                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+//                    // if there's an error in saving to our firebase database
+//                    if err != nil {
+//                        print(err)
+//                        return
+//                    }
+//                    // no error, so it means we've saved the user into our firebase database successfully
+//                    print("Save the user successfully into Firebase database")
+//                })
+//
+//                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//
+//                mainTabbarController.setupViewControllers()
+//                self.dismiss(animated: true, completion: nil)
+//
+//            }
+//
+//        }
+//
+//    }
+//
     
     
     //Update a user's profile
@@ -300,17 +334,12 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
     
     let loginButton : UIButton = {
         let button = UIButton(type: .system)
-        //        button.translatesAutoresizingMaskIntoConstraints = false
-        //button.backgroundColor = .blue
-        //        button.backgroundColor = UIColor(displayP3Red: 149/255, green: 204/255, blue: 244/255, alpha: 1)
         button.backgroundColor = UIColor.rgb(displayP3Red: 149, green: 204, blue: 244)
         button.setTitle("Login", for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
-        // Action
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
-        
         // Disable the signup button by default
         button.isEnabled = false
         return button
@@ -331,35 +360,26 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
             print("Successfully logged back in with user", user?.uid ?? "")
             //To show the main controller and reset the UI
             guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-            
             mainTabbarController.setupViewControllers()
             self.dismiss(animated: true, completion: nil)
-            
         }
-        
     }
     
     //
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Dont have an account with Caffe Napoli?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
-        
         button.setAttributedTitle(attributedTitle, for: .normal)
         // add the sign up
         attributedTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)])
         )
-//        button.setTitle("Dont have an account with Caffe Napoli? Sign up.", for: .normal)
-        //transition to signup controller. push sign up on to navigationaln stack
         button.addTarget(self, action: #selector(handelShowSignUp), for: .touchUpInside)
         return button
     }()
     
     @objc func handelShowSignUp(){
-        //Push the registration Controller
         let signUpController = SignUpController()
-       // print(navigationController)
-        navigationController?.pushViewController(signUpController, animated: true) // does not show because navigation controller is nil
-        
+        navigationController?.pushViewController(signUpController, animated: true)
     }
     //Change the font of the stausbar
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -368,12 +388,19 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        //
         view.addSubview(logoContainerView)
         view.addSubview(facebookLoginButton)
         view.addSubview(fbCustomButton)
-        
-        
-        
+        view.addSubview(googleButton)
+        view.addSubview(GoogleCustomButton)
+//        GIDSignIn.sharedInstance().signIn()
+        //
+        // Google Sign in
+        GIDSignIn.sharedInstance().uiDelegate = self
+       
+        //
         logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
         //Remove the navigation bar
         navigationController?.isNavigationBarHidden = true
@@ -397,6 +424,143 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate{
         facebookLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         //
         fbCustomButton.anchor(top: facebookLoginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+        //
+        googleButton.anchor(top: fbCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+        GoogleCustomButton.anchor(top: googleButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
         
     }
+}
+
+extension LoginController {
+    private func showEmailAddress(){
+        // log in to Firebase with this Facebook user.
+        // This how we get the access token
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else { return }
+//        let credentials = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        credential = FacebookAuthProvider.credential(withAccessToken: accessTokenString)
+        loginToFirebaseWithCredential(credential: credential!)
+        
+        // Facebook Credential
+        
+        
+  /*
+        Auth.auth().signIn(with: credential!) { (user, error) in
+            if error != nil {
+                print("Something went wrong with our FB user:", error ?? "")
+                return
+            }
+            print("Successfully logged in  with our FB user:", user ?? "")
+            // adding a reference to our firebase database
+            let ref = Database.database().reference(fromURL: "https://caffenapoli-8774f.firebaseio.com/")
+            // guard for user id
+            guard let uid = user?.uid else { return }
+            // create a child reference - uid will let us wrap each users data in a unique user id for later reference
+            let usersReference = ref.child("users").child(uid)
+            //
+            FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start { (connection, result, err) in
+                //
+                if err != nil {
+                    print("Failed to start graph request:", err ?? "")
+                    return
+                }
+                print(result ?? "")
+                /*
+                let values: [String:AnyObject] = result as! [String : AnyObject]
+                usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    // if there's an error in saving to our firebase database
+                    if err != nil {
+                        print(err?.localizedDescription ?? "")
+                        return
+                    }
+                    // no error, so it means we've saved the user into our firebase database successfully
+                    print("Save the user successfully into Firebase database")
+                    guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                    
+                    mainTabbarController.setupViewControllers()
+                    self.dismiss(animated: true, completion: nil)
+                })
+ */
+            }
+        }
+ */
+    }
+}
+
+extension LoginController {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        // ...
+        if let error = error {
+            print("could not sign in with Google", error)
+            return
+        }
+        print("Successfully signed in to Google:", user)
+        guard let authentication = user.authentication else { return }
+//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+//                                                       accessToken: authentication.accessToken)
+        credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        loginToFirebaseWithCredential(credential: credential!)
+        
+        print("Signin credential is:",credential ?? "")
+        //Google Credential
+        
+        
+        
+//        Auth.auth().signIn(with: credential!) { (user, error) in
+//            //
+//            if let error = error {
+//                print("could not sign in to Firebase with Google", error)
+//                return
+//            }
+//            print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
+//            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//
+//            mainTabbarController.setupViewControllers()
+//            self.dismiss(animated: true, completion: nil)
+//        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+        print("Disconnected by Firebase by Google Sign in")
+    }
+    
+}
+
+extension LoginController {
+    private func loginToFirebaseWithCredential( credential: AuthCredential) {
+//        user?.link(with: credential) { (user, error) in
+//
+//            if let error = error {
+//                //                The call to linkWithCredential:completion: will fail if the credentials are already linked to another user account. In this situation, you must handle merging the accounts and associated data as appropriate for your app
+//                print("could not sign in to Firebase with Google", error)
+//                return
+//            }
+//
+//
+//            
+//        }
+        
+        
+        Auth.auth().signIn(with: credential) { (user, error) in
+            //
+            if let error = error {
+                print("could not sign in to Firebase with Google", error)
+                return
+            }
+          
+            
+            
+            
+            print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
+            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            
+            mainTabbarController.setupViewControllers()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
 }

@@ -1,4 +1,4 @@
-//
+q//
 //  AppDelegate.swift
 //  CaffeNapoli
 //
@@ -11,17 +11,22 @@ import Firebase
 import UserNotifications
 import Stripe
 import FBSDKCoreKit
+import GoogleSignIn
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate, GIDSignInDelegate{
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         //
         FirebaseApp.configure()
+        //Google Sign In
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         //Stripe
         STPPaymentConfiguration.shared().publishableKey = "pk_test_10iie7Xp98twCbxCC0njHt8L"
         //Stripe + ApplePay
@@ -67,6 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
    
     //Facebook
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        GIDSignIn.sharedInstance().handle(url,
+                                          sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                          annotation: [:])
         return true
     }
     
@@ -143,7 +151,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    
+    //Google Sign in
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+        // ...
+        if let error = error {
+           print("could not sign in with Google", error)
+            return
+        }
+        print("Successfully signed in to Google:", user)
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        print("Signin credential is:",credential)
+        Auth.auth().signIn(with: credential) { (user, error) in
+            //
+            if let error = error {
+                print("could not sign in to Firebase with Google", error)
+                return
+            }
+            print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+        print("Disconnected by Firebase by Google Sign in")
+    }
 
 }
 
