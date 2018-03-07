@@ -79,6 +79,7 @@
 		53DCA1A22029EAEE00BE7311 /* UIView+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DCA1962029E96300BE7311 /* UIView+Utility.swift */; };
 		53DE0A201FA954E000C2323D /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE0A1F1FA954E000C2323D /* HomeController.swift */; };
 		53DE0A221FA9591800C2323D /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE0A211FA9591800C2323D /* HomePostCell.swift */; };
+		53EA39702047E6140086BDA4 /* NewMainLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EA396F2047E6140086BDA4 /* NewMainLoginController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		53DCA19B2029EA9B00BE7311 /* RocketPathOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketPathOverlay.swift; sourceTree = "<group>"; };
 		53DE0A1F1FA954E000C2323D /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		53DE0A211FA9591800C2323D /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
+		53EA396F2047E6140086BDA4 /* NewMainLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMainLoginController.swift; sourceTree = "<group>"; };
 		6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CaffeNapoli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64E0A2148CD716B003738C2 /* Pods-CaffeNapoli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaffeNapoli.release.xcconfig"; path = "Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli.release.xcconfig"; sourceTree = "<group>"; };
 		F0D5B11F5CC86F77A3BDF081 /* Pods-CaffeNapoli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CaffeNapoli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli.debug.xcconfig"; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 			children = (
 				53B1A41D1F9C3F9F002E3421 /* LoginController.swift */,
 				532D849D1F7E827500756E8A /* SignUpController.swift */,
+				53EA396F2047E6140086BDA4 /* NewMainLoginController.swift */,
 			);
 			path = "Log In";
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				532D84961F7E827500756E8A /* Resources */,
 				3BA65458A67B8C987837C1F1 /* [CP] Embed Pods Frameworks */,
 				682C75167470328899F98072 /* [CP] Copy Pods Resources */,
+				533DEB552047762E0070EC45 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -585,6 +589,8 @@
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -601,6 +607,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -609,6 +617,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		533DEB552047762E0070EC45 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 07a383abfb191bc8cefe329b85551916d4e9fd8b 56a463efc4276d638cfd33796aebc70485801b31d447dedd3f97ab145cada044";
 		};
 		5855CE9643114831FA5C915F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -635,11 +656,25 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseTwitterAuthUI.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseTwitterAuthUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterKitResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TwitterShareExtensionUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -692,6 +727,7 @@
 				5357130F1FF3D4CD00CCB70F /* ProductDetailCell.swift in Sources */,
 				53510DF6201415E30001A352 /* ProductDetailMoreCell.swift in Sources */,
 				539A5C231FA815AC007947B0 /* Posts.swift in Sources */,
+				53EA39702047E6140086BDA4 /* NewMainLoginController.swift in Sources */,
 				53A03F901FD7E26400ACB034 /* CommentsCell.swift in Sources */,
 				533A7056202FD95200245A3E /* CheckoutViewController.swift in Sources */,
 				5376C7381FF9CE74005F2C21 /* NumberOfItemsCell.swift in Sources */,

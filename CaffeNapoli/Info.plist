@@ -30,9 +30,31 @@
 				<string>com.googleusercontent.apps.992911149445-uaf31k6p3gegsmbgk8utbkbg9sbmmq73</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>https://caffenapoli-8774f.firebaseapp.com/__/auth/handler</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>07a383abfb191bc8cefe329b85551916d4e9fd8b</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>1905766599735664</string>
 	<key>FacebookDisplayName</key>

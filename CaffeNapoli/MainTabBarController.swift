@@ -40,7 +40,8 @@ if Auth.auth().currentUser == nil {
         DispatchQueue.main.async {
             //
             // THE USER IS NOT LOGGED IN, PRESENT LOGIN
-            let loginController = LoginController()
+//            let loginController = LoginController()
+            let loginController = NewMainLoginController()
             let navigationController = CustomNavigationController(rootViewController: loginController)
             self.present(navigationController, animated: true, completion: nil)
             

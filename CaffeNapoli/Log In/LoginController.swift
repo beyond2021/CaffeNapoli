@@ -7,10 +7,12 @@
 //
 
 import UIKit
-import  Firebase
+import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleSignIn
+import Crashlytics
+import TwitterKit
 
 class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     
@@ -111,6 +113,24 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
          self.showEmailAddress()
 
 }
+    //Twitter
+    lazy var twitterLoginButton : TWTRLogInButton = {
+        let button = TWTRLogInButton(logInCompletion: { (session, error) in
+            if error != nil {
+                print("Unable to Login with Twitter:", error ?? "")
+                return
+            }
+        })
+        print("Successfully Logged in with Twitter")
+//        button.setTitle("Crash", for:[])
+//        button.addTarget(self, action : #selector(handleCrashButtonTapped), for : .touchUpInside)
+        return button
+    }()
+    
+    @objc private func handleCrashButtonTapped() {
+        Crashlytics.sharedInstance().crash()
+    }
+    
 //    private func showEmailAddress(){
 //        // log in to Firebase with this Facebook user.
 //         // This how we get the access token
@@ -399,6 +419,8 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         //
         // Google Sign in
         GIDSignIn.sharedInstance().uiDelegate = self
+        //
+        view.addSubview(twitterLoginButton)
        
         //
         logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
@@ -427,7 +449,7 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         //
         googleButton.anchor(top: fbCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
         GoogleCustomButton.anchor(top: googleButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
-        
+        twitterLoginButton.anchor(top: GoogleCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
     }
 }
 
@@ -444,7 +466,7 @@ extension LoginController {
         // Facebook Credential
         
         
-  /*
+ 
         Auth.auth().signIn(with: credential!) { (user, error) in
             if error != nil {
                 print("Something went wrong with our FB user:", error ?? "")
@@ -465,7 +487,7 @@ extension LoginController {
                     return
                 }
                 print(result ?? "")
-                /*
+               
                 let values: [String:AnyObject] = result as! [String : AnyObject]
                 usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
                     // if there's an error in saving to our firebase database
@@ -480,10 +502,10 @@ extension LoginController {
                     mainTabbarController.setupViewControllers()
                     self.dismiss(animated: true, completion: nil)
                 })
- */
+ 
             }
         }
- */
+
     }
 }
 
@@ -495,30 +517,31 @@ extension LoginController {
             return
         }
         print("Successfully signed in to Google:", user)
+        
+        
+        
         guard let authentication = user.authentication else { return }
 //        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
 //                                                       accessToken: authentication.accessToken)
         credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        loginToFirebaseWithCredential(credential: credential!)
+//        loginToFirebaseWithCredential(credential: credential!)
         
-        print("Signin credential is:",credential ?? "")
+        print("Signin Google credential is:",credential ?? "")
         //Google Credential
         
         
         
-//        Auth.auth().signIn(with: credential!) { (user, error) in
-//            //
-//            if let error = error {
-//                print("could not sign in to Firebase with Google", error)
-//                return
-//            }
-//            print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
-//            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-//
-//            mainTabbarController.setupViewControllers()
-//            self.dismiss(animated: true, completion: nil)
-//        }
+        Auth.auth().signIn(with: credential!) { (user, error) in
+            //
+            if let error = error {
+                print("could not sign in to Firebase with Google", error)
+                return
+            }
+            print("Signed in time to dissmiss", user?.uid)
+           
+            
+        }
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

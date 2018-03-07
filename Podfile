@@ -17,4 +17,14 @@ target 'CaffeNapoli' do
    pod 'Alamofire', '~> 4.5'
    pod 'FBSDKLoginKit'
    pod 'GoogleSignIn'
+   pod 'Fabric'
+   pod 'Crashlytics'
+   pod 'TwitterKit'
+pod 'FirebaseUI/Auth'
+
+pod 'FirebaseUI/Google'
+pod 'FirebaseUI/Facebook'
+pod 'FirebaseUI/Twitter'
+pod 'FirebaseUI/Phone'
+
 end

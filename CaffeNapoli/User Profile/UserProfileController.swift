@@ -162,7 +162,8 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
            try Auth.auth().signOut()
              //WE NEED TO PRE4SENT SOME KING OF LOGIN CONTROLLER
                 
-                let loginController = LoginController()
+//                let loginController = LoginController()
+                let loginController = NewMainLoginController()
                 let navigationController = UINavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
                 
