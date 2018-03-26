@@ -15,8 +15,8 @@ extension Database {
         print("Fetching user with uid:", uid)
         Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let userDictionary = snapshot.value as? [String:Any] else { return }
-            //            let user = User(dictionary: userDictionary)
             let user = User(uid: uid, dictionary: userDictionary)
+
             //            print(snapshot.value ?? [])
             //FETCH POST FOR USER            //
             //            self.fetchPostsWithUser(user: user)
@@ -29,8 +29,6 @@ extension Database {
             //
             print("Failed to fetch user for posts", error)
         }
-        
-        
         
     }
     

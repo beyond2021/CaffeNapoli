@@ -4,7 +4,9 @@
 //
 //  Created by Kev1 on 9/29/17.
 //  Copyright © 2017 Kev1. All rights reserved.
+// ssVxvba81xSUzPkHHNyAYoy44wf2
 //
+
 
 import UIKit
 import Firebase
@@ -16,7 +18,8 @@ import Fabric
 import Crashlytics
 import TwitterKit
 import FirebaseAuthUI
-
+//import FirebaseUI
+import GTMSessionFetcher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate{
@@ -41,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         Fabric.with([Crashlytics.self])
         TWTRTwitter.sharedInstance().start(withConsumerKey:"PUT6xb0mTa9Y5xQIUcIfH6Ir3",
                                        consumerSecret:"WGs093vDE0BX2WTdwopshTOAOkmTdJj6eUZbbPsPNOzItBZ0b6")
+        GTMSessionFetcher.setLoggingEnabled(true)
         // UI
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
@@ -76,15 +80,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         }
     }
     
-  
+    
+    
+    // Phone Login
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Pass device token to auth
+        Auth.auth().setAPNSToken(deviceToken, type: .prod)
+    }
+    //Facebook
+    
+    //Google Signin
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
+        
+        
+    }
+    //Twitter
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
+    }
    
     //Facebook
+    /*
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         GIDSignIn.sharedInstance().handle(url,
                                           sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                           annotation: [:])
+        TWTRTwitter.sharedInstance().application(app, open: url, options: options)
         return true
     }
+ */
     
 //    func application(_ app: UIApplication, open url: URL,
 //                     options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
@@ -109,11 +137,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
     
     //MARK:- Notification methods
-   
+   /*
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         //
         print("Registered for notifications", deviceToken)
     }
+ */
     
     
     
@@ -169,34 +198,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
     
     
-//    //Google Sign in
-//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-//        // ...
-//        if let error = error {
-//           print("could not sign in with Google", error)
-//            return
-//        }
-//        print("Successfully signed in to Google:", user)
-//        guard let authentication = user.authentication else { return }
-//        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-//                                                       accessToken: authentication.accessToken)
-//        print("Signin credential is:",credential)
-//        Auth.auth().signIn(with: credential) { (user, error) in
-//            //
-//            if let error = error {
-//                print("could not sign in to Firebase with Google", error)
-//                return
-//            }
-//            print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
-//        }
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+//        return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
 //    }
-//
-//    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-//        // Perform any operations when the user disconnects from app here.
-//        // ...
-//        print("Disconnected by Firebase by Google Sign in")
-//    }
-
+    func application(application: UIApplication,
+                     openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        return  GIDSignIn.sharedInstance().handle(url as URL?, sourceApplication: sourceApplication!, annotation: annotation) || FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL?, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+       return true
+    }
+    
+    
+    
 }
 
+//- (BOOL)handleOpenURL:(NSURL *)URL
+//sourceApplication:(nullable NSString *)sourceApplication;
 

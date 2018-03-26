@@ -420,7 +420,7 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         // Google Sign in
         GIDSignIn.sharedInstance().uiDelegate = self
         //
-        view.addSubview(twitterLoginButton)
+//        view.addSubview(twitterLoginButton)
        
         //
         logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
@@ -449,7 +449,7 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         //
         googleButton.anchor(top: fbCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
         GoogleCustomButton.anchor(top: googleButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
-        twitterLoginButton.anchor(top: GoogleCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+//        twitterLoginButton.anchor(top: GoogleCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
     }
 }
 

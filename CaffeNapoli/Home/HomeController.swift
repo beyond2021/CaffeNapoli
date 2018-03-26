@@ -116,7 +116,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
-        //title
+        noPostsAvailableLabel.alpha = 0
         setUpNavigationItems()
         fetchAllPosts()
     }
@@ -290,7 +290,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if posts.count > 0 {
             noPostsAvailableLabel.alpha = 0
             howToSeePostsLabel.alpha = 0
+        } else {
+            noPostsAvailableLabel.alpha = 1
+            
         }
+        
         return posts.count
     }
     //
@@ -303,7 +307,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return cell
      
     }
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //
+//        print("I selected :", indexPath.item)
+        let post = posts[indexPath.item]
+//        print(post.user)
+        if post.user.uid == Auth.auth().currentUser?.uid {
+            let editPostController = EditPhotoController()
+            self.navigationController?.pushViewController(editPostController, animated: true)
+        } else {
+            return
+        }
+        
+    }
     
     //Cell sizes
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

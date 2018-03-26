@@ -9,7 +9,80 @@
 import UIKit
 import Firebase
 
-class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate{
+class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func showEditProfileController() {
+        let editProfileVC = EditProfileController()
+        //TODO pass the logged in user here
+//        navigationController?.pushViewController(editProfileVC, animated: true)
+        present(editProfileVC, animated: true, completion: nil)
+    }
+    
+    
+    
+    func updateProfilePhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        // allow editing
+        imagePickerController.allowsEditing = true
+        // present picker
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    //To get which photo was picked
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var profileImage : UIImage?
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            profileImage = editedImage
+        } else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            profileImage = originalImage
+        }
+        guard let newImage = profileImage else { return }
+        uploadImage(selectedImage: newImage)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func uploadImage(selectedImage:UIImage) {
+        print("Trying to upload image")
+        //Lets upload the image instead
+        let image = selectedImage 
+        // turn the image into upload data
+        guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+        // Append New image
+        let filename = NSUUID().uuidString
+        //
+        Storage.storage().reference().child("profile_Images").child(filename).putData(uploadData, metadata: nil, completion: { (metadata, err) in
+            //
+            if let error = err {
+                print("Could not upload profile photo:", error)
+                return
+            }
+            // Photo upload success
+            // Append Metadata
+            guard   let profileImageURL = metadata?.downloadURL()?.absoluteString else { return }
+            print("Successfully uploaded profile photo", profileImageURL)
+            
+            // Lets save the username in Firebase
+            //!:
+            let user = Auth.auth().currentUser
+            guard let uid = user?.uid else { return}
+            // Getb token from the messaging of Firebase
+            //to save the username
+            let dictionaryValues = [ "profileImageURL" : profileImageURL]
+            let values = [uid : dictionaryValues ]
+            //this appends new users  on server
+            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+                if let err = err {
+                    print("Failed to save user info into db:", err)
+                    return
+                }
+                // success
+                print("Successfully saved user info into db")
+                //To show the main controller and reset the UI
+                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                mainTabbarController.setupViewControllers()
+                self.dismiss(animated: true, completion: nil)
+            })
+        })
+    }
     // View State
     var isGridView = true // default state
     //
@@ -17,8 +90,6 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         print("did change to list view")
          isGridView = false // toggle to false
         collectionView?.reloadData() // UI
-        
-        
     }
     
     func didChangeToGridView() {
@@ -27,10 +98,8 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         collectionView?.reloadData() // UI
     }
     
-    
     let gridCellId = "gridCellId"
     let listCellId = "listCellId"
-    
     var userID:  String? // to show correct user from UserSearchController
     //
     override func viewDidLoad() {
@@ -39,14 +108,12 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         collectionView?.backgroundColor = UIColor.cellBGColor()
         // We need to registewrb the collectionview with a header
         collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
-      
         // Register 2 cell for grid and list layout
         collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: gridCellId)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)
         //Setup the gear icon
         setupLogoutButton()
         fetchUser()
-        
     }
     //
     var isFinishedPaging = false
@@ -92,6 +159,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
                
                 guard let user = self.user else { return }
                 guard let dictionary = snapshot.value as? [String: Any] else { return }
+//                var post = Post(user: user, dictionary: dictionary)
                 var post = Post(user: user, dictionary: dictionary)
                 //
                 post.id = snapshot.key
@@ -156,34 +224,21 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         //Add Action
         alertController.addAction(UIAlertAction(title: "Log Out Caffe Napoli", style: .destructive, handler: { (_) in
-            //
-//            print("Perform Logout")
             do {
            try Auth.auth().signOut()
              //WE NEED TO PRE4SENT SOME KING OF LOGIN CONTROLLER
-                
 //                let loginController = LoginController()
-                let loginController = NewMainLoginController()
+                let loginController = LoginAuthController()
                 let navigationController = UINavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
-                
+//                self.dismiss(animated: true, completion: nil)
                 
             } catch let signOutError {
                 print("Failed to sign Out", signOutError)
             }
-            
-            
-            
         }))
-        //Add in the cancel button
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-//            print("Perform Cancel")
-//        }))
-        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         present(alertController, animated: true, completion: nil)
-        
     }
     
     // size for cells
@@ -210,14 +265,11 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     }
     //spacing of cells
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
         if isGridView {
             return 1
         } else {
             return 10
-            
         }
-        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
@@ -251,6 +303,12 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         }
 
         
+    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //
+        print("I selected :", indexPath.item)
+        let editPostController = EditPhotoController()
+        self.navigationController?.pushViewController(editPostController, animated: true)
     }
     
     

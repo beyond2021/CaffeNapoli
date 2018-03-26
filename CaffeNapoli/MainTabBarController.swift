@@ -39,9 +39,9 @@ if Auth.auth().currentUser == nil {
         //PUT THE VIEW IN THE HIEARCHY
         DispatchQueue.main.async {
             //
-            // THE USER IS NOT LOGGED IN, PRESENT LOGIN
+            // THE USER IS NOT LOGGED IN, PRESENT LOGIN //FUIAuthViewController
 //            let loginController = LoginController()
-            let loginController = NewMainLoginController()
+            let loginController = LoginAuthController()
             let navigationController = CustomNavigationController(rootViewController: loginController)
             self.present(navigationController, animated: true, completion: nil)
             

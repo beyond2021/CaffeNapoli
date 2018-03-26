@@ -8,6 +8,7 @@
 
 import Foundation
 // TO STOP FECTHING DICTIONARY TWICE
+
 struct User {
     //
     let uid : String
@@ -25,3 +26,4 @@ struct User {
         
     }
 }
+

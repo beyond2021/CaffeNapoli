@@ -12,6 +12,8 @@ import Firebase
 protocol UserProfileHeaderDelegate {
     func didChangeToListView()
     func didChangeToGridView()
+    func updateProfilePhoto()
+    func showEditProfileController()
 }
 
 class UserProfileHeader: UICollectionViewCell {
@@ -104,7 +106,7 @@ class UserProfileHeader: UICollectionViewCell {
                 self.setupFollowStyle()
             })
             
-        } else {
+        } else if editProfileFollowButton.titleLabel?.text == "Follow"{
             
             // do follow here
             let followingRef = Database.database().reference().child("following").child(currentLoggedInUserId)
@@ -121,12 +123,19 @@ class UserProfileHeader: UICollectionViewCell {
                 
             }
             
+        } else {
+            print("Trying to open edit profile controller")
+            showEditProfileController()
             
         }
-        
        
     }
     
+    fileprivate func showEditProfileController() {
+        
+        delegate?.showEditProfileController()
+        
+    }
     fileprivate func setupFollowStyle() {
         self.editProfileFollowButton.setTitle("Follow", for: .normal)
         self.editProfileFollowButton.backgroundColor = UIColor.rgb(displayP3Red: 17, green: 154, blue: 237) //bg
@@ -144,13 +153,18 @@ class UserProfileHeader: UICollectionViewCell {
     
     
     //Let manually add our views
-    let profileImageView: CustomImageView = {
+    lazy var  profileImageView: CustomImageView = {
         let iv = CustomImageView()
-        ////iv.backgroundColor = .red
-//        iv.image = #imageLiteral(resourceName: "avatar2")
+        iv.isUserInteractionEnabled = true
+        iv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(updatePhoto)))
         return iv
-        
     }()
+    @objc  func updatePhoto() {
+        delegate?.updateProfilePhoto()
+        print("Trying to update photo from Header")
+    }
+    
+    
     //The bottom StackView
     lazy var gridButton: UIButton = {
       let button = UIButton(type: .system)
@@ -244,7 +258,8 @@ class UserProfileHeader: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setTitle("Edit Profile", for: .normal)
         button.setTitleColor(.black, for: .normal)// Text color for the button
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         // Draw the border around the buttom
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
@@ -280,14 +295,18 @@ class UserProfileHeader: UICollectionViewCell {
         setupUserStatsView()
         //EDIT PROFILE BUTTON
         addSubview(editProfileFollowButton)
-        editProfileFollowButton.anchor(top: postLabel.bottomAnchor, left: postLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
-        
+//        editProfileFollowButton.anchor(top: postLabel.bottomAnchor, left: postLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
+        editProfileFollowButton.anchor(top: followersLabel.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight:0, width: 60, height: 60)
+        editProfileFollowButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        editProfileFollowButton.layer.cornerRadius = 60/2
+        editProfileFollowButton.clipsToBounds = true
     }
     fileprivate func setupUserStatsView(){
         // !1 : Create the stackView
         let stackView = UIStackView(arrangedSubviews: [postLabel, followersLabel, followingLabel])
         // 1b: setup the stackView
         stackView.axis = .horizontal //
+//        stackView.axis = .vertical
         stackView.distribution = .fillEqually
         // make default gray = tintColor
         
@@ -295,8 +314,10 @@ class UserProfileHeader: UICollectionViewCell {
         // 2: Add it to cell
         addSubview(stackView)
         stackView.anchor(top: topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 12, width: 0, height: 50)
-
         
+//        stackView.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 2, paddingLeft: 2, paddingBottom: 0, paddingRight: 0, width: 0, height: 50)
+//        stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
     
     fileprivate func setupBottomToolbar() {
