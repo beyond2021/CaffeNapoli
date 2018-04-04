@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, UserProfileHeaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, CNUserProfileHeaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func showEditProfileController() {
         let editProfileVC = EditProfileController()
         //TODO pass the logged in user here
@@ -64,9 +64,11 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
             //!:
             let user = Auth.auth().currentUser
             guard let uid = user?.uid else { return}
+            guard let name = user?.displayName else { return }
+            guard let fcmToken = Messaging.messaging().fcmToken else { return }
             // Getb token from the messaging of Firebase
             //to save the username
-            let dictionaryValues = [ "profileImageURL" : profileImageURL]
+            let dictionaryValues = [ "profileImageURL" : profileImageURL, "uid" : uid, "name":name, "fcmToken":fcmToken]
             let values = [uid : dictionaryValues ]
             //this appends new users  on server
             Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
@@ -104,16 +106,22 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 //        collectionView?.backgroundColor = .white
         collectionView?.backgroundColor = UIColor.cellBGColor()
         // We need to registewrb the collectionview with a header
-        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
+//        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
+        collectionView?.register(CNUserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CNheaderID")
         // Register 2 cell for grid and list layout
         collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: gridCellId)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)
         //Setup the gear icon
         setupLogoutButton()
         fetchUser()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        fetchUser()
     }
     //
     var isFinishedPaging = false
@@ -315,8 +323,9 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //Setting up the header for the collectionview on the profile page
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         // here u have to return a UICollectionReusableView
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader // we can use bang! because we registered the UserProfileHeader in viewDidLoad
-        
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerID", for: indexPath) as! UserProfileHeader
+        // we can use bang! because we registered the UserProfileHeader in viewDidLoad
+         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CNheaderID", for: indexPath) as! CNUserProfileHeader
         //
         header.user = self.user //THIS LINE SET THE USER IN HEADERVIEWCONTROLLER
         // grid view change
@@ -328,7 +337,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //Must specify the size of the header UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         //
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 240)
     }
     
     
@@ -350,7 +359,9 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         Database.fetchUserWithUIUD(uid: uid) { (user) in
             //
             self.user = user
-            self.navigationItem.title = self.user?.username
+//            self.navigationItem.title = self.user?.username
+            self.navigationItem.title = self.user?.name
+            
             
             // TO STOP FECTHING DICTIONARY TWICE
             self.collectionView?.reloadData()

@@ -22,7 +22,7 @@ import FirebaseAuthUI
 import GTMSessionFetcher
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -135,18 +135,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         //
         completionHandler(.alert) // shows notifications when app is un the forground
     }
-    
-    //MARK:- Notification methods
-   /*
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        //
-        print("Registered for notifications", deviceToken)
-    }
- */
-    
-    
-    
-    
     private func attemptRegisterForNotifications(application : UIApplication) {
         print("Attempting to register for APNS") // APNS : Apple Push Notification Services
         //
@@ -210,10 +198,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
        return true
     }
     
+    func application(application: UIApplication,
+                     openURL url: NSURL,
+                     options: [UIApplicationOpenURLOptionsKey: Any ] ) {
+        
+        
+    }
+    
+    open func open(_ url: URL, options: [String : Any] = [:],
+                   completionHandler completion: ((Bool) -> Swift.Void)? = nil) {
+//        var handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: UIApplicationOpenURLOptionsSourceApplicationKey, annotation: UIApplicationOpenURLOptionsAnnotationKey)
+//
+        
+    }
+   
     
     
 }
 
-//- (BOOL)handleOpenURL:(NSURL *)URL
-//sourceApplication:(nullable NSString *)sourceApplication;
+
 

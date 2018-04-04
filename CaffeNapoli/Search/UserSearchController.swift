@@ -40,7 +40,10 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             self.filteredUsers = self.users.filter { (user) -> Bool in
                 // give u any array back
                 //lowercase makes it case insensitive
-                return user.username.lowercased().contains(searchText.lowercased())
+                let username = user.username ?? user.name
+
+//                return user.username.lowercased().contains(searchText.lowercased())
+                return username!.lowercased().contains(searchText.lowercased())
             }
             
             
@@ -129,7 +132,16 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             })
             //Sort the user here not sorted! which returns an array
             self.users.sort(by: { (user1, user2) -> Bool in
-                return user1.username.compare(user2.username) == .orderedAscending
+                if user1.username == "" || user2.username == "" {
+                    return user1.name!.compare(user2.name!) == .orderedAscending
+                } else if user1.username == "" {
+                    return user1.name!.compare(user2.username!) == .orderedAscending
+                } else if user2.username == "" {
+                    return user1.username!.compare(user2.name!) == .orderedAscending
+                    
+                } else {
+                    return user1.username!.compare(user2.username!) == .orderedAscending                }
+                //                return user1.username.compare(user2.username) == .orderedAscending
                 
             })
             

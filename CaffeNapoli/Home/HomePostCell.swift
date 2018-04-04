@@ -35,7 +35,7 @@ class HomePostCell: UICollectionViewCell {
 //            print("Fb user is :", post?.user.fbUsername)
             
             if post?.user.username == "" {
-                usernameLabel.text = post?.user.fbUsername
+                usernameLabel.text = post?.user.name
             } else {
                 usernameLabel.text = post?.user.username
                 
@@ -56,11 +56,11 @@ class HomePostCell: UICollectionViewCell {
         var attrText = ""
         if post.user.username == "" {
 //            print("Facebook user", post.user.fbUsername)
-            attrText = post.user.fbUsername!
+            attrText = post.user.name!
             
         } else {
             print("Regular user", post.user.username)
-            attrText = post.user.username
+            attrText = post.user.username!
             
         }
         

@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import AVFoundation
 import Lottie
+import Social
+
 
 
 class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
@@ -32,7 +34,7 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
 }
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate{
     
     func showMore(post: Post, sender : HomePostCell) {
         print("showing more from home controller")
@@ -41,6 +43,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
         actionSheet.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (_) in
             print("facebook Action")
+            //Check if user ic connected to Facebook
+            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+                //create a post
+                let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                
+            }
         }))
         actionSheet.addAction(UIAlertAction(title: "Share on Instagram", style: .default, handler: { (_) in
             print("Instagram Action")

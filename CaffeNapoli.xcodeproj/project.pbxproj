@@ -13,6 +13,7 @@
 		5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6211FB46E2800563B1C /* FirebaseUtils.swift */; };
 		5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6241FB473F600563B1C /* UserSearchController.swift */; };
 		5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6261FB47E0700563B1C /* UserSearchCell.swift */; };
+		532767C32069AC1000973516 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532767C22069AC1000973516 /* FacebookShare.framework */; };
 		532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849B1F7E827500756E8A /* AppDelegate.swift */; };
 		532D849E1F7E827500756E8A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849D1F7E827500756E8A /* SignUpController.swift */; };
 		532D84A11F7E827500756E8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D849F1F7E827500756E8A /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535713121FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift */; };
 		535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535713171FF4470F00CCB70F /* ProductImagesViewController.swift */; };
 		5357131A1FF4486000CCB70F /* ProductImagesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535713191FF4486000CCB70F /* ProductImagesPageViewController.swift */; };
+		536181952073317C00C1D278 /* CNUserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536181942073317C00C1D278 /* CNUserProfileHeader.swift */; };
 		537071B02028C15800AAE687 /* AddToCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537071AF2028C15800AAE687 /* AddToCartCell.swift */; };
 		537071B22028C18800AAE687 /* CheckOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537071B12028C18800AAE687 /* CheckOutCell.swift */; };
 		5376C7351FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5376C7341FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift */; };
@@ -51,6 +53,7 @@
 		537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 537EF9991F894916004CED83 /* GoogleService-Info.plist */; };
 		537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EF99B1F8DB613004CED83 /* MainTabBarController.swift */; };
 		537EF99E1F8DB8B9004CED83 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */; };
+		537F2CCC206ACE240092BA04 /* CNUserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537F2CCB206ACE240092BA04 /* CNUserProfileController.swift */; };
 		5395FF711FED34430061FA2E /* OK Hand Sign.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5395FF701FED34430061FA2E /* OK Hand Sign.wav */; };
 		5395FF731FED36540061FA2E /* Smiling Face With Heart-Shaped Eyes.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5395FF721FED36530061FA2E /* Smiling Face With Heart-Shaped Eyes.wav */; };
 		539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539A5C191FA181A0007947B0 /* PhotoSelectorCell.swift */; };
@@ -91,6 +94,7 @@
 		5324F6211FB46E2800563B1C /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		5324F6241FB473F600563B1C /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		5324F6261FB47E0700563B1C /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
+		532767C22069AC1000973516 /* FacebookShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FacebookShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		532D84981F7E827500756E8A /* CaffeNapoli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffeNapoli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532D849B1F7E827500756E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532D849D1F7E827500756E8A /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		535713121FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCell.swift; sourceTree = "<group>"; };
 		535713171FF4470F00CCB70F /* ProductImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagesViewController.swift; sourceTree = "<group>"; };
 		535713191FF4486000CCB70F /* ProductImagesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagesPageViewController.swift; sourceTree = "<group>"; };
+		536181942073317C00C1D278 /* CNUserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNUserProfileHeader.swift; sourceTree = "<group>"; };
 		537071AF2028C15800AAE687 /* AddToCartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartCell.swift; sourceTree = "<group>"; };
 		537071B12028C18800AAE687 /* CheckOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCell.swift; sourceTree = "<group>"; };
 		5376C7341FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingBagTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +136,7 @@
 		537EF9991F894916004CED83 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		537EF99B1F8DB613004CED83 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		537F2CCB206ACE240092BA04 /* CNUserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNUserProfileController.swift; sourceTree = "<group>"; };
 		5395FF701FED34430061FA2E /* OK Hand Sign.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "OK Hand Sign.wav"; sourceTree = "<group>"; };
 		5395FF721FED36530061FA2E /* Smiling Face With Heart-Shaped Eyes.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Smiling Face With Heart-Shaped Eyes.wav"; sourceTree = "<group>"; };
 		539A5C191FA181A0007947B0 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532767C32069AC1000973516 /* FacebookShare.framework in Frameworks */,
 				53FDE581205F39000071B62E /* SafariServices.framework in Frameworks */,
 				1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */,
 			);
@@ -380,6 +387,7 @@
 			isa = PBXGroup;
 			children = (
 				53B1A41A1F91F408002E3421 /* UserProfileHeader.swift */,
+				536181942073317C00C1D278 /* CNUserProfileHeader.swift */,
 				539A5C191FA181A0007947B0 /* PhotoSelectorCell.swift */,
 				539A5C1B1FA18F78007947B0 /* PhotoSelectorHeader.swift */,
 				539A5C241FA81BE3007947B0 /* UserProfilePhotoCell.swift */,
@@ -399,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				537EF99D1F8DB8B9004CED83 /* UserProfileController.swift */,
+				537F2CCB206ACE240092BA04 /* CNUserProfileController.swift */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -506,6 +515,7 @@
 		56BEB7A63FC08BA9D4DA5EB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				532767C22069AC1000973516 /* FacebookShare.framework */,
 				53FDE580205F39000071B62E /* SafariServices.framework */,
 				6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */,
 			);
@@ -711,6 +721,10 @@
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
@@ -735,6 +749,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
@@ -872,6 +890,7 @@
 				53A03F901FD7E26400ACB034 /* CommentsCell.swift in Sources */,
 				533A7056202FD95200245A3E /* CheckoutViewController.swift in Sources */,
 				5376C7381FF9CE74005F2C21 /* NumberOfItemsCell.swift in Sources */,
+				537F2CCC206ACE240092BA04 /* CNUserProfileController.swift in Sources */,
 				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
 				53045B442019CA4800E9C6A7 /* Address.swift in Sources */,
 				533AE03C2005E4B0000920A9 /* SplashScreenViewController.swift in Sources */,
@@ -888,6 +907,7 @@
 				539A5C251FA81BE3007947B0 /* UserProfilePhotoCell.swift in Sources */,
 				533A705A202FDA1B00245A3E /* Buttons.swift in Sources */,
 				53A03F921FDCA72300ACB034 /* Comment.swift in Sources */,
+				536181952073317C00C1D278 /* CNUserProfileHeader.swift in Sources */,
 				53DE0A201FA954E000C2323D /* HomeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

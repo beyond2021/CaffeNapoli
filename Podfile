@@ -27,5 +27,7 @@ pod 'Firebase'
 pod 'FBSDKCoreKit'
 pod 'TwitterCore'
 pod 'FirebaseUI', '~> 4.0'
-
+pod 'FacebookCore'
+pod 'FacebookLogin'
+pod 'FacebookShare'
 end

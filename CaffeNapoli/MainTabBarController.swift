@@ -73,6 +73,7 @@ if Auth.auth().currentUser == nil {
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
+        
         //Add a navigationbar on the top
         let userProfileNavController = UINavigationController(rootViewController: userProfileController)
         // items in the tabs

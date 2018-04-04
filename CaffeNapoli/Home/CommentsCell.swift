@@ -16,7 +16,7 @@ class CommentsCell: UICollectionViewCell {
             guard let comment = comment else { return }
             //NS
             
-            let username = comment.user.username
+            let username = comment.user.username ?? "No username"
             let userComment = comment.text
             
             let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor : UIColor.red])
