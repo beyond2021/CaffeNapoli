@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Following.swift">
+   </FileRef>
+   <FileRef
       location = "group:CaffeNapoli.xcodeproj">
    </FileRef>
    <FileRef

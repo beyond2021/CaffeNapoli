@@ -39,11 +39,22 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
         super.viewDidLoad()
         //Custome transitioning
         //1:  protocol UIViewControllerTransitioningDelegate
+        let swipeToDismiss = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftToDismiss))
+        swipeToDismiss.direction = .left
+        view.addGestureRecognizer(swipeToDismiss)
+        
         transitioningDelegate = self//trasition
         setupCaptureSession()
         setupHUD()
         
     }
+    
+    @objc func swipeLeftToDismiss() {
+        dismissCamera()
+        
+    }
+    
+    
     //Custom Transition
     //presenting
     let customAnimationPresentor = CustomAnimationPresenter()

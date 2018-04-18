@@ -15,7 +15,7 @@ protocol HomePostCellDelegate {
     func didLike(for cell: HomePostCell) // to hold like state
     //show more
     func showMore(post: Post, sender : HomePostCell)
-    
+    func swipeRightForCamera()
 }
 
 
@@ -134,7 +134,8 @@ class HomePostCell: UICollectionViewCell {
     lazy var optionsButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.setTitle("•••", for: .normal)
-        button.setImage(#imageLiteral(resourceName: "blMore").withRenderingMode(.alwaysOriginal), for: .normal)
+//        button.setImage(#imageLiteral(resourceName: "blMore").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "blueMore").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(showMore), for: .touchUpInside)
         return button
         
@@ -273,7 +274,17 @@ class HomePostCell: UICollectionViewCell {
         addSubview(ratingsView)
         ratingsView.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 200, height: 30)
         
+        let swipeToCamera = UISwipeGestureRecognizer(target: self, action: #selector(swipeRightForCamera))
+        swipeToCamera.direction = .right
+        addGestureRecognizer(swipeToCamera)
+        
     }
+    
+    @objc fileprivate func swipeRightForCamera(){
+        print("Trying to swipe right from home cell")
+        delegate?.swipeRightForCamera()
+    }
+    
     fileprivate func setupActionButtons(){
         let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton,sendMessageButton])
         stackView.distribution = .fillEqually

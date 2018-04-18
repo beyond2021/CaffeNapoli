@@ -122,6 +122,7 @@ extension LoginAuthController{
     @IBAction func loginAction(sender: AnyObject) {
         // Present the default login view controller provided by authUI
         let authViewController = authUI?.authViewController();
+        authViewController?.topViewController?.view.backgroundColor = UIColor.tabBarBlue()
         self.present(authViewController!, animated: true, completion: nil)
     }
    

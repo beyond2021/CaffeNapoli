@@ -16,6 +16,8 @@ struct User {
     let name : String?
     let profileImageURL : String
     let email : String?
+   
+    
     
     //Constructor to setup these properties
     init(uid: String, dictionary: [String:Any]) {

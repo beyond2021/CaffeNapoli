@@ -35,6 +35,11 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate{
+    func swipeRightForCamera() {
+                print("Showing Camera")
+        handleCamera()
+    }
+    
     
     func showMore(post: Post, sender : HomePostCell) {
         print("showing more from home controller")
@@ -106,7 +111,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
+        handleRefresh()
         
     }
     
@@ -159,6 +164,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        fetchFacebookUserPost()
     }
     
+    
     //MARK:- Get the usee ids of all the people that i am following
     fileprivate func fetchFollowingUserIds() {
         //LOGIC
@@ -191,6 +197,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUIUD(uid: uid) { (user) in
             //
+           
             self.fetchPostsWithUser(user: user)
         }
     }

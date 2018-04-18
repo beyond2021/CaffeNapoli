@@ -95,19 +95,7 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
         
         return textField
     }()
-    
-//    let passwordTextField : UITextField = {
-//        let textField = UITextField()
-//        textField.placeholder = "Password"
-//        // textField.backgroundColor = UIColor.lightGray
-//        textField.backgroundColor = UIColor(white: 0, alpha: 0.03)
-//        textField.isSecureTextEntry = true
-//        textField.font = UIFont.systemFont(ofSize: 14)
-//        textField.borderStyle = .roundedRect
-//        // textfield listener
-//        textField.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
-//        return textField
-//    }()
+  
     //
     @objc func handleTextInputChange(){
         // validate email
@@ -256,27 +244,7 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
             self.user = user
             //            self.navigationItem.title = self.user?.username
             self.navigationItem.title = self.user?.name
-            
-//            print("username is:", self.user?.username ?? "No username")
-//            if user.username == "" {
-//                self.usernameTextField.placeholder = "Username"
-//            } else {
-//                self.usernameTextField.placeholder = user.username
-//
-//            }
-//
-//            let userNamePlaceholder = user.username ?? "Username"
-//            let emailPlaceholder = user.email ?? "Email"
-//
-//            self.usernameTextField.placeholder = userNamePlaceholder
-//            self.fullNameTextField.placeholder = user.name
-//            self.emailTextField.placeholder = emailPlaceholder
-            
-        
-           
         }
-        
-        
     }
     
     
@@ -294,7 +262,6 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
         stackView.anchor(top: addPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 230)
         
     }
-    
 }
 extension EditProfileController {
     //Methods
@@ -321,8 +288,6 @@ extension EditProfileController {
             } else {
                 print("Successfully updated email")
             }
-            
-            
         }
     }
     //Send a user a verification email

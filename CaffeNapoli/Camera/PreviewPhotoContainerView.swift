@@ -8,8 +8,16 @@
 
 import UIKit
 import  Photos
+protocol PreviewPhotoContainerViewDelegate {
+    //
+}
+
+
 
 class PreviewPhotoContainerView: UIView {
+    //
+    var delegate : PreviewPhotoContainerViewDelegate?
+
     //
     let previewImageView: UIImageView = {
         let iv = UIImageView()
@@ -115,8 +123,14 @@ class PreviewPhotoContainerView: UIView {
         cancelButton.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 50, height: 50)
         saveButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 24, paddingBottom: 24, paddingRight: 0, width: 50, height: 50)
         
+//        let swipeToDismiss = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftToDismiss))
+//        swipeToDismiss.direction = .left
+//        addGestureRecognizer(swipeToDismiss)
     }
     
+//    @objc fileprivate func swipeLeftToDismiss() {
+//
+//    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -10,6 +10,79 @@ import UIKit
 import Firebase
 
 class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, CNUserProfileHeaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+    
+    func getMyPosts(posts: Int) {
+//        print("number of posts", posts.count)
+//        let header = CNUserProfileHeader()
+//        header.posts = posts.count
+        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
+        //        headerView?.followingLabel.text = "\(count) \nposts"
+        let attributedText = NSMutableAttributedString(string: "\(posts)\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        
+        headerView?.postLabel.attributedText = attributedText
+        
+    }
+    
+    func getMyFollowers() {
+        print("Getting the people that i am following")
+       // get my user ID
+        
+    }
+    var peopleThisUserFollowsCount  = 20
+    func getFollowing() {
+//        print("Getting my following")
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Database.fetchUserWithUIUD(uid: uid) { (user) in
+            //
+            
+            self.fetchPersonsThisUserIsFollowing(user: user)
+        }
+
+    }
+    fileprivate func fetchPersonsThisUserIsFollowing(user: User){
+         let followingReference = Database.database().reference().child("following").child(user.uid)
+        followingReference.observeSingleEvent(of: .value, with: { (followingSnapshot) in
+            print("FollowingSnapshot is:",followingSnapshot.value)
+            guard let dictionaries =  followingSnapshot.value as? [String: Any] else { return } //we are optionally binding this dictionary to postsSnapshot.value
+            // to get each dictionary
+           
+            dictionaries.forEach({ (key, value) in
+                let countedSet = NSCountedSet()
+                for (_, value) in dictionaries {
+                    countedSet.add(value)
+                }
+               
+                let count = (countedSet.count(for: 1))
+                self.peopleThisUserFollowsCount = (countedSet.count(for: 1))
+//                print("Count for true: \(countedSet.count(for: 1))")
+//                [[_collectionView collectionViewLayout] invalidateLayout]
+               
+                self.updateLabelWith(count: count)
+                print("PeopleThisUserFollowsCount is:\(self.peopleThisUserFollowsCount)")
+            })
+        })
+    }
+    
+    fileprivate func updateLabelWith(count : Int?) {
+       
+        guard let count = count else { return }
+        print("Will try to update following labe with count", count)
+//        let header = CNUserProfileHeader()
+//        collectionView?.collectionViewLayout.invalidateLayout()
+//        header.following = count
+        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
+//        headerView?.followingLabel.text = "\(count) \nposts"
+                let attributedText = NSMutableAttributedString(string: "\(count)\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
+                attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        
+                headerView?.followingLabel.attributedText = attributedText
+        
+        
+    }
+    
+    
     func showEditProfileController() {
         let editProfileVC = EditProfileController()
         //TODO pass the logged in user here
@@ -117,11 +190,30 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)
         //Setup the gear icon
         setupLogoutButton()
+//         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(updateLabel))
+        
         fetchUser()
+       
+//        getMyFollowers()
+//        self.getFollowing()
+//        getFollowing()
+//        getMyPosts()
     }
+    
+//    @objc fileprivate func updateLabel(){
+//        print("Trying to update header label")
+//        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
+//        headerView?.followingLabel.text = "22 \nposts"
+//
+//
+//
+//    }
+    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        fetchUser()
+        getFollowing()
     }
     //
     var isFinishedPaging = false
@@ -176,6 +268,8 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
                 
             })
             // pagination logic
+            self.getMyPosts(posts: self.posts.count)
+            
             self.posts.forEach({ (post) in
                 print(post.id ?? "")
             })
@@ -212,7 +306,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
             let post = Post(user: user, dictionary: dictionary)
             self.posts.insert(post, at: 0) // puts it in the front
 //            self.posts.append(post)// append goes to the back of the array
-            
+//             self.getMyPosts()
             self.collectionView?.reloadData()
             
         }) { (error) in
@@ -285,6 +379,10 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     //Number of items
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //
+//         getMyPosts()
+//        let header = CNUserProfileHeader()
+//        header.posts = posts.count
+//        print("Post count is:", posts.count)
         return posts.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -315,7 +413,10 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //
         print("I selected :", indexPath.item)
-        let editPostController = EditPhotoController()
+        let post = posts[indexPath.row]
+        let layout = UICollectionViewFlowLayout()
+        let editPostController = EditPhotoController(collectionViewLayout: layout)
+        editPostController.post = post
         self.navigationController?.pushViewController(editPostController, animated: true)
     }
     
@@ -327,6 +428,11 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         // we can use bang! because we registered the UserProfileHeader in viewDidLoad
          let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CNheaderID", for: indexPath) as! CNUserProfileHeader
         //
+//        self.getFollowing()
+//        header.followingLabel.text = "\(peopleThisUserFollowsCount)"
+//        header.following = peopleThisUserFollowsCount
+//        header.following = 25
+        
         header.user = self.user //THIS LINE SET THE USER IN HEADERVIEWCONTROLLER
         // grid view change
          header.delegate = self
@@ -334,6 +440,17 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         //IT IS WRONG TO TRY TO ADD SUBVIEWS TO HERE
         return header
     }
+    func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        
+    }
+    func invalidateSupplementaryElements(ofKind elementKind: String,
+                                         at indexPaths: [IndexPath]) {
+        
+        
+    }
+    
+    
+    
     //Must specify the size of the header UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         //
@@ -369,6 +486,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
 //            self.fetchOrderedPosts()
             //Pagination
             self.paginatePosts()
+//            self.getMyPosts()
         }
         
         

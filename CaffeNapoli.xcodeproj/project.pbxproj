@@ -41,6 +41,7 @@
 		535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535713171FF4470F00CCB70F /* ProductImagesViewController.swift */; };
 		5357131A1FF4486000CCB70F /* ProductImagesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535713191FF4486000CCB70F /* ProductImagesPageViewController.swift */; };
 		536181952073317C00C1D278 /* CNUserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536181942073317C00C1D278 /* CNUserProfileHeader.swift */; };
+		536A2E892075719400878FD6 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536A2E882075719400878FD6 /* Followers.swift */; };
 		537071B02028C15800AAE687 /* AddToCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537071AF2028C15800AAE687 /* AddToCartCell.swift */; };
 		537071B22028C18800AAE687 /* CheckOutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537071B12028C18800AAE687 /* CheckOutCell.swift */; };
 		5376C7351FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5376C7341FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift */; };
@@ -124,6 +125,7 @@
 		535713171FF4470F00CCB70F /* ProductImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagesViewController.swift; sourceTree = "<group>"; };
 		535713191FF4486000CCB70F /* ProductImagesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagesPageViewController.swift; sourceTree = "<group>"; };
 		536181942073317C00C1D278 /* CNUserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNUserProfileHeader.swift; sourceTree = "<group>"; };
+		536A2E882075719400878FD6 /* Followers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Followers.swift; sourceTree = "<group>"; };
 		537071AF2028C15800AAE687 /* AddToCartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCartCell.swift; sourceTree = "<group>"; };
 		537071B12028C18800AAE687 /* CheckOutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOutCell.swift; sourceTree = "<group>"; };
 		5376C7341FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingBagTableViewController.swift; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				539A5C221FA815AC007947B0 /* Posts.swift */,
 				5324F61F1FB4583A00563B1C /* User.swift */,
 				53A03F911FDCA72200ACB034 /* Comment.swift */,
+				536A2E882075719400878FD6 /* Followers.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				5376C7381FF9CE74005F2C21 /* NumberOfItemsCell.swift in Sources */,
 				537F2CCC206ACE240092BA04 /* CNUserProfileController.swift in Sources */,
 				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
+				536A2E892075719400878FD6 /* Followers.swift in Sources */,
 				53045B442019CA4800E9C6A7 /* Address.swift in Sources */,
 				533AE03C2005E4B0000920A9 /* SplashScreenViewController.swift in Sources */,
 				535713041FF2627B00CCB70F /* ShoppingCartCell.swift in Sources */,
