@@ -131,7 +131,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.refreshControl = refreshControl
         noPostsAvailableLabel.alpha = 0
         setUpNavigationItems()
-        fetchAllPosts()
+//        fetchAllPosts()
     }
     
     private func  setupLabels() {

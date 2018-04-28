@@ -28,6 +28,48 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
         return button
     }()
     
+    //
+    let flashButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "flashOff").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(toggleCamera), for: .touchDown)
+        return button
+    }()
+    var flashIsOn = false
+    @objc private func toggleCamera() {
+        
+        guard let avDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
+        
+        // check if the device has torch
+        if avDevice.hasTorch {
+            // lock your device for configuration
+            do {
+                let abv = try avDevice.lockForConfiguration()
+            } catch {
+                print("aaaa")
+            }
+            
+            // check if your torchMode is on or off. If on turns it off otherwise turns it on
+            if avDevice.isTorchActive {
+                avDevice.torchMode = AVCaptureDevice.TorchMode.off
+                //turn flash off
+                flashButton.setImage(#imageLiteral(resourceName: "flashOff").withRenderingMode(.alwaysOriginal), for: .normal)            } else {
+                // sets the torch intensity to 100%
+                do {
+                    let abv = try avDevice.setTorchModeOn(level: 1.0)
+                  //turn flash on
+                    flashButton.setImage(#imageLiteral(resourceName: "flashOn").withRenderingMode(.alwaysOriginal), for: .normal)                 } catch {
+                    print("bbb")
+                }
+                //    avDevice.setTorchModeOnWithLevel(1.0, error: nil)
+            }
+            // unlock your device
+            avDevice.unlockForConfiguration()
+        }
+        
+    }
+    
+    
     
     @objc func dismissCamera() {
         print("Dismissing camera....")
@@ -37,8 +79,10 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //Custome transitioning
         //1:  protocol UIViewControllerTransitioningDelegate
+        
         let swipeToDismiss = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftToDismiss))
         swipeToDismiss.direction = .left
         view.addGestureRecognizer(swipeToDismiss)
@@ -91,9 +135,13 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     fileprivate func setupHUD() {
         view.addSubview(capturePhotoButton)
         view.addSubview(dismissButton)
+        view.addSubview(flashButton)
         capturePhotoButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 0, width: 80, height: 80)
         //center it
         capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        //
+        flashButton.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 24, paddingRight: 10, width: 80, height: 80)
+        
         
         dismissButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 50)
     
