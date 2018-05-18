@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
 		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
+		530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */; };
 		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
 		5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6211FB46E2800563B1C /* FirebaseUtils.swift */; };
 		5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6241FB473F600563B1C /* UserSearchController.swift */; };
@@ -89,8 +90,21 @@
 		53FDE581205F39000071B62E /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FDE580205F39000071B62E /* SafariServices.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		530C2CAC20A3314E005078EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532D84901F7E827500756E8A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532D84971F7E827500756E8A;
+			remoteInfo = CaffeNapoli;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		53045B432019CA4800E9C6A7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeNapoliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeNapoliTests.swift; sourceTree = "<group>"; };
+		530C2CAB20A3314E005078EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5324F61F1FB4583A00563B1C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5324F6211FB46E2800563B1C /* FirebaseUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
 		5324F6241FB473F600563B1C /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
@@ -179,6 +193,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		530C2CA420A3314E005078EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532D84951F7E827500756E8A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +219,15 @@
 				53045B432019CA4800E9C6A7 /* Address.swift */,
 			);
 			path = Address;
+			sourceTree = "<group>";
+		};
+		530C2CA820A3314E005078EA /* CaffeNapoliTests */ = {
+			isa = PBXGroup;
+			children = (
+				530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */,
+				530C2CAB20A3314E005078EA /* Info.plist */,
+			);
+			path = CaffeNapoliTests;
 			sourceTree = "<group>";
 		};
 		5316211B20316139007C9726 /* Settings */ = {
@@ -229,6 +259,7 @@
 				5395FF701FED34430061FA2E /* OK Hand Sign.wav */,
 				5395FF721FED36530061FA2E /* Smiling Face With Heart-Shaped Eyes.wav */,
 				532D849A1F7E827500756E8A /* CaffeNapoli */,
+				530C2CA820A3314E005078EA /* CaffeNapoliTests */,
 				532D84991F7E827500756E8A /* Products */,
 				E2DA67F95523E4F50C0E0DCF /* Pods */,
 				56BEB7A63FC08BA9D4DA5EB6 /* Frameworks */,
@@ -239,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				532D84981F7E827500756E8A /* CaffeNapoli.app */,
+				530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -537,6 +569,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		530C2CA620A3314E005078EA /* CaffeNapoliTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 530C2CB020A3314E005078EA /* Build configuration list for PBXNativeTarget "CaffeNapoliTests" */;
+			buildPhases = (
+				530C2CA320A3314E005078EA /* Sources */,
+				530C2CA420A3314E005078EA /* Frameworks */,
+				530C2CA520A3314E005078EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				530C2CAD20A3314E005078EA /* PBXTargetDependency */,
+			);
+			name = CaffeNapoliTests;
+			productName = CaffeNapoliTests;
+			productReference = 530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		532D84971F7E827500756E8A /* CaffeNapoli */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532D84AA1F7E827600756E8A /* Build configuration list for PBXNativeTarget "CaffeNapoli" */;
@@ -564,10 +614,15 @@
 		532D84901F7E827500756E8A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Kev1;
 				TargetAttributes = {
+					530C2CA620A3314E005078EA = {
+						CreatedOnToolsVersion = 9.4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 532D84971F7E827500756E8A;
+					};
 					532D84971F7E827500756E8A = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -685,11 +740,19 @@
 			projectRoot = "";
 			targets = (
 				532D84971F7E827500756E8A /* CaffeNapoli */,
+				530C2CA620A3314E005078EA /* CaffeNapoliTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		530C2CA520A3314E005078EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532D84961F7E827500756E8A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -844,6 +907,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		530C2CA320A3314E005078EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		532D84941F7E827500756E8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -918,6 +989,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		530C2CAD20A3314E005078EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532D84971F7E827500756E8A /* CaffeNapoli */;
+			targetProxy = 530C2CAC20A3314E005078EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		532D849F1F7E827500756E8A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -938,6 +1017,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		530C2CAE20A3314E005078EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoliTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffeNapoli.app/CaffeNapoli";
+			};
+			name = Debug;
+		};
+		530C2CAF20A3314E005078EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoliTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoliTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CaffeNapoli.app/CaffeNapoli";
+			};
+			name = Release;
+		};
 		532D84A81F7E827600756E8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1065,7 +1184,49 @@
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks",
 					"$(PROJECT_DIR)/CaffeNapoli",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\" \"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\" \"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\" \"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\" \"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\" \"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\" \"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\" \"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_ROOT}/Crashlytics/iOS\" \"${PODS_ROOT}/Fabric/iOS\" \"${PODS_ROOT}/FirebaseAnalytics/Frameworks\" \"${PODS_ROOT}/FirebaseAuth/Frameworks\" \"${PODS_ROOT}/FirebaseCore/Frameworks\" \"${PODS_ROOT}/FirebaseDatabase/Frameworks\" \"${PODS_ROOT}/FirebaseFirestore/Frameworks\" \"${PODS_ROOT}/FirebaseInstanceID/Frameworks\" \"${PODS_ROOT}/FirebaseMessaging/Frameworks\" \"${PODS_ROOT}/FirebaseStorage/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\" \"${PODS_ROOT}/TwitterKit/iOS\" \"${PODS_ROOT}/TwitterCore/iOS\" \"${PODS_ROOT}/GoogleSignIn/Frameworks\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseFirestore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/TwitterKit/iOS\"",
+					"\"${PODS_ROOT}/TwitterCore/iOS\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+				);
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1113,6 +1274,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		530C2CB020A3314E005078EA /* Build configuration list for PBXNativeTarget "CaffeNapoliTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				530C2CAE20A3314E005078EA /* Debug */,
+				530C2CAF20A3314E005078EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		532D84931F7E827500756E8A /* Build configuration list for PBXProject "CaffeNapoli" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

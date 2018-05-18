@@ -18,19 +18,7 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        //
-////        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition1", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
-//        let animationController = Lot
-//        return animationController
-//        
-//    }
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        //
-//        let animationController = LOTAnimationTransitionController(animationNamed: "vcTransition2", fromLayerNamed: "outLayer", toLayerNamed: "inLayer")
-//        return animationController
-//        
-//    }
+
 }
 
 
@@ -48,11 +36,16 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
         actionSheet.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (_) in
             print("facebook Action")
+//            let share = [image, text, url]
+//            let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+//            activityViewController.popoverPresentationController?.sourceView = self.view
+//            self.present(activityViewController, animated: true, completion: nil)
+            
             //Check if user ic connected to Facebook
             if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
                 //create a post
                 let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                
+
             }
         }))
         actionSheet.addAction(UIAlertAction(title: "Share on Instagram", style: .default, handler: { (_) in
@@ -67,8 +60,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
             print("Cancel button tapped")
         }
-        
-        
         
         actionSheet.addAction(cancel)
         present(actionSheet, animated: true, completion: nil)
@@ -96,36 +87,32 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return label
     }()
     
-    //
+
     var posts = [Post]()
-    //
     let cellID = "cellID"
-    //
-    //iOS9
+//iOS9
 //    let refreshControl = UIRefreshControl()
 //    let curvedView = CurvedView()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         handleRefresh()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         print("viewDidLoad")
+        
+//        print("viewDidLoad")
         setupLabels()
+//        collectionView?.backgroundColor = UIColor.cellBGColor()
+        collectionView?.backgroundColor = UIColor.tabBarBlue()
 //        collectionView?.backgroundColor = .white
-        collectionView?.backgroundColor = UIColor.cellBGColor()
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
-, object: nil)
-        // register custom cell
+            , object: nil)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: cellID)
-        //Refresh Control
+//        Refresh Control
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
@@ -165,12 +152,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     
-    //MARK:- Get the usee ids of all the people that i am following
+//    Get the user ids of all the people that i am following
     fileprivate func fetchFollowingUserIds() {
-        //LOGIC
-        //1: get to following node user ids
+//        LOGIC
+//        get to following node user ids
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Database.database().reference().child("following").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+    Database.database().reference().child("following").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             //
 //            print(snapshot.value)
             //iterate through dictionary of followers
@@ -188,20 +175,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     var myPosts = 0
-  
-    //MARK:- Get the id of the loggen in user
-    // Fetch Posts from database for this user
+//     Get the id of the logged in user
+//     Fetch Posts from database for this user
     fileprivate func fetchPosts(){
 //        print("attempting to fetch post from firebase")
-        // Method 1: Observe what is happening at this node (posts-node then uid-node)
+//         Method 1: Observe what is happening at this node (posts-node then uid-node)
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUIUD(uid: uid) { (user) in
-            //
-           
             self.fetchPostsWithUser(user: user)
         }
     }
-    //MARK:- Fetch all posts of the people that this logged in user is folowing
+    
+//    Fetch all posts of the people that this logged in user is folowing
     fileprivate func fetchPostsWithUser(user: User) {
         
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -210,71 +195,55 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let postReference = Database.database().reference().child("posts").child(user.uid)
         
-        // because we need all new values at this point
+//         we need all new values at this point
         postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
-            // stop spinner
+//             stop spinner
             self.collectionView?.refreshControl?.endRefreshing() //iOS 10
-            
-            //print(postsSnapshot.value)
-            // For us to user our postSnapshot dictionary we get back . we have to cast it from type ANY to Type [String:Any]
-            guard let dictionaries =  postsSnapshot.value as? [String: Any] else { return } //we are optionally binding this dictionary to postsSnapshot.value
-            // to get each dictionary
+//            print(postsSnapshot.value)
+//             For us to user our postSnapshot dictionary we get back . we have to cast it from type ANY to Type [String:Any]
+            guard let dictionaries =  postsSnapshot.value as? [String: Any] else { return }
+//            we are optionally binding this dictionary to postsSnapshot.value
+//            to get each dictionary
             dictionaries.forEach({ (key, value) in
-                
-                //first cast dictionar as? []
+//                first cast dictionar as? []
                 guard let dictionary = value as? [String: Any] else { return }
-                //                    let dummyUser = User(dictionary: ["username" : "Keevin"])
-                
+//                let dummyUser = User(dictionary: ["username" : "Keevin"])
                 var post = Post(user: user, dictionary: dictionary)//var because structs need to be a var to change properties
                 post.id = key
-                
-                //                let post = Post(dictionary: dictionary)// here we create each post with a snapshot dictionary we get from firebase
-                //                // Start filling up post array by appending
-                //LIKES from Firebase
+//                let post = Post(dictionary: dictionary)
+//                here we create each post with a snapshot dictionary we get from firebase
+//                Start filling up post array by appending
+//                LIKES from Firebase
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                
-                Database.database().reference().child("likes").child(key).child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
-
-                    
+        Database.database().reference().child("likes").child(key).child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
 //                    print(snapshot) // expecting 1
-                    //creating a like
+//                    creating a like
                     if let value = snapshot.value as? Int, value == 1 {
-                        //post has been liked
+//                   post has been liked
                         post.hasLiked = true
                     } else {
                         post.hasLiked = false
-                        
                     }
                     self.posts.append(post)
-                    //
                     self.posts.sort(by: { (post1, post2) -> Bool in
-                        //
                         return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
                     })
-                    // stop refreshing
+//                    stop refreshing
                     if self.posts.count < 1 {
                         self.isFinishedRefreshing = true
-                        
                     }
-                    // UI
+//                     UI
                     self.collectionView?.reloadData()
-                    //
                 }, withCancel: { (err) in
-                    //
                     print("could not get like info for post", err)
                 })
-
             })
-
-            
         }) { (error) in
-            // get the error from the cancel block if there is any
+//            get the error from the cancel block if there is any
             print("Failed to fetch posts", error)
         }
-
     }
     
-    //
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
 //        let navController = CustomNavigationController()
@@ -282,42 +251,36 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue(), NSAttributedStringKey.font:UIFont(name:"HelveticaNeue", size: 40) ?? ""]
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue()]
-        
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     
-  
-    
-    @objc func handleCart(){
-        
-    }
-    
     @objc func handleCamera(){
-//        print("Showing Camera")
         let cameraController = CameraController()
         present(cameraController, animated: true, completion: nil)
     }
     
-    //DataSource
+//MARK:- DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if posts.count > 0 {
             noPostsAvailableLabel.alpha = 0
             howToSeePostsLabel.alpha = 0
         } else {
             noPostsAvailableLabel.alpha = 1
-            
         }
-        
         return posts.count
     }
-    //
     var isFinishedRefreshing = false
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
-            cell.post = posts[indexPath.item]
+        cell.layer.masksToBounds = false
+        cell.layer.cornerRadius = 6
+//        cell.layer.shadowOffset = CGSize(
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowRadius = 5;
+        cell.layer.shadowOpacity = 0.25;
+        cell.post = posts[indexPath.item]
             cell.delegate = self
         return cell
      
@@ -333,10 +296,16 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } else {
             return
         }
-        
+    }
+
+    
+//    Cell sizes
+    func collectionView(_ collectionView: UICollectionView,
+                                 layout collectionViewLayout: UICollectionViewLayout,
+                                 minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
     }
     
-    //Cell sizes
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //How tall the cell is
         var height: CGFloat = 40 + 8 + 8 // Username UserProfile
@@ -347,22 +316,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         height += 60
         return CGSize(width: view.frame.width, height: height)
     }
-    // HomePostCellDelegate Methjods
+//MARK:-  HomePostCellDelegate Methods
     func didTapComment(post: Post) {
-        //
-        print(post.caption)
+//        print(post.caption)
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
-        //pass the post to the commentscontroller here
+//        Pass the post to the commentscontroller here
         commentsController.post = post
-        // Push new viewcontroller on to the stack here
+//        Push new viewcontroller on to the stack here
         navigationController?.pushViewController(commentsController, animated: true)
     }
-    //MARK:- Saving the like state logic
+    
+//MARK:-    Saving the like state logic
     func didLike(for cell: HomePostCell) {
         guard let indexpath = collectionView?.indexPath(for: cell) else { return }
-        // we can now get the post
+//         get the post
         var post = self.posts[indexpath.item]
-        //check
         // print(post.caption)
         // Introduce a 5th node in firebase called likes
         guard let postId = post.id else { return }
@@ -375,7 +343,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             playAudio(sound: "OK Hand Sign", ext: "wav")
         }
         Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
-            //
             if let err = error {
                 print("Could not like post", err)
                 return
@@ -387,7 +354,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.collectionView?.reloadItems(at: [indexpath])
         }
     }
+   
     
+    
+    
+    //MARK:- Animation
     fileprivate func animateLikes() {
         (0...10).forEach { (_) in
             generateAnimatedViews()
@@ -422,31 +393,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 }
 
-//func playAudio(sound: String, ext: String) {
-//    let url = Bundle.main.url(forResource: sound, withExtension: ext)!
-//    do {
-//        bombSoundEffect = try AVAudioPlayer(contentsOf: url)
-//        guard let bombSound = bombSoundEffect else { return }
-//        bombSound.prepareToPlay()
-//        bombSound.play()
-//    } catch let error {
-//        print(error.localizedDescription)
-//    }
-//}
-
 
 func customPath() -> UIBezierPath {
     let path = UIBezierPath()
-    //starting point
+//    starting point
     path.move(to: CGPoint(x: 20, y: 480))
     let endPoint = CGPoint(x: 400, y: 480)
-    //        path.addLine(to: endPoint)
+//     path.addLine(to: endPoint)
     let randonYShift = 200 + drand48() * 300
     let cp1 = CGPoint(x: 120, y: 380 - randonYShift)
     let cp2 = CGPoint(x: 200, y: 580 + randonYShift)
     path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
     return path
-    
 }
 
 class CurvedView : UIView {

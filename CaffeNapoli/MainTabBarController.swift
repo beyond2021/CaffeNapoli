@@ -57,7 +57,10 @@ if Auth.auth().currentUser == nil {
     }
      func setupViewControllers(){
         //Home
-        let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let cellLayout = UICollectionViewFlowLayout()
+        cellLayout.minimumInteritemSpacing = 20
+        cellLayout.minimumLineSpacing = 20
+        let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: cellLayout))
         // Search
 //
         let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsYUnselected"), selectedImage: #imageLiteral(resourceName: "friendsYSelected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
