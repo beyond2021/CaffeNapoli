@@ -109,6 +109,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        collectionView?.backgroundColor = UIColor.cellBGColor()
         collectionView?.backgroundColor = UIColor.tabBarBlue()
 //        collectionView?.backgroundColor = .white
+//        [self.calendarView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
+//        collectionView?.contentInset(UIEdgeInsetsMake(20,0,0,0))
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
             , object: nil)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: cellID)
