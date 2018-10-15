@@ -16,6 +16,8 @@
  *
  */
 
+#include <grpc/support/port_platform.h>
+
 #include "src/core/lib/security/credentials/jwt/json_token.h"
 
 #include <string.h>
@@ -31,9 +33,9 @@
 #include "src/core/lib/slice/b64.h"
 
 extern "C" {
-#include <openssl/bio.h>
-#include <openssl/evp.h>
-#include <openssl/pem.h>
+#include <openssl_grpc/bio.h>
+#include <openssl_grpc/evp.h>
+#include <openssl_grpc/pem.h>
 }
 
 /* --- Constants. --- */

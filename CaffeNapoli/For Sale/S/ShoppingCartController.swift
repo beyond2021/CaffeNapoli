@@ -44,7 +44,7 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         collectionView?.backgroundColor = UIColor.tabBarBlue()
         collectionView?.register(ShoppingCartCell.self, forCellWithReuseIdentifier: cellId)
         navigationItem.title = "FOR SALE"
-        let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.tabBarBlue()]
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.tabBarBlue()]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
 //        navigationController?.navigationBar.prefersLargeTitles = true

@@ -195,8 +195,8 @@ class CNUserProfileHeader: UICollectionViewCell {
     lazy var postLabel: UILabel = {
         let label = UILabel()
         print("label is set")
-        let attributedText = NSMutableAttributedString(string: "01\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "01\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
 
         label.attributedText = attributedText
         // label.text = "11 \nposts"
@@ -208,8 +208,8 @@ class CNUserProfileHeader: UICollectionViewCell {
     //
     let followersLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "Watchers", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "Watchers", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
         
         label.attributedText = attributedText
         //label.text = "11 \nposts"
@@ -222,8 +222,8 @@ class CNUserProfileHeader: UICollectionViewCell {
 //    var followingLabel: UILabel?
     lazy var followingLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
 
         label.attributedText = attributedText
 //        label.text = "11 \nposts"
@@ -303,8 +303,8 @@ class CNUserProfileHeader: UICollectionViewCell {
                 
             }
 
-            let attributedText = NSMutableAttributedString(string: "\(following)\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-            attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+            let attributedText = NSMutableAttributedString(string: "\(following)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
 
 //            followingLabel.attributedText = attributedText
             
@@ -333,8 +333,8 @@ class CNUserProfileHeader: UICollectionViewCell {
 //
 //        }
         
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
         
         postLabel.attributedText = attributedText
         postLabel.text = "Regular text"
@@ -390,6 +390,6 @@ class CNUserProfileHeader: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     override func awakeFromNib() {
-        self.contentView.autoresizingMask = [UIViewAutoresizing.flexibleWidth , UIViewAutoresizing.flexibleHeight]
+        self.contentView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth , UIView.AutoresizingMask.flexibleHeight]
     }
 }

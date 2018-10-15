@@ -22,7 +22,7 @@ class NumberOfItemsCell: UITableViewCell {
         super.init(coder: aDecoder)
         
     }
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(numberOfItemsLabel)
         numberOfItemsLabel.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 13, paddingLeft: 8, paddingBottom: 13.5, paddingRight: 0, width: 56.5, height: 21.5)

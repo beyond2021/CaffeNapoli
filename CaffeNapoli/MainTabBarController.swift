@@ -60,7 +60,7 @@ if Auth.auth().currentUser == nil {
         let cellLayout = UICollectionViewFlowLayout()
         cellLayout.minimumInteritemSpacing = 20
         cellLayout.minimumLineSpacing = 20
-        cellLayout.sectionInset = UIEdgeInsetsMake(20,0,0,0)
+        cellLayout.sectionInset = UIEdgeInsets.init(top: 20,left: 0,bottom: 0,right: 0)
       
         let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: cellLayout))
         // Search

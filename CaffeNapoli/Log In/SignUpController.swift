@@ -37,7 +37,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     //To get which photo was picked
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         // Toget the ewdited image
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             addPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -147,7 +150,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
              //Lets upload the image instead
             guard let image = self.addPhotoButton.imageView?.image else {return}
             // turn the image into upload data
-            guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
             // Append New image
             let filename = NSUUID().uuidString
             
@@ -220,11 +223,11 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     //
     let alreadyHasAccountButton : UIButton = {
         let button = UIButton(type: .system)
-        let attributedTitle = NSMutableAttributedString(string: "Already have an account with Caffe Napoli?  ", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account with Caffe Napoli?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         button.setAttributedTitle(attributedTitle, for: .normal)
         // add the sign up
-        attributedTitle.append(NSMutableAttributedString(string: "Sign In", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedStringKey.foregroundColor: UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)])
+        attributedTitle.append(NSMutableAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.rgb(displayP3Red: 17, green: 154, blue: 237)])
         )
         //        button.setTitle("Dont have an account with Caffe Napoli? Sign up.", for: .normal)
         //transition to signup controller. push sign up on to navigationaln stack
@@ -304,3 +307,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}

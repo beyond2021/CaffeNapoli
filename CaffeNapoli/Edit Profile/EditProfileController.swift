@@ -36,7 +36,10 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
         
     }
     //To get which photo was picked
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         // Toget the ewdited image
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             addPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -170,7 +173,7 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
     fileprivate func updateWith(username : String?, email: String?, name: String) {
         guard let image = addPhotoButton.image(for: .normal) else { return}
         // turn the image into upload data
-        guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
         let filename = NSUUID().uuidString
         //
@@ -182,35 +185,74 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
             }
             // Photo upload success
             // Append Metadata
-            guard   let profileImageURL = metadata?.downloadURL()?.absoluteString else { return }
-            print("Successfully uploaded profile photo", profileImageURL)
-            //
-            let user = Auth.auth().currentUser
-            guard let uid = user?.uid else { return}
-            let username = username
-            let email = email
-            guard let fcmToken = Messaging.messaging().fcmToken else { return }
-            let dictionaryValues = ["profileImageURL" : profileImageURL, "username":username, "email":email, "name" : name, "fcmToken" : fcmToken ]
-            let values = [uid : dictionaryValues ]
-            //this appends new users  on server
-            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if let err = err {
-                    print("Failed to save user info into db:", err)
-                    return
+//            guard   let profileImageURL = metadata?.downloadURL()?.absoluteString else { return }
+            let profileImageURL = metadata?.storageReference?.downloadURL(completion: { (url, profileImageURLError) in
+                if let err = profileImageURLError {
+                    print("There was an error downloading profile image:", err)
                 }
-                // success
-                print("Successfully saved user info into db")
-                
-//                self.dismiss(animated: true, completion: nil)
-                self.dismiss(animated: true, completion: {
-                    guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-                    mainTabbarController.setupViewControllers()
-                    mainTabbarController.selectedIndex = 4
+                //success
+                guard   let url = url else { return }
+                print("Successfully uploaded profile photo", url)
+                //
+                let user = Auth.auth().currentUser
+                guard let uid = user?.uid else { return}
+                let username = username
+                let email = email
+                guard let fcmToken = Messaging.messaging().fcmToken else { return }
+                let dictionaryValues = ["profileImageURL" : url, "username":username ?? "", "email":email ?? "", "name" : name, "fcmToken" : fcmToken ] as [String : Any]
+                let values = [uid : dictionaryValues ]
+                //this appends new users  on server
+                Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+                    if let err = err {
+                        print("Failed to save user info into db:", err)
+                        return
+                    }
+                    // success
+                    print("Successfully saved user info into db")
+                    
+                    //                self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: {
+                        guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                        mainTabbarController.setupViewControllers()
+                        mainTabbarController.selectedIndex = 4
+                    })
                 })
+                
+                //
+            })
+                
+                
+                
             })
             
-           //
-        })
+//            print("Successfully uploaded profile photo", profileImageURL)
+//            //
+//            let user = Auth.auth().currentUser
+//            guard let uid = user?.uid else { return}
+//            let username = username
+//            let email = email
+//            guard let fcmToken = Messaging.messaging().fcmToken else { return }
+//            let dictionaryValues = ["profileImageURL" : profileImageURL, "username":username, "email":email, "name" : name, "fcmToken" : fcmToken ]
+//            let values = [uid : dictionaryValues ]
+//            //this appends new users  on server
+//            Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+//                if let err = err {
+//                    print("Failed to save user info into db:", err)
+//                    return
+//                }
+//                // success
+//                print("Successfully saved user info into db")
+//
+////                self.dismiss(animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: {
+//                    guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//                    mainTabbarController.setupViewControllers()
+//                    mainTabbarController.selectedIndex = 4
+//                })
+//            })
+//
+//           //
+//        })
         
     }
     
@@ -356,4 +398,9 @@ extension EditProfileController {
 //
 //    }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }

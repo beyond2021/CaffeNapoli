@@ -23,7 +23,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         collectionView?.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellID)
         
         // Register Custom Header
-        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         fetchPhotos()
         
     }

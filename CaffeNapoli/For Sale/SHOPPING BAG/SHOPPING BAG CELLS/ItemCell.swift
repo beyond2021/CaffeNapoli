@@ -61,7 +61,7 @@ class ItemCell : UITableViewCell {
         super.init(coder: aDecoder)
         
     }
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(productImageView)
         productImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: nil, paddingTop: 8, paddingLeft: 13, paddingBottom: 14, paddingRight: 0, width: 96, height: 96)
