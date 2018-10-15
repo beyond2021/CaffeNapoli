@@ -639,7 +639,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 532D84931F7E827500756E8A /* Build configuration list for PBXProject "CaffeNapoli" */;
+			buildConfigurationList = 532D84931F7E827500756E8A /* Build configuration list for PBXProject "Beyond2021" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1281,7 +1281,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		532D84931F7E827500756E8A /* Build configuration list for PBXProject "CaffeNapoli" */ = {
+		532D84931F7E827500756E8A /* Build configuration list for PBXProject "Beyond2021" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				532D84A81F7E827600756E8A /* Debug */,
