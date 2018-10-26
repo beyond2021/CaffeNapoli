@@ -16,7 +16,7 @@ pod 'lottie-ios'
 pod 'HCSStarRatingView', '~> 1.5'
 pod 'Stripe'
 pod 'Alamofire', '~> 4.5'
-pod 'FBSDKLoginKit'
+
 pod 'GoogleSignIn'
 pod 'Fabric'
 pod 'Crashlytics'
@@ -24,7 +24,7 @@ pod 'TwitterKit'
 pod 'FirebaseAuth'
 
 pod 'Firebase'
-pod 'FBSDKCoreKit'
+
 pod 'TwitterCore'
 pod 'FirebaseUI', '~> 4.0'
 pod 'FacebookCore'
