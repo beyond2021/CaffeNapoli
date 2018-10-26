@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
+		221052D72176992400D660E3 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221052D62176992300D660E3 /* UIColor+theme.swift */; };
 		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
 		530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */; };
 		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
@@ -99,6 +100,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		221052D62176992300D660E3 /* UIColor+theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		53045B432019CA4800E9C6A7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeNapoliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeNapoliTests.swift; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		537EF9961F885FA2004CED83 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				221052D62176992300D660E3 /* UIColor+theme.swift */,
 				53DCA19B2029EA9B00BE7311 /* RocketPathOverlay.swift */,
 				537EF9971F885FD7004CED83 /* Extensions.swift */,
 				539A5C261FA880A0007947B0 /* CustomImageView.swift */,
@@ -922,6 +925,7 @@
 				535713111FF3DBC900CCB70F /* SuggestionCell.swift in Sources */,
 				532D849E1F7E827500756E8A /* SignUpController.swift in Sources */,
 				537071B02028C15800AAE687 /* AddToCartCell.swift in Sources */,
+				221052D72176992400D660E3 /* UIColor+theme.swift in Sources */,
 				535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */,
 				535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,

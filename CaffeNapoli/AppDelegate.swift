@@ -48,9 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // UI
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
-        UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
-        UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
-        UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
+//        UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
+        UITabBar.appearance().barTintColor = .white
+        
+//        UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
+         UITabBar.appearance().tintColor = UIColor.white
+        
+//        UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
+        UINavigationBar.appearance().barTintColor = .lightRed
+        
         attemptRegisterForNotifications(application: application)
         UIApplication.shared.statusBarStyle = .lightContent
         return true

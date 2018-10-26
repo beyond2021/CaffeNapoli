@@ -98,7 +98,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        handleRefresh()
+//        handleRefresh()
     }
     
     override func viewDidLoad() {
@@ -107,8 +107,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        print("viewDidLoad")
         setupLabels()
 //        collectionView?.backgroundColor = UIColor.cellBGColor()
-        collectionView?.backgroundColor = UIColor.tabBarBlue()
-//        collectionView?.backgroundColor = .white
+//        collectionView?.backgroundColor = UIColor.tabBarBlue()
+        collectionView?.backgroundColor = .white
 //        [self.calendarView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
 //        collectionView?.contentInset(UIEdgeInsetsMake(20,0,0,0))
         
@@ -122,6 +122,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         noPostsAvailableLabel.alpha = 0
         setUpNavigationItems()
 //        fetchAllPosts()
+        handleRefresh()
+        
     }
     
     private func  setupLabels() {
@@ -250,10 +252,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
 //        let navController = CustomNavigationController()
-        navigationItem.title = "FOODIE"
+        navigationItem.title = "BYND2021 STUDIOS"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tabBarBlue(), NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 40) ?? ""]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tabBarBlue()]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 30) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
@@ -277,10 +279,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
-        cell.layer.masksToBounds = false
-        cell.layer.cornerRadius = 6
-//        cell.layer.shadowOffset = CGSize(
-        cell.layer.shadowColor = UIColor.black.cgColor
+//        cell.layer.masksToBounds = false
+//        cell.layer.cornerRadius = 6
+//        cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowRadius = 5;
         cell.layer.shadowOpacity = 0.25;
         cell.post = posts[indexPath.item]

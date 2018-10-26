@@ -176,7 +176,7 @@ class HomePostCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.cellBGColor()
+//        backgroundColor = UIColor.cellBGColor()
         //
         addSubview(userProfileImageView)
         addSubview(usernameLabel)
@@ -198,8 +198,8 @@ class HomePostCell: UICollectionViewCell {
         //Caption
         addSubview(captionLabel)
         captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
-        addSubview(ratingsView)
-        ratingsView.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 200, height: 30)
+//        addSubview(ratingsView)
+//        ratingsView.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 200, height: 30)
         let swipeToCamera = UISwipeGestureRecognizer(target: self, action: #selector(swipeRightForCamera))
         swipeToCamera.direction = .right
         addGestureRecognizer(swipeToCamera)

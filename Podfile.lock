@@ -12,28 +12,28 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.2):
     - BoringSSL-GRPC/Interface (= 0.0.2)
   - BoringSSL-GRPC/Interface (0.0.2)
-  - Crashlytics (3.10.9):
-    - Fabric (~> 1.7.13)
-  - Fabric (1.7.13)
-  - FacebookCore (0.4.0):
+  - Crashlytics (3.11.0):
+    - Fabric (~> 1.8.0)
+  - Fabric (1.8.0)
+  - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
-    - FBSDKCoreKit (~> 4.36)
-  - FacebookLogin (0.4.0):
+    - FBSDKCoreKit (~> 4.37)
+  - FacebookLogin (0.5.0):
     - Bolts (~> 1.9)
-    - FacebookCore (~> 0.4)
-    - FBSDKCoreKit (~> 4.36)
-    - FBSDKLoginKit (~> 4.36)
-  - FacebookShare (0.4.0):
+    - FacebookCore (~> 0.5)
+    - FBSDKCoreKit (~> 4.37)
+    - FBSDKLoginKit (~> 4.37)
+  - FacebookShare (0.5.0):
     - Bolts (~> 1.9)
-    - FacebookCore (~> 0.4)
-    - FBSDKCoreKit (~> 4.36)
-    - FBSDKShareKit (~> 4.36)
-  - FBSDKCoreKit (4.37.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.37.0):
+    - FacebookCore (~> 0.5)
+    - FBSDKCoreKit (~> 4.37)
+    - FBSDKShareKit (~> 4.37)
+  - FBSDKCoreKit (4.38.0):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.38.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.37.0):
-    - FBSDKCoreKit (~> 4.37.0)
+  - FBSDKShareKit (4.38.0):
+    - FBSDKCoreKit
   - Firebase (4.13.0):
     - Firebase/Core (= 4.13.0)
   - Firebase/Auth (4.13.0):
@@ -165,7 +165,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.2.0)
   - HCSStarRatingView (1.5)
   - leveldb-library (1.20)
-  - lottie-ios (2.5.0)
+  - lottie-ios (2.5.2)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -249,14 +249,14 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
-  Crashlytics: 55e24fc23989680285a21cb1146578d9d18e432c
-  Fabric: 25d0963b691fc97be566392243ff0ecef5a68338
-  FacebookCore: 770e57cfe250a4de4458b682191c0ff062dee247
-  FacebookLogin: eb0f2251aca835a94d70a5f7e580edc46d1e1603
-  FacebookShare: ec48492ba748f971c6a13661963f7aae38140111
-  FBSDKCoreKit: fe5f3474499a81963e11e3f3a5c753d0a95ca2b4
-  FBSDKLoginKit: 2f7249686d1e30ce8a5ef5400eedf50b3e3df332
-  FBSDKShareKit: 52e0083222c38e930eb6878007478326599195c3
+  Crashlytics: 1448070c1d2731ab71ea7c3faf84ac0f69657287
+  Fabric: 4ac1cdfef3004ccd83ce0959b91eda8a6e37df72
+  FacebookCore: 74288d0add931d361b1596beae787ab72c438249
+  FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
+  FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
+  FBSDKCoreKit: 2ab7fdbf600dc6b628ba7a49aa29d357a7b4c74e
+  FBSDKLoginKit: 634fa27e72e33620eb6389253337342c03d4a407
+  FBSDKShareKit: 00290e3db446eed603ff80ac629dcc5e80cf8b74
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
   FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
@@ -277,7 +277,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
-  lottie-ios: d699fdee68d7b63e721d949388b015fef1aaa4ac
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
