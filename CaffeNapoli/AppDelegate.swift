@@ -21,6 +21,8 @@ import FirebaseAuthUI
 //import FirebaseUI
 import GTMSessionFetcher
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
@@ -59,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         attemptRegisterForNotifications(application: application)
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        
         return true
     }
     //MARK:- receive alert open profile

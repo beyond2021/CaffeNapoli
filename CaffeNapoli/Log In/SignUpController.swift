@@ -153,8 +153,52 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
             // Append New image
             let filename = NSUUID().uuidString
+         
+             let storageRef = Storage.storage().reference().child("profile_Images").child(filename)
+             
+             storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+             
+             if let err = err {
+             print(err)
+             }
+//             guard   let profileImageURL = metadata?.downloadURL()?.absoluteString else { return }
+                
+             storageRef.downloadURL(completion: { (url, error) in
+             if error != nil {
+             print("Failed to download url:", error!)
+             return
+             } else {
+             //Do something with url
+            // self.saveToDatabaseWithImageUrl(imageUrl: (url?.absoluteString)!)
+             guard let uid = user?.uid else { return}
+             guard let fcmToken = Messaging.messaging().fcmToken else { return }
+             guard let profileImageURL = url?.absoluteString else {return}
+             let dictionaryValues = ["username": username, "profileImageURL" : profileImageURL, "fcmToken": fcmToken]
+             let values = [uid : dictionaryValues ]
+             //this appends new users  on server
+             Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+             //
+             //
+             if let err = err {
+             print("Failed to save user info into db:", err)
+             return
+             }
+             // success
+             print("Successfully saved user info into db")
+             //To show the main controller and reset the UI
+             guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+             
+             mainTabbarController.setupViewControllers()
+             self.dismiss(animated: true, completion: nil)
+             })
+                //
+                }
+                })
+ 
+            }
             
             //
+            /*
             Storage.storage().reference().child("profile_Images").child(filename).putData(uploadData, metadata: nil, completion: { (metadata, err) in
                 //
                 if let error = err {
@@ -198,7 +242,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             })
             
             
-            
+            */
  
             
             

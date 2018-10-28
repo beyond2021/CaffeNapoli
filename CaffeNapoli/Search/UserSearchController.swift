@@ -87,7 +87,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         searchBar.resignFirstResponder()
         //1 : Get the item
         let user = filteredUsers[indexPath.item]
-        print(user.username)
+        print(user.username ?? "")
         //2: b ring in the user profile page
         let userProfileController = UserProfileController(collectionViewLayout : UICollectionViewFlowLayout())
         //set the correct user in UserProfileController

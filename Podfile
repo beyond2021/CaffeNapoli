@@ -6,7 +6,6 @@ target 'CaffeNapoli' do
 use_frameworks!
 
   # Pods for CaffeNapoli
-
 pod ‘Firebase/Auth’
 pod ‘Firebase/Database’
 pod ‘Firebase/Storage’
@@ -30,5 +29,14 @@ pod 'FirebaseUI', '~> 4.0'
 pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'FacebookShare'
+
+post_install do |installer|
+installer.pods_project.targets.each do |target|
+target.build_configurations.each do |config|
+config.build_settings['CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF'] = 'NO'
+end
+end
+end
+
 
 end

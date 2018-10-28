@@ -44,7 +44,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
         if avDevice.hasTorch {
             // lock your device for configuration
             do {
-                let abv = try avDevice.lockForConfiguration()
+                _ = try avDevice.lockForConfiguration()
             } catch {
                 print("aaaa")
             }
@@ -56,7 +56,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
                 flashButton.setImage(#imageLiteral(resourceName: "flashOff").withRenderingMode(.alwaysOriginal), for: .normal)            } else {
                 // sets the torch intensity to 100%
                 do {
-                    let abv = try avDevice.setTorchModeOn(level: 1.0)
+                    _ = try avDevice.setTorchModeOn(level: 1.0)
                   //turn flash on
                     flashButton.setImage(#imageLiteral(resourceName: "flashOn").withRenderingMode(.alwaysOriginal), for: .normal)                 } catch {
                     print("bbb")

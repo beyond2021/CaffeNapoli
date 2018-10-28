@@ -44,7 +44,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     fileprivate func fetchPersonsThisUserIsFollowing(user: User){
          let followingReference = Database.database().reference().child("following").child(user.uid)
         followingReference.observeSingleEvent(of: .value, with: { (followingSnapshot) in
-            print("FollowingSnapshot is:",followingSnapshot.value)
+            print("FollowingSnapshot is:",followingSnapshot.value ?? "There was no snapShot")
             guard let dictionaries =  followingSnapshot.value as? [String: Any] else { return } //we are optionally binding this dictionary to postsSnapshot.value
             // to get each dictionary
            
@@ -123,8 +123,57 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         // turn the image into upload data
         guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
-        let filename = NSUUID().uuidString
-        //
+        let fileName = NSUUID().uuidString
+     
+         let storageRef = Storage.storage().reference().child("profile_Images").child(fileName)
+         
+         storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+         
+         if let err = err {
+         print(err)
+         }
+         storageRef.downloadURL(completion: { (url, error) in
+         if error != nil {
+         print("Failed to download url:", error!)
+         return
+         } else {
+         //Do something with url
+            print("Successfully uploaded profile photo", url?.absoluteString ?? "")
+         let user = Auth.auth().currentUser
+         guard let uid = user?.uid else { return}
+         guard let name = user?.displayName else { return }
+         guard let fcmToken = Messaging.messaging().fcmToken else { return }
+         guard let profileImageURL = url?.absoluteString else { return }
+         // Getb token from the messaging of Firebase
+         //to save the username
+         let dictionaryValues = [ "profileImageURL" : profileImageURL, "uid" : uid, "name":name, "fcmToken":fcmToken]
+         let values = [uid : dictionaryValues ]
+         //this appends new users  on server
+         Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+         if let err = err {
+         print("Failed to save user info into db:", err)
+         return
+         }
+         // success
+         print("Successfully saved user info into db")
+         //To show the main controller and reset the UI
+         guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+         mainTabbarController.setupViewControllers()
+         self.dismiss(animated: true, completion: nil)
+         })
+         
+         
+         
+         }
+         
+         })
+         }
+         }
+         
+         
+         /*
+
+        ///////
         Storage.storage().reference().child("profile_Images").child(filename).putData(uploadData, metadata: nil, completion: { (metadata, err) in
             //
             if let error = err {
@@ -160,7 +209,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 self.dismiss(animated: true, completion: nil)
             })
         })
-    }
+ */
+   // }
     // View State
     var isGridView = true // default state
     //

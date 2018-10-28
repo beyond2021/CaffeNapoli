@@ -167,10 +167,60 @@ extension LoginAuthController{
         // turn the image into upload data
         guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
-        let filename = NSUUID().uuidString
+        let fileName = NSUUID().uuidString
 //        let username = user.displayName
          let username = user?.displayName
         let email = user?.email
+       
+         let storageRef = Storage.storage().reference().child("profile_Images").child(fileName)
+         
+         storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+         
+         if let err = err {
+         print(err)
+         }
+         storageRef.downloadURL(completion: { (url, error) in
+         if error != nil {
+         print("Failed to download url:", error!)
+         return
+         } else {
+         
+         
+         //Do something with url
+         print("Successfully uploaded profile photo", url?.absoluteString ?? "")
+        
+         //to save the username
+         guard let fcmToken = Messaging.messaging().fcmToken else { return }
+         // unwrap the url
+         guard let profileImageURL = url?.absoluteString else { return }
+         //to save the username
+         let dictionaryValues = ["username": username, "profileImageURL" : profileImageURL, "fcmToken": fcmToken, "email":email]
+         let values = [uid!:dictionaryValues]
+         //this appends new users  on server
+         Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (err, ref) in
+         if let err = err {
+         print("Failed to save user info into db:", err)
+         return
+         }
+         // success
+         print("Successfully saved user info into db")
+         guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+         mainTabbarController.setupViewControllers()
+         self.dismiss(animated: true, completion: nil)
+         })
+         //
+         
+         
+         }
+         
+         })
+         }
+         }
+         
+ 
+
+        /*
+        
         //
         Storage.storage().reference().child("profile_Images").child(filename).putData(uploadData, metadata: nil, completion: { (metadata, err) in
             //
@@ -203,6 +253,9 @@ extension LoginAuthController{
             //
         })
     }
+ */
+ 
+ 
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         if let error = error {
             print("There was an error signing in with AuthData", error.localizedDescription)
@@ -220,7 +273,7 @@ extension LoginAuthController{
                 print(user.description)
                 print(user.email ?? "No email present")
                 print(user.displayName ?? "No name present")
-                print(user.photoURL)
+                print(user.photoURL ?? "No photo URL")
                 guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
                 mainTabbarController.setupViewControllers()
                 self.dismiss(animated: true, completion: nil)

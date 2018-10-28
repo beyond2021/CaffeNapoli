@@ -89,7 +89,11 @@ class SharePhotoController: UIViewController {
         containerView.backgroundColor = .white
         view.addSubview(containerView)
 //        containerView.anchor(top: topLayoutGuide.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 100)
-        containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 100)
+        if #available(iOS 11.0, *) {
+            containerView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 100)
+        } else {
+            // Fallback on earlier versions
+        }
         
         containerView.addSubview(imageView)
         imageView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: nil, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 0, width: 84, height: 0)
@@ -127,6 +131,8 @@ class SharePhotoController: UIViewController {
         //disable the share button
         navigationItem.rightBarButtonItem?.isEnabled = false
         
+        /*
+        
         Storage.storage().reference().child("posts").child(filename).putData(uploadData, metadata: nil) { (metaData, error) in
             //Check 4 error
 //            if err != nil {
@@ -144,11 +150,48 @@ class SharePhotoController: UIViewController {
                 return
             }
             // success and append on the file url (metaData?.downloadURL()?.absoluteString) from the returned metadata
-            guard let imageURL = metaData?.downloadURL()?.absoluteString else { return }
-            print("Successfully  uploaded photo", imageURL)
-            // Save to database
-            self.saveToDatabaseWithImageUrl(imageUrl: imageURL)
+//            guard let imageURL = metaData?.downloadURL()?.absoluteString else { return }
+//            StorageReference.downloadURLWithCompletion()
+            metaData?.storageReference?.downloadURL(completion: { (url, err) in
+                if let error = err {
+                    print("Could not  uploaded photo", error.localizedDescription)
+                    return
+                }
+//                print("Successfully  uploaded photo", url)
+
+
+
+                guard let urlString = url?.absoluteString else { return }
+                 self.saveToDatabaseWithImageUrl(imageUrl: urlString)
+
+            })
+            
+//            print("Successfully  uploaded photo", imageURL)
+//             Save to database
+//            self.saveToDatabaseWithImageUrl(imageUrl: imageURL)
         }
+ */
+        
+        
+        let storageRef = Storage.storage().reference().child("posts").child(filename)
+            
+            storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+                
+                if let err = err {
+                    print(err)
+                }
+                storageRef.downloadURL(completion: { (url, error) in
+                    if error != nil {
+                        print("Failed to download url:", error!)
+                        return
+                    } else {
+                        //Do something with url
+                        self.saveToDatabaseWithImageUrl(imageUrl: (url?.absoluteString)!)
+                    }
+                    
+                })
+            }
+            
         
         
     }

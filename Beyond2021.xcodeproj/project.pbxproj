@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
 		221052D72176992400D660E3 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221052D62176992300D660E3 /* UIColor+theme.swift */; };
 		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
 		530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */; };
@@ -15,7 +14,6 @@
 		5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6211FB46E2800563B1C /* FirebaseUtils.swift */; };
 		5324F6251FB473F600563B1C /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6241FB473F600563B1C /* UserSearchController.swift */; };
 		5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6261FB47E0700563B1C /* UserSearchCell.swift */; };
-		532767C32069AC1000973516 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 532767C22069AC1000973516 /* FacebookShare.framework */; };
 		532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849B1F7E827500756E8A /* AppDelegate.swift */; };
 		532D849E1F7E827500756E8A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849D1F7E827500756E8A /* SignUpController.swift */; };
 		532D84A11F7E827500756E8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D849F1F7E827500756E8A /* Main.storyboard */; };
@@ -87,6 +85,7 @@
 		53DE0A221FA9591800C2323D /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE0A211FA9591800C2323D /* HomePostCell.swift */; };
 		53EA9AD2205F6D0400CC6C6E /* EditPhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EA9AD1205F6D0400CC6C6E /* EditPhotoController.swift */; };
 		53FDE581205F39000071B62E /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FDE580205F39000071B62E /* SafariServices.framework */; };
+		60A9A6E0204C75DEE616BB36 /* Pods_CaffeNapoli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAA6DC70AA991C07F865EA8 /* Pods_CaffeNapoli.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,9 +201,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				532767C32069AC1000973516 /* FacebookShare.framework in Frameworks */,
 				53FDE581205F39000071B62E /* SafariServices.framework in Frameworks */,
-				1CC058265F6E6CA2967A5E8B /* Pods_CaffeNapoli.framework in Frameworks */,
+				60A9A6E0204C75DEE616BB36 /* Pods_CaffeNapoli.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -592,9 +590,9 @@
 				532D84941F7E827500756E8A /* Sources */,
 				532D84951F7E827500756E8A /* Frameworks */,
 				532D84961F7E827500756E8A /* Resources */,
-				3BA65458A67B8C987837C1F1 /* [CP] Embed Pods Frameworks */,
-				682C75167470328899F98072 /* [CP] Copy Pods Resources */,
 				533DEB552047762E0070EC45 /* ShellScript */,
+				1453D61A639AF3E93EBF6E9A /* [CP] Embed Pods Frameworks */,
+				9505AE40EA9D045C1EE57B89 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -774,10 +772,12 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3BA65458A67B8C987837C1F1 /* [CP] Embed Pods Frameworks */ = {
+		1453D61A639AF3E93EBF6E9A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-frameworks.sh",
@@ -808,6 +808,8 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
@@ -871,10 +873,12 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		682C75167470328899F98072 /* [CP] Copy Pods Resources */ = {
+		9505AE40EA9D045C1EE57B89 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CaffeNapoli/Pods-CaffeNapoli-resources.sh",
@@ -887,6 +891,8 @@
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
@@ -1173,6 +1179,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CaffeNapoli/CaffeNapoli.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SC6R6MV2N8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1230,7 +1237,7 @@
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;
@@ -1262,7 +1269,7 @@
 					"$(PROJECT_DIR)/CaffeNapoli",
 				);
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;

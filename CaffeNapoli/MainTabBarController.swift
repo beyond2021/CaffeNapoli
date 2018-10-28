@@ -55,6 +55,11 @@ if Auth.auth().currentUser == nil {
 
        
     }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
      func setupViewControllers(){
         //Home
         let cellLayout = UICollectionViewFlowLayout()

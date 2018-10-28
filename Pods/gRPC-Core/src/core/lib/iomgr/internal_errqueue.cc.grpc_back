@@ -1,6 +1,6 @@
 /*
  *
- * Copyright 2015 gRPC authors.
+ * Copyright 2018 gRPC authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,21 @@
  *
  */
 
-#ifndef GRPC_CORE_LIB_IOMGR_EV_EPOLLSIG_LINUX_H
-#define GRPC_CORE_LIB_IOMGR_EV_EPOLLSIG_LINUX_H
-
 #include <grpc/support/port_platform.h>
 
-#include "src/core/lib/iomgr/ev_posix.h"
 #include "src/core/lib/iomgr/port.h"
 
-const grpc_event_engine_vtable* grpc_init_epollsig_linux(bool explicit_request);
+#include "src/core/lib/iomgr/internal_errqueue.h"
 
-#ifdef GRPC_LINUX_EPOLL_CREATE1
-void* grpc_fd_get_polling_island(grpc_fd* fd);
-void* grpc_pollset_get_polling_island(grpc_pollset* ps);
-bool grpc_are_polling_islands_equal(void* p, void* q);
-#endif /* defined(GRPC_LINUX_EPOLL_CREATE1) */
+#ifdef GRPC_POSIX_SOCKET_TCP
 
-#endif /* GRPC_CORE_LIB_IOMGR_EV_EPOLLSIG_LINUX_H */
+bool kernel_supports_errqueue() {
+#ifdef LINUX_VERSION_CODE
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0)
+  return true;
+#endif /* LINUX_VERSION_CODE <= KERNEL_VERSION(4, 0, 0) */
+#endif /* LINUX_VERSION_CODE */
+  return false;
+}
+
+#endif /* GRPC_POSIX_SOCKET_TCP */

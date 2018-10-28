@@ -15,11 +15,17 @@ import Social
 
 
 class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+//   override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return .lightContent
+//    }
 
 }
+//extension UIViewController {
+//var preferredStatusBarStyle: UIStatusBarStyle {
+//    return .lightContent
+//    }
+//    
+//}
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate{
@@ -30,6 +36,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
     func showMore(post: Post, sender : HomePostCell) {
+//        let share = [image, text, url]
+//        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view
+//        self.present(activityViewController, animated: true, completion: nil)
+        
+     
         print("showing more from home controller")
 
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -42,11 +54,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //            self.present(activityViewController, animated: true, completion: nil)
             
             //Check if user ic connected to Facebook
-            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
-                //create a post
-                let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-
-            }
+//            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+//                //create a post
+//                let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//
+//            }
         }))
         actionSheet.addAction(UIAlertAction(title: "Share on Instagram", style: .default, handler: { (_) in
             print("Instagram Action")
@@ -63,8 +75,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         actionSheet.addAction(cancel)
         present(actionSheet, animated: true, completion: nil)
+ 
     }
-       
     
     
     
@@ -125,6 +137,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         handleRefresh()
         
     }
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    
     
     private func  setupLabels() {
         noPostsAvailableLabel.alpha = 1
@@ -253,8 +270,16 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
 //        let navController = CustomNavigationController()
         navigationItem.title = "BYND2021 STUDIOS"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 30) ?? ""]
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            // Fallback on earlier versions
+        }
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 30) ?? ""]
+        } else {
+            // Fallback on earlier versions
+        }
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))

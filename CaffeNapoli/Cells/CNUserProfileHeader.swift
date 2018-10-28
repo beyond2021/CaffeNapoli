@@ -278,7 +278,7 @@ class CNUserProfileHeader: UICollectionViewCell {
     }
     var posts : Int?{
         didSet{
-            print("The headerv post is now set",posts)
+            print("The headerv post is now set",posts ?? "")
 //            guard let posts = posts else { return }
 //            let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
 //            attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
@@ -295,13 +295,14 @@ class CNUserProfileHeader: UICollectionViewCell {
             guard let following = following else { return }
             print("The following is set in the header and is", following)
 //            followingLabel.text = "\(following)"
-            var attText = 0
-            if following == 0 {
-                attText = 0
-            } else {
-                attText = following
-                
-            }
+            
+//            var attText = 0
+//            if following == 0 {
+//                attText = 0
+//            } else {
+//                attText = following
+//
+//            }
 
             let attributedText = NSMutableAttributedString(string: "\(following)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
             attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
@@ -319,10 +320,10 @@ class CNUserProfileHeader: UICollectionViewCell {
     
     
     fileprivate func setupAttributedCaption() {
-        guard let posts = self.posts else { return }
+//        guard let posts = self.posts else { return }
         //Attributed text
         //        print("Fb user is :", post.user.fbUsername)
-        var attrText = ""
+//        var attrText = ""
 //        if post.user.username == "" {
 //            //            print("Facebook user", post.user.fbUsername)
 //            attrText = post.user.name!

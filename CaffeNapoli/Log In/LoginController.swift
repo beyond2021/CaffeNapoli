@@ -402,9 +402,9 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         navigationController?.pushViewController(signUpController, animated: true)
     }
     //Change the font of the stausbar
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle{
+//        return .lightContent
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -538,7 +538,7 @@ extension LoginController {
                 print("could not sign in to Firebase with Google", error)
                 return
             }
-            print("Signed in time to dissmiss", user?.uid)
+            print("Signed in time to dissmiss", user?.uid ?? "")
            
             
         }

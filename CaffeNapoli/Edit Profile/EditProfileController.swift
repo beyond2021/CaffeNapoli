@@ -186,7 +186,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
             // Photo upload success
             // Append Metadata
 //            guard   let profileImageURL = metadata?.downloadURL()?.absoluteString else { return }
-            let profileImageURL = metadata?.storageReference?.downloadURL(completion: { (url, profileImageURLError) in
+            _ = metadata?.storageReference?.downloadURL(completion: { (url, profileImageURLError) in
                 if let err = profileImageURLError {
                     print("There was an error downloading profile image:", err)
                 }
