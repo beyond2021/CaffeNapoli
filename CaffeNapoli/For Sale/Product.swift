@@ -37,6 +37,7 @@ class Product
         var productImages = [UIImage]()
         for i in 1...8 {
             productImages.append(UIImage(named: "p\(i)")!)
+           
         }
         let product1 = Product(uid: "875942-100", name: "Margherita", images: productImages, price: 25, description: "The pizza Margherita is just over a century old and is named after HM Queen Margherita of Italy, wife of King Umberto I and first Queen of Italy. It's made using toppings of tomato, mozzarella cheese, and fresh basil, which represent the red, white, and green of the Italian flag..", detail: "Calzone means 'stocking' in Italian and is a turnover that originates from Italy. Shaped like a semicircle, the calzone is made of dough folded over and filled with the usual pizza ingredients.", productType: .Delivered)
         products.append(product1)
@@ -96,8 +97,26 @@ class Product
         
         
     }
+    class func fetchServices() -> [Product] {
+        var products = [Product]()
+        
+        //
+        var serviceImages = [UIImage]()
+        for i in 1...8 {
+            serviceImages.append(UIImage(named: "p\(i)")!)
+            
+        }
+        return products
+    }
+    
+    
     
 }
+
+
+
+
+
 
 
 enum ProductType {

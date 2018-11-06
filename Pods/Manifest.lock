@@ -182,11 +182,15 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
+  - Bolts
   - Crashlytics
   - Fabric
   - FacebookCore
   - FacebookLogin
   - FacebookShare
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - Firebase
   - Firebase/Auth
   - Firebase/Core
@@ -200,7 +204,6 @@ DEPENDENCIES:
   - lottie-ios
   - Stripe
   - TwitterCore
-  - TwitterKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -283,6 +286,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 054005edf5350aa9074af74b41456e5a61e3f322
 
-PODFILE CHECKSUM: 8950e82c5e40e1ba4b99e02c67a0ba5de8c71877
+PODFILE CHECKSUM: 3123a78047aba5104066c73891abad062afbb13d
 
 COCOAPODS: 1.5.3

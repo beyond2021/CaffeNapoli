@@ -16,7 +16,7 @@ class ShoppingCartCell: UICollectionViewCell {
         iv.clipsToBounds = true
 //        iv.backgroundColor = .red
         iv.backgroundColor = UIColor.cellBGColor()
-        iv.image = #imageLiteral(resourceName: "s1")
+        iv.image = #imageLiteral(resourceName: "AdobeStock_132678227")
         return  iv
         
     }()

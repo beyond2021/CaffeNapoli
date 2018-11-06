@@ -41,10 +41,10 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         super.viewDidLoad()
         setUpNavigationItems()
 //        collectionView?.backgroundColor = .white
-        collectionView?.backgroundColor = UIColor.tabBarBlue()
+        collectionView?.backgroundColor = UIColor.tableViewBackgroundColor
         collectionView?.register(ShoppingCartCell.self, forCellWithReuseIdentifier: cellId)
-        navigationItem.title = "FOR SALE"
-        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.tabBarBlue()]
+        navigationItem.title = "SERVICES"
+        let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         
 //        navigationController?.navigationBar.prefersLargeTitles = true
@@ -67,8 +67,8 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
     
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "dismissGreen").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissCart))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.tabBarBlue()
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "dismissGreen").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(dismissCart))
+//        navigationItem.leftBarButtonItem?.tintColor = UIColor.tabBarBlue()
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "shopping-cart-50").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     

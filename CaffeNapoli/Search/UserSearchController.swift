@@ -18,7 +18,9 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         sb.placeholder = "Enter username"
         sb.barTintColor = .gray
 //        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.rgb(displayP3Red: 230, green: 230, blue: 230)
-         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.cellBGColor()
+//         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.cellBGColor()
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = .white
+        
         
         //to find whats being typed in the search bar
         sb.delegate = self // lazy var u have SELF, let u dont
@@ -59,7 +61,8 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView?.backgroundColor = UIColor.cellBGColor()
+//        collectionView?.backgroundColor = UIColor.cellBGColor()
+        collectionView?.backgroundColor = .white
         // put the search bar in the nav bar
         navigationController?.navigationBar.addSubview(searchBar)
         let navBar = navigationController?.navigationBar
@@ -168,6 +171,9 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         //cell.backgroundColor = .green
 //        cell.user = users[indexPath.item] // fill user in cell here
         cell.user = filteredUsers[indexPath.item] // after filtering
+       
+        
+        
         return cell
     }
     // UICollectionViewDelegateFlowLayout Methods

@@ -21,7 +21,10 @@ import FirebaseAuthUI
 //import FirebaseUI
 import GTMSessionFetcher
 
-
+class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
@@ -60,7 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         UINavigationBar.appearance().barTintColor = .lightRed
         
         attemptRegisterForNotifications(application: application)
-        UIApplication.shared.statusBarStyle = .lightContent
+//        UIApplication.shared.statusBarStyle = .lightContent
+       
         
         
         return true

@@ -19,16 +19,20 @@ pod 'Alamofire', '~> 4.5'
 pod 'GoogleSignIn'
 pod 'Fabric'
 pod 'Crashlytics'
-pod 'TwitterKit'
+
 pod 'FirebaseAuth'
 
 pod 'Firebase'
 
 pod 'TwitterCore'
 pod 'FirebaseUI', '~> 4.0'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
+pod 'Bolts', :modular_headers => true, :inhibit_warnings => true
+pod 'FacebookCore', :inhibit_warnings => true
+pod 'FacebookLogin', :inhibit_warnings => true
+pod 'FacebookShare', :inhibit_warnings => true
+pod 'FBSDKCoreKit', :modular_headers => true, :inhibit_warnings => true
+pod 'FBSDKLoginKit', :modular_headers => true, :inhibit_warnings => true
+pod 'FBSDKShareKit', :modular_headers => true, :inhibit_warnings => true
 
 post_install do |installer|
 installer.pods_project.targets.each do |target|

@@ -120,6 +120,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 
         self.paymentRow = CheckoutRowView(title: "Payment", detail: "Select Payment",
                                           theme: settings.theme)
+        
+        
         var shippingString = "Contact"
         if config.requiredShippingAddressFields?.contains(.postalAddress) ?? false {
             shippingString = config.shippingType == .shipping ? "Shipping" : "Delivery"

@@ -233,8 +233,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        collectionView?.backgroundColor = .white
-        collectionView?.backgroundColor = UIColor.cellBGColor()
+        collectionView?.backgroundColor = .white
+//        collectionView?.backgroundColor = UIColor.cellBGColor()
         // We need to registewrb the collectionview with a header
 //        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
         collectionView?.register(CNUserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CNheaderID")

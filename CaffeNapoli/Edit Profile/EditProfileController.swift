@@ -124,7 +124,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     let loginButton : UIButton = {
         let button = UIButton(type: .system)
 //        button.backgroundColor = UIColor.rgb(displayP3Red: 149, green: 204, blue: 244)
-        button.backgroundColor = UIColor.cellBGColor()
+//        button.backgroundColor = UIColor.cellBGColor()
+        button.backgroundColor = UIColor.tealColor
         button.setTitle("Please Fill All Fields", for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -138,7 +139,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     let cancelButton : UIButton = {
         let button = UIButton(type: .system)
         //        button.backgroundColor = UIColor.rgb(displayP3Red: 149, green: 204, blue: 244)
-        button.backgroundColor = UIColor.tabBarBlue()
+        button.backgroundColor = UIColor.tableViewBackgroundColor
         button.setTitle("Cancel Update", for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -259,7 +260,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.cellBGColor()
+//        view.backgroundColor = UIColor.cellBGColor()
+        view.backgroundColor = .white
         
         view.addSubview(addPhotoButton)
         setupInputFields()

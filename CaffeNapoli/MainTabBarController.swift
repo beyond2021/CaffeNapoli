@@ -67,18 +67,18 @@ if Auth.auth().currentUser == nil {
         cellLayout.minimumLineSpacing = 20
         cellLayout.sectionInset = UIEdgeInsets.init(top: 20,left: 0,bottom: 0,right: 0)
       
-        let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: cellLayout))
+//        let homeNavController = templateNavController(unselectedImage:#imageLiteral(resourceName: "feedUnselected"), selectedImage: #imageLiteral(resourceName: "feedSelected"), rootViewController: HomeController(collectionViewLayout: cellLayout))
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "homeFeedBE"), selectedImage: #imageLiteral(resourceName: "homeFeedBS"), rootViewController: HomeController(collectionViewLayout: cellLayout))
+        
         // Search
-//
-        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsYUnselected"), selectedImage: #imageLiteral(resourceName: "friendsYSelected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
-        
-        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "addNewUnselected"), selectedImage: #imageLiteral(resourceName: "addNewSelected"))
 
-//        let root = AddReservationViewController()
-//        let root = ShoppingCartController()
-//        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "resUnselected"), selectedImage: #imageLiteral(resourceName: "resSelected"), rootViewController: ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "friendsBE"), selectedImage: #imageLiteral(resourceName: "friendsBS"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
         
-        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "salSmUnsel"), selectedImage: #imageLiteral(resourceName: "saleSmSel"), rootViewController: ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let plusNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "uploadBE"), selectedImage: #imageLiteral(resourceName: "uploadBS"))
+
+
+        
+        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "serviceBE"), selectedImage: #imageLiteral(resourceName: "serviceBS"), rootViewController: ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout()))
         let layout = UICollectionViewFlowLayout()
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
@@ -87,8 +87,8 @@ if Auth.auth().currentUser == nil {
         //Add a navigationbar on the top
         let userProfileNavController = UINavigationController(rootViewController: userProfileController)
         // items in the tabs
-        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "userYUnselected")
-        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "userYSelected")
+        userProfileNavController.tabBarItem.image = #imageLiteral(resourceName: "avatarBE")
+        userProfileNavController.tabBarItem.selectedImage = #imageLiteral(resourceName: "avatarBS")
         
         // Color the tabBar
         tabBar.tintColor = .black
@@ -104,7 +104,7 @@ if Auth.auth().currentUser == nil {
     fileprivate func templateNavController(unselectedImage : UIImage, selectedImage : UIImage, rootViewController : UIViewController = UIViewController()) -> UINavigationController {
         // Home icon
         let viewController = rootViewController
-        let navController = UINavigationController(rootViewController: viewController)
+        let navController = CustomNavigationController(rootViewController: viewController)
         //To add the icons
         viewController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage

@@ -131,54 +131,15 @@ class SharePhotoController: UIViewController {
         //disable the share button
         navigationItem.rightBarButtonItem?.isEnabled = false
         
-        /*
-        
-        Storage.storage().reference().child("posts").child(filename).putData(uploadData, metadata: nil) { (metaData, error) in
-            //Check 4 error
-//            if err != nil {
-//                print("Error uploading photo", err)
-//                return
-//            }
-            
-            //or
-            if let err = error {
-                //reenable the share button if there is an error
-                self.navigationItem.rightBarButtonItem?.isEnabled = true
-                
-                
-                print("Error uploading photo", err)
-                return
-            }
-            // success and append on the file url (metaData?.downloadURL()?.absoluteString) from the returned metadata
-//            guard let imageURL = metaData?.downloadURL()?.absoluteString else { return }
-//            StorageReference.downloadURLWithCompletion()
-            metaData?.storageReference?.downloadURL(completion: { (url, err) in
-                if let error = err {
-                    print("Could not  uploaded photo", error.localizedDescription)
-                    return
-                }
-//                print("Successfully  uploaded photo", url)
-
-
-
-                guard let urlString = url?.absoluteString else { return }
-                 self.saveToDatabaseWithImageUrl(imageUrl: urlString)
-
-            })
-            
-//            print("Successfully  uploaded photo", imageURL)
-//             Save to database
-//            self.saveToDatabaseWithImageUrl(imageUrl: imageURL)
-        }
- */
-        
+    
         
         let storageRef = Storage.storage().reference().child("posts").child(filename)
             
             storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
                 
                 if let err = err {
-                    print(err)
+                    print("Failed to upload image:",err)
+                    return
                 }
                 storageRef.downloadURL(completion: { (url, error) in
                     if error != nil {
@@ -186,7 +147,8 @@ class SharePhotoController: UIViewController {
                         return
                     } else {
                         //Do something with url
-                        self.saveToDatabaseWithImageUrl(imageUrl: (url?.absoluteString)!)
+                        guard let imageUrl = url?.absoluteString else { return }
+                        self.saveToDatabaseWithImageUrl(imageUrl: imageUrl)
                     }
                     
                 })
@@ -216,7 +178,7 @@ class SharePhotoController: UIViewController {
             if let err = error {
                 //reenable the share button if there is an error
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
-                print("There was an error saving to database", err)
+                print("There was an error saving post to database", err)
                 return
             }
             print("successfully saved post to database")

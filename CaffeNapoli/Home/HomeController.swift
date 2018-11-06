@@ -14,12 +14,7 @@ import Social
 
 
 
-class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
-//   override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return .lightContent
-//    }
 
-}
 //extension UIViewController {
 //var preferredStatusBarStyle: UIStatusBarStyle {
 //    return .lightContent
@@ -48,17 +43,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
         actionSheet.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (_) in
             print("facebook Action")
-//            let share = [image, text, url]
-//            let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view
-//            self.present(activityViewController, animated: true, completion: nil)
-            
-            //Check if user ic connected to Facebook
-//            if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
-//                //create a post
-//                let post = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//
-//            }
+
         }))
         actionSheet.addAction(UIAlertAction(title: "Share on Instagram", style: .default, handler: { (_) in
             print("Instagram Action")
@@ -110,7 +95,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        handleRefresh()
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewDidLoad() {
@@ -137,10 +122,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         handleRefresh()
         
     }
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
-    }
-    
+   
     
     
     private func  setupLabels() {
@@ -269,7 +251,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
 //        let navController = CustomNavigationController()
-        navigationItem.title = "BYND2021 STUDIOS"
+        navigationItem.title = "OffTheHook"
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
@@ -281,7 +263,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             // Fallback on earlier versions
         }
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cameraBS").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
     }
     

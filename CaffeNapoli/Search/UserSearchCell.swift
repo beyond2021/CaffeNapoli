@@ -37,8 +37,21 @@ class UserSearchCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+//        self.layer.masksToBounds = false
+//        self.layer.shadowColor = UIColor.white.cgColor
+//        self.layer.shadowOpacity = 0.5
+//        self.layer.shadowOffset = CGSize(width: -1, height: 1)
+//        self.layer.shadowRadius = 1
+//        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+//        self.contentView.layer.shouldRasterize = true
+//        self.contentView.layer.rasterizationScale = UIScreen.main.scale
+        
+        
+        
 //        backgroundColor = .yellow
-        backgroundColor = UIColor.cellBGColor()
+//        backgroundColor = UIColor.cellBGColor()
+        backgroundColor = .white
         addSubview(profileImageView)
         addSubview(usernameLabel)
         // How to center Image in cell

@@ -69,8 +69,11 @@ class HomePostCell: UICollectionViewCell {
     //
     let userProfileImageView : CustomImageView = {
         let iv = CustomImageView()
-        iv.layer.borderColor = UIColor.NavBarYellow().cgColor
+//        iv.layer.borderColor = UIColor.NavBarYellow().cgColor
+        iv.layer.borderColor = UIColor.tableViewBackgroundColor.cgColor
         iv.layer.borderWidth = 4
+        iv.layer.shadowColor = UIColor.tableViewBackgroundColor.cgColor
+        iv.layer.shadowRadius = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
@@ -104,8 +107,10 @@ class HomePostCell: UICollectionViewCell {
     let usernameLabel : UILabel = {
         let label = UILabel()
         label.text = "Username"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = UIColor.tabBarBlue()
+//        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont(name:"HelveticaNeue", size: 16)
+//        label.textColor = UIColor.tabBarBlue()
+        label.textColor = UIColor.black
         return label
     }()
     //

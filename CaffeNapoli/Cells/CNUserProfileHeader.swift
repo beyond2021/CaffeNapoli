@@ -167,7 +167,7 @@ class CNUserProfileHeader: UICollectionViewCell {
     //Let manually add our views
     lazy var  profileImageView: CustomImageView = {
         let iv = CustomImageView()
-        iv.layer.borderColor = UIColor.NavBarYellow().cgColor
+        iv.layer.borderColor = UIColor.tableViewBackgroundColor.cgColor
         iv.layer.borderWidth = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true

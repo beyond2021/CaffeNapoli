@@ -14,13 +14,14 @@ class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.tabBarBlue()
+        view.backgroundColor = UIColor.tableViewBackgroundColor
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.splashTimeOut(sender:)), userInfo: nil, repeats: false)
-        
         playAudio(sound: "glasses", ext: "wav")
         setupSplashScreen()
-        
     }
+  override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
+    
     @objc fileprivate func setupSplashScreen() {
         let animationView = LOTAnimationView.init(name: "drink")
 //        animationView.contentMode = .scaleAspectFit
@@ -29,7 +30,6 @@ class SplashScreenViewController: UIViewController {
 //        animationView.loopAnimation = true
         view.addSubview(animationView)
         animationView.play()
-        
         view.addSubview(copyRightLabel)
         copyRightLabel.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 200, height: 20)
         copyRightLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -64,5 +64,5 @@ class SplashScreenViewController: UIViewController {
     
 }
 
-// Block implicitly retains 'self'; explicitly mention 'self' to indicate this is intended behavior
+
 
