@@ -20,7 +20,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         if index == 2 {
             let layout = UICollectionViewFlowLayout()
             let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
-            let navController = UINavigationController(rootViewController: photoSelectorController)
+            let navController = CustomNavigationController(rootViewController: photoSelectorController)
             present(navController, animated: true, completion: nil)
             return false
         }
@@ -78,7 +78,7 @@ if Auth.auth().currentUser == nil {
 
 
         
-        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "serviceBE"), selectedImage: #imageLiteral(resourceName: "serviceBS"), rootViewController: ShoppingCartController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let addReservationController = templateNavController(unselectedImage: #imageLiteral(resourceName: "serviceBE"), selectedImage: #imageLiteral(resourceName: "serviceBS"), rootViewController: ServicesController(collectionViewLayout: HeaderStrechyLayout()))
         let layout = UICollectionViewFlowLayout()
         
         let userProfileController = UserProfileController(collectionViewLayout: layout)
@@ -94,7 +94,7 @@ if Auth.auth().currentUser == nil {
         tabBar.tintColor = .black
 //        viewControllers = [navController, UIViewController()]
 //        HomeController(collectionViewLayout: UICollectionViewFlowLayout())
-        viewControllers = [homeNavController, searchNavController,plusNavController, addReservationController, userProfileNavController]
+        viewControllers = [homeNavController,addReservationController,plusNavController,searchNavController,  userProfileNavController]
         // Tomove the images to center of tabbar - insets here - Modify tabbar insets
         guard let items = tabBar.items else { return }
         for item in items {

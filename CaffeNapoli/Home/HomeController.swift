@@ -14,13 +14,16 @@ import Social
 
 
 
+/*
+{
+    "rules": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+    }
+}
+ */
 
-//extension UIViewController {
-//var preferredStatusBarStyle: UIStatusBarStyle {
-//    return .lightContent
-//    }
-//    
-//}
+
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate{
@@ -31,11 +34,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
     func showMore(post: Post, sender : HomePostCell) {
-//        let share = [image, text, url]
-//        let activityViewController = UIActivityViewController(activityItems: share, applicationActivities: nil)
-//        activityViewController.popoverPresentationController?.sourceView = self.view
-//        self.present(activityViewController, animated: true, completion: nil)
-        
+
      
         print("showing more from home controller")
 
@@ -100,15 +99,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        print("viewDidLoad")
         setupLabels()
-//        collectionView?.backgroundColor = UIColor.cellBGColor()
-//        collectionView?.backgroundColor = UIColor.tabBarBlue()
         collectionView?.backgroundColor = .white
-//        [self.calendarView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
-//        collectionView?.contentInset(UIEdgeInsetsMake(20,0,0,0))
-        
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
             , object: nil)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: cellID)

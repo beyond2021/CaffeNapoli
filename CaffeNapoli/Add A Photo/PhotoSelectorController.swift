@@ -27,6 +27,9 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         fetchPhotos()
         
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    
     //MARK: - Fetch Photos
     // An array to hold the images. EMPTY UIImage array
     var images = [UIImage]()
@@ -200,7 +203,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     
     fileprivate func setupNavigationButtons(){
-        navigationController?.navigationBar.tintColor = .black // change cancel button color
+        navigationController?.navigationBar.tintColor = .white // change cancel button color
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         //
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(handleNext))
