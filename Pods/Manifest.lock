@@ -14,6 +14,7 @@ PODS:
   - BoringSSL-GRPC/Interface (0.0.2)
   - Crashlytics (3.11.0):
     - Fabric (~> 1.8.0)
+  - ESTabBarController-swift (2.6.3)
   - Fabric (1.8.0)
   - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
@@ -171,6 +172,10 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
+  - NVActivityIndicatorView (4.4.0):
+    - NVActivityIndicatorView/Presenter (= 4.4.0)
+  - NVActivityIndicatorView/Presenter (4.4.0)
+  - pop (1.0.12)
   - Protobuf (3.6.1)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -184,6 +189,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Bolts
   - Crashlytics
+  - ESTabBarController-swift
   - Fabric
   - FacebookCore
   - FacebookLogin
@@ -202,6 +208,8 @@ DEPENDENCIES:
   - GoogleSignIn
   - HCSStarRatingView (~> 1.5)
   - lottie-ios
+  - NVActivityIndicatorView
+  - pop (~> 1.0)
   - Stripe
   - TwitterCore
 
@@ -211,6 +219,7 @@ SPEC REPOS:
     - Bolts
     - BoringSSL-GRPC
     - Crashlytics
+    - ESTabBarController-swift
     - Fabric
     - FacebookCore
     - FacebookLogin
@@ -240,6 +249,8 @@ SPEC REPOS:
     - leveldb-library
     - lottie-ios
     - nanopb
+    - NVActivityIndicatorView
+    - pop
     - Protobuf
     - SDWebImage
     - Stripe
@@ -251,6 +262,7 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   Crashlytics: 1448070c1d2731ab71ea7c3faf84ac0f69657287
+  ESTabBarController-swift: edb8d8bc2cd043a8ddb43ab501fefdf9865ac519
   Fabric: 4ac1cdfef3004ccd83ce0959b91eda8a6e37df72
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
@@ -280,12 +292,14 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  NVActivityIndicatorView: ec7440a57af2450319d3a4181cca7da6fc127064
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 054005edf5350aa9074af74b41456e5a61e3f322
 
-PODFILE CHECKSUM: 3123a78047aba5104066c73891abad062afbb13d
+PODFILE CHECKSUM: 8813478d66ad8d104499b4ae7c66a59b226cf515
 
 COCOAPODS: 1.5.3

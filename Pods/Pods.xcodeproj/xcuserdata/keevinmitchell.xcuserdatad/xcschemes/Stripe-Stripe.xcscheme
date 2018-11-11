@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52AADC36876D129AC7F23C38AC724382"
+               BlueprintIdentifier = "AF1B29F11E38A688768C29E2A105F69F"
                BuildableName = "Stripe.bundle"
                BlueprintName = "Stripe-Stripe"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52AADC36876D129AC7F23C38AC724382"
+            BlueprintIdentifier = "AF1B29F11E38A688768C29E2A105F69F"
             BuildableName = "Stripe.bundle"
             BlueprintName = "Stripe-Stripe"
             ReferencedContainer = "container:Pods.xcodeproj">

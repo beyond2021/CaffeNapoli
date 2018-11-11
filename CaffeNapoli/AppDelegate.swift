@@ -23,6 +23,9 @@ import GTMSessionFetcher
 
 class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
 }
 
@@ -54,13 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
 //        UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
-        UITabBar.appearance().barTintColor = .white
+        
         
 //        UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
          UITabBar.appearance().tintColor = UIColor.white
         
 //        UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
         UINavigationBar.appearance().barTintColor = .lightRed
+        UINavigationBar.appearance().tintColor = .white
         
         attemptRegisterForNotifications(application: application)
 //        UIApplication.shared.statusBarStyle = .lightContent

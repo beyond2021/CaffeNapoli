@@ -97,17 +97,7 @@ class Product
         
         
     }
-    class func fetchServices() -> [Product] {
-        var products = [Product]()
-        
-        //
-        var serviceImages = [UIImage]()
-        for i in 1...8 {
-            serviceImages.append(UIImage(named: "p\(i)")!)
-            
-        }
-        return products
-    }
+   
     
     
     

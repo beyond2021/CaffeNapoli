@@ -14,7 +14,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
     
     let dismissButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "right_arrow_shadow").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "dismissCamera").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(dismissCamera), for: .touchUpInside)
         
         return button

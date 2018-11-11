@@ -9,6 +9,11 @@
 import UIKit
 
 class EditPhotoController: UICollectionViewController, HomePostCellDelegate, UICollectionViewDelegateFlowLayout {
+    func handlePinch(sender: UIPinchGestureRecognizer, imageView: UIImageView) {
+        //
+    }
+    
+   
     func swipeRightForCamera() {
         //
     }

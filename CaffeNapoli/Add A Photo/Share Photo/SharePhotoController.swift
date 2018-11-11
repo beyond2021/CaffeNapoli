@@ -8,9 +8,19 @@
 
 import UIKit
 import  Firebase
+import NVActivityIndicatorView
 
 class SharePhotoController: UIViewController {
     static let updateFeedNotificationName = NSNotification.Name("UpdateFeed")
+    
+    let activityView : NVActivityIndicatorView = {
+        let actView = NVActivityIndicatorView(frame: CGRect.zero, type: .ballPulse, color: UIColor.tableViewBackgroundColor, padding: 0)
+        actView.translatesAutoresizingMaskIntoConstraints = false
+        return actView
+        
+    }()
+    
+    
     
     // Something to hold selected image from previous controller
     var selectedImage : UIImage?{
@@ -29,7 +39,10 @@ class SharePhotoController: UIViewController {
         // set up views
         setupImageAndTextViews()
         
-        setupAnimator()
+//        setupAnimator()
+        
+        
+        
         
     }
     
@@ -100,6 +113,10 @@ class SharePhotoController: UIViewController {
         containerView.addSubview(textView)
         textView.anchor(top: containerView.topAnchor, left: imageView.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 4, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
+        view.addSubview(activityView)
+        
+        activityView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 100)
+//        activityView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
     }
     
     
@@ -111,6 +128,8 @@ class SharePhotoController: UIViewController {
     // Handle Share
     @objc func handleShare(){
 //       print("Handling Shares")
+        activityView.startAnimating()
+        
         //Make sure that the caption has text in it
        
         guard let caption = textView.text, caption.count > 0 else { return }
@@ -183,6 +202,7 @@ class SharePhotoController: UIViewController {
             }
             print("successfully saved post to database")
             //Dismiss the share controller
+            self.activityView.stopAnimating()
             self.dismiss(animated: true, completion: nil)
             //POST A NOTIFICATION TO THE ENTIRE SYSTEM HERE!
             

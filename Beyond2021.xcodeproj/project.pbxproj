@@ -13,6 +13,8 @@
 		2232382C2192607400C2CE9E /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2232382B2192607300C2CE9E /* ServiceCell.swift */; };
 		223238312193511E00C2CE9E /* HeaderStrechyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223238302193511E00C2CE9E /* HeaderStrechyLayout.swift */; };
 		22802782218888AA0056ADF1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */; };
+		229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED172197CFFA00A4D228 /* CustomTabBarController.swift */; };
+		229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */; };
 		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
 		530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */; };
 		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
@@ -109,7 +111,13 @@
 		22323827219249C600C2CE9E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		2232382B2192607300C2CE9E /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		223238302193511E00C2CE9E /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
+		22770F63219518FF00ADFDA2 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
+		22770F652195190700ADFDA2 /* ServicesControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesControllers.swift; sourceTree = "<group>"; };
+		22770F662195190700ADFDA2 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
+		22770F672195190700ADFDA2 /* ServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
 		22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		229EED172197CFFA00A4D228 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleLottieAnimateContentView.swift; sourceTree = "<group>"; };
 		53045B432019CA4800E9C6A7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeNapoliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeNapoliTests.swift; sourceTree = "<group>"; };
@@ -245,6 +253,43 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		22770F5F2195184400ADFDA2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				22770F642195190700ADFDA2 /* Controllers */,
+				22770F62219518FF00ADFDA2 /* Layout */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22770F62219518FF00ADFDA2 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				22770F63219518FF00ADFDA2 /* HeaderStrechyLayout.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		22770F642195190700ADFDA2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				22770F652195190700ADFDA2 /* ServicesControllers.swift */,
+				22770F662195190700ADFDA2 /* ServiceCell.swift */,
+				22770F672195190700ADFDA2 /* ServicesController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		22770F682195197400ADFDA2 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				537EF99B1F8DB613004CED83 /* MainTabBarController.swift */,
+				229EED172197CFFA00A4D228 /* CustomTabBarController.swift */,
+				229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		53045B422019CA2A00E9C6A7 /* Address */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +356,8 @@
 		532D849A1F7E827500756E8A /* CaffeNapoli */ = {
 			isa = PBXGroup;
 			children = (
+				22770F682195197400ADFDA2 /* TabBar */,
+				22770F5F2195184400ADFDA2 /* Services */,
 				53A6C0342062D09E002EB240 /* Edit Profile */,
 				53EA9AD0205F6CD500CC6C6E /* Edit Post */,
 				5319D1872056AAE700CAFE4D /* Auth */,
@@ -329,7 +376,6 @@
 				53B1A41C1F9C3F5E002E3421 /* Log In */,
 				537EF9961F885FA2004CED83 /* Utils */,
 				532D849B1F7E827500756E8A /* AppDelegate.swift */,
-				537EF99B1F8DB613004CED83 /* MainTabBarController.swift */,
 				532D849F1F7E827500756E8A /* Main.storyboard */,
 				532D84A21F7E827600756E8A /* Assets.xcassets */,
 				532D84A41F7E827600756E8A /* LaunchScreen.storyboard */,
@@ -814,6 +860,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
@@ -824,6 +871,7 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
@@ -836,6 +884,7 @@
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -844,6 +893,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
@@ -854,6 +904,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
@@ -866,6 +917,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -963,6 +1015,7 @@
 				537071B02028C15800AAE687 /* AddToCartCell.swift in Sources */,
 				221052D72176992400D660E3 /* UIColor+theme.swift in Sources */,
 				535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */,
+				229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */,
 				535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,
 				53EA9AD2205F6D0400CC6C6E /* EditPhotoController.swift in Sources */,
@@ -1003,6 +1056,7 @@
 				537F2CCC206ACE240092BA04 /* CNUserProfileController.swift in Sources */,
 				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
 				536A2E892075719400878FD6 /* Followers.swift in Sources */,
+				229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */,
 				53045B442019CA4800E9C6A7 /* Address.swift in Sources */,
 				533AE03C2005E4B0000920A9 /* SplashScreenViewController.swift in Sources */,
 				535713041FF2627B00CCB70F /* ShoppingCartCell.swift in Sources */,
@@ -1227,49 +1281,7 @@
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks",
 					"$(PROJECT_DIR)/CaffeNapoli",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
-					"\"${PODS_ROOT}/Crashlytics/iOS\"",
-					"\"${PODS_ROOT}/Fabric/iOS\"",
-					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseFirestore/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\"",
-					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
-					"\"${PODS_ROOT}/TwitterKit/iOS\"",
-					"\"${PODS_ROOT}/TwitterCore/iOS\"",
-					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\" \"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\" \"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\" \"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\" \"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\" \"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\" \"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\" \"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_ROOT}/Crashlytics/iOS\" \"${PODS_ROOT}/Fabric/iOS\" \"${PODS_ROOT}/FirebaseAnalytics/Frameworks\" \"${PODS_ROOT}/FirebaseAuth/Frameworks\" \"${PODS_ROOT}/FirebaseCore/Frameworks\" \"${PODS_ROOT}/FirebaseDatabase/Frameworks\" \"${PODS_ROOT}/FirebaseFirestore/Frameworks\" \"${PODS_ROOT}/FirebaseInstanceID/Frameworks\" \"${PODS_ROOT}/FirebaseMessaging/Frameworks\" \"${PODS_ROOT}/FirebaseStorage/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\" \"${PODS_ROOT}/TwitterKit/iOS\" \"${PODS_ROOT}/TwitterCore/iOS\" \"${PODS_ROOT}/GoogleSignIn/Frameworks\"";
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

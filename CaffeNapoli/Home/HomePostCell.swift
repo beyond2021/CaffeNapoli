@@ -16,6 +16,7 @@ protocol HomePostCellDelegate {
     //show more
     func showMore(post: Post, sender : HomePostCell)
     func swipeRightForCamera()
+    func handlePinch(sender:UIPinchGestureRecognizer, imageView:UIImageView)
 }
 
 
@@ -25,7 +26,7 @@ class HomePostCell: UICollectionViewCell {
     // post to fill this cell
     var post: Post?{
         didSet {
-            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "blLikeSel").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "blLikeUn").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
+            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "cellLikeSel").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "likeCell").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
             if post?.user.username == "" {
@@ -55,12 +56,12 @@ class HomePostCell: UICollectionViewCell {
 //            print("Regular user", post.user.username)
             attrText = post.user.username!
         }
-        let attributedText = NSMutableAttributedString(string: attrText, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedString.Key.foregroundColor : UIColor.red])
-        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize:14),NSAttributedString.Key.foregroundColor : UIColor.tabBarBlue()]))
+        let attributedText = NSMutableAttributedString(string: attrText, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedString.Key.foregroundColor : UIColor.lightRed])
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize:14),NSAttributedString.Key.foregroundColor : UIColor.tableViewBackgroundColor]))
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
         let timeAgoDisplay = post.creationDate.timeAgoDisplay()
         // date
-        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.cellButtonsColor()]))
+        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.darkText]))
         captionLabel.attributedText = attributedText
     }
     
@@ -76,16 +77,25 @@ class HomePostCell: UICollectionViewCell {
         iv.layer.shadowRadius = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        
         return iv
     }()
     //
     let photoImageView : CustomImageView = {
         let iv = CustomImageView()
+        iv.addGestureRecognizer(UIPinchGestureRecognizer(target: self, action: #selector(handlePinch)))
+        iv.isUserInteractionEnabled = true
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
        return iv
     }()
     //
+    @objc func handlePinch(sender:UIPinchGestureRecognizer){
+        print("Handling Pinch")
+        
+       
+        
+    }
     
     let ratingsView : HCSStarRatingView = {
         let view = HCSStarRatingView()
@@ -119,7 +129,8 @@ class HomePostCell: UICollectionViewCell {
         let button = UIButton(type: .system)
 //        button.setTitle("•••", for: .normal)
 //        button.setImage(#imageLiteral(resourceName: "blMore").withRenderingMode(.alwaysOriginal), for: .normal)
-        button.setImage(#imageLiteral(resourceName: "blueMore").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "cellShareEM").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "cellShareSEL"), for: .selected)
         button.addTarget(self, action: #selector(showMore), for: .touchUpInside)
         return button
     }()
@@ -133,7 +144,7 @@ class HomePostCell: UICollectionViewCell {
     // Like Button
     lazy var likeButton : UIButton = {
         let button = UIButton(type: .system)
-      button.setImage(#imageLiteral(resourceName: "blLikeUn").withRenderingMode(.alwaysOriginal), for: .normal)
+      button.setImage(#imageLiteral(resourceName: "likeCell").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handlelike), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
@@ -141,7 +152,7 @@ class HomePostCell: UICollectionViewCell {
     //
     lazy var commentButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage( #imageLiteral(resourceName: "blMessUn").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage( #imageLiteral(resourceName: "commentCell").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
@@ -149,14 +160,14 @@ class HomePostCell: UICollectionViewCell {
     //
     let sendMessageButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "blShareUn").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "shareCell").withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
     //
     let bookmarkButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "blBookmarkUn").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()

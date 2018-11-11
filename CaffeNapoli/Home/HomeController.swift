@@ -11,6 +11,7 @@ import Firebase
 import AVFoundation
 import Lottie
 import Social
+import Alamofire
 
 
 
@@ -27,6 +28,13 @@ import Social
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate{
+    func handlePinch(sender: UIPinchGestureRecognizer, imageView: UIImageView) {
+        print("Handling for home")
+    }
+    
+   
+    
+   
     func swipeRightForCamera() {
                 print("Showing Camera")
         handleCamera()
@@ -95,6 +103,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
+        
+        
     }
     
     override func viewDidLoad() {
@@ -112,6 +122,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setUpNavigationItems()
 //        fetchAllPosts()
         handleRefresh()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+            self.setupBitcoin()
+        }
+        
+        
+        
+        
         
     }
    
@@ -243,7 +262,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
 //        navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapLogoSmallBlack"))
 //        let navController = CustomNavigationController()
-        navigationItem.title = "OffTheHook"
+        navigationItem.title = "Projects"
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
@@ -255,8 +274,37 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             // Fallback on earlier versions
         }
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cameraBS").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "saleSel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCart))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+        
+    }
+    private func setupBitcoin(){
+        Alamofire.request("https://api.coindesk.com/v1/bpi/currentprice.json").responseJSON { (response) in
+            print(response)
+            if let bitcoinJSON = response.result.value {
+                // we have good json
+                let bitcoinObject : Dictionary = bitcoinJSON as! Dictionary<String, Any> //sets up a dictionay and put in json response object.
+//                 print(bitcoinObject)
+                let bpiObject : Dictionary = bitcoinObject["bpi"] as! Dictionary<String, Any> // first level bpi
+                let usdObject : Dictionary = bpiObject["USD"] as! Dictionary<String, Any>
+                let rate : NSNumber = usdObject["rate_float"] as! NSNumber
+                let rateFloat: Float = Float(truncating: rate)
+                //
+                let now = NSDate()
+                let df = DateFormatter()
+                df.dateFormat = "hh:mm a"
+                let result = df.string(from: now as Date)
+//                let price = "$3700.00"
+                let dateString = result
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Bitcion price at \(dateString) :$\(rateFloat)", style: .plain, target: self, action: #selector(self.handleBitcoin))
+               
+                
+            }
+            print("Loading web services")
+        }
+       
+       
+        
     }
     
     @objc func handleCamera(){
@@ -264,6 +312,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         present(cameraController, animated: true, completion: nil)
     }
     
+    @objc private func handleBitcoin() {
+        print("Handling bitcoin")
+    }
 //MARK:- DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if posts.count > 0 {
@@ -401,7 +452,7 @@ func customPath() -> UIBezierPath {
     let path = UIBezierPath()
 //    starting point
     path.move(to: CGPoint(x: 20, y: 480))
-    let endPoint = CGPoint(x: 400, y: 480)
+    let endPoint = CGPoint(x: 600, y: 480)
 //     path.addLine(to: endPoint)
     let randonYShift = 200 + drand48() * 300
     let cp1 = CGPoint(x: 120, y: 380 - randonYShift)

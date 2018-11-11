@@ -37,9 +37,8 @@ class SplashScreenViewController: UIViewController {
     
     @objc func splashTimeOut(sender : Timer){
         let appvar = UIApplication.shared.delegate as! AppDelegate
-        appvar.window?.rootViewController = MainTabBarController()
-
-        
+//        appvar.window?.rootViewController = MainTabBarController()
+        appvar.window?.rootViewController = CustomTabBarController()
     }
     var bombSoundEffect: AVAudioPlayer?
     func playAudio(sound: String, ext: String) {

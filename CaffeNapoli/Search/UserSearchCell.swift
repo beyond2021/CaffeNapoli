@@ -21,11 +21,13 @@ class UserSearchCell: UICollectionViewCell {
     }// Starts out as nil. filled in cellFroItem
     
     let profileImageView : CustomImageView = {
-        let iv = CustomImageView()
-//        iv.backgroundColor = .red
-        iv.image = #imageLiteral(resourceName: "avatar2")
+        let iv = CustomImageView(image: #imageLiteral(resourceName: "icons8-technology-lifestyle-80"))
         iv.contentMode = .scaleAspectFill
+        iv.translatesAutoresizingMaskIntoConstraints = false
         iv.clipsToBounds = true
+        iv.layer.cornerRadius = 40 / 2
+        iv.layer.borderColor = UIColor.tableViewBackgroundColor.cgColor
+        iv.layer.borderWidth = 1
         return iv
     }()
     //
@@ -37,20 +39,7 @@ class UserSearchCell: UICollectionViewCell {
     }()
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        self.layer.masksToBounds = false
-//        self.layer.shadowColor = UIColor.white.cgColor
-//        self.layer.shadowOpacity = 0.5
-//        self.layer.shadowOffset = CGSize(width: -1, height: 1)
-//        self.layer.shadowRadius = 1
-//        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-//        self.contentView.layer.shouldRasterize = true
-//        self.contentView.layer.rasterizationScale = UIScreen.main.scale
-        
-        
-        
-//        backgroundColor = .yellow
-//        backgroundColor = UIColor.cellBGColor()
+
         backgroundColor = .white
         addSubview(profileImageView)
         addSubview(usernameLabel)

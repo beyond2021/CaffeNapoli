@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CFF1C0839E61AC3E2F5DE4BB6D327B6A"
+               BlueprintIdentifier = "55F3A4984A1430453532318CD2D915CE"
                BuildableName = "Pods_CaffeNapoli.framework"
                BlueprintName = "Pods-CaffeNapoli"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CFF1C0839E61AC3E2F5DE4BB6D327B6A"
+            BlueprintIdentifier = "55F3A4984A1430453532318CD2D915CE"
             BuildableName = "Pods_CaffeNapoli.framework"
             BlueprintName = "Pods-CaffeNapoli"
             ReferencedContainer = "container:Pods.xcodeproj">

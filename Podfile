@@ -33,6 +33,9 @@ pod 'FacebookShare', :inhibit_warnings => true
 pod 'FBSDKCoreKit', :modular_headers => true, :inhibit_warnings => true
 pod 'FBSDKLoginKit', :modular_headers => true, :inhibit_warnings => true
 pod 'FBSDKShareKit', :modular_headers => true, :inhibit_warnings => true
+pod 'NVActivityIndicatorView'
+pod 'ESTabBarController-swift'
+pod 'pop', '~> 1.0'
 
 post_install do |installer|
 installer.pods_project.targets.each do |target|
