@@ -12,6 +12,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.2):
     - BoringSSL-GRPC/Interface (= 0.0.2)
   - BoringSSL-GRPC/Interface (0.0.2)
+  - CCZoomTransition (0.1.2)
   - Crashlytics (3.11.0):
     - Fabric (~> 1.8.0)
   - ESTabBarController-swift (2.6.3)
@@ -188,6 +189,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - Bolts
+  - CCZoomTransition (~> 0.1)
   - Crashlytics
   - ESTabBarController-swift
   - Fabric
@@ -218,6 +220,7 @@ SPEC REPOS:
     - Alamofire
     - Bolts
     - BoringSSL-GRPC
+    - CCZoomTransition
     - Crashlytics
     - ESTabBarController-swift
     - Fabric
@@ -261,6 +264,7 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
+  CCZoomTransition: 224c2dc8669302c416399771d4307c18bc4530ca
   Crashlytics: 1448070c1d2731ab71ea7c3faf84ac0f69657287
   ESTabBarController-swift: edb8d8bc2cd043a8ddb43ab501fefdf9865ac519
   Fabric: 4ac1cdfef3004ccd83ce0959b91eda8a6e37df72
@@ -300,6 +304,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 054005edf5350aa9074af74b41456e5a61e3f322
 
-PODFILE CHECKSUM: 8813478d66ad8d104499b4ae7c66a59b226cf515
+PODFILE CHECKSUM: 4aec00f5eb3116f74b853da45f2f4814223dd961
 
 COCOAPODS: 1.5.3

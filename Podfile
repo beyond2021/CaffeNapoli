@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
+ platform :ios, '10.0'
 
 target 'CaffeNapoli' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -36,6 +36,8 @@ pod 'FBSDKShareKit', :modular_headers => true, :inhibit_warnings => true
 pod 'NVActivityIndicatorView'
 pod 'ESTabBarController-swift'
 pod 'pop', '~> 1.0'
+pod 'CCZoomTransition', '~> 0.1'
+
 
 post_install do |installer|
 installer.pods_project.targets.each do |target|

@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 class ServicesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    let serviceCellID = "ServiceCell"
-    let headerID = "headerID"
+    static let serviceCellID = "ServiceCell"
+    static let headerID = "headerID"
     var header : PhotoSelectorHeader?
     var services = [Service]()
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
         layout.headerReferenceSize = CGSize(width: width, height: width)
         collectionView.backgroundColor = .white
         collectionView.register(ServiceCell.self, forCellWithReuseIdentifier: serviceCellID)
-        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ServicesController.headerID)
         
         getAllServices()
     }
@@ -71,7 +71,7 @@ extension ServicesController {
         return services.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: serviceCellID, for: indexPath) as! ServiceCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServicesController.serviceCellID, for: indexPath) as! ServiceCell
         let service = services[indexPath.row]
         cell.service = service
         
@@ -81,12 +81,8 @@ extension ServicesController {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //How tall the cell is
-        let height: CGFloat = 40 + 8 + 8 // Username UserProfile
-//        height += view.frame.width
-//        //
-//        height += 50// for bottom buttons
-//        // Caption label
-//        height += 60
+        let height: CGFloat = 40 + 8 + 8 
+
         return CGSize(width: view.frame.width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -106,5 +102,17 @@ extension ServicesController {
         
         return header
     }
+    
+    
+    
+}
+
+extension ServicesController {
+    
+   
+    
+    
+    
+    
     
 }

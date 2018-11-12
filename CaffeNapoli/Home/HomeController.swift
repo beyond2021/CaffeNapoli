@@ -122,14 +122,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setUpNavigationItems()
 //        fetchAllPosts()
         handleRefresh()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
-            self.setupBitcoin()
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+//            self.setupBitcoin()
+//        }
         
-        
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "bitcoin"), style: .plain, target: self, action: #selector(handleBitcoin))
         
         
     }
@@ -329,9 +328,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
-//        cell.layer.masksToBounds = false
-//        cell.layer.cornerRadius = 6
-//        cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowRadius = 5;
         cell.layer.shadowOpacity = 0.25;
         cell.post = posts[indexPath.item]
