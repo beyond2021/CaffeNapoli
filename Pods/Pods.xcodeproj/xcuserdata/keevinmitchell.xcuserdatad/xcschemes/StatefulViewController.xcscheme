@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F3568D531DEDF210BC10037F8F4D913"
-               BuildableName = "Stripe.bundle"
-               BlueprintName = "Stripe-Stripe"
+               BlueprintIdentifier = "0D3EEC630DFB2682C022B3065CE47D89"
+               BuildableName = "StatefulViewController.framework"
+               BlueprintName = "StatefulViewController"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6F3568D531DEDF210BC10037F8F4D913"
-            BuildableName = "Stripe.bundle"
-            BlueprintName = "Stripe-Stripe"
+            BlueprintIdentifier = "0D3EEC630DFB2682C022B3065CE47D89"
+            BuildableName = "StatefulViewController.framework"
+            BlueprintName = "StatefulViewController"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

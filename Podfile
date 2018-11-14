@@ -37,6 +37,7 @@ pod 'NVActivityIndicatorView'
 pod 'ESTabBarController-swift'
 pod 'pop', '~> 1.0'
 pod 'CCZoomTransition', '~> 0.1'
+pod 'StatefulViewController', '~> 3.0'
 
 
 post_install do |installer|

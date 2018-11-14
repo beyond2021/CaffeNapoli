@@ -10,6 +10,7 @@
 		221052D72176992400D660E3 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221052D62176992300D660E3 /* UIColor+theme.swift */; };
 		22323828219249C800C2CE9E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22323827219249C600C2CE9E /* Service.swift */; };
 		22802782218888AA0056ADF1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */; };
+		228B82CB219CA0AB0072E611 /* HomeController+DelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */; };
 		229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED172197CFFA00A4D228 /* CustomTabBarController.swift */; };
 		229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */; };
 		229EED272199047D00A4D228 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = 229EED262199047D00A4D228 /* Services */; };
@@ -17,6 +18,11 @@
 		229EED2D21990AC400A4D228 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2C21990AC300A4D228 /* ServiceCell.swift */; };
 		229EED2F21990ACD00A4D228 /* HeaderStrechyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */; };
 		229EED3121990C3700A4D228 /* ServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED3021990C3700A4D228 /* ServicesController.swift */; };
+		22E82E2E219BAFDE003FE2E4 /* BasicPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */; };
+		22E82E30219BB070003FE2E4 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2F219BB070003FE2E4 /* EmptyView.swift */; };
+		22E82E32219BB226003FE2E4 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E31219BB226003FE2E4 /* ErrorView.swift */; };
+		22E82E34219BB2DD003FE2E4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E33219BB2DD003FE2E4 /* LoadingView.swift */; };
+		22E82E37219C84CE003FE2E4 /* HomeController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E36219C84CE003FE2E4 /* HomeController+Actions.swift */; };
 		53045B442019CA4800E9C6A7 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53045B432019CA4800E9C6A7 /* Address.swift */; };
 		530C2CAA20A3314E005078EA /* CaffeNapoliTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */; };
 		5324F6201FB4583A00563B1C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F61F1FB4583A00563B1C /* User.swift */; };
@@ -115,6 +121,7 @@
 		22770F662195190700ADFDA2 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		22770F672195190700ADFDA2 /* ServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
 		22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+DelegateMethods.swift"; sourceTree = "<group>"; };
 		229EED172197CFFA00A4D228 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleLottieAnimateContentView.swift; sourceTree = "<group>"; };
 		229EED1F2199022A00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
@@ -126,6 +133,11 @@
 		229EED2C21990AC300A4D228 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
 		229EED3021990C3700A4D228 /* ServicesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
+		22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicPlaceholderView.swift; path = "../../../../../Library/Autosave Information/BasicPlaceholderView.swift"; sourceTree = "<group>"; };
+		22E82E2F219BB070003FE2E4 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = "../../../../../Library/Autosave Information/EmptyView.swift"; sourceTree = "<group>"; };
+		22E82E31219BB226003FE2E4 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		22E82E33219BB2DD003FE2E4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		22E82E36219C84CE003FE2E4 /* HomeController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+Actions.swift"; sourceTree = "<group>"; };
 		53045B432019CA4800E9C6A7 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeNapoliTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		530C2CA920A3314E005078EA /* CaffeNapoliTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeNapoliTests.swift; sourceTree = "<group>"; };
@@ -297,6 +309,27 @@
 				229EED232199022A00A4D228 /* ServicesController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		22E82E2C219BAF8D003FE2E4 /* Stateful */ = {
+			isa = PBXGroup;
+			children = (
+				22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */,
+				22E82E2F219BB070003FE2E4 /* EmptyView.swift */,
+				22E82E31219BB226003FE2E4 /* ErrorView.swift */,
+				22E82E33219BB2DD003FE2E4 /* LoadingView.swift */,
+			);
+			path = Stateful;
+			sourceTree = "<group>";
+		};
+		22E82E35219C846C003FE2E4 /* HomeController */ = {
+			isa = PBXGroup;
+			children = (
+				53DE0A1F1FA954E000C2323D /* HomeController.swift */,
+				22E82E36219C84CE003FE2E4 /* HomeController+Actions.swift */,
+				228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */,
+			);
+			path = HomeController;
 			sourceTree = "<group>";
 		};
 		53045B422019CA2A00E9C6A7 /* Address */ = {
@@ -615,8 +648,9 @@
 		53DE0A1E1FA954AE00C2323D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				22E82E35219C846C003FE2E4 /* HomeController */,
+				22E82E2C219BAF8D003FE2E4 /* Stateful */,
 				53DB4479201609E600754BD6 /* star.wav */,
-				53DE0A1F1FA954E000C2323D /* HomeController.swift */,
 				53DE0A211FA9591800C2323D /* HomePostCell.swift */,
 				53A03F8D1FD4C5A300ACB034 /* CommentsController.swift */,
 				53A03F8F1FD7E26400ACB034 /* CommentsCell.swift */,
@@ -890,6 +924,7 @@
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/StatefulViewController/StatefulViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
 				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
@@ -924,6 +959,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatefulViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
@@ -1034,6 +1070,8 @@
 				535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */,
 				229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */,
 				535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */,
+				22E82E30219BB070003FE2E4 /* EmptyView.swift in Sources */,
+				22E82E2E219BAFDE003FE2E4 /* BasicPlaceholderView.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,
 				53EA9AD2205F6D0400CC6C6E /* EditPhotoController.swift in Sources */,
 				53B2BD47205C5DDE00D5A528 /* LoginAuthController.swift in Sources */,
@@ -1055,9 +1093,12 @@
 				537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */,
 				53B1A41B1F91F408002E3421 /* UserProfileHeader.swift in Sources */,
 				53C630A11FE8FF2D00023FBB /* AddReservationViewController.swift in Sources */,
+				22E82E37219C84CE003FE2E4 /* HomeController+Actions.swift in Sources */,
 				53A03F861FC2247300ACB034 /* CameraController.swift in Sources */,
 				5357130D1FF3C9FF00CCB70F /* BuyButtonCell.swift in Sources */,
 				5324F6201FB4583A00563B1C /* User.swift in Sources */,
+				228B82CB219CA0AB0072E611 /* HomeController+DelegateMethods.swift in Sources */,
+				22E82E32219BB226003FE2E4 /* ErrorView.swift in Sources */,
 				5376C73C1FFB1217005F2C21 /* CartDetailCell.swift in Sources */,
 				537EF99E1F8DB8B9004CED83 /* UserProfileController.swift in Sources */,
 				53DCA19C2029EA9B00BE7311 /* RocketPathOverlay.swift in Sources */,
@@ -1086,6 +1127,7 @@
 				53DE0A221FA9591800C2323D /* HomePostCell.swift in Sources */,
 				53B1A4211F9EFAEB002E3421 /* PhotoSelectorController.swift in Sources */,
 				229EED2B21990AAE00A4D228 /* WifiController.swift in Sources */,
+				22E82E34219BB2DD003FE2E4 /* LoadingView.swift in Sources */,
 				53A03F8E1FD4C5A300ACB034 /* CommentsController.swift in Sources */,
 				539A5C251FA81BE3007947B0 /* UserProfilePhotoCell.swift in Sources */,
 				533A705A202FDA1B00245A3E /* Buttons.swift in Sources */,
@@ -1299,7 +1341,49 @@
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks",
 					"$(PROJECT_DIR)/CaffeNapoli",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\" \"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\" \"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\" \"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\" \"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\" \"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\" \"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\" \"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_ROOT}/Crashlytics/iOS\" \"${PODS_ROOT}/Fabric/iOS\" \"${PODS_ROOT}/FirebaseAnalytics/Frameworks\" \"${PODS_ROOT}/FirebaseAuth/Frameworks\" \"${PODS_ROOT}/FirebaseCore/Frameworks\" \"${PODS_ROOT}/FirebaseDatabase/Frameworks\" \"${PODS_ROOT}/FirebaseFirestore/Frameworks\" \"${PODS_ROOT}/FirebaseInstanceID/Frameworks\" \"${PODS_ROOT}/FirebaseMessaging/Frameworks\" \"${PODS_ROOT}/FirebaseStorage/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\" \"${PODS_ROOT}/TwitterKit/iOS\" \"${PODS_ROOT}/TwitterCore/iOS\" \"${PODS_ROOT}/GoogleSignIn/Frameworks\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseFirestore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/TwitterKit/iOS\"",
+					"\"${PODS_ROOT}/TwitterCore/iOS\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+				);
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
