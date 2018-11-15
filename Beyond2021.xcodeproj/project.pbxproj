@@ -11,9 +11,9 @@
 		22323828219249C800C2CE9E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22323827219249C600C2CE9E /* Service.swift */; };
 		22802782218888AA0056ADF1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */; };
 		228B82CB219CA0AB0072E611 /* HomeController+DelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */; };
+		228B82CD219CBF690072E611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228B82CC219CBF690072E611 /* Main.storyboard */; };
 		229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED172197CFFA00A4D228 /* CustomTabBarController.swift */; };
 		229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */; };
-		229EED272199047D00A4D228 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = 229EED262199047D00A4D228 /* Services */; };
 		229EED2B21990AAE00A4D228 /* WifiController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2A21990AAE00A4D228 /* WifiController.swift */; };
 		229EED2D21990AC400A4D228 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2C21990AC300A4D228 /* ServiceCell.swift */; };
 		229EED2F21990ACD00A4D228 /* HeaderStrechyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */; };
@@ -31,7 +31,6 @@
 		5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5324F6261FB47E0700563B1C /* UserSearchCell.swift */; };
 		532D849C1F7E827500756E8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849B1F7E827500756E8A /* AppDelegate.swift */; };
 		532D849E1F7E827500756E8A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532D849D1F7E827500756E8A /* SignUpController.swift */; };
-		532D84A11F7E827500756E8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D849F1F7E827500756E8A /* Main.storyboard */; };
 		532D84A31F7E827600756E8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532D84A21F7E827600756E8A /* Assets.xcassets */; };
 		532D84A61F7E827600756E8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532D84A41F7E827600756E8A /* LaunchScreen.storyboard */; };
 		5333CE411FE2BDB100E3AB21 /* ShoppingCartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5333CE401FE2BDB100E3AB21 /* ShoppingCartController.swift */; };
@@ -122,13 +121,9 @@
 		22770F672195190700ADFDA2 /* ServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
 		22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+DelegateMethods.swift"; sourceTree = "<group>"; };
+		228B82CC219CBF690072E611 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		229EED172197CFFA00A4D228 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleLottieAnimateContentView.swift; sourceTree = "<group>"; };
-		229EED1F2199022A00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
-		229EED212199022A00A4D228 /* ServicesControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesControllers.swift; sourceTree = "<group>"; };
-		229EED222199022A00A4D228 /* ServiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
-		229EED232199022A00A4D228 /* ServicesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
-		229EED262199047D00A4D228 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Services; sourceTree = SOURCE_ROOT; };
 		229EED2A21990AAE00A4D228 /* WifiController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiController.swift; sourceTree = "<group>"; };
 		229EED2C21990AC300A4D228 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
@@ -149,7 +144,6 @@
 		532D84981F7E827500756E8A /* CaffeNapoli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaffeNapoli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532D849B1F7E827500756E8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		532D849D1F7E827500756E8A /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
-		532D84A01F7E827500756E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		532D84A21F7E827600756E8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532D84A51F7E827600756E8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		532D84A71F7E827600756E8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -284,31 +278,12 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		229EED1D2199022A00A4D228 /* Services */ = {
+		228B82D0219D0A950072E611 /* Service Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				229EED1E2199022A00A4D228 /* Layout */,
-				229EED202199022A00A4D228 /* Controllers */,
+				229EED3021990C3700A4D228 /* ServicesController.swift */,
 			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		229EED1E2199022A00A4D228 /* Layout */ = {
-			isa = PBXGroup;
-			children = (
-				229EED1F2199022A00A4D228 /* HeaderStrechyLayout.swift */,
-			);
-			path = Layout;
-			sourceTree = "<group>";
-		};
-		229EED202199022A00A4D228 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				229EED212199022A00A4D228 /* ServicesControllers.swift */,
-				229EED222199022A00A4D228 /* ServiceCell.swift */,
-				229EED232199022A00A4D228 /* ServicesController.swift */,
-			);
-			path = Controllers;
+			path = "Service Controllers";
 			sourceTree = "<group>";
 		};
 		22E82E2C219BAF8D003FE2E4 /* Stateful */ = {
@@ -375,6 +350,7 @@
 		532D848F1F7E827500756E8A = {
 			isa = PBXGroup;
 			children = (
+				228B82CC219CBF690072E611 /* Main.storyboard */,
 				5395FF701FED34430061FA2E /* OK Hand Sign.wav */,
 				5395FF721FED36530061FA2E /* Smiling Face With Heart-Shaped Eyes.wav */,
 				532D849A1F7E827500756E8A /* CaffeNapoli */,
@@ -397,12 +373,10 @@
 		532D849A1F7E827500756E8A /* CaffeNapoli */ = {
 			isa = PBXGroup;
 			children = (
-				229EED3021990C3700A4D228 /* ServicesController.swift */,
+				228B82D0219D0A950072E611 /* Service Controllers */,
 				229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */,
 				229EED2C21990AC300A4D228 /* ServiceCell.swift */,
 				229EED2A21990AAE00A4D228 /* WifiController.swift */,
-				229EED1D2199022A00A4D228 /* Services */,
-				229EED262199047D00A4D228 /* Services */,
 				22770F682195197400ADFDA2 /* TabBar */,
 				22770F5F2195184400ADFDA2 /* Services */,
 				53A6C0342062D09E002EB240 /* Edit Profile */,
@@ -423,7 +397,6 @@
 				53B1A41C1F9C3F5E002E3421 /* Log In */,
 				537EF9961F885FA2004CED83 /* Utils */,
 				532D849B1F7E827500756E8A /* AppDelegate.swift */,
-				532D849F1F7E827500756E8A /* Main.storyboard */,
 				532D84A21F7E827600756E8A /* Assets.xcassets */,
 				532D84A41F7E827600756E8A /* LaunchScreen.storyboard */,
 				532D84A71F7E827600756E8A /* Info.plist */,
@@ -884,11 +857,10 @@
 				533AE03E2005E6FB000920A9 /* like.json in Resources */,
 				537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */,
 				533AE044200891B4000920A9 /* spinner.json in Resources */,
-				229EED272199047D00A4D228 /* Services in Resources */,
+				228B82CD219CBF690072E611 /* Main.storyboard in Resources */,
 				53DB447A201609E600754BD6 /* star.wav in Resources */,
 				532D84A31F7E827600756E8A /* Assets.xcassets in Resources */,
 				5395FF711FED34430061FA2E /* OK Hand Sign.wav in Resources */,
-				532D84A11F7E827500756E8A /* Main.storyboard in Resources */,
 				5395FF731FED36540061FA2E /* Smiling Face With Heart-Shaped Eyes.wav in Resources */,
 				533AE0402005E7C2000920A9 /* Watch Progress.json in Resources */,
 			);
@@ -1148,14 +1120,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		532D849F1F7E827500756E8A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				532D84A01F7E827500756E8A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		532D84A41F7E827600756E8A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
