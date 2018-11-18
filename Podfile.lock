@@ -13,10 +13,10 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.2)
   - BoringSSL-GRPC/Interface (0.0.2)
   - CCZoomTransition (0.1.2)
-  - Crashlytics (3.11.0):
-    - Fabric (~> 1.8.0)
-  - ESTabBarController-swift (2.6.3)
-  - Fabric (1.8.0)
+  - Crashlytics (3.11.1):
+    - Fabric (~> 1.8.1)
+  - ESTabBarController-swift (2.6.4)
+  - Fabric (1.8.2)
   - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
     - FBSDKCoreKit (~> 4.37)
@@ -30,11 +30,11 @@ PODS:
     - FacebookCore (~> 0.5)
     - FBSDKCoreKit (~> 4.37)
     - FBSDKShareKit (~> 4.37)
-  - FBSDKCoreKit (4.38.0):
+  - FBSDKCoreKit (4.38.1):
     - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.38.0):
+  - FBSDKLoginKit (4.38.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.38.0):
+  - FBSDKShareKit (4.38.1):
     - FBSDKCoreKit
   - Firebase (4.13.0):
     - Firebase/Core (= 4.13.0)
@@ -182,10 +182,11 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - StatefulViewController (3.0)
-  - Stripe (13.2.0)
+  - Stripe (14.0.0)
+  - TransitionButton (0.5.2)
   - TwitterCore (3.2.0)
-  - TwitterKit (3.4.1):
-    - TwitterCore (>= 3.1.0)
+  - TwitterKit (3.4.2):
+    - TwitterCore (>= 3.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
@@ -215,6 +216,7 @@ DEPENDENCIES:
   - pop (~> 1.0)
   - StatefulViewController (~> 3.0)
   - Stripe
+  - TransitionButton
   - TwitterCore
 
 SPEC REPOS:
@@ -260,6 +262,7 @@ SPEC REPOS:
     - SDWebImage
     - StatefulViewController
     - Stripe
+    - TransitionButton
     - TwitterCore
     - TwitterKit
 
@@ -268,15 +271,15 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   CCZoomTransition: 224c2dc8669302c416399771d4307c18bc4530ca
-  Crashlytics: 1448070c1d2731ab71ea7c3faf84ac0f69657287
-  ESTabBarController-swift: edb8d8bc2cd043a8ddb43ab501fefdf9865ac519
-  Fabric: 4ac1cdfef3004ccd83ce0959b91eda8a6e37df72
+  Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
+  ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
+  Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
-  FBSDKCoreKit: 2ab7fdbf600dc6b628ba7a49aa29d357a7b4c74e
-  FBSDKLoginKit: 634fa27e72e33620eb6389253337342c03d4a407
-  FBSDKShareKit: 00290e3db446eed603ff80ac629dcc5e80cf8b74
+  FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
+  FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
+  FBSDKShareKit: 6ffe22f0a0618eb7424d4104ab0ef3ce9643d42a
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
   FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
@@ -304,10 +307,11 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
-  Stripe: 2c69e216061d54d9c538204bb4f58bd597ddfc5b
+  Stripe: db29ad197c74aca6fb981e4e8355cf7ebd0fca5a
+  TransitionButton: fb271583d9c9e4bb116b97103047e5157653f233
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
-  TwitterKit: 054005edf5350aa9074af74b41456e5a61e3f322
+  TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 62becbce02257d833319e26bf755134aa9b00a9b
+PODFILE CHECKSUM: 0bb28c5b23dbbb79ccc5770ed3e1dea63e138a56
 
 COCOAPODS: 1.5.3

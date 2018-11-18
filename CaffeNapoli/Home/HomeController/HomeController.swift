@@ -24,11 +24,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var isFinishedRefreshing = false
     
     static let cellID = "cellID"
-    static let navTitle = "Projects"
+    static let navTitle = "PROJECTS"
     static let followingNode = "following"
     static let postsNode = "posts"
-    static let navFontName = "HelveticaNeue"
+//    static let navFontName = "HelveticaNeue"
     static let likesNode = "likes"
+    static let navFontName = "CloisterBlack-Light"
+    static let navFontSizeLarge: CGFloat = 30
+    static let navFontSizeSmall: CGFloat = 20
+    
    
     let EmptyLabel : UILabel = {
         let label = UILabel()
@@ -75,6 +79,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
             , object: nil)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: HomeController.cellID)
+//        collectionView.setCollectionViewLayout(browsingLayout, animated: true, completion: nil)
+//        browsingLayout.itemHeight = collectionView.frame.size.height
+//        browsingLayout.itemGap = 100
 //        Refresh Control
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
@@ -206,11 +213,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             // Fallback on earlier versions
         }
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: 30) ?? ""]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
         } else {
             // Fallback on earlier versions
         }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
     }

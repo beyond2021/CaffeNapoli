@@ -9,10 +9,10 @@
 import UIKit
 import CCZoomTransition
 
-class WifiController : UIViewController {
+class ServicesDetailController : UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.tableViewBackgroundColor
+        view.backgroundColor = .white
         
     }
 }

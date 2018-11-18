@@ -13,6 +13,7 @@ import CCZoomTransition
 
 
 class ServicesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
     let serviceCellID = "ServiceCell"
     let headerID = "headerID"
     var header : PhotoSelectorHeader?
@@ -37,11 +38,12 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
             // Fallback on earlier versions
         }
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 30) ?? ""]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
         } else {
             // Fallback on earlier versions
         }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+//        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
     }
     private func getAllServices() {
@@ -118,8 +120,8 @@ extension ServicesController {
 //    }
     
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-
-        let vc = WifiController()
+        let layout = UICollectionViewFlowLayout()
+        let vc = ServicesDetailController(collectionViewLayout: layout)
 
         if let imageCell = collectionView.cellForItem(at: indexPath) as? ServiceCell {
             vc.cc_setZoomTransition(originalView: imageCell.serviceImageView)

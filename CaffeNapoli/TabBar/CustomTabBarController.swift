@@ -9,6 +9,7 @@
 import UIKit
 import ESTabBarController_swift
 import  Firebase
+
 class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
     
     static let homeTitle = "Home"
@@ -83,7 +84,7 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
         contentView.highlightIconColor = UIColor.tableViewBackgroundColor
         contentView.iconColor = UIColor.tableViewBackgroundColor
         contentView.titleLabel.textColor = UIColor.tableViewBackgroundColor
-        viewController.tabBarItem = ESTabBarItem(ExampleIrregularityContentView(), title: title, image: unselectedImage, selectedImage: selectedImage, tag: tag)
+        viewController.tabBarItem = ESTabBarItem(ExampleBouncesContentView(), title: title, image: unselectedImage, selectedImage: selectedImage, tag: tag)
         
 //        viewController.tabBarItem = ESTabBarItem.init(content: ExampleImpliesTabBarItemContent.init(animator: ExampleBackgroundAnimator.init(special: true)))
 
