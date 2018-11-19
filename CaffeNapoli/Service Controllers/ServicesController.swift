@@ -18,6 +18,10 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
     let headerID = "headerID"
     var header : PhotoSelectorHeader?
     var services = [Service]()
+    
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "SERVICES"
@@ -28,7 +32,6 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView.backgroundColor = .white
         collectionView.register(ServiceCell.self, forCellWithReuseIdentifier: serviceCellID)
         collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
-        
         getAllServices()
     }
     func setupNavigationStyle(){

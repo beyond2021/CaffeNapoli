@@ -15,6 +15,7 @@ PODS:
   - CCZoomTransition (0.1.2)
   - Crashlytics (3.11.1):
     - Fabric (~> 1.8.1)
+  - EasyAnimation (2.2.1)
   - ESTabBarController-swift (2.6.4)
   - Fabric (1.8.2)
   - FacebookCore (0.5.0):
@@ -193,6 +194,7 @@ DEPENDENCIES:
   - Bolts
   - CCZoomTransition (~> 0.1)
   - Crashlytics
+  - EasyAnimation
   - ESTabBarController-swift
   - Fabric
   - FacebookCore
@@ -226,6 +228,7 @@ SPEC REPOS:
     - BoringSSL-GRPC
     - CCZoomTransition
     - Crashlytics
+    - EasyAnimation
     - ESTabBarController-swift
     - Fabric
     - FacebookCore
@@ -272,6 +275,7 @@ SPEC CHECKSUMS:
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   CCZoomTransition: 224c2dc8669302c416399771d4307c18bc4530ca
   Crashlytics: ca7ab4bc304aa216bdc2e4c1a96389ee77252203
+  EasyAnimation: 226d133d23ef0ef99ddfb8928ff2a9a4a77d1cfd
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   Fabric: d2b22f443ba195d8a7cc204da230977c72733b40
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
@@ -312,6 +316,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 0bb28c5b23dbbb79ccc5770ed3e1dea63e138a56
+PODFILE CHECKSUM: 2304648b7fe57303a3dc3430d190be3a0290eb3b
 
 COCOAPODS: 1.5.3

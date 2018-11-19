@@ -39,7 +39,7 @@ pod 'pop', '~> 1.0'
 pod 'CCZoomTransition', '~> 0.1'
 pod 'StatefulViewController', '~> 3.0'
 pod 'TransitionButton'
-
+pod 'EasyAnimation'
 
 
 

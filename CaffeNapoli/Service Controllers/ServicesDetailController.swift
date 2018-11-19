@@ -8,11 +8,15 @@
 
 import UIKit
 import CCZoomTransition
+import EasyAnimation
 
 class ServicesDetailController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     static let headerCell = "headerCell"
     static let serviceTopicCell = "serviceTopicCell"
     static let footerCell = "footerCell"
+    var moveLeftAnchor: NSLayoutConstraint?
+    var chain: EAAnimationFuture?
+    
     var header : ServicesDetailHeader?
     var footer : ServiceDetailFooter?
     
@@ -21,6 +25,15 @@ class ServicesDetailController : UICollectionViewController, UICollectionViewDel
             
         }
     }
+    let moveRightView: UIImageView  = {
+        let iv = UIImageView(image: #imageLiteral(resourceName: "WhitRingArrow"))
+        iv.backgroundColor = UIColor.tableViewBackgroundColor
+        iv.layer.borderColor = UIColor.white.cgColor
+        iv.layer.borderWidth = 1
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +46,34 @@ class ServicesDetailController : UICollectionViewController, UICollectionViewDel
         collectionView?.register(ServicesDetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ServicesDetailController.headerCell)
         collectionView?.register(ServiceDetailFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ServicesDetailController.footerCell)
         
+        view.insertSubview(moveRightView, aboveSubview: collectionView)
+        moveRightView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        moveRightView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        moveRightView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant:40).isActive = true
+        moveLeftAnchor = moveRightView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10)
+        moveLeftAnchor?.isActive = true
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+       UIView.animate(withDuration: 2.0, delay: 2.0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.0, options: [.repeat, .autoreverse, .curveEaseOut], animations: {
+         self.moveLeftAnchor!.constant  += 20
+        self.moveRightView.layer.cornerRadius = 5.0
+        self.view.layer.borderWidth = 5.0
+        
+         self.view.layoutIfNeeded()
+            
+       }, completion : nil)
+        
+    }
+    
+    
+    
+    
 }
+
 extension ServicesDetailController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
