@@ -16,12 +16,19 @@
 		2285765B219F5CD800A5958C /* ServiceDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2285765A219F5CD800A5958C /* ServiceDetailFooter.swift */; };
 		228B82CB219CA0AB0072E611 /* HomeController+DelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */; };
 		228B82CD219CBF690072E611 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228B82CC219CBF690072E611 /* Main.storyboard */; };
+		22967FB821C587B800ACBE60 /* CaffeNapoliUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22967FB721C587B800ACBE60 /* CaffeNapoliUITests.swift */; };
 		229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED172197CFFA00A4D228 /* CustomTabBarController.swift */; };
 		229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */; };
 		229EED2B21990AAE00A4D228 /* ServicesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2A21990AAE00A4D228 /* ServicesDetailController.swift */; };
 		229EED2D21990AC400A4D228 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2C21990AC300A4D228 /* ServiceCell.swift */; };
 		229EED2F21990ACD00A4D228 /* HeaderStrechyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */; };
 		229EED3121990C3700A4D228 /* ServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED3021990C3700A4D228 /* ServicesController.swift */; };
+		22B75D7721ADFCDE00B13C7C /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */; };
+		22B75D7821ADFCDE00B13C7C /* Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */; };
+		22B75D7D21ADFD1000B13C7C /* Jura-DemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */; };
+		22B75D7E21ADFD1000B13C7C /* Jura-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */; };
+		22B75D7F21ADFD1000B13C7C /* Jura-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */; };
+		22B75D8021ADFD1000B13C7C /* Jura-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */; };
 		22E82E2E219BAFDE003FE2E4 /* BasicPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */; };
 		22E82E30219BB070003FE2E4 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2F219BB070003FE2E4 /* EmptyView.swift */; };
 		22E82E32219BB226003FE2E4 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E31219BB226003FE2E4 /* ErrorView.swift */; };
@@ -107,6 +114,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		22967FBA21C587B800ACBE60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 532D84901F7E827500756E8A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 532D84971F7E827500756E8A;
+			remoteInfo = CaffeNapoli;
+		};
 		530C2CAC20A3314E005078EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 532D84901F7E827500756E8A /* Project object */;
@@ -130,12 +144,21 @@
 		2285765A219F5CD800A5958C /* ServiceDetailFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailFooter.swift; sourceTree = "<group>"; };
 		228B82CA219CA0AB0072E611 /* HomeController+DelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+DelegateMethods.swift"; sourceTree = "<group>"; };
 		228B82CC219CBF690072E611 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		22967FB521C587B800ACBE60 /* CaffeNapoliUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaffeNapoliUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22967FB721C587B800ACBE60 /* CaffeNapoliUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaffeNapoliUITests.swift; sourceTree = "<group>"; };
+		22967FB921C587B800ACBE60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		229EED172197CFFA00A4D228 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		229EED192198A7E400A4D228 /* ExampleLottieAnimateContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleLottieAnimateContentView.swift; sourceTree = "<group>"; };
 		229EED2A21990AAE00A4D228 /* ServicesDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesDetailController.swift; sourceTree = "<group>"; };
 		229EED2C21990AC300A4D228 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
 		229EED3021990C3700A4D228 /* ServicesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
+		22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
+		22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
+		22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-DemiBold.otf"; sourceTree = "<group>"; };
+		22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Medium.otf"; sourceTree = "<group>"; };
+		22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Regular.otf"; sourceTree = "<group>"; };
+		22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Light.otf"; sourceTree = "<group>"; };
 		22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicPlaceholderView.swift; path = "../../../../../Library/Autosave Information/BasicPlaceholderView.swift"; sourceTree = "<group>"; };
 		22E82E2F219BB070003FE2E4 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = "../../../../../Library/Autosave Information/EmptyView.swift"; sourceTree = "<group>"; };
 		22E82E31219BB226003FE2E4 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -229,6 +252,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		22967FB221C587B800ACBE60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		530C2CA420A3314E005078EA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -289,6 +319,12 @@
 		2285764F219DDEDB00A5958C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */,
+				22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */,
+				22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */,
+				22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */,
+				22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */,
+				22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */,
 				22857650219DDF6B00A5958C /* CloisterBlack.ttf */,
 			);
 			path = Fonts;
@@ -313,6 +349,22 @@
 				229EED3021990C3700A4D228 /* ServicesController.swift */,
 			);
 			path = "Service Controllers";
+			sourceTree = "<group>";
+		};
+		22967F7221C13D9500ACBE60 /* Views+State */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Views+State";
+			sourceTree = "<group>";
+		};
+		22967FB621C587B800ACBE60 /* CaffeNapoliUITests */ = {
+			isa = PBXGroup;
+			children = (
+				22967FB721C587B800ACBE60 /* CaffeNapoliUITests.swift */,
+				22967FB921C587B800ACBE60 /* Info.plist */,
+			);
+			path = CaffeNapoliUITests;
 			sourceTree = "<group>";
 		};
 		22E82E2C219BAF8D003FE2E4 /* Stateful */ = {
@@ -385,6 +437,7 @@
 				5395FF721FED36530061FA2E /* Smiling Face With Heart-Shaped Eyes.wav */,
 				532D849A1F7E827500756E8A /* CaffeNapoli */,
 				530C2CA820A3314E005078EA /* CaffeNapoliTests */,
+				22967FB621C587B800ACBE60 /* CaffeNapoliUITests */,
 				532D84991F7E827500756E8A /* Products */,
 				E2DA67F95523E4F50C0E0DCF /* Pods */,
 				56BEB7A63FC08BA9D4DA5EB6 /* Frameworks */,
@@ -396,6 +449,7 @@
 			children = (
 				532D84981F7E827500756E8A /* CaffeNapoli.app */,
 				530C2CA720A3314E005078EA /* CaffeNapoliTests.xctest */,
+				22967FB521C587B800ACBE60 /* CaffeNapoliUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -649,6 +703,7 @@
 		53DE0A1E1FA954AE00C2323D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				22967F7221C13D9500ACBE60 /* Views+State */,
 				22E82E35219C846C003FE2E4 /* HomeController */,
 				22E82E2C219BAF8D003FE2E4 /* Stateful */,
 				53DB4479201609E600754BD6 /* star.wav */,
@@ -689,6 +744,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		22967FB421C587B800ACBE60 /* CaffeNapoliUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22967FBE21C587B800ACBE60 /* Build configuration list for PBXNativeTarget "CaffeNapoliUITests" */;
+			buildPhases = (
+				22967FB121C587B800ACBE60 /* Sources */,
+				22967FB221C587B800ACBE60 /* Frameworks */,
+				22967FB321C587B800ACBE60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22967FBB21C587B800ACBE60 /* PBXTargetDependency */,
+			);
+			name = CaffeNapoliUITests;
+			productName = CaffeNapoliUITests;
+			productReference = 22967FB521C587B800ACBE60 /* CaffeNapoliUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		530C2CA620A3314E005078EA /* CaffeNapoliTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 530C2CB020A3314E005078EA /* Build configuration list for PBXNativeTarget "CaffeNapoliTests" */;
@@ -734,10 +807,15 @@
 		532D84901F7E827500756E8A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Kev1;
 				TargetAttributes = {
+					22967FB421C587B800ACBE60 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 532D84971F7E827500756E8A;
+					};
 					530C2CA620A3314E005078EA = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1000;
@@ -863,11 +941,19 @@
 			targets = (
 				532D84971F7E827500756E8A /* CaffeNapoli */,
 				530C2CA620A3314E005078EA /* CaffeNapoliTests */,
+				22967FB421C587B800ACBE60 /* CaffeNapoliUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22967FB321C587B800ACBE60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		530C2CA520A3314E005078EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -879,16 +965,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B75D7F21ADFD1000B13C7C /* Jura-Regular.otf in Resources */,
 				53DB447420156D3300754BD6 /* drink.json in Resources */,
+				22B75D7721ADFCDE00B13C7C /* Gilroy-ExtraBold.otf in Resources */,
 				532D84A61F7E827600756E8A /* LaunchScreen.storyboard in Resources */,
 				53DB447620157C5A00754BD6 /* glasses.wav in Resources */,
 				22857652219DDF6B00A5958C /* CloisterBlack.ttf in Resources */,
 				533AE03E2005E6FB000920A9 /* like.json in Resources */,
 				537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */,
+				22B75D7D21ADFD1000B13C7C /* Jura-DemiBold.otf in Resources */,
 				533AE044200891B4000920A9 /* spinner.json in Resources */,
+				22B75D7821ADFCDE00B13C7C /* Gilroy-Light.otf in Resources */,
 				228B82CD219CBF690072E611 /* Main.storyboard in Resources */,
+				22B75D7E21ADFD1000B13C7C /* Jura-Medium.otf in Resources */,
 				53DB447A201609E600754BD6 /* star.wav in Resources */,
 				532D84A31F7E827600756E8A /* Assets.xcassets in Resources */,
+				22B75D8021ADFD1000B13C7C /* Jura-Light.otf in Resources */,
 				5395FF711FED34430061FA2E /* OK Hand Sign.wav in Resources */,
 				5395FF731FED36540061FA2E /* Smiling Face With Heart-Shaped Eyes.wav in Resources */,
 				533AE0402005E7C2000920A9 /* Watch Progress.json in Resources */,
@@ -919,7 +1011,6 @@
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
@@ -956,7 +1047,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
@@ -1050,6 +1140,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		22967FB121C587B800ACBE60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22967FB821C587B800ACBE60 /* CaffeNapoliUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		530C2CA320A3314E005078EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1148,6 +1246,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		22967FBB21C587B800ACBE60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 532D84971F7E827500756E8A /* CaffeNapoli */;
+			targetProxy = 22967FBA21C587B800ACBE60 /* PBXContainerItemProxy */;
+		};
 		530C2CAD20A3314E005078EA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 532D84971F7E827500756E8A /* CaffeNapoli */;
@@ -1167,6 +1270,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		22967FBC21C587B800ACBE60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoliUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CaffeNapoli;
+			};
+			name = Debug;
+		};
+		22967FBD21C587B800ACBE60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SC6R6MV2N8;
+				INFOPLIST_FILE = CaffeNapoliUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoliUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CaffeNapoli;
+			};
+			name = Release;
+		};
 		530C2CAE20A3314E005078EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1341,7 +1481,49 @@
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks",
 					"$(PROJECT_DIR)/CaffeNapoli",
 				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\" \"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\" \"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\" \"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\" \"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\" \"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\" \"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\" \"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\" \"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\" \"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\" \"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\" \"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\" \"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\" \"${PODS_ROOT}/Crashlytics/iOS\" \"${PODS_ROOT}/Fabric/iOS\" \"${PODS_ROOT}/FirebaseAnalytics/Frameworks\" \"${PODS_ROOT}/FirebaseAuth/Frameworks\" \"${PODS_ROOT}/FirebaseCore/Frameworks\" \"${PODS_ROOT}/FirebaseDatabase/Frameworks\" \"${PODS_ROOT}/FirebaseFirestore/Frameworks\" \"${PODS_ROOT}/FirebaseInstanceID/Frameworks\" \"${PODS_ROOT}/FirebaseMessaging/Frameworks\" \"${PODS_ROOT}/FirebaseStorage/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\" \"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\" \"${PODS_ROOT}/TwitterKit/iOS\" \"${PODS_ROOT}/TwitterCore/iOS\" \"${PODS_ROOT}/GoogleSignIn/Frameworks\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/BoringSSL\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKCoreKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FBSDKLoginKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMOAuth2\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GTMSessionFetcher\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleToolboxForMac\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/HCSStarRatingView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Stripe\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-Core\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-ProtoRPC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-RxLibrary\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"\"${PODS_ROOT}/Crashlytics/iOS\"",
+					"\"${PODS_ROOT}/Fabric/iOS\"",
+					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseAuth/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseCore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseDatabase/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseFirestore/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseMessaging/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseStorage/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks\"",
+					"\"${PODS_ROOT}/FirebaseUI/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks\"",
+					"\"${PODS_ROOT}/TwitterKit/iOS\"",
+					"\"${PODS_ROOT}/TwitterCore/iOS\"",
+					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
+				);
 				INFOPLIST_FILE = CaffeNapoli/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1389,6 +1571,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22967FBE21C587B800ACBE60 /* Build configuration list for PBXNativeTarget "CaffeNapoliUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22967FBC21C587B800ACBE60 /* Debug */,
+				22967FBD21C587B800ACBE60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		530C2CB020A3314E005078EA /* Build configuration list for PBXNativeTarget "CaffeNapoliTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -9,13 +9,19 @@
 import UIKit
 
 class ServiceTopicCell : UICollectionViewCell {
-    
+    var service: Service? {
+        didSet {
+            topicTextLabel.text = service?.description
+        }
+        
+    }
     let topicTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = UIColor.lightGray
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+//        label.textColor = UIColor.lightGray
+//        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont(name: "Jura-Light", size: 15)
      
         label.text = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum Contrary to popular belief"
        
@@ -24,12 +30,12 @@ class ServiceTopicCell : UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .cyan
+        backgroundColor = .white
         addSubview(topicTextLabel)
-        topicTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        topicTextLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
         topicTextLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
         topicTextLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20).isActive = true
-        topicTextLabel.heightAnchor.constraint(equalToConstant: 400)
+        topicTextLabel.heightAnchor.constraint(equalToConstant: 300)
     }
     
     required init?(coder aDecoder: NSCoder) {

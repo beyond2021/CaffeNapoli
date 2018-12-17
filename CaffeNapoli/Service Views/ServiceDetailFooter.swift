@@ -14,36 +14,44 @@ class ServiceDetailFooter: UICollectionViewCell {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = UIColor.darkText
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.tableViewBackgroundColor
         return view
     }()
     let separatorView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //        view.backgroundColor = UIColor.darkText
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.tableViewBackgroundColor
         return view
         
     }()
     
     let contactButton : TransitionButton = {
-        let button = TransitionButton(type: UIButton.ButtonType.custom)
+        let button = TransitionButton(type: UIButton.ButtonType.system)
         button.setTitle("Contact Us", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = UIColor.tableViewBackgroundColor
         
-        button.backgroundColor = UIColor.tableViewBackgroundColor
-        button.layer.borderColor =  UIColor.white.cgColor
+        button.titleLabel?.textColor =  UIColor.tableViewBackgroundColor
+        
+        button.backgroundColor = UIColor.white
+        
+        button.layer.shadowPath = UIBezierPath(rect: button.layer.bounds).cgPath
+        button.layer.shadowColor = UIColor.darkGray.cgColor
+        button.layer.shadowRadius = 3
+        button.layer.borderColor =  UIColor.tableViewBackgroundColor.cgColor
         button.layer.borderWidth = 1
         return button
     }()
     
     let techCareButton : TransitionButton = {
-        let button = TransitionButton(type: UIButton.ButtonType.custom)
+        let button = TransitionButton(type: UIButton.ButtonType.system)
         button.setTitle("Tech Care", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
-        button.backgroundColor = UIColor.tableViewBackgroundColor
-        button.layer.borderColor =  UIColor.white.cgColor
+        button.tintColor = UIColor.tableViewBackgroundColor
+         button.titleLabel?.textColor =  UIColor.tableViewBackgroundColor
+        button.backgroundColor = UIColor.white
+        button.layer.borderColor =  UIColor.tableViewBackgroundColor.cgColor
         button.layer.borderWidth = 1
         return button
     }()

@@ -17,6 +17,7 @@ extension HomeController {
         } else {
             noPostsAvailableLabel.alpha = 1
         }
+        postCount = posts.count
         return posts.count
     }
     

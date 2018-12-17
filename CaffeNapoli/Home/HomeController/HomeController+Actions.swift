@@ -89,7 +89,7 @@ extension HomeController {
         }
     }
     func generateAnimatedViews() {
-        let image = drand48() > 0.5 ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "thumbsUp")
+        let image = drand48() > 0.5 ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "likeGreenSelected")
         let imageView = UIImageView(image: image)
         let dimensions = 20 + drand48() * 10
         imageView.frame = CGRect(x: 0, y: 0, width: dimensions, height: 30)

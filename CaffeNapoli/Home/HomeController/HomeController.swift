@@ -14,6 +14,7 @@ import Social
 import Alamofire
 import StatefulViewController
 import NVActivityIndicatorView
+import EasyAnimation
 
 
 
@@ -22,18 +23,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var bombSoundEffect: AVAudioPlayer?
     var posts = [Post]()
     var isFinishedRefreshing = false
+    var morePostsButtonTopAnchor : NSLayoutConstraint?
+    var morePostsButtonWidthAnchor : NSLayoutConstraint?
+    var chain: EAAnimationFuture?
+    var postCount: Int = 0
     
     static let cellID = "cellID"
     static let navTitle = "PROJECTS"
     static let followingNode = "following"
     static let postsNode = "posts"
-//    static let navFontName = "HelveticaNeue"
+    //    static let navFontName = "HelveticaNeue"
     static let likesNode = "likes"
     static let navFontName = "CloisterBlack-Light"
     static let navFontSizeLarge: CGFloat = 30
     static let navFontSizeSmall: CGFloat = 20
     
-   
+    
     let EmptyLabel : UILabel = {
         let label = UILabel()
         label.textColor = UIColor.darkText
@@ -62,8 +67,46 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         label.textColor = .white
         return label
     }()
-
-
+    
+    let networkStatus: UILabel = {
+        let label = UILabel()
+        label.text = "Network Label "
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = .red
+        return label
+    }()
+    
+    let hostNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = " "
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 30)
+        label.textColor = .white
+        return label
+    }()
+    
+    let morePostsButton: UIButton  = {
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setTitle("More Posts?", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
+        button.titleLabel?.textColor = .white
+        button.addTarget(self, action: #selector(checkForPosts), for: .touchUpInside)
+        button.backgroundColor = UIColor.tableViewBackgroundColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    @objc private func checkForPosts(){
+        print("More post pressed")
+        // scroll to the top
+        hideMorePostsButton()
+        if (self.posts.count > 0) {
+            self.collectionView.setContentOffset(CGPoint(x:0,y:0), animated: true)
+        }
+        setMorePostButton()
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("from view will appear")
@@ -71,55 +114,115 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         handleRefresh()
         
     }
+   
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        checkReachAbility()
         setupLabels()
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
             , object: nil)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: HomeController.cellID)
-//        collectionView.setCollectionViewLayout(browsingLayout, animated: true, completion: nil)
-//        browsingLayout.itemHeight = collectionView.frame.size.height
-//        browsingLayout.itemGap = 100
-//        Refresh Control
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView?.refreshControl = refreshControl
         noPostsAvailableLabel.alpha = 0
         setUpNavigationItems()
+        view.insertSubview(morePostsButton, aboveSubview: collectionView)
+        setMorePostButton()
         // Setup placeholder views
-//        loadingView = LoadingView(frame: view.frame)
-//        emptyView = EmptyView(frame: view.frame)
-//        let failureView = ErrorView(frame: view.frame)
-//        failureView.tapGestureRecognizer.addTarget(self, action: #selector(refreshPostsFromFailure))
-//        errorView = failureView
+        loadingView = LoadingView()
+        collectionView?.addSubview(loadingView!)
+        emptyView = EmptyView()
+        collectionView?.addSubview(emptyView!)
+        let failureView = ErrorView(frame: view.frame)
+        failureView.tapGestureRecognizer.addTarget(self, action: #selector(handleRefresh))
+        errorView = failureView
+        collectionView?.addSubview(errorView!)
         
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
-//            self.setupBitcoin()
-//        }
+        
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+        
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+        //            self.setupBitcoin()
+        //        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "bitcoin"), style: .plain, target: self, action: #selector(handleBitcoin))
         
-//        handleRefresh()
+        //        handleRefresh()
         
     }
+    func checkReachAbility(){
+       
+        
+       
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    private func setMorePostButton() {
+        morePostsButtonTopAnchor = morePostsButton.topAnchor.constraint(equalTo: view.topAnchor, constant:10)
+        morePostsButtonTopAnchor?.isActive = true
+        morePostsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        morePostsButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        morePostsButtonWidthAnchor = morePostsButton.widthAnchor.constraint(equalToConstant: 20)
+        morePostsButtonWidthAnchor?.isActive = true
+        
+    }
+    private func hideMorePostsButton(){
+        morePostsButton.isEnabled = false
+        morePostsButton.isHidden = true
+        
+    }
+    private func ShowMorePostsButton(){
+        morePostsButton.isEnabled = true
+        morePostsButton.isHidden = false
+    }
+    
+    
+    
+    private func animatePostButton(){
+        ShowMorePostsButton()
+        chain = UIView.animateAndChain(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options:  .curveEaseOut, animations: {
+            self.morePostsButtonTopAnchor!.constant  += 140
+            self.morePostsButton.layer.cornerRadius = 5.0
+            self.morePostsButton.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.0)
+            self.view.layoutIfNeeded()
+        }, completion: nil).animate(withDuration: 2.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: .curveEaseOut, animations: {
+            self.morePostsButtonWidthAnchor!.constant += 80
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    
     
     @objc private func refreshPostsFromFailure() {
         handleRefresh()
+        
     }
-
-   private func  setupLabels() {
+    override func viewDidDisappear(_ animated: Bool) {
+        hideMorePostsButton()
+        setMorePostButton()
+    }
+    
+    private func  setupLabels() {
         noPostsAvailableLabel.alpha = 1
         howToSeePostsLabel.alpha = 1
-        collectionView?.addSubview(noPostsAvailableLabel)
-        collectionView?.addSubview(howToSeePostsLabel)
-        noPostsAvailableLabel.anchor(top: collectionView?.topAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 40)
-        noPostsAvailableLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
-        howToSeePostsLabel.anchor(top: noPostsAvailableLabel.bottomAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 60)
-        howToSeePostsLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
+//        collectionView?.addSubview(networkStatus)
+////        collectionView?.addSubview(howToSeePostsLabel)
+//        networkStatus.anchor(top: collectionView?.topAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 40)
+//        networkStatus.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
+//        howToSeePostsLabel.anchor(top: noPostsAvailableLabel.bottomAnchor, left: collectionView?.leftAnchor, bottom: nil, right: collectionView?.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingBottom: 0, paddingRight: -20, width: 0, height: 60)
+//        howToSeePostsLabel.centerXAnchor.constraint(equalTo: (collectionView?.centerXAnchor)!).isActive = true
     }
     
     
@@ -129,12 +232,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleRefresh() {
         if self.lastState == StatefulViewControllerState.Loading { return }
-        
         startLoading {
             print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
         }
         print("startLoading -> loadingState: \(self.lastState.rawValue)")
-        
         print("Handling refresh...")
         playAudio(sound: "Smiling Face With Heart-Shaped Eyes", ext: "wav")
         posts.removeAll()
@@ -146,8 +247,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         fetchPosts()
         fetchFollowingUserIds()
     }
-   
-  
+    
+    
     fileprivate func fetchFollowingUserIds() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.database().reference().child(HomeController.followingNode).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -195,6 +296,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                         self.isFinishedRefreshing = true
                     }
                     self.collectionView?.reloadData()
+                    self.endLoading(error: nil, completion: {
+                        print("completion endLoading -> loadingState: \(self.currentState.rawValue)")
+                    })
+                    print("endLoading -> loadingState: \(self.lastState.rawValue)")
+                    
+//                    self.collectionView?.reloadData()
                 }, withCancel: { (err) in
                     print("could not get like info for post", err)
                 })
@@ -224,27 +331,31 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
     private func setupBitcoin(){
-        Alamofire.request("https://api.coindesk.com/v1/bpi/currentprice.json").responseJSON { (response) in
-            print(response)
-            if let bitcoinJSON = response.result.value {
-                // we have good json
-                let bitcoinObject : Dictionary = bitcoinJSON as! Dictionary<String, Any> //sets up a dictionay and put in json response object.
-//                 print(bitcoinObject)
-                let bpiObject : Dictionary = bitcoinObject["bpi"] as! Dictionary<String, Any> // first level bpi
-                let usdObject : Dictionary = bpiObject["USD"] as! Dictionary<String, Any>
-                let rate : NSNumber = usdObject["rate_float"] as! NSNumber
-                let rateFloat: Float = Float(truncating: rate)
-                //
-                let now = NSDate()
-                let df = DateFormatter()
-                df.dateFormat = "hh:mm a"
-                let result = df.string(from: now as Date)
-//                let price = "$3700.00"
-                let dateString = result
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Bitcion price at \(dateString) :$\(rateFloat)", style: .plain, target: self, action: #selector(self.handleBitcoin))
-            }
-            print("Loading web services")
-        }
+        
+        
+        /*
+         Alamofire.request("https://api.coindesk.com/v1/bpi/currentprice.json").responseJSON { (response) in
+         print(response)
+         if let bitcoinJSON = response.result.value {
+         // we have good json
+         let bitcoinObject : Dictionary = bitcoinJSON as! Dictionary<String, Any> //sets up a dictionay and put in json response object.
+         //                 print(bitcoinObject)
+         let bpiObject : Dictionary = bitcoinObject["bpi"] as! Dictionary<String, Any> // first level bpi
+         let usdObject : Dictionary = bpiObject["USD"] as! Dictionary<String, Any>
+         let rate : NSNumber = usdObject["rate_float"] as! NSNumber
+         let rateFloat: Float = Float(truncating: rate)
+         //
+         let now = NSDate()
+         let df = DateFormatter()
+         df.dateFormat = "hh:mm a"
+         let result = df.string(from: now as Date)
+         //                let price = "$3700.00"
+         let dateString = result
+         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Bitcion price at \(dateString) :$\(rateFloat)", style: .plain, target: self, action: #selector(self.handleBitcoin))
+         }
+         print("Loading web services")
+         }
+         */
         
     }
     
@@ -257,8 +368,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         print("Handling bitcoin")
     }
     
-
+    
 }
+
+extension HomeController {
     
+    func hasContent() -> Bool {
+        return posts.count > 0
+    }
     
+  
+}
+
+
 

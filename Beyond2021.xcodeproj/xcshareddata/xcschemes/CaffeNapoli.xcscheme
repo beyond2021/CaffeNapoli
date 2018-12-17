@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Beyond2021.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "22967FB421C587B800ACBE60"
+               BuildableName = "CaffeNapoliUITests.xctest"
+               BlueprintName = "CaffeNapoliUITests"
+               ReferencedContainer = "container:Beyond2021.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

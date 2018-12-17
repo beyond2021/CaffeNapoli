@@ -14,8 +14,8 @@ import CCZoomTransition
 
 class ServicesController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let serviceCellID = "ServiceCell"
-    let headerID = "headerID"
+    static let serviceCellID = "ServiceCell"
+    static let headerID = "headerID"
     var header : PhotoSelectorHeader?
     var services = [Service]()
     
@@ -30,8 +30,8 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.headerReferenceSize = CGSize(width: width, height: width)
         collectionView.backgroundColor = .white
-        collectionView.register(ServiceCell.self, forCellWithReuseIdentifier: serviceCellID)
-        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView.register(ServiceCell.self, forCellWithReuseIdentifier: ServicesController.serviceCellID)
+        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ServicesController.headerID)
         getAllServices()
     }
     func setupNavigationStyle(){
@@ -51,6 +51,7 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
     }
     private func getAllServices() {
         let postReference = Database.database().reference().child("services")
+        var preSortedServices:[Service] = [Service]()
         postReference.observeSingleEvent(of: .value, with: { (serviceSnapshot) in
 //            print(serviceSnapshot)
             self.collectionView?.refreshControl?.endRefreshing()
@@ -58,18 +59,15 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 let service = Service(dictionary: dictionary)
-                self.services.append(service)
-                self.collectionView.reloadData()
-                
+                preSortedServices.append(service)
             })
-            
-            
+            let sortedArray = preSortedServices.sorted(by: {$0.name < $1.name})
+            self.services = sortedArray
+            self.collectionView.reloadData()
         }) { (error) in
             //            get the error from the cancel block if there is any
             print("Failed to fetch posts", error)
         }
-        
-        
     }
     
 }
@@ -79,7 +77,7 @@ extension ServicesController {
         return services.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: serviceCellID, for: indexPath) as! ServiceCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ServicesController.serviceCellID, for: indexPath) as! ServiceCell
         let service = services[indexPath.row]
         cell.service = service
         
@@ -105,7 +103,7 @@ extension ServicesController {
     
     // This method reders out the header for us
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerID, for: indexPath) as! PhotoSelectorHeader
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ServicesController.headerID, for: indexPath) as! PhotoSelectorHeader
      
         self.header = header
        
@@ -122,18 +120,35 @@ extension ServicesController {
 //        self.present(viewController, animated: true, completion: nil)
 //    }
     
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        let layout = UICollectionViewFlowLayout()
+//        let vc = ServicesDetailController(collectionViewLayout: layout)
+//        let service = services[indexPath.row]
+//        vc.header?.service = service
+//
+//        if let imageCell = collectionView.cellForItem(at: indexPath) as? ServiceCell {
+//            vc.cc_setZoomTransition(originalView: imageCell.serviceImageView)
+////                        vc.cc_swipeBackDisabled = true
+//        }
+//
+//        self.present(vc, animated: true, completion: nil)
+//
+//        return false
+//    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
         let vc = ServicesDetailController(collectionViewLayout: layout)
-
+        let service = services[indexPath.row]
+        vc.service = service
+        
         if let imageCell = collectionView.cellForItem(at: indexPath) as? ServiceCell {
             vc.cc_setZoomTransition(originalView: imageCell.serviceImageView)
-//                        vc.cc_swipeBackDisabled = true
+            //                        vc.cc_swipeBackDisabled = true
         }
-
+        
         self.present(vc, animated: true, completion: nil)
-
-        return false
+        
     }
     
     
