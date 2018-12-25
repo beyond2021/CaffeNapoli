@@ -18,8 +18,17 @@ import Fabric
 import Crashlytics
 import TwitterKit
 import FirebaseAuthUI
-//import FirebaseUI
+import Reachability
 import GTMSessionFetcher
+import SystemConfiguration
+
+protocol AppDelegateDelegate {
+    func showWifiAlert()
+    func showCellularAlert()
+    func showNoConnectionAlert()
+}
+
+
 
 class CustomNavigationController: UINavigationController, UIViewControllerTransitioningDelegate {
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
@@ -33,9 +42,20 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+    var reachability : Reachability?
+    var delegate : AppDelegateDelegate?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+//        setReachabilityNotifier()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: nil)
+        
+        
+        //        setReachabilityNotifier()
+        reachability = Reachability(hostname: "www.apple.com")
+        setReachabilityNotifier()
         
         //
         FirebaseApp.configure()
@@ -56,23 +76,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // UI
         window = UIWindow()
         window?.rootViewController = SplashScreenViewController()
-//        UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
+       
         
-        
-//        UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
-         UITabBar.appearance().tintColor = UIColor.white
-        
-//        UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
+//        window?.rootViewController = TestCollectionViewController()
+       
+        UITabBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().barTintColor = .lightRed
         UINavigationBar.appearance().tintColor = .white
-        
         attemptRegisterForNotifications(application: application)
-//        UIApplication.shared.statusBarStyle = .lightContent
-       
+        
         
         
         return true
     }
+    private func setReachabilityNotifier() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: proReachability)
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            print("Could not start notifier")
+        }
+    }
+
+
+
+
+    @objc func reachabilityChanged(note: Notification) {
+        let reachability = note.object as! Reachability
+        switch reachability.connection {
+        case .wifi:
+            print ("Reachable via Wifi")
+            //            self.alert(message: "Via Wifi", title: "Reacable")
+            delegate?.showWifiAlert()
+        case .cellular:
+            print ("Reachable via Cellular")
+            //            self.alert(message: "Via cellular", title: "Reacable")
+            delegate?.showCellularAlert()
+
+        case .none:
+            print ("Network not reachable")
+            //            self.alert(message: "Please connect to the internet.", title: "Network not reachable")
+            delegate?.showNoConnectionAlert()
+        }
+
+
+    }
+    
     //MARK:- receive alert open profile
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         //
@@ -187,8 +236,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

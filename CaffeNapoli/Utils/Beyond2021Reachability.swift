@@ -1,0 +1,33 @@
+//
+//  Beyond2021Reachability.swift
+//  Beyond2021ReachAbility
+//
+//  Created by KEEVIN MITCHELL on 12/14/18.
+//  Copyright © 2018 KEEVIN MITCHELL. All rights reserved.
+//
+
+import Foundation
+import SystemConfiguration
+
+struct Beyond2021Reachability {
+    
+    func networkConnectionAvailable() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        //
+        guard let defaultRouteReachAbility = withUnsafePointer(to: &zeroAddress,{$0.withMemoryRebound(to: sockaddr.self, capacity:1) {SCNetworkReachabilityCreateWithAddress(nil, $0)}}) else {
+            return false
+        }
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachAbility, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        
+        return (isReachable && !needsConnection)
+        
+    }
+    
+}

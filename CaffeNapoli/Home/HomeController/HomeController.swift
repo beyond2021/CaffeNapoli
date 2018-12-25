@@ -19,7 +19,25 @@ import EasyAnimation
 
 
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate, StatefulViewController {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate, StatefulViewController, AppDelegateDelegate{
+    func showWifiAlert() {
+        print("Show wifi alert from delegate")
+        self.alert(message: "Connected via Wifi.", title: "OK")
+    }
+    
+    func showCellularAlert() {
+         print("Show Cellular alert from delegate")
+        self.alert(message: "Connected via Cellular.", title: "OK")
+    }
+    
+    func showNoConnectionAlert() {
+        print("Show no connection alert from delegate")
+        self.alert(message: "No network connection.", title: "OK")
+    }
+    
+   
+ 
+    
     var bombSoundEffect: AVAudioPlayer?
     var posts = [Post]()
     var isFinishedRefreshing = false
@@ -37,6 +55,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     static let navFontName = "CloisterBlack-Light"
     static let navFontSizeLarge: CGFloat = 30
     static let navFontSizeSmall: CGFloat = 20
+    
+     let connection = Beyond2021Reachability()
     
     
     let EmptyLabel : UILabel = {
@@ -110,8 +130,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("from view will appear")
-        setupInitialViewState()
-        handleRefresh()
+
+//        if connection.networkConnectionAvailable() == true {
+//                    setupInitialViewState()
+//                    handleRefresh()
+//
+////            self.alert(message: "You can connect.", title: "OK")
+//        } else {
+//            self.alert(message: "You cannot connect.", title: "OK")
+//        }
         
     }
    
@@ -120,8 +147,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        appDel.delegate = self
 
-        checkReachAbility()
+//        checkReachAbility()
         setupLabels()
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
@@ -144,7 +173,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         failureView.tapGestureRecognizer.addTarget(self, action: #selector(handleRefresh))
         errorView = failureView
         collectionView?.addSubview(errorView!)
-        
+//
         
         
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
@@ -157,7 +186,29 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         //        handleRefresh()
         
+        if connection.networkConnectionAvailable() == true {
+            setupInitialViewState()
+            handleRefresh()
+            
+            //            self.alert(message: "You can connect.", title: "OK")
+        } else {
+            self.alert(message: "You cannot connect.", title: "OK")
+        }
+        
+        
+        
     }
+    private func checkConnection(){
+       
+        if connection.networkConnectionAvailable() == true {
+            self.alert(message: "You can connect.", title: "OK")
+        } else {
+            self.alert(message: "You cannot connect.", title: "OK")
+        }
+        
+        
+    }
+    
     func checkReachAbility(){
        
         

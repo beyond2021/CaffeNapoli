@@ -172,6 +172,7 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.4.1)
   - pop (1.0.12)
   - Protobuf (3.6.1)
+  - ReachabilitySwift (4.3.0)
   - SDWebImage (4.4.3):
     - SDWebImage/Core (= 4.4.3)
   - SDWebImage/Core (4.4.3)
@@ -209,6 +210,7 @@ DEPENDENCIES:
   - lottie-ios
   - NVActivityIndicatorView
   - pop (~> 1.0)
+  - ReachabilitySwift
   - StatefulViewController (~> 3.0)
   - Stripe
   - TransitionButton
@@ -254,6 +256,7 @@ SPEC REPOS:
     - NVActivityIndicatorView
     - pop
     - Protobuf
+    - ReachabilitySwift
     - SDWebImage
     - StatefulViewController
     - Stripe
@@ -300,6 +303,7 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   StatefulViewController: 4803bf900d44de26074344998e10e041113b5931
   Stripe: db29ad197c74aca6fb981e4e8355cf7ebd0fca5a
@@ -307,6 +311,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: d3bca367e1a6e211330100931b7aae269111be93
+PODFILE CHECKSUM: ceba3b5ac83265727ff10ace08efea142b10fcf4
 
 COCOAPODS: 1.5.3
