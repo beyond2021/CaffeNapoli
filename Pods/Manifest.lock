@@ -167,9 +167,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - NVActivityIndicatorView (4.4.1):
-    - NVActivityIndicatorView/Presenter (= 4.4.1)
-  - NVActivityIndicatorView/Presenter (4.4.1)
+  - NVActivityIndicatorView (4.5.0):
+    - NVActivityIndicatorView/Presenter (= 4.5.0)
+  - NVActivityIndicatorView/Presenter (4.5.0)
   - pop (1.0.12)
   - Protobuf (3.6.1)
   - ReachabilitySwift (4.3.0)
@@ -190,7 +190,6 @@ DEPENDENCIES:
   - Crashlytics
   - EasyAnimation
   - ESTabBarController-swift
-  - Fabric
   - FacebookCore
   - FacebookLogin
   - FacebookShare
@@ -214,7 +213,6 @@ DEPENDENCIES:
   - StatefulViewController (~> 3.0)
   - Stripe
   - TransitionButton
-  - TwitterCore
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -300,7 +298,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  NVActivityIndicatorView: f0a6b0ed2973d9544da268f4eb76696f0a9577b0
+  NVActivityIndicatorView: 1e4e3ed79248cf1666af182593c3a2acf0fcf193
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
@@ -311,6 +309,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: ceba3b5ac83265727ff10ace08efea142b10fcf4
+PODFILE CHECKSUM: 3a82f0798d881b403e1bc91a709aa2ab3a4df5b3
 
 COCOAPODS: 1.5.3

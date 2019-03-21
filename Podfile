@@ -17,14 +17,13 @@ pod 'Stripe'
 pod 'Alamofire', '~> 4.5'
 
 pod 'GoogleSignIn'
-pod 'Fabric'
-pod 'Crashlytics'
+
 
 pod 'FirebaseAuth'
 
 pod 'Firebase'
 
-pod 'TwitterCore'
+pod 'Crashlytics'
 pod 'FirebaseUI', '~> 4.0'
 pod 'Bolts', :modular_headers => true, :inhibit_warnings => true
 pod 'FacebookCore', :inhibit_warnings => true

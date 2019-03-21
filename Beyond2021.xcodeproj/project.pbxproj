@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2204ADE222430973003AFA0F /* SignUpSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2204ADE122430973003AFA0F /* SignUpSimpleViewController.swift */; };
 		221052D72176992400D660E3 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221052D62176992300D660E3 /* UIColor+theme.swift */; };
 		22323828219249C800C2CE9E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22323827219249C600C2CE9E /* Service.swift */; };
 		22802782218888AA0056ADF1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22802781218888AA0056ADF1 /* FBSDKCoreKit.framework */; };
@@ -135,6 +136,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2204ADE122430973003AFA0F /* SignUpSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSimpleViewController.swift; sourceTree = "<group>"; };
 		221052D62176992300D660E3 /* UIColor+theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		22323827219249C600C2CE9E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		22770F63219518FF00ADFDA2 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				53ACE4D9204FD1C500881059 /* Auth */,
 				53B1A41D1F9C3F9F002E3421 /* LoginController.swift */,
 				532D849D1F7E827500756E8A /* SignUpController.swift */,
+				2204ADE122430973003AFA0F /* SignUpSimpleViewController.swift */,
 			);
 			path = "Log In";
 			sourceTree = "<group>";
@@ -1103,7 +1106,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 07a383abfb191bc8cefe329b85551916d4e9fd8b 56a463efc4276d638cfd33796aebc70485801b31d447dedd3f97ab145cada044";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 07a383abfb191bc8cefe329b85551916d4e9fd8b 56a463efc4276d638cfd33796aebc70485801b31d447dedd3f97ab145cada044\nreadonly MODULEMAP=\"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework/Modules/module.private.modulemap\"\nreadonly HEADER=\"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework/Headers/TwitterCore.h\"\n\nif ! grep -q \"TwitterCore_Private\" \"${MODULEMAP}\"; then\ncat >\"${MODULEMAP}\" <<EOL\nmodule TwitterCore_Private {\n}\nEOL\nfi\n\nif ! grep -q \"TWTRColorUtil.h\" \"${HEADER}\"; then\ncat >>\"${HEADER}\" <<EOL\n#import \"TWTRColorUtil.h\"\nEOL\nfi\n";
 		};
 		5855CE9643114831FA5C915F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1181,6 +1184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2204ADE222430973003AFA0F /* SignUpSimpleViewController.swift in Sources */,
 				5324F6221FB46E2800563B1C /* FirebaseUtils.swift in Sources */,
 				533A7058202FD9EB00245A3E /* CheckoutRowView.swift in Sources */,
 				53A03F8C1FCA76A800ACB034 /* CustomAnimationDismisser.swift in Sources */,
@@ -1494,18 +1498,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SC6R6MV2N8;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseFacebookAuthUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseFirestoreUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseGoogleAuthUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebasePhoneAuthUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseStorageUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseTwitterAuthUI/Frameworks",
-					"$(PROJECT_DIR)/CaffeNapoli",
-				);
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseAuthUI/Frameworks",
 					"$(PROJECT_DIR)/CaffeNapoli/FirebaseUIFrameworks/FirebaseDatabaseUI/Frameworks",

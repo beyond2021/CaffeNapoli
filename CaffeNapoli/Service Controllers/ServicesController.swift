@@ -25,7 +25,7 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "SERVICES"
-        setupNavigationStyle()
+//        setupNavigationStyle()
         let width = collectionView.frame.width
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.headerReferenceSize = CGSize(width: width, height: width)
@@ -33,6 +33,11 @@ class ServicesController: UICollectionViewController, UICollectionViewDelegateFl
         collectionView.register(ServiceCell.self, forCellWithReuseIdentifier: ServicesController.serviceCellID)
         collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ServicesController.headerID)
         getAllServices()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     func setupNavigationStyle(){
         if #available(iOS 11.0, *) {
@@ -107,7 +112,7 @@ extension ServicesController {
      
         self.header = header
        
-        header.photoImageView.image = #imageLiteral(resourceName: "AdobeStock_3716439")
+        header.photoImageView.image = #imageLiteral(resourceName: "AdobeStock_53506740")
        
         
         return header

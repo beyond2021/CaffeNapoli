@@ -69,13 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // facebook
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         // twitter
-        Fabric.with([Crashlytics.self])
-        TWTRTwitter.sharedInstance().start(withConsumerKey:"PUT6xb0mTa9Y5xQIUcIfH6Ir3",
-                                       consumerSecret:"WGs093vDE0BX2WTdwopshTOAOkmTdJj6eUZbbPsPNOzItBZ0b6")
+//        Fabric.with([Crashlytics.self])
+//        TWTRTwitter.sharedInstance().start(withConsumerKey:"PUT6xb0mTa9Y5xQIUcIfH6Ir3",
+//                                       consumerSecret:"WGs093vDE0BX2WTdwopshTOAOkmTdJj6eUZbbPsPNOzItBZ0b6")
         GTMSessionFetcher.setLoggingEnabled(true)
         // UI
         window = UIWindow()
-        window?.rootViewController = SplashScreenViewController()
+//        window?.rootViewController = SplashScreenViewController()
+        window?.rootViewController = SignUpSimpleController()
        
         
 //        window?.rootViewController = TestCollectionViewController()

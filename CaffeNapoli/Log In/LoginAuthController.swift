@@ -17,8 +17,8 @@ import FirebaseTwitterAuthUI
 import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleSignIn
-import TwitterCore
-import TwitterKit
+//import TwitterCore
+//import TwitterKit
 
 class LoginAuthController: UIViewController, FUIAuthDelegate, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
     

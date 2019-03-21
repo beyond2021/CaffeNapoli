@@ -221,4 +221,11 @@ class SharePhotoController: UIViewController {
         basicAnimation.isRemovedOnCompletion = false
         shapeLayer.add(basicAnimation, forKey: "urSoBasic")
     }
+    
+    deinit {
+        print("OS reclaiming memory for SharePhotoController - NO Retain Cycle/Leak!")
+        
+    }
+    
+    
 }
