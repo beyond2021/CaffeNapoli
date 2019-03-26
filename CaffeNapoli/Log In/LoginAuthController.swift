@@ -61,16 +61,16 @@ class LoginAuthController: UIViewController, FUIAuthDelegate, FBSDKLoginButtonDe
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        title = "FOODIE"
-        view.backgroundColor = UIColor.tabBarBlue()
-        view.addSubview(nameLabel)
-        setupViews()
+//        let firebaseAuth = Auth.auth()
+//        do {
+//            try firebaseAuth.signOut()
+//        } catch let signOutError as NSError {
+//            print ("Error signing out: %@", signOutError)
+//        }
+//        title = "FOODIE"
+//        view.backgroundColor = UIColor.tabBarBlue()
+//        view.addSubview(nameLabel)
+//        setupViews()
         //Google signin
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
@@ -124,6 +124,9 @@ extension LoginAuthController{
         let authViewController = authUI?.authViewController();
         authViewController?.topViewController?.view.backgroundColor = UIColor.tabBarBlue()
         self.present(authViewController!, animated: true, completion: nil)
+//        guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//
+//        mainTabbarController.setupViewControllers()
     }
    
     
@@ -137,6 +140,9 @@ extension LoginAuthController{
             {
                 // user exist
                 print("Dismissing from a logged in user:", user.uid)
+                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                
+                mainTabbarController.setupViewControllers()
                 
                 self.dismiss(animated: true, completion: nil)
             } else {
@@ -275,6 +281,8 @@ extension LoginAuthController{
                 print(user.displayName ?? "No name present")
                 print(user.photoURL ?? "No photo URL")
                 guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                
+                
                 mainTabbarController.setupViewControllers()
                 self.dismiss(animated: true, completion: nil)
             } else {

@@ -28,10 +28,6 @@
 	<string>Caffe Napoli would like to access your camera to take photos</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.07</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -46,8 +42,12 @@
 			</dict>
 		</array>
 	</dict>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.07</string>
 	<key>FacebookAppID</key>
 	<string>1905766599735664</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -94,7 +94,7 @@
 		<string>CloisterBlack.ttf</string>
 	</array>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>CaffeNapoli will like access to your photos</string>
+	<string>We will like access to your photos</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -111,7 +111,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>CaffeNapoli will like access to your photos</string>
+	<string>We will like access to your photos</string>
 	<key>priva</key>
 	<string></string>
 </dict>

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuthUI
 
 class UserProfileController : UICollectionViewController, UICollectionViewDelegateFlowLayout, CNUserProfileHeaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
@@ -373,12 +374,13 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogout))
         
     }
+    fileprivate(set) var authUI: FUIAuth?
     @objc func handleLogout() {
       print("Logging out")
         //Alert controller with actionsheet
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         //Add Action
-        alertController.addAction(UIAlertAction(title: "Log Out Caffe Napoli", style: .destructive, handler: { (_) in
+        alertController.addAction(UIAlertAction(title: "Log Out of BYTES", style: .destructive, handler: { (_) in
             do {
            try Auth.auth().signOut()
              //WE NEED TO PRE4SENT SOME KING OF LOGIN CONTROLLER
@@ -386,6 +388,7 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                 let loginController = LoginAuthController()
                 let navigationController = UINavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
+           
 //                self.dismiss(animated: true, completion: nil)
                 
             } catch let signOutError {

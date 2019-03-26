@@ -21,7 +21,9 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
     let logoContainerView : UIView = {
         let view = UIView()
         //Add in the logo
-        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "CaffeNapoliLargeWhite"))
+        let image = #imageLiteral(resourceName: "serviceBS")
+        let logoImageView = UIImageView()
+        logoImageView.image = image
         logoImageView.contentMode = .scaleAspectFill
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         //logoImageView.backgroundColor = .red

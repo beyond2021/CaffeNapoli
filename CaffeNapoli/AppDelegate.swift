@@ -75,14 +75,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         GTMSessionFetcher.setLoggingEnabled(true)
         // UI
         window = UIWindow()
-//        window?.rootViewController = SplashScreenViewController()
-        window?.rootViewController = SignUpSimpleController()
+        window?.rootViewController = SplashScreenViewController()
+//        window?.rootViewController = LoginController()
        
         
 //        window?.rootViewController = TestCollectionViewController()
        
         UITabBar.appearance().tintColor = UIColor.white
-        UINavigationBar.appearance().barTintColor = .lightRed
+//        UINavigationBar.appearance().barTintColor = .lightRed
         UINavigationBar.appearance().tintColor = .white
         attemptRegisterForNotifications(application: application)
         
@@ -278,10 +278,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 //
         
     }
+    
+   
    
     
     
 }
 
-
-
+//- (BOOL)handleOpenURL:(NSURL *)URL
+//sourceApplication:(nullable NSString *)sourceApplication;
