@@ -94,7 +94,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         config.requiredBillingAddressFields = settings.requiredBillingAddressFields
         config.requiredShippingAddressFields = settings.requiredShippingAddressFields
         config.shippingType = settings.shippingType
-        config.additionalPaymentMethods = settings.additionalPaymentMethods
+//        config.additionalPaymentOptions = settings.additionalPaymentMethods
+        //TODO
 
         // Create card sources instead of card tokens
         config.createCardSources = true;
@@ -110,7 +111,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 
         let paymentSelectionFooter = PaymentContextFooterView(text: "You can add custom footer views to the payment selection screen.")
         paymentSelectionFooter.theme = settings.theme
-        paymentContext.paymentMethodsViewControllerFooterView = paymentSelectionFooter
+//        paymentContext.paymentMethodsViewControllerFooterView = paymentSelectionFooter
+        paymentContext.paymentOptionsViewControllerFooterView = paymentSelectionFooter
 
         let addCardFooter = PaymentContextFooterView(text: "You can add custom footer views to the add card screen.")
         addCardFooter.theme = settings.theme
@@ -173,7 +175,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         self.buyButton.addTarget(self, action: #selector(didTapBuy), for: .touchUpInside)
         self.totalRow.detail = self.numberFormatter.string(from: NSNumber(value: Float(self.paymentContext.paymentAmount)/100))!
         self.paymentRow.onTap = { [weak self] in
-            self?.paymentContext.pushPaymentMethodsViewController()
+//            self?.paymentContext.pushPaymentMethodsViewController()
+            self?.paymentContext.pushPaymentOptionsViewController()
         }
         self.shippingRow.onTap = { [weak self]  in
             self?.paymentContext.pushShippingViewController()
@@ -231,7 +234,13 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
             title = "Success"
             message = "You bought a \(self.product)!"
         case .userCancellation:
+            title = "Transaction Cancelled"
+            message = " Youy cancelled this transaction"
+        default:
+            title = "There was an error"
+            message = " Please retry your transaction."
             return
+            
         }
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -241,9 +250,13 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
 
     func paymentContextDidChange(_ paymentContext: STPPaymentContext) {
         self.paymentRow.loading = paymentContext.loading
-        if let paymentMethod = paymentContext.selectedPaymentMethod {
+//        if let paymentMethod = paymentContext.selectedPaymentMethod {
+//            self.paymentRow.detail = paymentMethod.label
+//        }
+        if let paymentMethod = paymentContext.selectedPaymentOption {
             self.paymentRow.detail = paymentMethod.label
         }
+            
         else {
             self.paymentRow.detail = "Select Payment"
         }

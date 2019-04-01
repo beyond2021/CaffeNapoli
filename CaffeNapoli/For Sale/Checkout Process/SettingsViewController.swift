@@ -9,6 +9,9 @@
 import UIKit
 import Stripe
 
+
+
+
 struct Settings {
     let theme: STPTheme
     let additionalPaymentMethods: STPPaymentMethodType
@@ -20,7 +23,7 @@ struct Settings {
 class SettingsViewController: UITableViewController {
     var settings: Settings {
         return Settings(theme: self.theme.stpTheme,
-                        additionalPaymentMethods: self.applePay.enabled ? .all : STPPaymentMethodType(),
+                        additionalPaymentMethods: self.additionalPaymentMethods ,
                         requiredBillingAddressFields: self.requiredBillingAddressFields.stpBillingAddressFields,
                         requiredShippingAddressFields: self.requiredShippingAddressFields.stpContactFields,
                         shippingType: self.shippingType.stpShippingType)
@@ -31,6 +34,7 @@ class SettingsViewController: UITableViewController {
     private var requiredBillingAddressFields: RequiredBillingAddressFields = .None
     private var requiredShippingAddressFields: RequiredShippingAddressFields = .PostalAddressPhone
     private var shippingType: ShippingType = .Shipping
+    private var additionalPaymentMethods: STPPaymentMethodType = .typeCard
 
     fileprivate enum Section: String {
         case Theme = "Theme"

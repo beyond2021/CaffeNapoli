@@ -76,7 +76,6 @@
 		53B1A41B1F91F408002E3421 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A41A1F91F408002E3421 /* UserProfileHeader.swift */; };
 		53B1A41E1F9C3F9F002E3421 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A41D1F9C3F9F002E3421 /* LoginController.swift */; };
 		53B1A4211F9EFAEB002E3421 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A4201F9EFAEB002E3421 /* PhotoSelectorController.swift */; };
-		53B2BD47205C5DDE00D5A528 /* LoginAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B2BD46205C5DDE00D5A528 /* LoginAuthController.swift */; };
 		53C630A11FE8FF2D00023FBB /* AddReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */; };
 		53DB447420156D3300754BD6 /* drink.json in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447320156D3300754BD6 /* drink.json */; };
 		53DB447620157C5A00754BD6 /* glasses.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447520157C5900754BD6 /* glasses.wav */; };
@@ -159,7 +158,6 @@
 		53B1A41A1F91F408002E3421 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		53B1A41D1F9C3F9F002E3421 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		53B1A4201F9EFAEB002E3421 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
-		53B2BD46205C5DDE00D5A528 /* LoginAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAuthController.swift; sourceTree = "<group>"; };
 		53B76F4F204FF9A9002D2BDD /* CaffeNapoli-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CaffeNapoli-Bridging-Header.h"; sourceTree = "<group>"; };
 		53BC71BA1FE4BE9200E12DC4 /* CaffeNapoli.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CaffeNapoli.entitlements; sourceTree = "<group>"; };
 		53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReservationViewController.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 		53B1A41C1F9C3F5E002E3421 /* Log In */ = {
 			isa = PBXGroup;
 			children = (
-				53B2BD46205C5DDE00D5A528 /* LoginAuthController.swift */,
 				53ACE4D9204FD1C500881059 /* Auth */,
 				53B1A41D1F9C3F9F002E3421 /* LoginController.swift */,
 				532D849D1F7E827500756E8A /* SignUpController.swift */,
@@ -567,6 +564,7 @@
 				TargetAttributes = {
 					532D84971F7E827500756E8A = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
@@ -858,7 +856,6 @@
 				535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,
 				53EA9AD2205F6D0400CC6C6E /* EditPhotoController.swift in Sources */,
-				53B2BD47205C5DDE00D5A528 /* LoginAuthController.swift in Sources */,
 				535713061FF265C300CCB70F /* Product.swift in Sources */,
 				5376C73A1FF9D67D005F2C21 /* ItemCell.swift in Sources */,
 				5376C7351FF9CCCC005F2C21 /* ShoppingBagTableViewController.swift in Sources */,
@@ -1117,7 +1114,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CaffeNapoli/CaffeNapoli-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1149,7 +1146,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.beyond2021.CaffeNapoli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "CaffeNapoli/CaffeNapoli-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

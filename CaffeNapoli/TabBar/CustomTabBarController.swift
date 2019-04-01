@@ -97,7 +97,7 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
 extension CustomTabBarController {
     public func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         // Figure which index you are selecting
-        let index = viewControllers?.index(of: viewController) // viewController - selected one
+        let index = viewControllers?.firstIndex(of: viewController) // viewController - selected one
         print(index ?? 0)
         // will perform custom logic at index 2
         if index == 2 {

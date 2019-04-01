@@ -280,8 +280,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        let navController = CustomNavigationController()
         navigationItem.title = "FOODIE"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue(), NSAttributedStringKey.font:UIFont(name:"HelveticaNeue", size: 40) ?? ""]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.tabBarBlue()]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tabBarBlue(), NSAttributedString.Key.font:UIFont(name:"HelveticaNeue", size: 40) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.tabBarBlue()]
         
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "blCameraUnsel").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
@@ -401,9 +401,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let animation = CAKeyframeAnimation(keyPath: "position")
         animation.path = customPath().cgPath
         animation.duration = 2 + drand48() * 3
-        animation.fillMode = kCAFillModeForwards //removes from view
+        animation.fillMode = CAMediaTimingFillMode.forwards //removes from view
         animation.isRemovedOnCompletion = false
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         imageView.layer.add(animation, forKey: nil)
         view?.addSubview(imageView)
     }

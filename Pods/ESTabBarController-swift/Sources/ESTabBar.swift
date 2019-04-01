@@ -162,7 +162,7 @@ open class ESTabBar: UITabBar {
 
 internal extension ESTabBar /* Layout */ {
     
-    internal func updateLayout() {
+    func updateLayout() {
         guard let tabBarItems = self.items else {
             ESTabBarController.printError("empty items")
             return
@@ -246,18 +246,18 @@ internal extension ESTabBar /* Layout */ {
 
 internal extension ESTabBar /* Actions */ {
     
-    internal func isMoreItem(_ index: Int) -> Bool {
+    func isMoreItem(_ index: Int) -> Bool {
         return ESTabBarController.isShowingMore(tabBarController) && (index == (items?.count ?? 0) - 1)
     }
     
-    internal func removeAll() {
+    func removeAll() {
         for container in containers {
             container.removeFromSuperview()
         }
         containers.removeAll()
     }
     
-    internal func reload() {
+    func reload() {
         removeAll()
         guard let tabBarItems = self.items else {
             ESTabBarController.printError("empty items")
@@ -279,7 +279,7 @@ internal extension ESTabBar /* Actions */ {
         self.setNeedsLayout()
     }
     
-    @objc internal func highlightAction(_ sender: AnyObject?) {
+    @objc func highlightAction(_ sender: AnyObject?) {
         guard let container = sender as? ESTabBarItemContainer else {
             return
         }
@@ -299,7 +299,7 @@ internal extension ESTabBar /* Actions */ {
         }
     }
     
-    @objc internal func dehighlightAction(_ sender: AnyObject?) {
+    @objc func dehighlightAction(_ sender: AnyObject?) {
         guard let container = sender as? ESTabBarItemContainer else {
             return
         }
@@ -319,16 +319,16 @@ internal extension ESTabBar /* Actions */ {
         }
     }
     
-    @objc internal func selectAction(_ sender: AnyObject?) {
+    @objc func selectAction(_ sender: AnyObject?) {
         guard let container = sender as? ESTabBarItemContainer else {
             return
         }
         select(itemAtIndex: container.tag - 1000, animated: true)
     }
     
-    @objc internal func select(itemAtIndex idx: Int, animated: Bool) {
+    @objc func select(itemAtIndex idx: Int, animated: Bool) {
         let newIndex = max(0, idx)
-        let currentIndex = (selectedItem != nil) ? (items?.index(of: selectedItem!) ?? -1) : -1
+        let currentIndex = (selectedItem != nil) ? (items?.firstIndex(of: selectedItem!) ?? -1) : -1
         guard newIndex < items?.count ?? 0, let item = self.items?[newIndex], item.isEnabled == true else {
             return
         }
@@ -400,7 +400,7 @@ internal extension ESTabBar /* Actions */ {
         self.updateAccessibilityLabels()
     }
     
-    internal func updateAccessibilityLabels() {
+    func updateAccessibilityLabels() {
         guard let tabBarItems = self.items, tabBarItems.count == self.containers.count else {
             return
         }

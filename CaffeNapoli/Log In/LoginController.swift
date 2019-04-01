@@ -518,7 +518,7 @@ extension LoginController {
             print("could not sign in with Google", error)
             return
         }
-        print("Successfully signed in to Google:", user)
+        print("Successfully signed in to Google:", user as Any)
         
         
         

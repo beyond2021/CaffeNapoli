@@ -31,7 +31,7 @@ class ShoppingBagTableViewController: UITableViewController, CheckoutButtonCellD
         super.viewDidLoad()
         view.backgroundColor = UIColor.tabBarBlue()
         self.tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.register(NumberOfItemsCell.self, forCellReuseIdentifier: Constant.numberOfItemsCell)
         tableView.register(ItemCell.self, forCellReuseIdentifier: Constant.itemCell)
         tableView.register(CartDetailCell.self, forCellReuseIdentifier: Constant.cartDetailCell)

@@ -19,8 +19,8 @@ class CommentsCell: UICollectionViewCell {
             let username = comment.user.username ?? "No username"
             let userComment = comment.text
             
-            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedStringKey.foregroundColor : UIColor.red])
-            attributedText.append(NSAttributedString(string: " " + userComment, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize:14)]))
+            let attributedText = NSMutableAttributedString(string: username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),NSAttributedString.Key.foregroundColor : UIColor.red])
+            attributedText.append(NSAttributedString(string: " " + userComment, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize:14)]))
             
             
             

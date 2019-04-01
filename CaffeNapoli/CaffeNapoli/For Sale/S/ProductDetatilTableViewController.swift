@@ -144,7 +144,7 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
         super.viewDidLoad()
         title = product?.name
         self.tableView.estimatedRowHeight = self.tableView.rowHeight
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.tableHeaderView = headerView
         headerView.addSubview(pageViewController.view)
         pageViewController.view.anchor(top: headerView.topAnchor, left: headerView.leftAnchor, bottom: nil, right: headerView.rightAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 350)
@@ -165,7 +165,7 @@ class ProductDetatilTableViewController: UITableViewController, BuyButtonCellDel
         if indexPath.row == 3 {
             return self.tableView.bounds.width + 68
         } else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
     }
 }
@@ -194,7 +194,7 @@ extension ProductDetatilTableViewController
             return cell
         }  else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: productDetailMoreCell, for: indexPath) as! ProductDetailMoreCell
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: suggestionCell, for: indexPath) as! SuggestionCell

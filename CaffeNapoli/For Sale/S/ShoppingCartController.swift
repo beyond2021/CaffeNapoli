@@ -90,7 +90,7 @@ class ShoppingCartController: UICollectionViewController, UICollectionViewDelega
         
         cell.product = self.products?[indexPath.row]
         
-        print(cell.product)
+//        print(cell.product)
         
         return cell
     }

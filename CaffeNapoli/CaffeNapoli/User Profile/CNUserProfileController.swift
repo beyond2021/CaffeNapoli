@@ -220,7 +220,7 @@ class CNUserProfileController: UICollectionViewController, UICollectionViewDeleg
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
         
-        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
+        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         // Register 2 cell for grid and list layout
         collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: gridCellId)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)

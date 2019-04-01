@@ -23,7 +23,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         collectionView?.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellID)
         
         // Register Custom Header
-        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
+        collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         fetchPhotos()
         
     }
@@ -130,7 +130,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         // get the index of the image
         
         if let selectedImage = selectedImage {
-            if let index = self.images.index(of: selectedImage) {
+            if let index = self.images.firstIndex(of: selectedImage) {
                let selectedAsset = self.assets[index]
                  let imageManager = PHImageManager.default()
                 

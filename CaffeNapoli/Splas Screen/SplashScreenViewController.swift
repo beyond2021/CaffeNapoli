@@ -23,7 +23,7 @@ class SplashScreenViewController: UIViewController {
     
     
     @objc fileprivate func setupSplashScreen() {
-        let animationView = LOTAnimationView.init(name: "drink")
+        let animationView = AnimationView.init(name: "drink")
 //        animationView.contentMode = .scaleAspectFit
         animationView.frame = CGRect(x: 0, y: 100, width: view.frame.size.width , height: 550)
         animationView.contentMode = .scaleAspectFit

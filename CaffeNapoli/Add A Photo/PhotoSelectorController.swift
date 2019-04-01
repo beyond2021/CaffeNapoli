@@ -133,7 +133,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         // get the index of the image
         
         if let selectedImage = selectedImage {
-            if let index = self.images.index(of: selectedImage) {
+            if let index = self.images.firstIndex(of: selectedImage) {
                let selectedAsset = self.assets[index]
                  let imageManager = PHImageManager.default()
                 

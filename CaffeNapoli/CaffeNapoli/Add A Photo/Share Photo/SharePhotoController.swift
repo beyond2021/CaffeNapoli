@@ -57,7 +57,7 @@ class SharePhotoController: UIViewController {
         shapeLayer.strokeColor = UIColor.red.cgColor
         shapeLayer.lineWidth = 10
         //round the tip
-        shapeLayer.lineCap = kCALineCapRound
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
         // remove inside color
         shapeLayer.fillColor = UIColor.clear.cgColor
         
@@ -122,7 +122,7 @@ class SharePhotoController: UIViewController {
         
         let filename = NSUUID().uuidString // Filename is random string we generate
         //2: change the image into data
-        guard let uploadData = UIImageJPEGRepresentation(image, 0.5) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
         
         //disable the share button
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -192,7 +192,7 @@ class SharePhotoController: UIViewController {
         basicAnimation.toValue = 1
         basicAnimation.duration = 1
         //stay the animation
-        basicAnimation.fillMode = kCAFillModeForwards
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
         basicAnimation.isRemovedOnCompletion = false
         shapeLayer.add(basicAnimation, forKey: "urSoBasic")
     }

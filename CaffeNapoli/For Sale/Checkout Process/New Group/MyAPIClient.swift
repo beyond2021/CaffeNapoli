@@ -10,7 +10,7 @@ import Foundation
 import Stripe
 import Alamofire
 import  Firebase
-class MyAPIClient: NSObject, STPEphemeralKeyProvider {
+class MyAPIClient: NSObject, STPCustomerEphemeralKeyProvider {
 
     static let sharedClient = MyAPIClient()
     var baseURLString: String? = nil

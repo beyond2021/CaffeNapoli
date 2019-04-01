@@ -14,7 +14,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         // Figure which index you are selecting
-        let index = viewControllers?.index(of: viewController) // viewController - selected one
+        let index = viewControllers?.firstIndex(of: viewController) // viewController - selected one
         print(index ?? 0)
         // will perform custom logic at index 2
         if index == 2 {
@@ -41,7 +41,7 @@ if Auth.auth().currentUser == nil {
             //
             // THE USER IS NOT LOGGED IN, PRESENT LOGIN //FUIAuthViewController
 //            let loginController = LoginController()
-            let loginController = LoginAuthController()
+            let loginController = LoginController()
             let navigationController = CustomNavigationController(rootViewController: loginController)
             self.present(navigationController, animated: true, completion: nil)
             

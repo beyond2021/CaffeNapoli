@@ -21,7 +21,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         navigationItem.title = "Comments"
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true // for scrolling
-        collectionView?.indicatorStyle = UIScrollViewIndicatorStyle.black
+        collectionView?.indicatorStyle = UIScrollView.IndicatorStyle.black
         collectionView?.keyboardDismissMode = .interactive// for dismissal
         
 //        collectionView?.backgroundColor = .red

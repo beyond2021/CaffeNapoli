@@ -36,7 +36,10 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
         
     }
     //To get which photo was picked
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         // Toget the ewdited image
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             addPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -170,7 +173,7 @@ class EditProfileController: UIViewController,  UIImagePickerControllerDelegate,
     fileprivate func updateWith(username : String?, email: String?, name: String) {
         guard let image = addPhotoButton.image(for: .normal) else { return}
         // turn the image into upload data
-        guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
         let filename = NSUUID().uuidString
         //
@@ -356,4 +359,9 @@ extension EditProfileController {
 //
 //    }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
 }

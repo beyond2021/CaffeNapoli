@@ -16,10 +16,10 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
 //        print("number of posts", posts.count)
 //        let header = CNUserProfileHeader()
 //        header.posts = posts.count
-        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
+        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
         //        headerView?.followingLabel.text = "\(count) \nposts"
-        let attributedText = NSMutableAttributedString(string: "\(posts)\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+        let attributedText = NSMutableAttributedString(string: "\(posts)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "My Stories", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
         
         headerView?.postLabel.attributedText = attributedText
         
@@ -72,10 +72,10 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
 //        let header = CNUserProfileHeader()
 //        collectionView?.collectionViewLayout.invalidateLayout()
 //        header.following = count
-        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
+        let headerView = collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: [0,0]) as? CNUserProfileHeader
 //        headerView?.followingLabel.text = "\(count) \nposts"
-                let attributedText = NSMutableAttributedString(string: "\(count)\n", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)])
-                attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedStringKey.foregroundColor:UIColor.lightGray, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 14)]))
+                let attributedText = NSMutableAttributedString(string: "\(count)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                attributedText.append(NSAttributedString(string: "Watching", attributes:[NSAttributedString.Key.foregroundColor:UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
         
                 headerView?.followingLabel.attributedText = attributedText
         
@@ -101,7 +101,10 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         present(imagePickerController, animated: true, completion: nil)
     }
     //To get which photo was picked
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         var profileImage : UIImage?
         if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
             profileImage = editedImage
@@ -118,7 +121,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         //Lets upload the image instead
         let image = selectedImage 
         // turn the image into upload data
-        guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
         let filename = NSUUID().uuidString
         //
@@ -184,7 +187,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
         collectionView?.backgroundColor = UIColor.cellBGColor()
         // We need to registewrb the collectionview with a header
 //        collectionView?.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerID")
-        collectionView?.register(CNUserProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CNheaderID")
+        collectionView?.register(CNUserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "CNheaderID")
         // Register 2 cell for grid and list layout
         collectionView?.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: gridCellId)
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)
@@ -330,7 +333,7 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
            try Auth.auth().signOut()
              //WE NEED TO PRE4SENT SOME KING OF LOGIN CONTROLLER
 //                let loginController = LoginController()
-                let loginController = LoginAuthController()
+                let loginController = LoginController()
                 let navigationController = UINavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
 //                self.dismiss(animated: true, completion: nil)
@@ -493,3 +496,8 @@ class UserProfileController : UICollectionViewController, UICollectionViewDelega
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}

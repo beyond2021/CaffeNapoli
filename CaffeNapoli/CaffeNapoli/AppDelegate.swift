@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         //
         FirebaseApp.configure()
@@ -47,7 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         GTMSessionFetcher.setLoggingEnabled(true)
         // UI
         window = UIWindow()
-        window?.rootViewController = SplashScreenViewController()
+//        window?.rootViewController = SplashScreenViewController()
+        window?.rootViewController = LoginController()
+        
         UITabBar.appearance().barTintColor = UIColor.tabBarBlue()
         UITabBar.appearance().tintColor = UIColor.tabBarButtonColor()
         UINavigationBar.appearance().barTintColor = UIColor.NavBarYellow()
@@ -99,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     }
     //Twitter
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
     }
    
@@ -200,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
     
     func application(application: UIApplication,
                      openURL url: NSURL,
-                     options: [UIApplicationOpenURLOptionsKey: Any ] ) {
+                     options: [UIApplication.OpenURLOptionsKey: Any ] ) {
         
         
     }

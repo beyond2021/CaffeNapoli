@@ -165,7 +165,7 @@ extension LoginAuthController{
         let image = #imageLiteral(resourceName: "avatar1")
 //        let image = user?.photoURL
         // turn the image into upload data
-        guard let uploadData = UIImageJPEGRepresentation(image, 0.3) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
         // Append New image
         let filename = NSUUID().uuidString
 //        let username = user.displayName
