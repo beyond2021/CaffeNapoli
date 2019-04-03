@@ -18,24 +18,24 @@ PODS:
   - EasyAnimation (2.2.1)
   - ESTabBarController-swift (2.6.4)
   - Fabric (1.9.0)
-  - FacebookCore (0.5.0):
+  - FacebookCore (0.6.0):
     - Bolts (~> 1.9)
-    - FBSDKCoreKit (~> 4.37)
-  - FacebookLogin (0.5.0):
-    - Bolts (~> 1.9)
-    - FacebookCore (~> 0.5)
-    - FBSDKCoreKit (~> 4.37)
-    - FBSDKLoginKit (~> 4.37)
-  - FacebookShare (0.5.0):
+    - FBSDKCoreKit (~> 4.43)
+  - FacebookLogin (0.6.0):
     - Bolts (~> 1.9)
     - FacebookCore (~> 0.5)
-    - FBSDKCoreKit (~> 4.37)
-    - FBSDKShareKit (~> 4.37)
-  - FBSDKCoreKit (4.42.0):
+    - FBSDKCoreKit (~> 4.43)
+    - FBSDKLoginKit (~> 4.43)
+  - FacebookShare (0.6.1):
     - Bolts (~> 1.9)
-  - FBSDKLoginKit (4.42.0):
+    - FacebookCore (~> 0.5)
+    - FBSDKCoreKit (~> 4.43)
+    - FBSDKShareKit (~> 4.43)
+  - FBSDKCoreKit (4.44.0):
+    - Bolts (~> 1.9)
+  - FBSDKLoginKit (4.44.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.42.0):
+  - FBSDKShareKit (4.43.0):
     - FBSDKCoreKit
   - Firebase (4.13.0):
     - Firebase/Core (= 4.13.0)
@@ -167,9 +167,9 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - NVActivityIndicatorView (4.6.1):
-    - NVActivityIndicatorView/Presenter (= 4.6.1)
-  - NVActivityIndicatorView/Presenter (4.6.1)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
   - pop (1.0.12)
   - Protobuf (3.7.0)
   - ReachabilitySwift (4.3.1)
@@ -271,12 +271,12 @@ SPEC CHECKSUMS:
   EasyAnimation: 226d133d23ef0ef99ddfb8928ff2a9a4a77d1cfd
   ESTabBarController-swift: 58cca4ab7de980657d99a02181c1ff310983e975
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  FacebookCore: 74288d0add931d361b1596beae787ab72c438249
-  FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
-  FacebookShare: 963b4bb1124a64a395b1e428163d70b5774116e8
-  FBSDKCoreKit: aa42f1c384775f8b075f53a43080474278e9701d
-  FBSDKLoginKit: 373830c68aa48c9e8f0bfed93a3e32d2ca8963a0
-  FBSDKShareKit: 387749259d79e4070ebb304b3fd256e4b4bc4298
+  FacebookCore: 38cd3a4078738d6f648eb9b6b9d35b02d693e9a1
+  FacebookLogin: 658b0569961a081a0890f5f4dbf69ced00657d9e
+  FacebookShare: 84bccbc222fc09c839b851925ad6c295a4ab7840
+  FBSDKCoreKit: 8bcd4503afe43f28823c2175a6142a7f50f1bf28
+  FBSDKLoginKit: 93c5a407ab1a6a17b1b38cff57e89991f714d878
+  FBSDKShareKit: 5216050ba1406c3ad5fafdc07ee87afa6a8d2942
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
   FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
@@ -298,7 +298,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   lottie-ios: 06e0b54aab85ba128e332687d7f4ac4861a7a7ae
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
