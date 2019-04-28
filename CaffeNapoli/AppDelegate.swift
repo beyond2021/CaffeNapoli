@@ -5,7 +5,8 @@
 //  Created by Kev1 on 9/29/17.
 //  Copyright © 2017 Kev1. All rights reserved.
 // ssVxvba81xSUzPkHHNyAYoy44wf2
-//
+// APP AD ID: ca-app-pub-1722609658478702~6699045921
+// AD UNIT ID: ca-app-pub-1722609658478702/1128112903 - for production
 
 
 import UIKit

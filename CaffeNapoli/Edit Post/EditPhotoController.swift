@@ -9,6 +9,10 @@
 import UIKit
 
 class EditPhotoController: UICollectionViewController, HomePostCellDelegate, UICollectionViewDelegateFlowLayout {
+    func didLike(for cell: HomePostCell, post: Post) {
+        //
+    }
+    
     func handlePinch(sender: UIPinchGestureRecognizer, imageView: UIImageView) {
         //
     }

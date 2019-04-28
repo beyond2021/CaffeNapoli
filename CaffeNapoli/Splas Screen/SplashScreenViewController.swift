@@ -14,7 +14,8 @@ class SplashScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.tableViewBackgroundColor
+        view.backgroundColor = .white
+        
         Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(self.splashTimeOut(sender:)), userInfo: nil, repeats: false)
         playAudio(sound: "glasses", ext: "wav")
         setupSplashScreen()

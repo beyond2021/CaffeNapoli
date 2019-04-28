@@ -21,3 +21,25 @@ struct Comment {
         self.uid = dictionary["uid"] as? String ?? ""
     }
 }
+
+struct Like {
+   
+    let uid : String
+    //initializer that will take in the snapshot value
+    init(post: Post, dictionary : [String: Any]) {
+        //
+       
+        self.uid = dictionary["likes"] as? String ?? ""
+    }
+}
+
+struct Share {
+    
+    let uid : String
+    //initializer that will take in the snapshot value
+    init(post: Post, dictionary : [String: Any]) {
+        //
+        
+        self.uid = dictionary["shares"] as? String ?? ""
+    }
+}

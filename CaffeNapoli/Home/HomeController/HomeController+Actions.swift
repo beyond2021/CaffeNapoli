@@ -54,8 +54,13 @@ extension HomeController {
     }
     
     
+    
     //MARK:-    Saving the like state logic
-    func didLike(for cell: HomePostCell) {
+    func didLike(for cell: HomePostCell, post:Post) {
+        
+        
+        
+        
         guard let indexpath = collectionView?.indexPath(for: cell) else { return }
         //         get the post
         var post = self.posts[indexpath.item]
@@ -64,12 +69,40 @@ extension HomeController {
         guard let postId = post.id else { return }
         //current user uid
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let values = [uid:post.hasLiked == true ? 0 : 1] // me liking or unliking this post
+        let values = [uid:post.hasLiked == true ? 1 : 0] // me liking or unliking this post
+        if post.hasLiked  {
+            likesCount  = likesCount + 1
+        } else if !post.hasLiked && likesCount > 0 {
+            likesCount  = likesCount - 1
+            
+        } else {
+             likesCount  = 0
+        }
+        
+        print("Likes count is: ",self.likesCount)
         print("like :", post.hasLiked)
         if post.hasLiked == false {
             animateLikes()
             playAudio(sound: "OK Hand Sign", ext: "wav")
+            
         }
+        //
+        
+        let ref = Database.database().reference().child("likes").child(postId)
+        ref.observe(.childAdded, with: { (snapshot) in
+            
+            //
+            print("Likes snapshot is:",snapshot.value )
+            // cast snapshot into a dictionary
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            //try to get the user for the comment here. get the uid
+            guard let uid = dictionary["uid"] as? String else { return }// uid for the user of this parrticular comment
+        
+        })
+        
+        
+        //
+        
         Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
             if let err = error {
                 print("Could not like post", err)
@@ -80,7 +113,9 @@ extension HomeController {
             post.hasLiked = !post.hasLiked // toggle like button
             self.posts[indexpath.item] = post // because of structs
             self.collectionView?.reloadItems(at: [indexpath])
+            
         }
+        
     }
     
     func animateLikes() {
@@ -88,8 +123,44 @@ extension HomeController {
             generateAnimatedViews()
         }
     }
+    
+    func fetchLikesCount() {
+        //        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        guard let uid = user?.uid else { return }
+        
+        let postReference = Database.database().reference().child("likes").child(uid)
+        
+        postReference.observe(.childAdded) { (snapshot) in
+            print(snapshot.key, snapshot.value)
+        }
+    }
+        
+        
+//        postReference.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
+//
+//            //            print(snapshot.key, snapshot.value)
+//
+//            guard let dictionary = snapshot.value as? [String : Any] else { return }
+//
+//            guard let user = self.user else { return }
+//
+//            let post = Post(user: user, dictionary: dictionary)
+//            self.posts.insert(post, at: 0) // puts it in the front
+//            //            self.posts.append(post)// append goes to the back of the array
+//            //             self.getMyPosts()
+//            self.collectionView?.reloadData()
+//
+//        }) { (error) in
+//            //
+//            print("Failed to nfetch ordered post", error)
+//        }
+ //   }
+    
+    
+    
     func generateAnimatedViews() {
-        let image = drand48() > 0.5 ? #imageLiteral(resourceName: "heart") : #imageLiteral(resourceName: "likeGreenSelected")
+        let image = drand48() > 0.5 ? #imageLiteral(resourceName: "icons8-heart-filled-50") : #imageLiteral(resourceName: "icons8-heart-filled-50")
         let imageView = UIImageView(image: image)
         let dimensions = 20 + drand48() * 10
         imageView.frame = CGRect(x: 0, y: 0, width: dimensions, height: 30)

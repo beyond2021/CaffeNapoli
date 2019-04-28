@@ -20,6 +20,8 @@ import EasyAnimation
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate, StatefulViewController, AppDelegateDelegate{
+   
+    
     func showWifiAlert() {
         print("Show wifi alert from delegate")
         self.alert(message: "Connected via Wifi.", title: "OK")
@@ -35,7 +37,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         self.alert(message: "No network connection.", title: "OK")
     }
     
-   
+    var post : Post?
+    var likes = [Like]() // container to hold the comments empty
+ 
+    var likesCount = 0
+    
+    
+    // MARK : USER
+    var user : User? {
+        // To know when they are set because they are empty in the begining
+        didSet {
+            //            print("Did set \(String(describing: user?.username))")
+            // SINCE ITS SET WE WILL MAKE THE URLSESSION CALL
+            
+            guard let profileImageUrl = user?.profileImageURL else { return }
+            userProfileImageView.loadImage(urlString: profileImageUrl)
+           
+            
+        }
+    }
  
     
     var bombSoundEffect: AVAudioPlayer?
@@ -47,14 +67,32 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var postCount: Int = 0
     
     static let cellID = "cellID"
-    static let navTitle = "PROJECTS"
+    static let navTitle = "Browse"
     static let followingNode = "following"
     static let postsNode = "posts"
     //    static let navFontName = "HelveticaNeue"
     static let likesNode = "likes"
-    static let navFontName = "CloisterBlack-Light"
+    static let navFontName = "CamberW04-SemiBold"
     static let navFontSizeLarge: CGFloat = 30
     static let navFontSizeSmall: CGFloat = 20
+    private struct Const {
+        /// Image height/width for Large NavBar state
+        static let ImageSizeForLargeState: CGFloat = 60
+        /// Margin from right anchor of safe area to right anchor of Image
+        static let ImageRightMargin: CGFloat = 16
+        /// Margin from bottom anchor of NavBar to bottom anchor of Image for Large NavBar state
+        static let ImageBottomMarginForLargeState: CGFloat = 12
+        /// Margin from bottom anchor of NavBar to bottom anchor of Image for Small NavBar state
+        static let ImageBottomMarginForSmallState: CGFloat = 6
+        /// Image height/width for Small NavBar state
+        static let ImageSizeForSmallState: CGFloat = 32
+        /// Height of NavBar for Small state. Usually it's just 44
+        static let NavBarHeightSmallState: CGFloat = 44
+        /// Height of NavBar for Large state. Usually it's just 96.5 but if you have a custom font for the title, please make sure to edit this value since it changes the height for Large state of NavBar
+        static let NavBarHeightLargeState: CGFloat = 96.5
+    }
+    
+    
     
      let connection = Beyond2021Reachability()
     
@@ -126,6 +164,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setMorePostButton()
     }
     
+    let userProfileImageView : CustomImageView = {
+        let iv = CustomImageView()
+        iv.image = #imageLiteral(resourceName: "IMG_0767")
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        
+        return iv
+    }()
+    
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -147,6 +197,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+        
+//        guard let navUser = user else { return }
+////        guard let profileImageUrl = navUser.profileImageURL else { return }
+//        let profileImageUrl = navUser.profileImageURL
+//        userProfileImageView.loadImage(urlString: profileImageUrl)
+        
         let appDel = UIApplication.shared.delegate as! AppDelegate
         appDel.delegate = self
 
@@ -182,10 +243,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         //            self.setupBitcoin()
         //        }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "bitcoin"), style: .plain, target: self, action: #selector(handleBitcoin))
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "bitcoin"), style: .plain, target: self, action: #selector(handleBitcoin))
         
         //        handleRefresh()
-        
+           fetchLikesCount()
         if connection.networkConnectionAvailable() == true {
             setupInitialViewState()
             handleRefresh()
@@ -198,6 +259,42 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         
     }
+    //MARK:- Tabbar image resize
+    private func moveAndResizeImage(for height: CGFloat) {
+        let coeff: CGFloat = {
+            let delta = height - Const.NavBarHeightSmallState
+            let heightDifferenceBetweenStates = (Const.NavBarHeightLargeState - Const.NavBarHeightSmallState)
+            return delta / heightDifferenceBetweenStates
+        }()
+        
+        let factor = Const.ImageSizeForSmallState / Const.ImageSizeForLargeState
+        
+        let scale: CGFloat = {
+            let sizeAddendumFactor = coeff * (1.0 - factor)
+            return min(1.0, sizeAddendumFactor + factor)
+        }()
+        
+        // Value of difference between icons for large and small states
+        let sizeDiff = Const.ImageSizeForLargeState * (1.0 - factor) // 8.0
+        let yTranslation: CGFloat = {
+            /// This value = 14. It equals to difference of 12 and 6 (bottom margin for large and small states). Also it adds 8.0 (size difference when the image gets smaller size)
+            let maxYTranslation = Const.ImageBottomMarginForLargeState - Const.ImageBottomMarginForSmallState + sizeDiff
+            return max(0, min(maxYTranslation, (maxYTranslation - coeff * (Const.ImageBottomMarginForSmallState + sizeDiff))))
+        }()
+        
+        let xTranslation = max(0, sizeDiff - coeff * sizeDiff)
+        
+        userProfileImageView.transform = CGAffineTransform.identity
+            .scaledBy(x: scale, y: scale)
+            .translatedBy(x: xTranslation, y: yTranslation)
+    }
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let height = navigationController?.navigationBar.frame.height else { return }
+        moveAndResizeImage(for: height)
+    }
+    
+    
+    
     private func checkConnection(){
        
         if connection.networkConnectionAvailable() == true {
@@ -302,6 +399,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchFollowingUserIds() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+       
+        
         Database.database().reference().child(HomeController.followingNode).child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             guard let userIdsDictionary = snapshot.value as? [String : Any] else { return }
             userIdsDictionary.forEach({ (key, value) in
@@ -318,12 +417,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Database.fetchUserWithUIUD(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
+            
         }
+      
     }
     
     
     
     fileprivate func fetchPostsWithUser(user: User) {
+     
         let postReference = Database.database().reference().child(HomeController.postsNode).child(user.uid)
         postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
             self.collectionView?.refreshControl?.endRefreshing() //iOS 10
@@ -365,19 +467,33 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func setUpNavigationItems() {
         navigationItem.title = HomeController.navTitle
+        
+        
+        
+        
+        
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
             // Fallback on earlier versions
         }
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
         } else {
             // Fallback on earlier versions
         }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
+        navigationBar.addSubview(userProfileImageView)
+        userProfileImageView.layer.cornerRadius = Const.ImageSizeForLargeState / 2
+        userProfileImageView.clipsToBounds = true
+        userProfileImageView.translatesAutoresizingMaskIntoConstraints = false
+        userProfileImageView.anchor(top: nil, left: nil, bottom: navigationBar.bottomAnchor, right: navigationBar.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: Const.ImageBottomMarginForLargeState, paddingRight: Const.ImageRightMargin, width: Const.ImageSizeForLargeState, height: Const.ImageSizeForLargeState)
+        
+
+        
     }
     
     

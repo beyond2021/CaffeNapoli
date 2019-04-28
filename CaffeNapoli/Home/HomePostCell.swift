@@ -12,7 +12,7 @@ import  AVFoundation
 protocol HomePostCellDelegate {
     func didTapComment(post: Post) // parameter tell which post we are clicking on
     // likes
-    func didLike(for cell: HomePostCell) // to hold like state
+    func didLike(for cell: HomePostCell, post:Post) // to hold like state
     //show more
     func showMore(post: Post, sender : HomePostCell)
     func swipeRightForCamera()
@@ -26,7 +26,8 @@ class HomePostCell: UICollectionViewCell {
     // post to fill this cell
     var post: Post?{
         didSet {
-            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "cellLikeSel").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "likeCell").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
+            //get the likes for this post
+            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
             if post?.user.username == "" {
@@ -34,11 +35,13 @@ class HomePostCell: UICollectionViewCell {
             } else {
                 usernameLabel.text = post?.user.username
             }
-//            usernameLabel.text = post?.user.username
+            usernameLabel.text = post?.user.username
             guard let profileImageUrl = post?.user.profileImageURL else { return }
             userProfileImageView.loadImage(urlString: profileImageUrl)
 //            captionLabel.text = post?.caption
             setupAttributedCaption()
+            // Get the likes for this post
+            
           
         }
     } //needs to be nil in the beginning
@@ -61,8 +64,32 @@ class HomePostCell: UICollectionViewCell {
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
         let timeAgoDisplay = post.creationDate.timeAgoDisplay()
         // date
-        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.darkText]))
+        attributedText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor : UIColor.darkText]))
         captionLabel.attributedText = attributedText
+        
+        
+        let nameTimeAttributeText = NSMutableAttributedString(string: attrText, attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 20)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+//        nameTimeAttributeText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        nameTimeAttributeText.append(NSAttributedString(string: "  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        nameTimeAttributeText.append(NSAttributedString(string: "• ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize:16),NSAttributedString.Key.foregroundColor :  UIColor.bytesBlueTextColor]))
+//        let timeAgoDisplay = post.creationDate.timeAgoDisplay()
+        // date
+        nameTimeAttributeText.append(NSAttributedString(string: timeAgoDisplay, attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+        usernameLabel.attributedText = nameTimeAttributeText
+        
+        // setup Replies
+        let repliesAttributeText = NSMutableAttributedString(string: "Replies", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+        repliesAttributeText.append(NSAttributedString(string: " 28", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+
+        repliesLabel.attributedText = repliesAttributeText
+        
+        // setup shares
+        let sharesAttributeText = NSMutableAttributedString(string: "Shares", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+        sharesAttributeText.append(NSAttributedString(string: " 4", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+        
+        sharesLabel.attributedText = sharesAttributeText
+        
+        
     }
     
     
@@ -71,10 +98,10 @@ class HomePostCell: UICollectionViewCell {
     let userProfileImageView : CustomImageView = {
         let iv = CustomImageView()
 //        iv.layer.borderColor = UIColor.NavBarYellow().cgColor
-        iv.layer.borderColor = UIColor.tableViewBackgroundColor.cgColor
-        iv.layer.borderWidth = 4
-        iv.layer.shadowColor = UIColor.tableViewBackgroundColor.cgColor
-        iv.layer.shadowRadius = 4
+//        iv.layer.borderColor = UIColor.tableViewBackgroundColor.cgColor
+//        iv.layer.borderWidth = 4
+//        iv.layer.shadowColor = UIColor.tableViewBackgroundColor.cgColor
+//        iv.layer.shadowRadius = 4
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         
@@ -87,6 +114,9 @@ class HomePostCell: UICollectionViewCell {
         iv.isUserInteractionEnabled = true
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        iv.layer.cornerRadius = 8
+        
+//        contentView.layer.masksToBounds = true
        return iv
     }()
     //
@@ -118,7 +148,7 @@ class HomePostCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Username"
 //        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.font = UIFont(name:"HelveticaNeue", size: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
 //        label.textColor = UIColor.tabBarBlue()
         label.textColor = UIColor.black
         return label
@@ -144,30 +174,60 @@ class HomePostCell: UICollectionViewCell {
     // Like Button
     lazy var likeButton : UIButton = {
         let button = UIButton(type: .system)
-      button.setImage(#imageLiteral(resourceName: "likeCell").withRenderingMode(.alwaysOriginal), for: .normal)
+      button.setImage(#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handlelike), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
+//    lazy var likeLabel : UILabel = {
+//        let label = UILabel()
+//        label.text = "Like 280"
+//        return label
+//    }()
+    
     //
     lazy var commentButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage( #imageLiteral(resourceName: "commentCell").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage( #imageLiteral(resourceName: "icons8-topic-50").withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
-    //
-    let sendMessageButton : UIButton = {
+    
+    lazy var repliesButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "shareCell").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage( #imageLiteral(resourceName: "icons8-topic-50").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
+    
+    let repliesLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Replies 25"
+        return label
+    }()
+    
+    
+    
     //
-    let bookmarkButton : UIButton = {
+    let sharesButton : UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "icons8-forward-arrow-50").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        return button
+    }()
+    
+    let sharesLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Shares 4"
+        return label
+    }()
+    
+    //
+   lazy var moreButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "icons8-more-48").withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitleColor(.black, for: .normal)
         return button
     }()
@@ -178,7 +238,8 @@ class HomePostCell: UICollectionViewCell {
     }
     
     @objc func handlelike() {
-        delegate?.didLike(for: self)// which cell was like = self
+        guard let post = self.post else { return }
+        delegate?.didLike(for: self, post: post)// which cell was like = self
     }
     
     
@@ -192,33 +253,65 @@ class HomePostCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
+        
 //        backgroundColor = UIColor.cellBGColor()
         //
         addSubview(userProfileImageView)
         addSubview(usernameLabel)
-        addSubview(optionsButton)
+//        addSubview(optionsButton)
         addSubview(photoImageView)
         //
-        userProfileImageView.anchor(top: topAnchor, left: nil, bottom: photoImageView.topAnchor, right: nil, paddingTop: 6, paddingLeft: 6, paddingBottom: 8, paddingRight: 0, width: 60, height: 60)
-        userProfileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        userProfileImageView.anchor(top: topAnchor, left: leftAnchor, bottom: photoImageView.topAnchor, right: nil, paddingTop: 6, paddingLeft: 10, paddingBottom: 8, paddingRight: 0, width: 60, height: 60)
+//        userProfileImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         userProfileImageView.layoutCornerRadiusAndShadow(cornerRadius: 60/2)
         //
-        usernameLabel.anchor(top: topAnchor, left: leftAnchor, bottom: photoImageView.topAnchor, right: optionsButton.leftAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        usernameLabel.anchor(top: topAnchor, left: userProfileImageView.rightAnchor, bottom: photoImageView.topAnchor, right:nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        usernameLabel.centerYAnchor.constraint(equalTo: userProfileImageView.centerYAnchor).isActive = true
         //
-        optionsButton.anchor(top: topAnchor, left: nil, bottom: photoImageView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 44, height: 0)
+//        optionsButton.anchor(top: topAnchor, left: nil, bottom: photoImageView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 44, height: 0)
         photoImageView.anchor(top: userProfileImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         //nil for bottom anchor leaves space for bottom buttons // make pic square
         photoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
         // animation
-       setupActionButtons()
+     setupActionButtons()
         //Caption
-        addSubview(captionLabel)
-        captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        
+        
+//        addSubview(captionLabel)
+//        captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        
+        
+        
 //        addSubview(ratingsView)
 //        ratingsView.anchor(top: photoImageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 200, height: 30)
         let swipeToCamera = UISwipeGestureRecognizer(target: self, action: #selector(swipeRightForCamera))
         swipeToCamera.direction = .right
         addGestureRecognizer(swipeToCamera)
+        
+        
+        
+        //
+        //userinteraction StackView
+//        let redView = UIView()
+//        redView.backgroundColor = .red
+//        let blueView = UIView()
+//        blueView.backgroundColor = .blue
+//        let yellowView = UIView()
+//        yellowView.backgroundColor = .yellow
+//        let greenView = UIView()
+//        greenView.backgroundColor = .green
+//
+//        let interActiveStackView = UIStackView(arrangedSubviews: [redView, blueView, yellowView, greenView])
+//        interActiveStackView.distribution = .equalSpacing
+//        interActiveStackView.axis = .horizontal
+        
+//        addSubview(interActiveStackView)
+//        interActiveStackView.anchor(top: photoImageView.bottomAnchor, left: leftAnchor, bottom: nil
+//            , right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 40)
+        
+        
         
     }
     
@@ -228,10 +321,31 @@ class HomePostCell: UICollectionViewCell {
     }
     
     fileprivate func setupActionButtons(){
-        let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton,sendMessageButton])
-        stackView.distribution = .fillEqually
-        addSubview(stackView)
-        stackView.anchor(top: photoImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 120, height: 50)
+//        let stackView = UIStackView(arrangedSubviews: [likeButton, commentButton,sendMessageButton])
+//        stackView.distribution = .fillEqually
+//        addSubview(stackView)
+//        stackView.anchor(top: photoImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 120, height: 50)
+        
+        
+        
+        
+        
+        
+                let likeStackView = UIStackView(arrangedSubviews: [likeButton, likeLabel])
+                let repliesStackView = UIStackView(arrangedSubviews: [repliesButton, repliesLabel])
+                let sharesStackView = UIStackView(arrangedSubviews: [sharesButton, sharesLabel])
+                let moreStackView = UIStackView(arrangedSubviews: [moreButton])
+        
+                let interActiveStackView = UIStackView(arrangedSubviews: [likeStackView, repliesStackView, sharesStackView, moreStackView])
+                interActiveStackView.distribution = .equalSpacing
+                interActiveStackView.axis = .horizontal
+
+                addSubview(interActiveStackView)
+                interActiveStackView.anchor(top: photoImageView.bottomAnchor, left: leftAnchor, bottom: nil
+                    , right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 40)
+        
+        
+        
     }
     
     
@@ -239,6 +353,32 @@ class HomePostCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     var bombSoundEffect: AVAudioPlayer?
+    //MARK: - Interaction Labels
+    // like
+    lazy var likeLabel: UILabel = {
+        let label = UILabel()
+        print("label is set")
+
+//        let attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+//        attributedText.append(NSAttributedString(string: "Like", attributes:[NSAttributedString.Key.foregroundColor:UIColor.bytesDarkTextColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
+        //
+        let likesAttributeText = NSMutableAttributedString(string: " Like", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+        likesAttributeText.append(NSAttributedString(string: " 280", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+        
+       label.attributedText = likesAttributeText
+        
+
+        
+//        label.attributedText = attributedText
+       
+        label.numberOfLines = 1
+//        label.textAlignment = .center
+        return label
+    }()
+    
+    
+    
+    
 }
 
 extension HomePostCell {

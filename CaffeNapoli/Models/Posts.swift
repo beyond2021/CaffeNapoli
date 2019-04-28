@@ -14,6 +14,10 @@ struct Post {
     let imageUrl : String
     let caption : String
     let creationDate: Date
+//    let comment : Comment?
+//    let like : Like?
+//    let share: Share?
+    
     //
     var hasLiked  = false
     
@@ -23,9 +27,15 @@ struct Post {
         self.imageUrl = dictionary["imageUrl"] as? String ?? "" //empty string if u cant get one
         self.user = user
         self.caption = dictionary["caption"] as? String ?? ""
+       
+        
         // date conversion /
         let secondsFrom1970 = dictionary["creationDate"] as? Double ?? 0
         self.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
         
     }
 }
+
+
+    
+

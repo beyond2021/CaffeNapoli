@@ -14,4 +14,8 @@ extension UIColor {
     static let tableViewBackgroundColor = UIColor(displayP3Red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
     static let lightRed = UIColor(displayP3Red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
     static let lightBlue = UIColor(red: 218/255, green: 235/255, blue: 243/255, alpha: 1)
+    
+    //
+    static let bytesDarkTextColor = UIColor(red: 35/255, green: 56/255, blue: 96/255, alpha: 1)
+    static let bytesBlueTextColor = UIColor(red: 179/255, green: 192/255, blue: 215/255, alpha: 1)
 }

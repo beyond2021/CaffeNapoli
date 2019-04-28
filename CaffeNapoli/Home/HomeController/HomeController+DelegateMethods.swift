@@ -23,8 +23,10 @@ extension HomeController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeController.cellID, for: indexPath) as! HomePostCell
-        cell.layer.shadowRadius = 5;
-        cell.layer.shadowOpacity = 0.25;
+//        cell.layer.shadowRadius = 5;
+//        cell.layer.shadowOpacity = 0.25;
+//        cell.layer.cornerRadius = 4
+        
         cell.post = posts[indexPath.item]
         cell.delegate = self
         return cell
@@ -53,13 +55,13 @@ extension HomeController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //How tall the cell is
-        var height: CGFloat = 40 + 8 + 8 // Username UserProfile
+        var height: CGFloat = 40 + 8 + 8 + 20// Username UserProfile
         height += view.frame.width
         //
         height += 50// for bottom buttons
         // Caption label
         height += 60
-        return CGSize(width: view.frame.width, height: height)
+        return CGSize(width: view.frame.width - 20, height: height)
     }
     
     func handleErrorWhenContentAvailable(_ error: Error) {

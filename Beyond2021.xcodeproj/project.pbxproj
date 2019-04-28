@@ -26,11 +26,15 @@
 		229EED2D21990AC400A4D228 /* ServiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2C21990AC300A4D228 /* ServiceCell.swift */; };
 		229EED2F21990ACD00A4D228 /* HeaderStrechyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */; };
 		229EED3121990C3700A4D228 /* ServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229EED3021990C3700A4D228 /* ServicesController.swift */; };
+		22A724EB2256B90100FD3638 /* FreeSet Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724E72256B8F400FD3638 /* FreeSet Regular.ttf */; };
+		22A724EC2256B90100FD3638 /* FreeSet Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724E82256B8FA00FD3638 /* FreeSet Normal.ttf */; };
+		22A724ED2256B90100FD3638 /* FreeSet Cyrillic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724E92256B8FD00FD3638 /* FreeSet Cyrillic.ttf */; };
+		22A724EE2256B90100FD3638 /* FreeSet Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724EA2256B90100FD3638 /* FreeSet Bold.ttf */; };
+		22A724F02256B9AD00FD3638 /* Uninsta W00 DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724EF2256B9AD00FD3638 /* Uninsta W00 DemiBold.ttf */; };
+		22A724F22256BA2500FD3638 /* Camber W04 SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724F12256BA2500FD3638 /* Camber W04 SemiBold.ttf */; };
+		22A724F42256BB9700FD3638 /* clear-sans-bold_[allfont.net].ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A724F32256BB9700FD3638 /* clear-sans-bold_[allfont.net].ttf */; };
 		22B75D7721ADFCDE00B13C7C /* Gilroy-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */; };
-		22B75D7821ADFCDE00B13C7C /* Gilroy-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */; };
-		22B75D7D21ADFD1000B13C7C /* Jura-DemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */; };
 		22B75D7E21ADFD1000B13C7C /* Jura-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */; };
-		22B75D7F21ADFD1000B13C7C /* Jura-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */; };
 		22B75D8021ADFD1000B13C7C /* Jura-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */; };
 		22E54E4421CA9F71006BB838 /* Beyond2021Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */; };
 		22E54E4521CA9F71006BB838 /* Beyond2021Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */; };
@@ -161,11 +165,15 @@
 		229EED2C21990AC300A4D228 /* ServiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceCell.swift; sourceTree = "<group>"; };
 		229EED2E21990ACC00A4D228 /* HeaderStrechyLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderStrechyLayout.swift; sourceTree = "<group>"; };
 		229EED3021990C3700A4D228 /* ServicesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServicesController.swift; sourceTree = "<group>"; };
+		22A724E72256B8F400FD3638 /* FreeSet Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeSet Regular.ttf"; sourceTree = "<group>"; };
+		22A724E82256B8FA00FD3638 /* FreeSet Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeSet Normal.ttf"; sourceTree = "<group>"; };
+		22A724E92256B8FD00FD3638 /* FreeSet Cyrillic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeSet Cyrillic.ttf"; sourceTree = "<group>"; };
+		22A724EA2256B90100FD3638 /* FreeSet Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeSet Bold.ttf"; sourceTree = "<group>"; };
+		22A724EF2256B9AD00FD3638 /* Uninsta W00 DemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Uninsta W00 DemiBold.ttf"; sourceTree = "<group>"; };
+		22A724F12256BA2500FD3638 /* Camber W04 SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Camber W04 SemiBold.ttf"; sourceTree = "<group>"; };
+		22A724F32256BB9700FD3638 /* clear-sans-bold_[allfont.net].ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "clear-sans-bold_[allfont.net].ttf"; sourceTree = "<group>"; };
 		22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-ExtraBold.otf"; sourceTree = "<group>"; };
-		22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Light.otf"; sourceTree = "<group>"; };
-		22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-DemiBold.otf"; sourceTree = "<group>"; };
 		22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Medium.otf"; sourceTree = "<group>"; };
-		22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Regular.otf"; sourceTree = "<group>"; };
 		22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Light.otf"; sourceTree = "<group>"; };
 		22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beyond2021Reachability.swift; sourceTree = "<group>"; };
 		22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicPlaceholderView.swift; path = "../../../../../Library/Autosave Information/BasicPlaceholderView.swift"; sourceTree = "<group>"; };
@@ -328,12 +336,16 @@
 		2285764F219DDEDB00A5958C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				22B75D7921ADFD0800B13C7C /* Jura-DemiBold.otf */,
+				22A724F32256BB9700FD3638 /* clear-sans-bold_[allfont.net].ttf */,
+				22A724F12256BA2500FD3638 /* Camber W04 SemiBold.ttf */,
+				22A724EF2256B9AD00FD3638 /* Uninsta W00 DemiBold.ttf */,
+				22A724EA2256B90100FD3638 /* FreeSet Bold.ttf */,
+				22A724E92256B8FD00FD3638 /* FreeSet Cyrillic.ttf */,
+				22A724E82256B8FA00FD3638 /* FreeSet Normal.ttf */,
+				22A724E72256B8F400FD3638 /* FreeSet Regular.ttf */,
 				22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */,
 				22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */,
-				22B75D7B21ADFD0D00B13C7C /* Jura-Regular.otf */,
 				22B75D7521ADFCDB00B13C7C /* Gilroy-ExtraBold.otf */,
-				22B75D7621ADFCDE00B13C7C /* Gilroy-Light.otf */,
 				22857650219DDF6B00A5958C /* CloisterBlack.ttf */,
 			);
 			path = Fonts;
@@ -987,7 +999,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B75D7F21ADFD1000B13C7C /* Jura-Regular.otf in Resources */,
 				53DB447420156D3300754BD6 /* drink.json in Resources */,
 				22B75D7721ADFCDE00B13C7C /* Gilroy-ExtraBold.otf in Resources */,
 				532D84A61F7E827600756E8A /* LaunchScreen.storyboard in Resources */,
@@ -995,17 +1006,22 @@
 				22857652219DDF6B00A5958C /* CloisterBlack.ttf in Resources */,
 				533AE03E2005E6FB000920A9 /* like.json in Resources */,
 				537EF99A1F895022004CED83 /* GoogleService-Info.plist in Resources */,
-				22B75D7D21ADFD1000B13C7C /* Jura-DemiBold.otf in Resources */,
 				533AE044200891B4000920A9 /* spinner.json in Resources */,
-				22B75D7821ADFCDE00B13C7C /* Gilroy-Light.otf in Resources */,
 				228B82CD219CBF690072E611 /* Main.storyboard in Resources */,
 				22B75D7E21ADFD1000B13C7C /* Jura-Medium.otf in Resources */,
+				22A724ED2256B90100FD3638 /* FreeSet Cyrillic.ttf in Resources */,
 				53DB447A201609E600754BD6 /* star.wav in Resources */,
+				22A724EB2256B90100FD3638 /* FreeSet Regular.ttf in Resources */,
 				532D84A31F7E827600756E8A /* Assets.xcassets in Resources */,
+				22A724EC2256B90100FD3638 /* FreeSet Normal.ttf in Resources */,
+				22A724F22256BA2500FD3638 /* Camber W04 SemiBold.ttf in Resources */,
 				22B75D8021ADFD1000B13C7C /* Jura-Light.otf in Resources */,
+				22A724F42256BB9700FD3638 /* clear-sans-bold_[allfont.net].ttf in Resources */,
 				5395FF711FED34430061FA2E /* OK Hand Sign.wav in Resources */,
+				22A724F02256B9AD00FD3638 /* Uninsta W00 DemiBold.ttf in Resources */,
 				5395FF731FED36540061FA2E /* Smiling Face With Heart-Shaped Eyes.wav in Resources */,
 				533AE0402005E7C2000920A9 /* Watch Progress.json in Resources */,
+				22A724EE2256B90100FD3638 /* FreeSet Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
