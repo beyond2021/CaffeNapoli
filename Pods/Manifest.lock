@@ -121,6 +121,14 @@ PODS:
   - FirebaseUI/Twitter (4.5.5):
     - FirebaseUI/Auth
     - TwitterKit (~> 3.0)
+  - Google-Mobile-Ads-SDK (7.43.0):
+    - GoogleAppMeasurement (~> 5.7)
+  - GoogleAppMeasurement (5.8.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -137,6 +145,22 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.2.0)
     - "GoogleToolboxForMac/NSString+URLArguments (= 2.2.0)"
   - "GoogleToolboxForMac/NSString+URLArguments (2.2.0)"
+  - GoogleUtilities/AppDelegateSwizzler (5.8.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.8.0)
+  - GoogleUtilities/Logger (5.8.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.8.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.8.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.8.0)"
+  - GoogleUtilities/Reachability (5.8.0):
+    - GoogleUtilities/Logger
   - gRPC (1.19.0):
     - gRPC-RxLibrary (= 1.19.0)
     - gRPC/Main (= 1.19.0)
@@ -204,6 +228,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - FirebaseAuth
   - FirebaseUI (~> 4.0)
+  - Google-Mobile-Ads-SDK
   - GoogleSignIn
   - HCSStarRatingView (~> 1.5)
   - lottie-ios
@@ -240,8 +265,11 @@ SPEC REPOS:
     - FirebaseMessaging
     - FirebaseStorage
     - FirebaseUI
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleToolboxForMac
+    - GoogleUtilities
     - gRPC
     - gRPC-Core
     - gRPC-ProtoRPC
@@ -287,8 +315,11 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 75cdb862e86c30e0913a2ff307e48d49357c5b73
   FirebaseStorage: 0c223481c8f89ed300cf1239ddd2d9833622c65f
   FirebaseUI: 7f149d40db1a67c459df16540256b66d8f8e8c70
+  Google-Mobile-Ads-SDK: e911f5544fc6488f8372a183627a802c8bdb5e36
+  GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
+  GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   gRPC: 77d2866b3ce1e187b2239d8adba48b98d9524c15
   gRPC-Core: bd9472c8daa2e414b9f8038ba667bf56ce0e02b8
   gRPC-ProtoRPC: cc498c1885e75a1fb6b892881b440707f131fb5e
@@ -309,6 +340,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8cbc9ad34d91c63a0035ea05bfbfc0d7ca72a28c
   TwitterKit: 5e4f41d70b9abdb41df5467f52d7aa2c0fd26ebb
 
-PODFILE CHECKSUM: 1c626b0445488f4f7014a14e44ec844b691d4858
+PODFILE CHECKSUM: 91fce66ab9cadd2cd32b7c5e65562a81e62b14ac
 
 COCOAPODS: 1.5.3

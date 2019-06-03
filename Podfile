@@ -42,6 +42,7 @@ pod 'StatefulViewController', '~> 3.0'
 pod 'TransitionButton'
 pod 'EasyAnimation'
 pod 'ReachabilitySwift'
+pod 'Google-Mobile-Ads-SDK'
 
 
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import GoogleMobileAds
 
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
    
@@ -24,9 +25,27 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         // Register Custom Header
         collectionView?.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        // ADS View
+       view.addSubview(adView)
+        adView.anchor(top: nil, left: nil, bottom: view.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 320, height: 50)
+        adView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        // Banner View
+        adView.adUnitID = "ca-app-pub-1722609658478702/1128112903"
+        adView.rootViewController = self
+        adView.load(GADRequest())
+        adView.delegate = self
         fetchPhotos()
         
     }
+    
+    let adView: GADBannerView = {
+        let view = GADBannerView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+        
+        
+    }()
     
     override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
     
@@ -220,5 +239,14 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         sharePhotoController.selectedImage = header?.photoImageView.image
         navigationController?.pushViewController(sharePhotoController, animated: true)
         
+    }
+}
+extension PhotoSelectorController: GADBannerViewDelegate {
+    // Receipt of the Ad
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Received Ad")
+    }
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        print(error)
     }
 }

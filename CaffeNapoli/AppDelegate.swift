@@ -22,6 +22,8 @@ import FirebaseAuthUI
 import Reachability
 import GTMSessionFetcher
 import SystemConfiguration
+import GoogleMobileAds
+
 
 protocol AppDelegateDelegate {
     func showWifiAlert()
@@ -86,6 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 //        UINavigationBar.appearance().barTintColor = .lightRed
         UINavigationBar.appearance().tintColor = .white
         attemptRegisterForNotifications(application: application)
+        
+       //Google Ads
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         
         

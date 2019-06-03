@@ -117,5 +117,7 @@
 	<string>We will like access to your photos</string>
 	<key>priva</key>
 	<string></string>
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-1722609658478702~6699045921</string>
 </dict>
 </plist>
