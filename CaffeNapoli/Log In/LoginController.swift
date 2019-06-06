@@ -21,17 +21,17 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
     let logoContainerView : UIView = {
         let view = UIView()
         //Add in the logo
-        let image = #imageLiteral(resourceName: "serviceBS")
+        let image = #imageLiteral(resourceName: "avatarBS")
         let logoImageView = UIImageView()
         logoImageView.image = image
         logoImageView.contentMode = .scaleAspectFill
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         //logoImageView.backgroundColor = .red
-        view.addSubview(logoImageView)
-        logoImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 50)
-        // to center it
-        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//        view.addSubview(logoImageView)
+//        logoImageView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 200, height: 50)
+//        // to center it
+//        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.backgroundColor = UIColor.rgb(displayP3Red: 0, green: 120, blue: 175)
         return view
@@ -381,9 +381,12 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
             // successful
             print("Successfully logged back in with user", user?.uid ?? "")
             //To show the main controller and reset the UI
-            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+           guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? CustomTabBarController else { return }
             mainTabbarController.setupViewControllers()
             self.dismiss(animated: true, completion: nil)
+            
+            
         }
     }
     
@@ -413,10 +416,10 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
        
         //
         view.addSubview(logoContainerView)
-        view.addSubview(facebookLoginButton)
-        view.addSubview(fbCustomButton)
-        view.addSubview(googleButton)
-        view.addSubview(GoogleCustomButton)
+//        view.addSubview(facebookLoginButton)
+//        view.addSubview(fbCustomButton)
+//        view.addSubview(googleButton)
+//        view.addSubview(GoogleCustomButton)
 //        GIDSignIn.sharedInstance().signIn()
         //
         // Google Sign in
@@ -443,14 +446,14 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         // Add stackView into the view
         view.addSubview(stackView)
         stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
-        facebookLoginButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 80, height: 50)
-        facebookLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        facebookLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        //
-        fbCustomButton.anchor(top: facebookLoginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
-        //
-        googleButton.anchor(top: fbCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
-        GoogleCustomButton.anchor(top: googleButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+//        facebookLoginButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 80, height: 50)
+//        facebookLoginButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//        facebookLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        //
+//        fbCustomButton.anchor(top: facebookLoginButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+//        //
+//        googleButton.anchor(top: fbCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
+//        GoogleCustomButton.anchor(top: googleButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
 //        twitterLoginButton.anchor(top: GoogleCustomButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 10, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 40)
     }
 }

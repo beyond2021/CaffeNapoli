@@ -47,7 +47,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var user : User? {
         // To know when they are set because they are empty in the begining
         didSet {
-            //            print("Did set \(String(describing: user?.username))")
+                        print("Did set \(String(describing: user?.username))")
             // SINCE ITS SET WE WILL MAKE THE URLSESSION CALL
             
             guard let profileImageUrl = user?.profileImageURL else { return }
@@ -415,8 +415,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var myPosts = 0
     fileprivate func fetchPosts(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
+
         Database.fetchUserWithUIUD(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
+           let profileImageUrl = user.profileImageURL
+            self.userProfileImageView.loadImage(urlString: profileImageUrl)
+            self.userProfileImageView.alpha = 1
             
         }
       
@@ -468,9 +472,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func setUpNavigationItems() {
         navigationItem.title = HomeController.navTitle
         
-        
-        
-        
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//        Database.fetchUserWithUIUD(uid: uid) { (user) in
+//            self.fetchPostsWithUser(user: user)
+//            let profileImageUrl = user.profileImageURL
+//            self.userProfileImageView.loadImage(urlString: profileImageUrl)
+//
+//        }
+//
         
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
@@ -485,12 +495,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
+        //get the signed in user
+        // get the signedin user profile image
         guard let navigationBar = self.navigationController?.navigationBar else { return }
         navigationBar.addSubview(userProfileImageView)
         userProfileImageView.layer.cornerRadius = Const.ImageSizeForLargeState / 2
         userProfileImageView.clipsToBounds = true
         userProfileImageView.translatesAutoresizingMaskIntoConstraints = false
         userProfileImageView.anchor(top: nil, left: nil, bottom: navigationBar.bottomAnchor, right: navigationBar.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: Const.ImageBottomMarginForLargeState, paddingRight: Const.ImageRightMargin, width: Const.ImageSizeForLargeState, height: Const.ImageSizeForLargeState)
+        userProfileImageView.alpha = 0
         
 
         

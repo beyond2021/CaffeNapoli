@@ -385,7 +385,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
            try Auth.auth().signOut()
              //WE NEED TO PRE4SENT SOME KING OF LOGIN CONTROLLER
 //                let loginController = LoginController()
-                let loginController = LoginAuthController()
+//                let loginController = LoginAuthController()
+                let loginController = LoginController()
                 let navigationController = UINavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
            

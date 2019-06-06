@@ -78,8 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         GTMSessionFetcher.setLoggingEnabled(true)
         // UI
         window = UIWindow()
-        window?.rootViewController = SplashScreenViewController()
-//        window?.rootViewController = LoginController()
+//        window?.rootViewController = SplashScreenViewController()
+        window?.rootViewController = CustomTabBarController()
        
         
 //        window?.rootViewController = TestCollectionViewController()

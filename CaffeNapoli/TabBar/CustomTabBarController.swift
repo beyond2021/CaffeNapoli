@@ -34,8 +34,9 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
             DispatchQueue.main.async {
                 //
                 // THE USER IS NOT LOGGED IN, PRESENT LOGIN //FUIAuthViewController
-                //            let loginController = LoginController()
-                let loginController = LoginAuthController()
+                            let loginController = LoginController()
+//                let loginController = LoginAuthController()
+                
                 let navigationController = CustomNavigationController(rootViewController: loginController)
                 self.present(navigationController, animated: true, completion: nil)
                 
@@ -52,7 +53,7 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
         }
         setupViewControllers()
     }
-    private func setupViewControllers() {
+     func setupViewControllers() {
         let cellLayout = UICollectionViewFlowLayout()
         cellLayout.minimumInteritemSpacing = 20
         cellLayout.minimumLineSpacing = 20

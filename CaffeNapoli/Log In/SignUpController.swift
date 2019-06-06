@@ -186,7 +186,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
              // success
              print("Successfully saved user info into db")
              //To show the main controller and reset the UI
-             guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+//             guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
              
              mainTabbarController.setupViewControllers()
              self.dismiss(animated: true, completion: nil)
