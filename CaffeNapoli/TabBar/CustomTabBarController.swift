@@ -38,6 +38,7 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
 //                let loginController = LoginAuthController()
                 
                 let navigationController = CustomNavigationController(rootViewController: loginController)
+                navigationController.modalPresentationStyle = .fullScreen
                 self.present(navigationController, animated: true, completion: nil)
                 
             }
@@ -105,6 +106,7 @@ extension CustomTabBarController {
             let layout = UICollectionViewFlowLayout()
             let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
             let navController = CustomNavigationController(rootViewController: photoSelectorController)
+            navController.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
             present(navController, animated: true, completion: nil)
             return false
         }

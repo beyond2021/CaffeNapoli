@@ -404,6 +404,7 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
     
     @objc func handelShowSignUp(){
         let signUpController = SignUpController()
+        signUpController.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(signUpController, animated: true)
     }
     //Change the font of the stausbar
