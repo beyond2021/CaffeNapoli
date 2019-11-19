@@ -17,6 +17,7 @@ protocol HomePostCellDelegate {
     func showMore(post: Post, sender : HomePostCell)
     func swipeRightForCamera()
     func handlePinch(sender:UIPinchGestureRecognizer, imageView:UIImageView)
+    func didUnlike(for cell: HomePostCell, post:Post)
 }
 
 
@@ -26,8 +27,12 @@ class HomePostCell: UICollectionViewCell {
     // post to fill this cell
     var post: Post?{
         didSet {
+            
+            print(post?.hasLiked)
             //get the likes for this post
-            likeButton.setImage( post?.hasLiked == true ? #imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal) // tenerary operator
+
+           
+            
             guard let postImageUrl = post?.imageUrl else { return }
             photoImageView.loadImage(urlString: postImageUrl)
             if post?.user.username == "" {
@@ -41,7 +46,32 @@ class HomePostCell: UICollectionViewCell {
 //            captionLabel.text = post?.caption
             setupAttributedCaption()
             // Get the likes for this post
+            guard let likesCount = post?.likesCount else { return}
+            if Int(truncating: likesCount) > 0 {
+                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal), for: .normal)            } else {
+                 likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
+                
+            }
             
+//            if  post?.hasLiked == true {
+//                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal), for: .normal)
+//            } else {
+//                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
+//            }
+//
+           
+         
+                  /*
+                likeButton.setImage( post?.hasLiked  == true ? #imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal) :#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
+ */
+                      
+            
+            
+//            print("Post likes count: \(likesCount)")
+            let likesAttributeText = NSMutableAttributedString(string: " Like", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+                   likesAttributeText.append(NSAttributedString(string: " \(String(describing: likesCount))", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+                   
+            self.likeLabel.attributedText = likesAttributeText
           
         }
     } //needs to be nil in the beginning
@@ -78,7 +108,7 @@ class HomePostCell: UICollectionViewCell {
         usernameLabel.attributedText = nameTimeAttributeText
         
         // setup Replies
-        let repliesAttributeText = NSMutableAttributedString(string: "Replies", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+        let repliesAttributeText = NSMutableAttributedString(string: "Solutions", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
         repliesAttributeText.append(NSAttributedString(string: " 28", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
 
         repliesLabel.attributedText = repliesAttributeText
@@ -241,8 +271,10 @@ class HomePostCell: UICollectionViewCell {
         guard let post = self.post else { return }
         delegate?.didLike(for: self, post: post)// which cell was like = self
     }
-    
-    
+    @objc func handleUnlike() {
+        guard let post = self.post else { return }
+        delegate?.didUnlike(for: self, post: post)// which cell was like = self
+    }
     
     // MARK:- Caption Label
     let captionLabel: UILabel = {
@@ -358,14 +390,17 @@ class HomePostCell: UICollectionViewCell {
     lazy var likeLabel: UILabel = {
         let label = UILabel()
         print("label is set")
-
+//        let likes = post
+        let post = self.post
+        let likesCount = post?.likesCount
+//        let likesCount = post.li
 //        let attributedText = NSMutableAttributedString(string: "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
 //        attributedText.append(NSAttributedString(string: "Like", attributes:[NSAttributedString.Key.foregroundColor:UIColor.bytesDarkTextColor, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)]))
         //
-        let likesAttributeText = NSMutableAttributedString(string: " Like", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
-        likesAttributeText.append(NSAttributedString(string: " 280", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
-        
-       label.attributedText = likesAttributeText
+//        let likesAttributeText = NSMutableAttributedString(string: " Like", attributes: [NSAttributedString.Key.font: UIFont(name: "ClearSans-Bold", size: 16)!,NSAttributedString.Key.foregroundColor : UIColor.darkText])
+//        likesAttributeText.append(NSAttributedString(string: " \(String(describing: likesCount))", attributes: [NSAttributedString.Key.font: UIFont(name: "UninstaW00-DemiBold", size: 16)!, NSAttributedString.Key.foregroundColor : UIColor.bytesBlueTextColor]))
+//
+//       label.attributedText = likesAttributeText
         
 
         

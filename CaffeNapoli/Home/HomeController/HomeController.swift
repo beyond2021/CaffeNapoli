@@ -20,7 +20,10 @@ import EasyAnimation
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate, StatefulViewController, AppDelegateDelegate{
-   
+    func didUnlike(for cell: HomePostCell, post: Post) {
+        //
+    }
+    var likeCount = 0
     
     func showWifiAlert() {
         print("Show wifi alert from delegate")
@@ -38,9 +41,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     var post : Post?
-    var likes = [Like]() // container to hold the comments empty
+//    var likes = [Like]() // container to hold the comments empty
  
-    var likesCount = 0
+//    var likesCount = 0
     
     
     // MARK : USER
@@ -67,11 +70,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     var postCount: Int = 0
     
     static let cellID = "cellID"
-    static let navTitle = "Browse"
+    static let navTitle = "WHAT'S GOOD"
     static let followingNode = "following"
     static let postsNode = "posts"
     //    static let navFontName = "HelveticaNeue"
-    static let likesNode = "likes"
+    static let likesNode = "likesCount"
     static let navFontName = "CamberW04-SemiBold"
     static let navFontSizeLarge: CGFloat = 30
     static let navFontSizeSmall: CGFloat = 20
@@ -200,7 +203,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         for family in UIFont.familyNames.sorted() {
             let names = UIFont.fontNames(forFamilyName: family)
-            print("Family: \(family) Font names: \(names)")
+//            print("Family: \(family) Font names: \(names)")
         }
         
 //        guard let navUser = user else { return }
@@ -226,14 +229,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.insertSubview(morePostsButton, aboveSubview: collectionView)
         setMorePostButton()
         // Setup placeholder views
-        loadingView = LoadingView()
-        collectionView?.addSubview(loadingView!)
-        emptyView = EmptyView()
-        collectionView?.addSubview(emptyView!)
-        let failureView = ErrorView(frame: view.frame)
-        failureView.tapGestureRecognizer.addTarget(self, action: #selector(handleRefresh))
-        errorView = failureView
-        collectionView?.addSubview(errorView!)
+//        loadingView = LoadingView()
+//        collectionView?.addSubview(loadingView!)
+//        emptyView = EmptyView()
+//        collectionView?.addSubview(emptyView!)
+//        let failureView = ErrorView(frame: view.frame)
+//        failureView.tapGestureRecognizer.addTarget(self, action: #selector(handleRefresh))
+//        errorView = failureView
+//        collectionView?.addSubview(errorView!)
 //
         
         
@@ -246,7 +249,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        navigationItem.rightBarButtonItem = UIBarButtonItem(image:#imageLiteral(resourceName: "bitcoin"), style: .plain, target: self, action: #selector(handleBitcoin))
         
         //        handleRefresh()
-           fetchLikesCount()
+//           fetchLikesCount()
         if connection.networkConnectionAvailable() == true {
             setupInitialViewState()
             handleRefresh()
@@ -381,10 +384,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     @objc func handleRefresh() {
         if self.lastState == StatefulViewControllerState.Loading { return }
         startLoading {
-            print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
+//            print("completaion startLoading -> loadingState: \(self.currentState.rawValue)")
         }
-        print("startLoading -> loadingState: \(self.lastState.rawValue)")
-        print("Handling refresh...")
+//        print("startLoading -> loadingState: \(self.lastState.rawValue)")
+//        print("Handling refresh...")
         playAudio(sound: "Smiling Face With Heart-Shaped Eyes", ext: "wav")
         posts.removeAll()
         collectionView?.reloadData() // stops index out of bounds crash
@@ -426,25 +429,26 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
       
     }
     
-    
-    
+
     fileprivate func fetchPostsWithUser(user: User) {
+        
      
         let postReference = Database.database().reference().child(HomeController.postsNode).child(user.uid)
         postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
+//            print("Change: \(postsSnapshot.value)")
+            
+//            print("snapshot: \(postsSnapshot.value ?? 0)")
             self.collectionView?.refreshControl?.endRefreshing() //iOS 10
             guard let dictionaries =  postsSnapshot.value as? [String: Any] else { return }
             dictionaries.forEach({ (key, value) in
                 guard let dictionary = value as? [String: Any] else { return }
                 var post = Post(user: user, dictionary: dictionary)
                 post.id = key
+                
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                Database.database().reference().child(HomeController.likesNode).child(key).child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let value = snapshot.value as? Int, value == 1 {
-                        post.hasLiked = true
-                    } else {
-                        post.hasLiked = false
-                    }
+                let postUserID = post.user.uid
+                 
+                    
                     self.posts.append(post)
                     self.posts.sort(by: { (post1, post2) -> Bool in
                         return post1.creationDate.compare(post2.creationDate ) == .orderedDescending
@@ -459,15 +463,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     print("endLoading -> loadingState: \(self.lastState.rawValue)")
                     
 //                    self.collectionView?.reloadData()
-                }, withCancel: { (err) in
-                    print("could not get like info for post", err)
-                })
-            })
-        }) { (error) in
+                }
+//                , withCancel: { (err) in
+//                    print("could not get like info for post", err)
+//                })
+           // })
+        //})
+          )}
+        ){ (error) in
             print("Failed to fetch posts", error)
         }
     }
-    
+   var likes = 0
     
     fileprivate func setUpNavigationItems() {
         navigationItem.title = HomeController.navTitle
@@ -487,8 +494,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } else {
             // Fallback on earlier versions
         }
+        //bytesDarkTextColor
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
         } else {
             // Fallback on earlier versions
         }

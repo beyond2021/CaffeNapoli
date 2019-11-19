@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditPhotoController: UICollectionViewController, HomePostCellDelegate, UICollectionViewDelegateFlowLayout {
+class EditPhotoController: UICollectionViewController,  UICollectionViewDelegateFlowLayout {
     func didLike(for cell: HomePostCell, post: Post) {
         //
     }
@@ -53,7 +53,7 @@ class EditPhotoController: UICollectionViewController, HomePostCellDelegate, UIC
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! HomePostCell
         cell.post = post
-        cell.delegate = self
+//        cell.delegate = self
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

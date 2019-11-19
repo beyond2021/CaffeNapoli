@@ -56,10 +56,175 @@ extension HomeController {
     
     
     //MARK:-    Saving the like state logic
+func didLike(for cell: HomePostCell, post:Post) {
+    guard let uid = Auth.auth().currentUser?.uid else { return }
+    print("My uid: \(uid)")
+    let postUserUID = post.user.uid
+    if uid == postUserUID {
+        print("Not alloed to like")
+    } else {
+        print("Allowed to like")
+    }
+    
+//   var
+    var loggedIn = true
+    guard let postId = post.id else { return }
+    let postUserID = post.user.uid
+    print(postId)
+    var ref: DatabaseReference!
+
+    ref = Database.database().reference()
+
+//    let keyValue = ref.child("posts").child(postId).childByAutoId().key
+    
+    LikePost(postUserID: postUserID, postID: postId){
+    print("liking post")
+    }
+   // print(keyValue)
+    //
+    /*
+    if loggedIn {
+//       LikePost(postUserID: postUserID, postID: postId)
+        LikePost(postUserID: postUserID, postID: postId){
+            print("liking post")
+    }
+                
+        } else {
+             unlikePost(postUserID: postUserID, postID: postId) {
+                           print("unliking post")
+                
+            }
+ 
+    }
+ */
+    
+//    Database.database().reference().child("posts").child(postUserID).child(postId).setValue(["likesCount":2])
+
+    }
+    private func updateLikeImage(postID: String, postUserID: String, completionBlock : @escaping (() -> Void)) {
+        let prntRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("hasLiked")
+
+        prntRef.runTransactionBlock({ (resul) -> TransactionResult in
+        if let dealResul_Initial = resul.value as? Bool{
+
+            resul.value = true
+            //Or HowSoEver you want to update your dealResul.
+            return TransactionResult.success(withValue: resul)
+        }else{
+
+            return TransactionResult.success(withValue: resul)
+
+        }
+        }, andCompletionBlock: {(error,completion,snap) in
+
+                print(error?.localizedDescription)
+                print(completion)
+                print(snap)
+            if !completion {
+
+               print("Couldn't Update the node")
+            }else{
+
+                completionBlock()
+            }
+        })
+    }
+    
+    func LikePost(postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
+       
+        defer {
+            //  NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
+        
+            updateLikeImage(postID: postID, postUserID: postUserID) {
+                print("updating like image")
+            }
+           NotificationCenter.default.post(name: HomeController.updateFeedNotificationName, object: nil)
+        }
+
+        let prntRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("likesCount")
+
+        prntRef.runTransactionBlock({ (resul) -> TransactionResult in
+        if let dealResul_Initial = resul.value as? Int{
+
+            resul.value = dealResul_Initial + 1
+            //Or HowSoEver you want to update your dealResul.
+            return TransactionResult.success(withValue: resul)
+        }else{
+
+            return TransactionResult.success(withValue: resul)
+
+        }
+        }, andCompletionBlock: {(error,completion,snap) in
+
+                print(error?.localizedDescription)
+                print(completion)
+                print(snap)
+            if !completion {
+
+               print("Couldn't Update the node")
+            }else{
+
+                completionBlock()
+            }
+        })
+
+     
+    }
+    static let updateFeedNotificationName = NSNotification.Name("UpdateFeed")
+    
+   // unlike Post
+    
+    func unlikePost(postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
+       
+        defer {
+            //  NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
+        
+            updateLikeImage(postID: postID, postUserID: postUserID) {
+                print("updating like image")
+            }
+           NotificationCenter.default.post(name: HomeController.updateFeedNotificationName, object: nil)
+        }
+
+        let prntRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("likesCount")
+
+        prntRef.runTransactionBlock({ (resul) -> TransactionResult in
+        if let dealResul_Initial = resul.value as? Int{
+            if dealResul_Initial >= 1{
+            resul.value = dealResul_Initial - 1
+            } else {
+             resul.value = 0
+            }
+            //Or HowSoEver you want to update your dealResul.
+            return TransactionResult.success(withValue: resul)
+        }else{
+
+            return TransactionResult.success(withValue: resul)
+
+        }
+        }, andCompletionBlock: {(error,completion,snap) in
+
+                print(error?.localizedDescription)
+                print(completion)
+                print(snap)
+            if !completion {
+
+               print("Couldn't Update the node")
+            }else{
+
+                completionBlock()
+            }
+        })
+
+     
+    }
+    
+    
+   
+   /*
     func didLike(for cell: HomePostCell, post:Post) {
         
         
-        
+       
         
         guard let indexpath = collectionView?.indexPath(for: cell) else { return }
         //         get the post
@@ -67,74 +232,173 @@ extension HomeController {
         // print(post.caption)
         // Introduce a 5th node in firebase called likes
         guard let postId = post.id else { return }
+        print("Post id is: \(postId)")
         //current user uid
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let values = [uid:post.hasLiked == true ? 1 : 0] // me liking or unliking this post
-        if post.hasLiked  {
-            likesCount  = likesCount + 1
-        } else if !post.hasLiked && likesCount > 0 {
-            likesCount  = likesCount - 1
-            
-        } else {
-             likesCount  = 0
-        }
+//        let values = [uid:post.hasLiked == true ? 1 : 0] // me liking or unliking this post
         
-        print("Likes count is: ",self.likesCount)
-        print("like :", post.hasLiked)
-        if post.hasLiked == false {
-            animateLikes()
-            playAudio(sound: "OK Hand Sign", ext: "wav")
-            
-        }
-        //
         
-        let ref = Database.database().reference().child("likes").child(postId)
-        ref.observe(.childAdded, with: { (snapshot) in
-            
+        // udate values in backend
+        // get likes count
+        // add 1
+        // get liked status
+        // update if necessary
+//        guard let likesCount = post.likesCount else { return }
+//        let newLikesCount = NSNumber(value: Int(likesCount) + 1)
+        let newLikesCount =  likes + 1
+        likes = newLikesCount
+        print(newLikesCount)
+        let userPostRef = Database.database().reference().child("posts").child(postId)
+        let listReference = userPostRef.childByAutoId()
+        let values = ["likesCount" :newLikesCount] as [String:Any]
+        
+         
+        listReference.updateChildValues(values) { (error, reference) in
             //
-            print("Likes snapshot is:",snapshot.value )
-            // cast snapshot into a dictionary
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
-            //try to get the user for the comment here. get the uid
-            guard let uid = dictionary["uid"] as? String else { return }// uid for the user of this parrticular comment
-        
-        })
-        
-        
-        //
-        
-        Database.database().reference().child("likes").child(postId).updateChildValues(values) { (error, reference) in
             if let err = error {
-                print("Could not like post", err)
+                //reenable the share button if there is an error
+//                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("There was an error updating  post to database", err)
                 return
             }
-            // success
-            //            print("Successfully liked post")
-            post.hasLiked = !post.hasLiked // toggle like button
-            self.posts[indexpath.item] = post // because of structs
-            self.collectionView?.reloadItems(at: [indexpath])
-            
+            print("successfully saved updated post to database")
+            //Dismiss the share controller
+//            self.activityView.stopAnimating()
+//            self.dismiss(animated: true, completion: nil)
+//            //POST A NOTIFICATION TO THE ENTIRE SYSTEM HERE!
+//
+//            NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
+       
+        //}
+                    
+      //  }
+    }
+ 
+        
+//        if post.hasLiked  {
+////            likesCount  = likesCount + 1
+////            self.fetchLikesCount()
+//        } else if !post.hasLiked && likesCount > 0 {
+////            likesCount  = likesCount - 1
+//
+//        } else {
+////             likesCount  = 0
+//        }
+//
+        /*
+        print("Likes count is: ",self.likesCount)
+        print("like :", post.hasLiked)
+        if post.hasLiked != false {
+            animateLikes()
+            playAudio(sound: "OK Hand Sign", ext: "wav")
+            let ref = Database.database().reference().child("likesCount").child(postId)
+                    ref.observe(.childAdded, with: { (snapshot) in
+                        
+                        //
+                        print("Likes snapshot is:",snapshot.value )
+                        // cast snapshot into a dictionary
+                        guard let dictionary = snapshot.value as? [String: Any] else { return }
+                        //try to get the user for the comment here. get the uid
+            //            guard let uid = dictionary["uid"] as? String else { return }// uid for the user of this parrticular comment
+                        guard let likesCount = dictionary["likesCount"] as? String else { return }
+                    })
+                    
+                    
+                    //
+                    
+                    Database.database().reference().child("likesCount").child(postId).updateChildValues(values) { (error, reference) in
+                        if let err = error {
+                            print("Could not like post", err)
+                            return
+                        }
+                        // success
+                        //            print("Successfully liked post")
+                        post.hasLiked = !post.hasLiked // toggle like button
+                        self.posts[indexpath.item] = post // because of structs
+                        self.post?.likesCount = self.likesCount
+                        self.collectionView?.reloadItems(at: [indexpath])
+                        
+            }
+        } else {
+            Database.database().reference().child("likesCount").child(postId).updateChildValues(values) { (error, reference) in
+                        if let err = error {
+                            print("Could not like post", err)
+                            return
+                        }
+                        // success
+                print("Unlike count: \(self.likesCount)")
+                        post.hasLiked = !post.hasLiked // toggle like button
+                        self.posts[indexpath.item] = post // because of structs
+                self.post?.likesCount = self.likesCount
+                        self.collectionView?.reloadItems(at: [indexpath])
+                        
+            }
         }
+        //
+        */
+        
         
     }
+    
+*/
+    
+    /*
+    func didLike(for cell: HomePostCell, post:Post) {
+        guard let indexpath = collectionView?.indexPath(for: cell) else { return }
+        var newPost = self.posts[indexpath.item]
+        newPost.hasLiked = false
+        var couldLike = false
+        // check if current user ID and post owner ID is the same
+        //1: get current user
+         let uid = Auth.auth().currentUser?.uid
+        //2: Get the post userID
+        let postUserId = post.user.uid
+        //3: compare UIDs
+        if uid == postUserId {
+             print("Leaving Scope")
+            couldLike = false
+            return
+           
+        } else {
+       couldLike = true
+        
+        
+        //
+       
+            print("\(post.id ?? "") \(newPost.id ?? "")")
+            // update like count
+            likesCount = likesCount + 1
+            newPost.likesCount = likesCount
+            print("likes count:\(likesCount)")
+            // update image
+            newPost.hasLiked = true
+            let values = [uid:post.hasLiked == true ? 1 : 0]
+            // update server
+            
+        }
+        }
+        */
+   
     
     func animateLikes() {
         (0...10).forEach { (_) in
             generateAnimatedViews()
         }
     }
-    
-    func fetchLikesCount() {
+    /*
+    private func fetchLikesCount() {
         //        guard let uid = Auth.auth().currentUser?.uid else { return }
         
         guard let uid = user?.uid else { return }
         
-        let postReference = Database.database().reference().child("likes").child(uid)
+        let postReference = Database.database().reference().child("likesCount").child(uid)
         
         postReference.observe(.childAdded) { (snapshot) in
             print(snapshot.key, snapshot.value)
+            print("Fetch likes count : \(snapshot.value)")
         }
     }
+ */
         
         
 //        postReference.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in

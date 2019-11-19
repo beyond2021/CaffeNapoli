@@ -38,8 +38,6 @@
 		22B75D8021ADFD1000B13C7C /* Jura-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */; };
 		22E54E4421CA9F71006BB838 /* Beyond2021Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */; };
 		22E54E4521CA9F71006BB838 /* Beyond2021Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */; };
-		22E82E2E219BAFDE003FE2E4 /* BasicPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */; };
-		22E82E30219BB070003FE2E4 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E2F219BB070003FE2E4 /* EmptyView.swift */; };
 		22E82E32219BB226003FE2E4 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E31219BB226003FE2E4 /* ErrorView.swift */; };
 		22E82E34219BB2DD003FE2E4 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E33219BB2DD003FE2E4 /* LoadingView.swift */; };
 		22E82E37219C84CE003FE2E4 /* HomeController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E82E36219C84CE003FE2E4 /* HomeController+Actions.swift */; };
@@ -110,6 +108,9 @@
 		53B1A41E1F9C3F9F002E3421 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A41D1F9C3F9F002E3421 /* LoginController.swift */; };
 		53B1A4211F9EFAEB002E3421 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1A4201F9EFAEB002E3421 /* PhotoSelectorController.swift */; };
 		53B2BD47205C5DDE00D5A528 /* LoginAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B2BD46205C5DDE00D5A528 /* LoginAuthController.swift */; };
+		53C036012339756800E5209E /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C036002339756800E5209E /* File.swift */; };
+		53C036032339765700E5209E /* BasicPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C036022339765700E5209E /* BasicPlaceholderView.swift */; };
+		53C0360523398AC900E5209E /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C0360423398AC900E5209E /* EmptyView.swift */; };
 		53C630A11FE8FF2D00023FBB /* AddReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */; };
 		53DB447420156D3300754BD6 /* drink.json in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447320156D3300754BD6 /* drink.json */; };
 		53DB447620157C5A00754BD6 /* glasses.wav in Resources */ = {isa = PBXBuildFile; fileRef = 53DB447520157C5900754BD6 /* glasses.wav */; };
@@ -176,8 +177,6 @@
 		22B75D7A21ADFD0A00B13C7C /* Jura-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Medium.otf"; sourceTree = "<group>"; };
 		22B75D7C21ADFD1000B13C7C /* Jura-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jura-Light.otf"; sourceTree = "<group>"; };
 		22E54E4321CA9F71006BB838 /* Beyond2021Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beyond2021Reachability.swift; sourceTree = "<group>"; };
-		22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasicPlaceholderView.swift; path = "../../../../../Library/Autosave Information/BasicPlaceholderView.swift"; sourceTree = "<group>"; };
-		22E82E2F219BB070003FE2E4 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyView.swift; path = "../../../../../Library/Autosave Information/EmptyView.swift"; sourceTree = "<group>"; };
 		22E82E31219BB226003FE2E4 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		22E82E33219BB2DD003FE2E4 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		22E82E36219C84CE003FE2E4 /* HomeController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+Actions.swift"; sourceTree = "<group>"; };
@@ -254,6 +253,9 @@
 		53B2BD46205C5DDE00D5A528 /* LoginAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAuthController.swift; sourceTree = "<group>"; };
 		53B76F4F204FF9A9002D2BDD /* CaffeNapoli-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CaffeNapoli-Bridging-Header.h"; sourceTree = "<group>"; };
 		53BC71BA1FE4BE9200E12DC4 /* CaffeNapoli.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CaffeNapoli.entitlements; sourceTree = "<group>"; };
+		53C036002339756800E5209E /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		53C036022339765700E5209E /* BasicPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlaceholderView.swift; sourceTree = "<group>"; };
+		53C0360423398AC900E5209E /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		53C630A01FE8FF2C00023FBB /* AddReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReservationViewController.swift; sourceTree = "<group>"; };
 		53DB447320156D3300754BD6 /* drink.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = drink.json; sourceTree = "<group>"; };
 		53DB447520157C5900754BD6 /* glasses.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glasses.wav; sourceTree = "<group>"; };
@@ -399,10 +401,11 @@
 		22E82E2C219BAF8D003FE2E4 /* Stateful */ = {
 			isa = PBXGroup;
 			children = (
-				22E82E2D219BAFDE003FE2E4 /* BasicPlaceholderView.swift */,
-				22E82E2F219BB070003FE2E4 /* EmptyView.swift */,
 				22E82E31219BB226003FE2E4 /* ErrorView.swift */,
 				22E82E33219BB2DD003FE2E4 /* LoadingView.swift */,
+				53C036002339756800E5209E /* File.swift */,
+				53C036022339765700E5209E /* BasicPlaceholderView.swift */,
+				53C0360423398AC900E5209E /* EmptyView.swift */,
 			);
 			path = Stateful;
 			sourceTree = "<group>";
@@ -1219,8 +1222,6 @@
 				535713181FF4470F00CCB70F /* ProductImagesViewController.swift in Sources */,
 				229EED182197CFFA00A4D228 /* CustomTabBarController.swift in Sources */,
 				535713131FF3EB6B00CCB70F /* SuggestionCollectionViewCell.swift in Sources */,
-				22E82E30219BB070003FE2E4 /* EmptyView.swift in Sources */,
-				22E82E2E219BAFDE003FE2E4 /* BasicPlaceholderView.swift in Sources */,
 				22857659219E609D00A5958C /* ServiceTopicCell.swift in Sources */,
 				539A5C1A1FA181A0007947B0 /* PhotoSelectorCell.swift in Sources */,
 				53EA9AD2205F6D0400CC6C6E /* EditPhotoController.swift in Sources */,
@@ -1241,10 +1242,12 @@
 				5333CE411FE2BDB100E3AB21 /* ShoppingCartController.swift in Sources */,
 				533A705C202FDA8C00245A3E /* SettingsViewController.swift in Sources */,
 				537EF99C1F8DB613004CED83 /* MainTabBarController.swift in Sources */,
+				53C036012339756800E5209E /* File.swift in Sources */,
 				53B1A41B1F91F408002E3421 /* UserProfileHeader.swift in Sources */,
 				53C630A11FE8FF2D00023FBB /* AddReservationViewController.swift in Sources */,
 				22E54E4421CA9F71006BB838 /* Beyond2021Reachability.swift in Sources */,
 				22E82E37219C84CE003FE2E4 /* HomeController+Actions.swift in Sources */,
+				53C0360523398AC900E5209E /* EmptyView.swift in Sources */,
 				53A03F861FC2247300ACB034 /* CameraController.swift in Sources */,
 				5357130D1FF3C9FF00CCB70F /* BuyButtonCell.swift in Sources */,
 				5324F6201FB4583A00563B1C /* User.swift in Sources */,
@@ -1265,6 +1268,7 @@
 				22967FC721CA7E9B00ACBE60 /* InternetReachability.swift in Sources */,
 				537F2CCC206ACE240092BA04 /* CNUserProfileController.swift in Sources */,
 				5324F6271FB47E0700563B1C /* UserSearchCell.swift in Sources */,
+				53C036032339765700E5209E /* BasicPlaceholderView.swift in Sources */,
 				536A2E892075719400878FD6 /* Followers.swift in Sources */,
 				229EED1A2198A7E400A4D228 /* ExampleLottieAnimateContentView.swift in Sources */,
 				53045B442019CA4800E9C6A7 /* Address.swift in Sources */,

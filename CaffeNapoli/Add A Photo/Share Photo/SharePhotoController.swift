@@ -190,7 +190,7 @@ class SharePhotoController: UIViewController {
         //lists reference
         let listReference = userPostRef.childByAutoId() //THIS IS USED FOR ANY TYPE OF LISTS - (Here list of usersb posts)
         //get the values dictionary to be saved image size info needed for timeline download
-        let values = ["imageUrl":imageUrl, "caption" : caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970] as [String:Any]
+        let values = ["imageUrl":imageUrl, "caption" : caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970 , "hasLiked": false, "likesCount": 0] as [String:Any]
         
         listReference.updateChildValues(values) { (error, reference) in
             //

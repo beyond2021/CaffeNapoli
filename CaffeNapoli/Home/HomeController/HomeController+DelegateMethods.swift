@@ -20,6 +20,32 @@ extension HomeController {
         postCount = posts.count
         return posts.count
     }
+    func getLikesFromPosts(post: Post){
+        
+//        let likesCount = post.likesCount
+//        print(" likes for post: \(likesCount)")
+        let postReference = Database.database().reference().child(HomeController.postsNode).child(post.id!)
+        postReference.observeSingleEvent(of: .value, with: { (postsSnapshot) in
+            print(postsSnapshot.value)
+//            self.collectionView?.refreshControl?.endRefreshing() //iOS 10
+            guard let dictionaries =  postsSnapshot.value as? [String: Any] else { return }
+            dictionaries.forEach({ (key, value) in
+                guard let dictionary = value as? [String: Any] else { return }
+            
+            
+//                var post = Post(user: user, dictionary: dictionary)
+//                post.id = key
+//                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+//                Database.database().reference().child(HomeController.likesNode).child(key).child(currentUserUid).observeSingleEvent(of: .value, with: { (snapshot) in
+//                    print("Change")
+            }) })
+        
+        
+        
+    }
+            
+       
+      
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeController.cellID, for: indexPath) as! HomePostCell
@@ -27,22 +53,25 @@ extension HomeController {
 //        cell.layer.shadowOpacity = 0.25;
 //        cell.layer.cornerRadius = 4
         
+        
         cell.post = posts[indexPath.item]
         cell.delegate = self
+//        getLikesFromPosts(post: cell.post!)
         return cell
         
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tapped on post")
         //
         //        print("I selected :", indexPath.item)
         let post = posts[indexPath.item]
-        //        print(post.user)
-        if post.user.uid == Auth.auth().currentUser?.uid {
-            let editPostController = EditPhotoController()
-            self.navigationController?.pushViewController(editPostController, animated: true)
-        } else {
-            return
-        }
+        print(post.user.uid)
+//        if post.user.uid == Auth.auth().currentUser?.uid {
+//            let editPostController = EditPhotoController()
+//            self.navigationController?.pushViewController(editPostController, animated: true)
+//        } else {
+//            return
+//        }
     }
     
     
