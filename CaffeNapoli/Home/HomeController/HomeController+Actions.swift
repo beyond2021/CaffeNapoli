@@ -56,58 +56,50 @@ extension HomeController {
     
     
     //MARK:-    Saving the like state logic
+    
+    static let updateFeedNotificationName = NSNotification.Name("UpdatePostLikeCount")
 func didLike(for cell: HomePostCell, post:Post) {
+//    post.hasLiked = !post.hasLiked // toggle like button
     guard let uid = Auth.auth().currentUser?.uid else { return }
-    print("My uid: \(uid)")
+//    print("My uid: \(uid)")
     let postUserUID = post.user.uid
+    
+    
     if uid == postUserUID {
         print("Not alloed to like")
+        return
     } else {
         print("Allowed to like")
-    }
-    
-//   var
-    var loggedIn = true
-    guard let postId = post.id else { return }
-    let postUserID = post.user.uid
-    print(postId)
-    var ref: DatabaseReference!
-
-    ref = Database.database().reference()
-
-//    let keyValue = ref.child("posts").child(postId).childByAutoId().key
-    
-    LikePost(postUserID: postUserID, postID: postId){
-    print("liking post")
-    }
-   // print(keyValue)
-    //
-    /*
-    if loggedIn {
-//       LikePost(postUserID: postUserID, postID: postId)
-        LikePost(postUserID: postUserID, postID: postId){
-            print("liking post")
-    }
-                
+        guard let postId = post.id else { return }
+        let postUserID = post.user.uid
+        // like or unlike post
+            
+        
+        if post.hasLiked  {
+            LikePost(cell: cell, postUserID: postUserID, postID: postId){
+                print("liking post")
+                }
+            
         } else {
-             unlikePost(postUserID: postUserID, postID: postId) {
-                           print("unliking post")
-                
+            unlikePost(cell: cell, postUserID: postUserID, postID: postId) {
+                print("unliking Post")
             }
- 
+            
+        }
+        
+        
     }
- */
     
-//    Database.database().reference().child("posts").child(postUserID).child(postId).setValue(["likesCount":2])
 
+  
     }
-    private func updateLikeImage(postID: String, postUserID: String, completionBlock : @escaping (() -> Void)) {
+    private func updateLikeImage(cell: HomePostCell, postID: String, postUserID: String, completionBlock : @escaping (() -> Void)) {
         let prntRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("hasLiked")
 
         prntRef.runTransactionBlock({ (resul) -> TransactionResult in
-        if let dealResul_Initial = resul.value as? Bool{
+        if let image_Initial = resul.value as? Bool{
 
-            resul.value = true
+            resul.value = !image_Initial
             //Or HowSoEver you want to update your dealResul.
             return TransactionResult.success(withValue: resul)
         }else{
@@ -117,9 +109,9 @@ func didLike(for cell: HomePostCell, post:Post) {
         }
         }, andCompletionBlock: {(error,completion,snap) in
 
-                print(error?.localizedDescription)
-                print(completion)
-                print(snap)
+//                print(error?.localizedDescription)
+//                print(completion)
+//                print(snap)
             if !completion {
 
                print("Couldn't Update the node")
@@ -130,17 +122,9 @@ func didLike(for cell: HomePostCell, post:Post) {
         })
     }
     
-    func LikePost(postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
+    func LikePost(cell: HomePostCell, postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
        
-        defer {
-            //  NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
-        
-            updateLikeImage(postID: postID, postUserID: postUserID) {
-                print("updating like image")
-            }
-           NotificationCenter.default.post(name: HomeController.updateFeedNotificationName, object: nil)
-        }
-
+       
         let prntRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("likesCount")
 
         prntRef.runTransactionBlock({ (resul) -> TransactionResult in
@@ -148,6 +132,8 @@ func didLike(for cell: HomePostCell, post:Post) {
 
             resul.value = dealResul_Initial + 1
             //Or HowSoEver you want to update your dealResul.
+//             self.updatePostCount(postID: postID, postUserID: postUserID)
+        
             return TransactionResult.success(withValue: resul)
         }else{
 
@@ -156,9 +142,9 @@ func didLike(for cell: HomePostCell, post:Post) {
         }
         }, andCompletionBlock: {(error,completion,snap) in
 
-                print(error?.localizedDescription)
-                print(completion)
-                print(snap)
+//                print(error?.localizedDescription)
+//                print(completion)
+//                print(snap)
             if !completion {
 
                print("Couldn't Update the node")
@@ -170,17 +156,17 @@ func didLike(for cell: HomePostCell, post:Post) {
 
      
     }
-    static let updateFeedNotificationName = NSNotification.Name("UpdateFeed")
+   
     
    // unlike Post
     
-    func unlikePost(postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
+    func unlikePost(cell: HomePostCell, postUserID: String ,postID: String, completionBlock : @escaping (() -> Void)){
        
         defer {
             //  NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
         
-            updateLikeImage(postID: postID, postUserID: postUserID) {
-                print("updating like image")
+            updateLikeImage(cell: cell, postID: postID, postUserID: postUserID) {
+//                print("updating like image")
             }
            NotificationCenter.default.post(name: HomeController.updateFeedNotificationName, object: nil)
         }
@@ -203,9 +189,12 @@ func didLike(for cell: HomePostCell, post:Post) {
         }
         }, andCompletionBlock: {(error,completion,snap) in
 
-                print(error?.localizedDescription)
-                print(completion)
-                print(snap)
+//                print(error?.localizedDescription)
+//                print(completion)
+//                print(snap)
+//
+          
+            
             if !completion {
 
                print("Couldn't Update the node")
@@ -454,6 +443,7 @@ func didLike(for cell: HomePostCell, post:Post) {
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
         commentsController.post = post
         navigationController?.pushViewController(commentsController, animated: true)
+       
     }
     
 }

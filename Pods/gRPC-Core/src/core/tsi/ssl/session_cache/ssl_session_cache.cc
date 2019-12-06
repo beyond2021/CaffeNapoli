@@ -18,7 +18,7 @@
 
 #include <grpc/support/port_platform.h>
 
-#include "src/core/lib/gprpp/mutex_lock.h"
+#include "src/core/lib/gprpp/sync.h"
 #include "src/core/lib/slice/slice_internal.h"
 #include "src/core/tsi/ssl/session_cache/ssl_session.h"
 #include "src/core/tsi/ssl/session_cache/ssl_session_cache.h"
@@ -28,18 +28,20 @@
 
 namespace tsi {
 
-static void cache_key_avl_destroy(void* key, void* unused) {}
+static void cache_key_avl_destroy(void* /*key*/, void* /*unused*/) {}
 
-static void* cache_key_avl_copy(void* key, void* unused) { return key; }
+static void* cache_key_avl_copy(void* key, void* /*unused*/) { return key; }
 
-static long cache_key_avl_compare(void* key1, void* key2, void* unused) {
+static long cache_key_avl_compare(void* key1, void* key2, void* /*unused*/) {
   return grpc_slice_cmp(*static_cast<grpc_slice*>(key1),
                         *static_cast<grpc_slice*>(key2));
 }
 
-static void cache_value_avl_destroy(void* value, void* unused) {}
+static void cache_value_avl_destroy(void* /*value*/, void* /*unused*/) {}
 
-static void* cache_value_avl_copy(void* value, void* unused) { return value; }
+static void* cache_value_avl_copy(void* value, void* /*unused*/) {
+  return value;
+}
 
 // AVL only stores pointers, ownership belonges to the linked list.
 static const grpc_avl_vtable cache_avl_vtable = {

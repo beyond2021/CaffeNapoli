@@ -35,9 +35,11 @@
 #include "src/core/lib/transport/error_utils.h"
 #include "src/core/lib/transport/transport_impl.h"
 
-#define INPROC_LOG(...)                                    \
-  do {                                                     \
-    if (grpc_inproc_trace.enabled()) gpr_log(__VA_ARGS__); \
+#define INPROC_LOG(...)                               \
+  do {                                                \
+    if (GRPC_TRACE_FLAG_ENABLED(grpc_inproc_trace)) { \
+      gpr_log(__VA_ARGS__);                           \
+    }                                                 \
   } while (0)
 
 namespace {
@@ -64,6 +66,8 @@ struct shared_mu {
     gpr_ref_init(&refs, 2);
   }
 
+  ~shared_mu() { gpr_mu_destroy(&mu); }
+
   gpr_mu mu;
   gpr_refcount refs;
 };
@@ -71,18 +75,19 @@ struct shared_mu {
 struct inproc_transport {
   inproc_transport(const grpc_transport_vtable* vtable, shared_mu* mu,
                    bool is_client)
-      : mu(mu), is_client(is_client) {
+      : mu(mu),
+        is_client(is_client),
+        state_tracker(is_client ? "inproc_client" : "inproc_server",
+                      GRPC_CHANNEL_READY) {
     base.vtable = vtable;
     // Start each side of transport with 2 refs since they each have a ref
     // to the other
     gpr_ref_init(&refs, 2);
-    grpc_connectivity_state_init(&connectivity, GRPC_CHANNEL_READY,
-                                 is_client ? "inproc_client" : "inproc_server");
   }
 
   ~inproc_transport() {
-    grpc_connectivity_state_destroy(&connectivity);
     if (gpr_unref(&mu->refs)) {
+      mu->~shared_mu();
       gpr_free(mu);
     }
   }
@@ -106,7 +111,7 @@ struct inproc_transport {
   shared_mu* mu;
   gpr_refcount refs;
   bool is_client;
-  grpc_connectivity_state_tracker connectivity;
+  grpc_core::ConnectivityStateTracker state_tracker;
   void (*accept_stream_cb)(void* user_data, grpc_transport* transport,
                            const void* server_data);
   void* accept_stream_data;
@@ -117,7 +122,7 @@ struct inproc_transport {
 
 struct inproc_stream {
   inproc_stream(inproc_transport* t, grpc_stream_refcount* refcount,
-                const void* server_data, gpr_arena* arena)
+                const void* server_data, grpc_core::Arena* arena)
       : t(t), refs(refcount), arena(arena) {
     // Ref this stream right now for ctor and list.
     ref("inproc_init_stream:init");
@@ -247,7 +252,7 @@ struct inproc_stream {
   grpc_stream_refcount* refs;
   grpc_closure* closure_at_destroy = nullptr;
 
-  gpr_arena* arena;
+  grpc_core::Arena* arena;
 
   grpc_transport_stream_op_batch* send_message_op = nullptr;
   grpc_transport_stream_op_batch* send_trailing_md_op = nullptr;
@@ -293,7 +298,7 @@ grpc_error* fill_in_metadata(inproc_stream* s,
                              const grpc_metadata_batch* metadata,
                              uint32_t flags, grpc_metadata_batch* out_md,
                              uint32_t* outflags, bool* markfilled) {
-  if (grpc_inproc_trace.enabled()) {
+  if (GRPC_TRACE_FLAG_ENABLED(grpc_inproc_trace)) {
     log_metadata(metadata, s->t->is_client, outflags != nullptr);
   }
 
@@ -306,8 +311,8 @@ grpc_error* fill_in_metadata(inproc_stream* s,
   grpc_error* error = GRPC_ERROR_NONE;
   for (grpc_linked_mdelem* elem = metadata->list.head;
        (elem != nullptr) && (error == GRPC_ERROR_NONE); elem = elem->next) {
-    grpc_linked_mdelem* nelem = static_cast<grpc_linked_mdelem*>(
-        gpr_arena_alloc(s->arena, sizeof(*nelem)));
+    grpc_linked_mdelem* nelem =
+        static_cast<grpc_linked_mdelem*>(s->arena->Alloc(sizeof(*nelem)));
     nelem->md =
         grpc_mdelem_from_slices(grpc_slice_intern(GRPC_MDKEY(elem->md)),
                                 grpc_slice_intern(GRPC_MDVALUE(elem->md)));
@@ -319,7 +324,7 @@ grpc_error* fill_in_metadata(inproc_stream* s,
 
 int init_stream(grpc_transport* gt, grpc_stream* gs,
                 grpc_stream_refcount* refcount, const void* server_data,
-                gpr_arena* arena) {
+                grpc_core::Arena* arena) {
   INPROC_LOG(GPR_INFO, "init_stream %p %p %p", gt, gs, server_data);
   inproc_transport* t = reinterpret_cast<inproc_transport*>(gt);
   new (gs) inproc_stream(t, refcount, server_data, arena);
@@ -433,13 +438,13 @@ void fail_helper_locked(inproc_stream* s, grpc_error* error) {
       // since it expects that as well as no error yet
       grpc_metadata_batch fake_md;
       grpc_metadata_batch_init(&fake_md);
-      grpc_linked_mdelem* path_md = static_cast<grpc_linked_mdelem*>(
-          gpr_arena_alloc(s->arena, sizeof(*path_md)));
+      grpc_linked_mdelem* path_md =
+          static_cast<grpc_linked_mdelem*>(s->arena->Alloc(sizeof(*path_md)));
       path_md->md = grpc_mdelem_from_slices(g_fake_path_key, g_fake_path_value);
       GPR_ASSERT(grpc_metadata_batch_link_tail(&fake_md, path_md) ==
                  GRPC_ERROR_NONE);
-      grpc_linked_mdelem* auth_md = static_cast<grpc_linked_mdelem*>(
-          gpr_arena_alloc(s->arena, sizeof(*auth_md)));
+      grpc_linked_mdelem* auth_md =
+          static_cast<grpc_linked_mdelem*>(s->arena->Alloc(sizeof(*auth_md)));
       auth_md->md = grpc_mdelem_from_slices(g_fake_auth_key, g_fake_auth_value);
       GPR_ASSERT(grpc_metadata_batch_link_tail(&fake_md, auth_md) ==
                  GRPC_ERROR_NONE);
@@ -904,7 +909,7 @@ void perform_stream_op(grpc_transport* gt, grpc_stream* gs,
   gpr_mu* mu = &s->t->mu->mu;  // save aside in case s gets closed
   gpr_mu_lock(mu);
 
-  if (grpc_inproc_trace.enabled()) {
+  if (GRPC_TRACE_FLAG_ENABLED(grpc_inproc_trace)) {
     if (op->send_initial_metadata) {
       log_metadata(op->payload->send_initial_metadata.send_initial_metadata,
                    s->t->is_client, true);
@@ -1029,6 +1034,11 @@ void perform_stream_op(grpc_transport* gt, grpc_stream* gs,
     }
   } else {
     if (error != GRPC_ERROR_NONE) {
+      // Consume any send message that was sent here but that we are not pushing
+      // to the other side
+      if (op->send_message) {
+        op->payload->send_message.send_message.reset();
+      }
       // Schedule op's closures that we didn't push to op state machine
       if (op->recv_initial_metadata) {
         if (op->payload->recv_initial_metadata.trailing_metadata_available !=
@@ -1080,10 +1090,7 @@ void perform_stream_op(grpc_transport* gt, grpc_stream* gs,
 
 void close_transport_locked(inproc_transport* t) {
   INPROC_LOG(GPR_INFO, "close_transport %p %d", t, t->is_closed);
-  grpc_connectivity_state_set(
-      &t->connectivity, GRPC_CHANNEL_SHUTDOWN,
-      GRPC_ERROR_CREATE_FROM_STATIC_STRING("Closing transport."),
-      "close transport");
+  t->state_tracker.SetState(GRPC_CHANNEL_SHUTDOWN, "close transport");
   if (!t->is_closed) {
     t->is_closed = true;
     /* Also end all streams on this transport */
@@ -1102,10 +1109,12 @@ void perform_transport_op(grpc_transport* gt, grpc_transport_op* op) {
   inproc_transport* t = reinterpret_cast<inproc_transport*>(gt);
   INPROC_LOG(GPR_INFO, "perform_transport_op %p %p", t, op);
   gpr_mu_lock(&t->mu->mu);
-  if (op->on_connectivity_state_change) {
-    grpc_connectivity_state_notify_on_state_change(
-        &t->connectivity, op->connectivity_state,
-        op->on_connectivity_state_change);
+  if (op->start_connectivity_watch != nullptr) {
+    t->state_tracker.AddWatcher(op->start_connectivity_watch_state,
+                                std::move(op->start_connectivity_watch));
+  }
+  if (op->stop_connectivity_watch != nullptr) {
+    t->state_tracker.RemoveWatcher(op->stop_connectivity_watch);
   }
   if (op->set_accept_stream) {
     t->accept_stream_cb = op->set_accept_stream_fn;
@@ -1195,7 +1204,7 @@ void inproc_transports_create(grpc_transport** server_transport,
  */
 void grpc_inproc_transport_init(void) {
   grpc_core::ExecCtx exec_ctx;
-  g_empty_slice = grpc_slice_from_static_buffer(nullptr, 0);
+  g_empty_slice = grpc_core::ExternallyManagedSlice();
 
   grpc_slice key_tmp = grpc_slice_from_static_string(":path");
   g_fake_path_key = grpc_slice_intern(key_tmp);
@@ -1218,10 +1227,15 @@ grpc_channel* grpc_inproc_channel_create(grpc_server* server,
 
   grpc_core::ExecCtx exec_ctx;
 
-  const grpc_channel_args* server_args = grpc_server_get_channel_args(server);
+  // Remove max_connection_idle and max_connection_age channel arguments since
+  // those do not apply to inproc transports.
+  const char* args_to_remove[] = {GRPC_ARG_MAX_CONNECTION_IDLE_MS,
+                                  GRPC_ARG_MAX_CONNECTION_AGE_MS};
+  const grpc_channel_args* server_args = grpc_channel_args_copy_and_remove(
+      grpc_server_get_channel_args(server), args_to_remove,
+      GPR_ARRAY_SIZE(args_to_remove));
 
   // Add a default authority channel argument for the client
-
   grpc_arg default_authority_arg;
   default_authority_arg.type = GRPC_ARG_STRING;
   default_authority_arg.key = (char*)GRPC_ARG_DEFAULT_AUTHORITY;
@@ -1241,6 +1255,7 @@ grpc_channel* grpc_inproc_channel_create(grpc_server* server,
       "inproc", client_args, GRPC_CLIENT_DIRECT_CHANNEL, client_transport);
 
   // Free up created channel args
+  grpc_channel_args_destroy(server_args);
   grpc_channel_args_destroy(client_args);
 
   // Now finish scheduled operations

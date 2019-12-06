@@ -20,6 +20,12 @@ import EasyAnimation
 
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate, UIViewControllerTransitioningDelegate, UIActionSheetDelegate, StatefulViewController, AppDelegateDelegate{
+   
+    
+    func updatelikescount(for  post: Post, likesCount: String) {
+        //
+    }
+    
     func didUnlike(for cell: HomePostCell, post: Post) {
         //
     }
@@ -201,10 +207,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for family in UIFont.familyNames.sorted() {
-            let names = UIFont.fontNames(forFamilyName: family)
-//            print("Family: \(family) Font names: \(names)")
-        }
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+////            print("Family: \(family) Font names: \(names)")
+//        }
         
 //        guard let navUser = user else { return }
 ////        guard let profileImageUrl = navUser.profileImageURL else { return }
@@ -219,6 +225,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = .white
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name:         SharePhotoController.updateFeedNotificationName
             , object: nil)
+       
         collectionView?.register(HomePostCell.self, forCellWithReuseIdentifier: HomeController.cellID)
         
         let refreshControl = UIRefreshControl()
@@ -416,6 +423,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     var myPosts = 0
+    var myUser: User?
     fileprivate func fetchPosts(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
@@ -424,11 +432,51 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
            let profileImageUrl = user.profileImageURL
             self.userProfileImageView.loadImage(urlString: profileImageUrl)
             self.userProfileImageView.alpha = 1
+            self.myUser = user
             
         }
       
     }
     
+    // updatePostCount
+   // need the cell and post postUser id
+    func updatePostCount(cell: HomePostCell, postID: String, postUserID: String){
+//        let postRef = Database.database().reference().child("posts").child(postUserID).child(postID).child("likesCount")
+         let postRef = Database.database().reference().child("posts").child(postUserID)
+      
+//        let postToLike = self.posts[indexPath.row]
+//        guard let dictionary = value as? [String: Any] else { return }
+//                       var post = Post(user: user, dictionary: dictionary)
+        
+
+//        postRef.observe(DataEventType.value, with: { (snapshot) in
+        postRef.observe(DataEventType.childChanged, with: { (snapshot) in
+            if let postDict = snapshot.value as? [String:AnyObject] {
+                print("post dict : \(postDict)")
+//                var post = Post(user: , dictionary: postDict)
+                
+//                for post in postDict {
+//                    if post.key == "likesCount" {
+//                        print(post.value)
+//                        self.updatePostLabel(postID: postID, likes: post.key)
+//                    }
+//                }
+            }
+//            print(snapshot)
+            
+         })
+    }
+    /*
+    func updatePostLabel(postID: String,  likes:String) {
+        let cell = HomePostCell()
+        let indexPath = self.collectionView.indexPath(for: cell)
+//        print("cell row: \(indexPath!.row)")
+        if  postID == postID {
+            
+        }
+        
+    }
+ */
 
     fileprivate func fetchPostsWithUser(user: User) {
         
@@ -489,6 +537,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        }
 //
         
+       /*
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
+            appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+            let bar = self.navigationController?.navigationBar
+            bar?.scrollEdgeAppearance = appearance
+            bar?.standardAppearance = appearance
+            bar?.compactAppearance = appearance
+        } else {
+            // Fallback on earlier versions
+        }
+ */
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
@@ -500,7 +561,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } else {
             // Fallback on earlier versions
         }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.bytesDarkTextColor, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))
         //get the signed in user

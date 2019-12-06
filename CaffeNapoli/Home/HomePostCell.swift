@@ -18,6 +18,7 @@ protocol HomePostCellDelegate {
     func swipeRightForCamera()
     func handlePinch(sender:UIPinchGestureRecognizer, imageView:UIImageView)
     func didUnlike(for cell: HomePostCell, post:Post)
+    func updatelikescount( for post: Post, likesCount: String)
 }
 
 

@@ -21,6 +21,21 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //ios 13
+        /*
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.largeTitleTextAttributes = textAttributes
+            appearance.titleTextAttributes = textAttributes
+            let bar = self.navigationController?.navigationBar
+            bar?.scrollEdgeAppearance = appearance
+            bar?.standardAppearance = appearance
+            bar?.compactAppearance = appearance
+        } else {
+            // Fallback on earlier versions
+        }
+ */
+        
         self.tabBar.barTintColor = .white
        
         

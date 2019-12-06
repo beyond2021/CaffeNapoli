@@ -10,6 +10,10 @@ import UIKit
 import Stripe
 import PassKit
 class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
+    func paymentContext(_ paymentContext: STPPaymentContext, didCreatePaymentResult paymentResult: STPPaymentResult, completion: @escaping STPPaymentStatusBlock) {
+        // to do
+    }
+    
 
     // 1) To get started with this demo, first head to https://dashboard.stripe.com/account/apikeys
     // and copy your "Test Publishable Key" (it looks like pk_test_abcdef) into the line below.
@@ -40,7 +44,9 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
     let rowHeight: CGFloat = 44
     let moveDown: CGFloat = 200
     let productImage = UILabel()
-    let activityIndicator = UIActivityIndicatorView(style: .gray)
+    let activityIndicator = UIActivityIndicatorView()
+    
+    // UIActivityIndicatorViewStyle.WhiteLarge
     let numberFormatter: NumberFormatter
     let shippingString: String
     var product = ""
@@ -98,8 +104,8 @@ class CheckoutViewController: UIViewController, STPPaymentContextDelegate {
         //TODO
 
         // Create card sources instead of card tokens
-        config.createCardSources = true;
-
+//        config.createCardSources = true; // todo
+        //
         let customerContext = STPCustomerContext(keyProvider: MyAPIClient.sharedClient)
         let paymentContext = STPPaymentContext(customerContext: customerContext,
                                                configuration: config,

@@ -6,12 +6,18 @@
 //  Copyright © 2018 Kev1. All rights reserved.
 //
 
+/*
 import Foundation
 import Reachability
 import SystemConfiguration
 
 class InternetReachability {
-    let reachability = Reachability()
+    do {
+    let reachability = try Reachability()
+    catch {}
+    }
+    
+    
     init() {
         setReachabilityNotifier()
     }
@@ -89,3 +95,4 @@ func checkReachability(with reachability: SCNetworkReachability) -> Bool {
     return false
 }
 
+*/

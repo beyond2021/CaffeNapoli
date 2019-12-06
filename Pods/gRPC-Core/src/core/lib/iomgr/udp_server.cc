@@ -260,7 +260,7 @@ static void finish_shutdown(grpc_udp_server* s) {
   grpc_core::Delete(s);
 }
 
-static void destroyed_port(void* server, grpc_error* error) {
+static void destroyed_port(void* server, grpc_error* /*error*/) {
   grpc_udp_server* s = static_cast<grpc_udp_server*>(server);
   gpr_mu_lock(&s->mu);
   s->destroyed_ports++;
@@ -332,7 +332,7 @@ void GrpcUdpListener::OnFdAboutToOrphan() {
   GRPC_CLOSURE_INIT(&destroyed_closure_, destroyed_port, server_,
                     grpc_schedule_on_exec_ctx);
   if (!orphan_notified_ && udp_handler_ != nullptr) {
-    /* Singals udp_handler that the FD is about to be closed and
+    /* Signals udp_handler that the FD is about to be closed and
      * should no longer be used. */
     GRPC_CLOSURE_INIT(&orphan_fd_closure_, shutdown_fd, this,
                       grpc_schedule_on_exec_ctx);
@@ -495,7 +495,8 @@ void GrpcUdpListener::OnRead(grpc_error* error, void* do_read_arg) {
 
 // static
 // Wrapper of grpc_fd_notify_on_write() with a grpc_closure callback interface.
-void GrpcUdpListener::fd_notify_on_write_wrapper(void* arg, grpc_error* error) {
+void GrpcUdpListener::fd_notify_on_write_wrapper(void* arg,
+                                                 grpc_error* /*error*/) {
   GrpcUdpListener* sp = static_cast<GrpcUdpListener*>(arg);
   gpr_mu_lock(sp->mutex());
   if (!sp->notify_on_write_armed_) {
@@ -645,7 +646,7 @@ int grpc_udp_server_add_port(grpc_udp_server* s,
           grpc_sockaddr_set_port(addr, allocated_port1);
           port = allocated_port1;
         } else if (allocated_port1 >= 0) {
-          /* The following sucessfully created socket should have same port as
+          /* The following successfully created socket should have same port as
            * the first one. */
           GPR_ASSERT(port == allocated_port1);
         }

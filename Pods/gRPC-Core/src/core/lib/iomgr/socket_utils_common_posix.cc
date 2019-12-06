@@ -30,7 +30,11 @@
 #include <fcntl.h>
 #include <limits.h>
 #include <netinet/in.h>
+#ifdef GRPC_LINUX_TCP_H
+#include <linux/tcp.h>
+#else
 #include <netinet/tcp.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -42,7 +46,6 @@
 #include <grpc/support/sync.h>
 
 #include "src/core/lib/channel/channel_args.h"
-#include "src/core/lib/gpr/host_port.h"
 #include "src/core/lib/gpr/string.h"
 #include "src/core/lib/iomgr/sockaddr.h"
 #include "src/core/lib/iomgr/sockaddr_utils.h"
@@ -288,7 +291,7 @@ grpc_error* grpc_set_socket_tcp_user_timeout(
   }
   if (enable) {
     extern grpc_core::TraceFlag grpc_tcp_trace;
-    if (grpc_tcp_trace.enabled()) {
+    if (GRPC_TRACE_FLAG_ENABLED(grpc_tcp_trace)) {
       gpr_log(GPR_INFO, "Enabling TCP_USER_TIMEOUT with a timeout of %d ms",
               timeout);
     }
@@ -311,7 +314,7 @@ grpc_error* grpc_set_socket_tcp_user_timeout(
   }
 #else
   extern grpc_core::TraceFlag grpc_tcp_trace;
-  if (grpc_tcp_trace.enabled()) {
+  if (GRPC_TRACE_FLAG_ENABLED(grpc_tcp_trace)) {
     gpr_log(GPR_INFO, "TCP_USER_TIMEOUT not supported for this platform");
   }
 #endif /* GRPC_HAVE_TCP_USER_TIMEOUT */
@@ -325,6 +328,19 @@ grpc_error* grpc_set_socket_with_mutator(int fd, grpc_socket_mutator* mutator) {
     return GRPC_ERROR_CREATE_FROM_STATIC_STRING("grpc_socket_mutator failed.");
   }
   return GRPC_ERROR_NONE;
+}
+
+grpc_error* grpc_apply_socket_mutator_in_args(int fd,
+                                              const grpc_channel_args* args) {
+  const grpc_arg* socket_mutator_arg =
+      grpc_channel_args_find(args, GRPC_ARG_SOCKET_MUTATOR);
+  if (socket_mutator_arg == nullptr) {
+    return GRPC_ERROR_NONE;
+  }
+  GPR_DEBUG_ASSERT(socket_mutator_arg->type == GRPC_ARG_POINTER);
+  grpc_socket_mutator* mutator =
+      static_cast<grpc_socket_mutator*>(socket_mutator_arg->value.pointer.p);
+  return grpc_set_socket_with_mutator(fd, mutator);
 }
 
 static gpr_once g_probe_ipv6_once = GPR_ONCE_INIT;

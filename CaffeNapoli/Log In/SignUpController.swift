@@ -185,9 +185,20 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
              }
              // success
              print("Successfully saved user info into db")
+                //
+                let keyWindow = UIApplication.shared.connectedScenes
+                .filter({$0.activationState == .foregroundActive})
+                .map({$0 as? UIWindowScene})
+                .compactMap({$0})
+                .first?.windows
+                .filter({$0.isKeyWindow}).first
+                
              //To show the main controller and reset the UI
 //             guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? CustomTabBarController else { return }
+//                guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? CustomTabBarController else { return }
+//                let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                
+                guard let mainTabbarController = keyWindow?.rootViewController as? CustomTabBarController else { return }
              
              mainTabbarController.setupViewControllers()
              self.dismiss(animated: true, completion: nil)

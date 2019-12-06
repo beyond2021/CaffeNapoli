@@ -153,8 +153,9 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     }()
     
     @objc fileprivate func dissMiss() {
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         self.dismiss(animated: true) {
-            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            guard let mainTabbarController = keyWindow?.rootViewController as? MainTabBarController else { return }
             mainTabbarController.setupViewControllers()
             mainTabbarController.selectedIndex = 4
             
@@ -213,7 +214,8 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
                     
                     //                self.dismiss(animated: true, completion: nil)
                     self.dismiss(animated: true, completion: {
-                        guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                        guard let mainTabbarController = keyWindow?.rootViewController as? MainTabBarController else { return }
                         mainTabbarController.setupViewControllers()
                         mainTabbarController.selectedIndex = 4
                     })

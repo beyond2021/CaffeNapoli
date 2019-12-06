@@ -5,10 +5,10 @@
 //  Created by KEEVIN MITCHELL on 12/18/18.
 //  Copyright © 2018 Kev1. All rights reserved.
 //
-
+/*
 import UIKit
 import SystemConfiguration
-import Reachability
+//import Reachability
 
 class TestCollectionViewController: UIViewController{
     let reachability = Reachability()
@@ -87,3 +87,4 @@ class TestCollectionViewController: UIViewController{
 struct Constants {
     static let iternetWebsiteString = "www.google.com"
 }
+*/

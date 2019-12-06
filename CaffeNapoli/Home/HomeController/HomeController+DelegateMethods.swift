@@ -20,6 +20,7 @@ extension HomeController {
         postCount = posts.count
         return posts.count
     }
+    /*
     func getLikesFromPosts(post: Post){
         
 //        let likesCount = post.likesCount
@@ -43,6 +44,7 @@ extension HomeController {
         
         
     }
+ */
             
        
       

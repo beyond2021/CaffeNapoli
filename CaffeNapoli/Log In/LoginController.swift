@@ -60,7 +60,8 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
         
         GIDSignIn.sharedInstance().signIn()
         //Dissmiss signin screen
-        guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+        let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        guard let mainTabbarController = keyWindow?.rootViewController as? MainTabBarController else { return }
         
         mainTabbarController.setupViewControllers()
         self.dismiss(animated: true, completion: nil)
@@ -381,8 +382,8 @@ class LoginController: UIViewController,FBSDKLoginButtonDelegate, GIDSignInUIDel
             // successful
             print("Successfully logged back in with user", user?.uid ?? "")
             //To show the main controller and reset the UI
-//            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
-           guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? CustomTabBarController else { return }
+            let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+           guard let mainTabbarController = keyWindow?.rootViewController as? CustomTabBarController else { return }
             mainTabbarController.setupViewControllers()
             self.dismiss(animated: true, completion: nil)
             
@@ -503,7 +504,8 @@ extension LoginController {
                     }
                     // no error, so it means we've saved the user into our firebase database successfully
                     print("Save the user successfully into Firebase database")
-                    guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+                    let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                    guard let mainTabbarController = keyWindow?.rootViewController as? MainTabBarController else { return }
                     
                     mainTabbarController.setupViewControllers()
                     self.dismiss(animated: true, completion: nil)
@@ -584,7 +586,8 @@ extension LoginController {
             
             
             print("Successfully signed in to Firebase with Google:", user?.uid ?? "")
-            guard let mainTabbarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            guard let mainTabbarController = keyWindow?.rootViewController as? MainTabBarController else { return }
             
             mainTabbarController.setupViewControllers()
             self.dismiss(animated: true, completion: nil)

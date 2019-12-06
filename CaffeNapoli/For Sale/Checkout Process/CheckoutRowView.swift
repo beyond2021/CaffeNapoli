@@ -44,7 +44,7 @@ class CheckoutRowView: UIView {
 
     fileprivate let titleLabel = UILabel()
     fileprivate let detailLabel = UILabel()
-    fileprivate let activityIndicator = UIActivityIndicatorView(style: .gray)
+    fileprivate let activityIndicator = UIActivityIndicatorView(style: .medium)
     fileprivate let backgroundView = HighlightingButton()
     fileprivate let topSeparator = UIView()
     fileprivate let bottomSeparator = UIView()

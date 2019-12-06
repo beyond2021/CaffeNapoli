@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '10.0'
+ platform :ios, '13.0'
 
 target 'CaffeNapoli' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -41,7 +41,7 @@ pod 'CCZoomTransition', '~> 0.1'
 pod 'StatefulViewController', '~> 3.0'
 pod 'TransitionButton'
 pod 'EasyAnimation'
-pod 'ReachabilitySwift'
+
 pod 'Google-Mobile-Ads-SDK'
 
 

@@ -19,7 +19,7 @@ import Fabric
 import Crashlytics
 import TwitterKit
 import FirebaseAuthUI
-import Reachability
+//import Reachability
 import GTMSessionFetcher
 import SystemConfiguration
 import GoogleMobileAds
@@ -45,7 +45,7 @@ class CustomNavigationController: UINavigationController, UIViewControllerTransi
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
-    var reachability : Reachability?
+//    var reachability : Reachability?
     var delegate : AppDelegateDelegate?
 
 
@@ -53,12 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
 //        setReachabilityNotifier()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: nil)
         
         
         //        setReachabilityNotifier()
-        reachability = Reachability(hostname: "www.apple.com")
-        setReachabilityNotifier()
+//        reachability = Reachability(hostname: "www.apple.com")
+//        setReachabilityNotifier()
         
         //
         FirebaseApp.configure()
@@ -96,6 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         
         return true
     }
+    /*
     private func setReachabilityNotifier() {
 //        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(note:)), name: .reachabilityChanged, object: proReachability)
         do {
@@ -128,6 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 
 
     }
+ */
     
     //MARK:- receive alert open profile
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

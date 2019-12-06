@@ -28,7 +28,7 @@ class LoadingView: BasicPlaceholderView, StatefulPlaceholderView {
         label.translatesAutoresizingMaskIntoConstraints = false
         centerView.addSubview(label)
         
-        let activityIndicator = UIActivityIndicatorView(style: .gray)
+        let activityIndicator = UIActivityIndicatorView(style:.medium)
         activityIndicator.startAnimating()
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
