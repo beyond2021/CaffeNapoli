@@ -25,6 +25,8 @@
 
 #include <grpc/support/alloc.h>
 
+#include "absl/container/inlined_vector.h"
+
 #include "src/core/ext/filters/client_channel/lb_policy_registry.h"
 #include "src/core/ext/filters/client_channel/server_address.h"
 // TODO(roth): Should not need the include of subchannel.h here, since
@@ -33,7 +35,6 @@
 #include "src/core/ext/filters/client_channel/subchannel_interface.h"
 #include "src/core/lib/channel/channel_args.h"
 #include "src/core/lib/debug/trace.h"
-#include "src/core/lib/gprpp/inlined_vector.h"
 #include "src/core/lib/gprpp/orphanable.h"
 #include "src/core/lib/gprpp/ref_counted.h"
 #include "src/core/lib/gprpp/ref_counted_ptr.h"
@@ -62,7 +63,7 @@ class MySubchannelList
 };
 
 */
-// All methods will be called from within the client_channel combiner.
+// All methods will be called from within the client_channel work serializer.
 
 namespace grpc_core {
 
@@ -172,7 +173,7 @@ class SubchannelData {
 template <typename SubchannelListType, typename SubchannelDataType>
 class SubchannelList : public InternallyRefCounted<SubchannelListType> {
  public:
-  typedef InlinedVector<SubchannelDataType, 10> SubchannelVector;
+  typedef absl::InlinedVector<SubchannelDataType, 10> SubchannelVector;
 
   // The number of subchannels in the list.
   size_t num_subchannels() const { return subchannels_.size(); }
@@ -206,10 +207,6 @@ class SubchannelList : public InternallyRefCounted<SubchannelListType> {
   virtual ~SubchannelList();
 
  private:
-  // So New() can call our private ctor.
-  template <typename T, typename... Args>
-  friend T* New(Args&&... args);
-
   // For accessing Ref() and Unref().
   friend class SubchannelData<SubchannelListType, SubchannelDataType>;
 
@@ -267,7 +264,8 @@ void SubchannelData<SubchannelListType, SubchannelDataType>::Watcher::
 template <typename SubchannelListType, typename SubchannelDataType>
 SubchannelData<SubchannelListType, SubchannelDataType>::SubchannelData(
     SubchannelList<SubchannelListType, SubchannelDataType>* subchannel_list,
-    const ServerAddress& address, RefCountedPtr<SubchannelInterface> subchannel)
+    const ServerAddress& /*address*/,
+    RefCountedPtr<SubchannelInterface> subchannel)
     : subchannel_list_(subchannel_list),
       subchannel_(std::move(subchannel)),
       // We assume that the current state is IDLE.  If not, we'll get a
@@ -286,10 +284,10 @@ void SubchannelData<SubchannelListType, SubchannelDataType>::
     if (GRPC_TRACE_FLAG_ENABLED(*subchannel_list_->tracer())) {
       gpr_log(GPR_INFO,
               "[%s %p] subchannel list %p index %" PRIuPTR " of %" PRIuPTR
-              " (subchannel %p): unreffing subchannel",
+              " (subchannel %p): unreffing subchannel (%s)",
               subchannel_list_->tracer()->name(), subchannel_list_->policy(),
               subchannel_list_, Index(), subchannel_list_->num_subchannels(),
-              subchannel_.get());
+              subchannel_.get(), reason);
     }
     subchannel_.reset();
   }
@@ -316,10 +314,10 @@ void SubchannelData<SubchannelListType,
   }
   GPR_ASSERT(pending_watcher_ == nullptr);
   pending_watcher_ =
-      New<Watcher>(this, subchannel_list()->Ref(DEBUG_LOCATION, "Watcher"));
+      new Watcher(this, subchannel_list()->Ref(DEBUG_LOCATION, "Watcher"));
   subchannel_->WatchConnectivityState(
       connectivity_state_,
-      UniquePtr<SubchannelInterface::ConnectivityStateWatcherInterface>(
+      std::unique_ptr<SubchannelInterface::ConnectivityStateWatcherInterface>(
           pending_watcher_));
 }
 
@@ -373,14 +371,7 @@ SubchannelList<SubchannelListType, SubchannelDataType>::SubchannelList(
                                          GRPC_ARG_SERVICE_CONFIG};
   // Create a subchannel for each address.
   for (size_t i = 0; i < addresses.size(); i++) {
-    // TODO(roth): we should ideally hide this from the LB policy code. In
-    // principle, if we're dealing with this special case in the client_channel
-    // code for selecting grpclb, then we should also strip out these addresses
-    // there if we're not using grpclb.
-    if (addresses[i].IsBalancer()) {
-      continue;
-    }
-    InlinedVector<grpc_arg, 3> args_to_add;
+    absl::InlinedVector<grpc_arg, 3> args_to_add;
     const size_t subchannel_address_arg_index = args_to_add.size();
     args_to_add.emplace_back(
         Subchannel::CreateSubchannelAddressArg(&addresses[i].address()));

@@ -26,7 +26,7 @@ extension UIColor {
         
     }
     static func cellBGColor() -> UIColor {
-        return UIColor.rgb(displayP3Red: 230, green: 225, blue: 197)
+        return UIColor.rgb(displayP3Red: 239, green: 236, blue: 244)
         
     }
     static func tabBarButtonColor() -> UIColor {

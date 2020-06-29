@@ -17,7 +17,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "270"
             endingLineNumber = "270"
-            landmarkName = "application(_:handleOpen:)"
+            landmarkName = "application(application:openURL:sourceApplication:annotation:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,8 +51,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "282"
             endingLineNumber = "282"
-            landmarkName = "open(_:options:completionHandler:)"
-            landmarkType = "7">
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "B0752320-ABE2-4052-B383-B7FEA25D087C - a2ec13d02433855a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of CaffeNapoli.AppDelegate.open(_: Foundation.URL, options: Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler: Swift.Optional&lt;(Swift.Bool) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "CaffeNapoli"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keevinmitchell/Desktop/WhatsGood/CaffeNapoli/CaffeNapoli/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "283"
+                  endingLineNumber = "283"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "B0752320-ABE2-4052-B383-B7FEA25D087C - 9324db3513fff734"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CaffeNapoli.AppDelegate.open(_: Foundation.URL, options: Swift.Dictionary&lt;Swift.String, Any&gt;, completionHandler: Swift.Optional&lt;(Swift.Bool) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "CaffeNapoli"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keevinmitchell/Desktop/WhatsGood/CaffeNapoli/CaffeNapoli/AppDelegate.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "288"
+                  endingLineNumber = "288"
+                  offsetFromSymbolStart = "55">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -87,23 +119,6 @@
             endingLineNumber = "275"
             landmarkName = "authUI(_:didSignInWith:error:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A49E27EA-050B-429B-BA56-3CEF9FA6FF73"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CaffeNapoli/Home/HomeController/HomeController.swift"
-            timestampString = "581514359.029369"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "user"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

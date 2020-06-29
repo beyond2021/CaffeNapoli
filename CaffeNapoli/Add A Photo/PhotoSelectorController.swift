@@ -18,6 +18,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     let headerID = "headerID"
     override func viewDidLoad() {
         super.viewDidLoad()
+//        navigationController?.navigationBar.tintColor = .white
         collectionView?.backgroundColor = .white
         setupNavigationButtons()
         //
@@ -141,6 +142,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
        
         
         self.header = header
+//        self.header?.tintColor = .white
         //header.backgroundColor = .red
         // INSERT THE HEADER IMAGE HERE
         header.photoImageView.image = selectedImage // blurry image
@@ -222,8 +224,12 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     
     fileprivate func setupNavigationButtons(){
-//        navigationController?.navigationBar.tintColor = .white // change cancel button color
-        navigationController?.navigationBar.tintColor = .bytesDarkTextColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+        
+        
+        navigationController?.navigationBar.tintColor = .white
+        // change cancel button color
+//        navigationController?.navigationBar.tintColor = .bytesDarkTextColor
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         //
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(handleNext))

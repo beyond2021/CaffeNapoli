@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2E4A3BC41C561D81B175D72C3455F443"
+               BlueprintIdentifier = "1519EEC5E2CBA6156102312B0EC878B2"
+               BuildableName = "StatefulViewController.framework"
                BlueprintName = "StatefulViewController"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "StatefulViewController.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

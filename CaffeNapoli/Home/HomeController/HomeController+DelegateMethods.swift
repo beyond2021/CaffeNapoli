@@ -51,9 +51,9 @@ extension HomeController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeController.cellID, for: indexPath) as! HomePostCell
-//        cell.layer.shadowRadius = 5;
-//        cell.layer.shadowOpacity = 0.25;
-//        cell.layer.cornerRadius = 4
+        cell.layer.shadowRadius = 5;
+        cell.layer.shadowOpacity = 0.25;
+        cell.layer.cornerRadius = (60/2)
         
         
         cell.post = posts[indexPath.item]

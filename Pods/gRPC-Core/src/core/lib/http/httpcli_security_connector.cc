@@ -22,6 +22,8 @@
 
 #include <string.h>
 
+#include "absl/strings/string_view.h"
+
 #include <grpc/support/alloc.h>
 #include <grpc/support/log.h>
 #include <grpc/support/string_util.h>
@@ -30,7 +32,6 @@
 #include "src/core/lib/channel/handshaker_registry.h"
 #include "src/core/lib/gpr/string.h"
 #include "src/core/lib/gprpp/ref_counted_ptr.h"
-#include "src/core/lib/gprpp/string_view.h"
 #include "src/core/lib/iomgr/pollset.h"
 #include "src/core/lib/security/credentials/credentials.h"
 #include "src/core/lib/security/security_connector/ssl_utils.h"
@@ -100,7 +101,7 @@ class grpc_httpcli_ssl_channel_security_connector final
       error = GRPC_ERROR_CREATE_FROM_COPIED_STRING(msg);
       gpr_free(msg);
     }
-    GRPC_CLOSURE_SCHED(on_peer_checked, error);
+    grpc_core::ExecCtx::Run(DEBUG_LOCATION, on_peer_checked, error);
     tsi_peer_destruct(&peer);
   }
 
@@ -111,7 +112,7 @@ class grpc_httpcli_ssl_channel_security_connector final
     return strcmp(secure_peer_name_, other->secure_peer_name_);
   }
 
-  bool check_call_host(grpc_core::StringView /*host*/,
+  bool check_call_host(absl::string_view /*host*/,
                        grpc_auth_context* /*auth_context*/,
                        grpc_closure* /*on_call_host_checked*/,
                        grpc_error** error) override {
@@ -154,12 +155,11 @@ httpcli_ssl_channel_security_connector_create(
 
 /* handshaker */
 
-typedef struct {
+struct on_done_closure {
   void (*func)(void* arg, grpc_endpoint* endpoint);
   void* arg;
   grpc_core::RefCountedPtr<grpc_core::HandshakeManager> handshake_mgr;
-} on_done_closure;
-
+};
 static void on_handshake_done(void* arg, grpc_error* error) {
   auto* args = static_cast<grpc_core::HandshakerArgs*>(arg);
   on_done_closure* c = static_cast<on_done_closure*>(args->user_data);
@@ -174,13 +174,13 @@ static void on_handshake_done(void* arg, grpc_error* error) {
     gpr_free(args->read_buffer);
     c->func(c->arg, args->endpoint);
   }
-  grpc_core::Delete<on_done_closure>(c);
+  delete c;
 }
 
 static void ssl_handshake(void* arg, grpc_endpoint* tcp, const char* host,
                           grpc_millis deadline,
                           void (*on_done)(void* arg, grpc_endpoint* endpoint)) {
-  auto* c = grpc_core::New<on_done_closure>();
+  auto* c = new on_done_closure();
   const char* pem_root_certs =
       grpc_core::DefaultSslRootStore::GetPemRootCerts();
   const tsi_ssl_root_certs_store* root_store =

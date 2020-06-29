@@ -29,6 +29,7 @@
 #include "src/core/lib/gprpp/orphanable.h"
 #include "src/core/lib/iomgr/closure.h"
 #include "src/core/lib/iomgr/exec_ctx.h"
+#include "src/core/lib/iomgr/work_serializer.h"
 
 namespace grpc_core {
 
@@ -70,14 +71,15 @@ class AsyncConnectivityStateWatcherInterface
 
   // If \a combiner is nullptr, then the notification will be scheduled on the
   // ExecCtx.
-  explicit AsyncConnectivityStateWatcherInterface(Combiner* combiner = nullptr)
-      : combiner_(combiner) {}
+  explicit AsyncConnectivityStateWatcherInterface(
+      std::shared_ptr<WorkSerializer> work_serializer = nullptr)
+      : work_serializer_(std::move(work_serializer)) {}
 
   // Invoked asynchronously when Notify() is called.
   virtual void OnConnectivityStateChange(grpc_connectivity_state new_state) = 0;
 
  private:
-  Combiner* combiner_;
+  std::shared_ptr<WorkSerializer> work_serializer_;
 };
 
 // Tracks connectivity state.  Maintains a list of watchers that are
@@ -119,8 +121,8 @@ class ConnectivityStateTracker {
   Atomic<grpc_connectivity_state> state_;
   // TODO(roth): Once we can use C++-14 heterogeneous lookups, this can
   // be a set instead of a map.
-  Map<ConnectivityStateWatcherInterface*,
-      OrphanablePtr<ConnectivityStateWatcherInterface>>
+  std::map<ConnectivityStateWatcherInterface*,
+           OrphanablePtr<ConnectivityStateWatcherInterface>>
       watchers_;
 };
 

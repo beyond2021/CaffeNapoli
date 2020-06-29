@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 //        window?.rootViewController = TestCollectionViewController()
        
         UITabBar.appearance().tintColor = UIColor.white
-//        UINavigationBar.appearance().barTintColor = .lightRed
+        UINavigationBar.appearance().barTintColor = .lightRed
         UINavigationBar.appearance().tintColor = .white
         attemptRegisterForNotifications(application: application)
         

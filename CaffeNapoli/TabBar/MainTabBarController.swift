@@ -14,9 +14,9 @@ import Firebase
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     // This method comes from UITabBarControllerDelegate protocol
     static let homeTitle = "Home"
-    static let serviceTitle = "service"
+    static let serviceTitle = "Service"
     static let shareTitle = "Share"
-    static let friendsTitle = "Friends"
+    static let friendsTitle = "Users"
     static let meTitle = "Me"
    
     override func viewDidLoad() {
@@ -57,7 +57,8 @@ if Auth.auth().currentUser == nil {
         let userProfileNavController = templateNavController(title: MainTabBarController.meTitle, unselectedImage:  #imageLiteral(resourceName: "avatarBE"), selectedImage: #imageLiteral(resourceName: "avatarBS"), rootViewController:UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
         // Color the tabBar
         tabBar.tintColor = .black
-        viewControllers = [homeNavController,addReservationController,plusNavController,searchNavController,  userProfileNavController]
+        tabBar.barTintColor = UIColor.tealColor
+        viewControllers =  [homeNavController,addReservationController,plusNavController,searchNavController,  userProfileNavController]
         // Tomove the images to center of tabbar - insets here - Modify tabbar insets
         guard let items = tabBar.items else { return }
         for  item in items {

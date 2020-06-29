@@ -54,11 +54,11 @@ class HomePostCell: UICollectionViewCell {
                 
             }
             
-//            if  post?.hasLiked == true {
-//                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal), for: .normal)
-//            } else {
-//                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
-//            }
+            if  post?.hasLiked == true {
+                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-filled-50").withRenderingMode(.alwaysOriginal), for: .normal)
+            } else {
+                likeButton.setImage(#imageLiteral(resourceName: "icons8-heart-50").withRenderingMode(.alwaysOriginal), for: .normal)
+            }
 //
            
          
@@ -289,7 +289,7 @@ class HomePostCell: UICollectionViewCell {
         
         
         
-//        backgroundColor = UIColor.cellBGColor()
+        backgroundColor = UIColor.cellBGColor()
         //
         addSubview(userProfileImageView)
         addSubview(usernameLabel)

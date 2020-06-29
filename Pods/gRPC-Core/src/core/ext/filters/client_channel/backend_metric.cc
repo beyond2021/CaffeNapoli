@@ -18,31 +18,34 @@
 
 #include "src/core/ext/filters/client_channel/backend_metric.h"
 
-#include "src/core/lib/gprpp/string_view.h"
+#include "absl/strings/string_view.h"
+
 #if COCOAPODS==1
   #include  "src/core/ext/upb-generated/udpa/data/orca/v1/orca_load_report.upb.h"
 #else
   #include  "udpa/data/orca/v1/orca_load_report.upb.h"
 #endif
 
+#include "src/core/lib/gprpp/map.h"
+
 namespace grpc_core {
 
 namespace {
 
 template <typename EntryType>
-Map<StringView, double, StringLess> ParseMap(
+std::map<absl::string_view, double, StringLess> ParseMap(
     udpa_data_orca_v1_OrcaLoadReport* msg,
     EntryType** (*entry_func)(udpa_data_orca_v1_OrcaLoadReport*, size_t*),
     upb_strview (*key_func)(const EntryType*),
     double (*value_func)(const EntryType*), Arena* arena) {
-  Map<StringView, double, StringLess> result;
+  std::map<absl::string_view, double, StringLess> result;
   size_t size;
   const auto* const* entries = entry_func(msg, &size);
   for (size_t i = 0; i < size; ++i) {
     upb_strview key_view = key_func(entries[i]);
     char* key = static_cast<char*>(arena->Alloc(key_view.size + 1));
     memcpy(key, key_view.data, key_view.size);
-    result[StringView(key, key_view.size)] = value_func(entries[i]);
+    result[absl::string_view(key, key_view.size)] = value_func(entries[i]);
   }
   return result;
 }

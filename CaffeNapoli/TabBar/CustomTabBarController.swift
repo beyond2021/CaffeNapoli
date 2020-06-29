@@ -15,31 +15,32 @@ class CustomTabBarController: ESTabBarController, UITabBarControllerDelegate {
     static let homeTitle = "Home"
     static let serviceTitle = "service"
     static let shareTitle = "Share"
-    static let friendsTitle = "Friends"
+    static let friendsTitle = "Users"
     static let meTitle = "Me"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //ios 13
-        /*
-        if #available(iOS 13.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.largeTitleTextAttributes = textAttributes
-            appearance.titleTextAttributes = textAttributes
-            let bar = self.navigationController?.navigationBar
-            bar?.scrollEdgeAppearance = appearance
-            bar?.standardAppearance = appearance
-            bar?.compactAppearance = appearance
-        } else {
-            // Fallback on earlier versions
-        }
- */
+        
+//        if #available(iOS 13.0, *) {
+//            let appearance = UINavigationBarAppearance()
+//            appearance.largeTitleTextAttributes = textAttributes
+//            appearance.titleTextAttributes = textAttributes
+//            let bar = self.navigationController?.navigationBar
+//            bar?.scrollEdgeAppearance = appearance
+//            bar?.standardAppearance = appearance
+//            bar?.compactAppearance = appearance
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//
         
         self.tabBar.barTintColor = .white
        
         
-//        self.tabBar.tintColor = .white
+        self.tabBar.tintColor = .red
+        
         
         self.delegate = self //- disables tabbar selections
         //HERE WE WILL CHECK IF THE USER IS LOGGED IN

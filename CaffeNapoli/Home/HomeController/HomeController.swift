@@ -47,9 +47,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     var post : Post?
-//    var likes = [Like]() // container to hold the comments empty
+    var likes = [Like]() // container to hold the comments empty
  
-//    var likesCount = 0
+    var likesCount = 0
     
     
     // MARK : USER
@@ -522,7 +522,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             print("Failed to fetch posts", error)
         }
     }
-   var likes = 0
+//   var likes = 0
     
     fileprivate func setUpNavigationItems() {
         navigationItem.title = HomeController.navTitle
@@ -557,11 +557,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
         //bytesDarkTextColor
         if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.lightRed, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeLarge) ?? ""]
         } else {
             // Fallback on earlier versions
         }
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font:UIFont(name:HomeController.navFontName, size: HomeController.navFontSizeSmall) ?? ""]
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "TakeAPic").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "...", style: .plain, target: self, action: #selector(handleBitcoin))

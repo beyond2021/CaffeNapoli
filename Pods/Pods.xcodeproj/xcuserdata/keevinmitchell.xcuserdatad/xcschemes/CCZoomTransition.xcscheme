@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BBB19296B500F2C54B775AB7864DCA73"
+               BlueprintIdentifier = "EEE4D9751F1080317CFBC7D08DA51812"
+               BuildableName = "CCZoomTransition.framework"
                BlueprintName = "CCZoomTransition"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "CCZoomTransition.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

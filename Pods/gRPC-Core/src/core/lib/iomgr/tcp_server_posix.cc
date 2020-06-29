@@ -37,6 +37,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <string>
+
 #include <grpc/support/alloc.h>
 #include <grpc/support/log.h>
 #include <grpc/support/string_util.h>
@@ -108,7 +110,8 @@ static void finish_shutdown(grpc_tcp_server* s) {
   GPR_ASSERT(s->shutdown);
   gpr_mu_unlock(&s->mu);
   if (s->shutdown_complete != nullptr) {
-    GRPC_CLOSURE_SCHED(s->shutdown_complete, GRPC_ERROR_NONE);
+    grpc_core::ExecCtx::Run(DEBUG_LOCATION, s->shutdown_complete,
+                            GRPC_ERROR_NONE);
   }
 
   gpr_mu_destroy(&s->mu);
@@ -119,7 +122,7 @@ static void finish_shutdown(grpc_tcp_server* s) {
     gpr_free(sp);
   }
   grpc_channel_args_destroy(s->channel_args);
-  grpc_core::Delete(s->fd_handler);
+  delete s->fd_handler;
 
   gpr_free(s);
 }
@@ -348,7 +351,7 @@ static grpc_error* add_wildcard_addrs_to_server(grpc_tcp_server* s,
 
 static grpc_error* clone_port(grpc_tcp_listener* listener, unsigned count) {
   grpc_tcp_listener* sp = nullptr;
-  char* addr_str;
+  std::string addr_str;
   char* name;
   grpc_error* err;
 
@@ -367,8 +370,8 @@ static grpc_error* clone_port(grpc_tcp_listener* listener, unsigned count) {
                                          true, &port);
     if (err != GRPC_ERROR_NONE) return err;
     listener->server->nports++;
-    grpc_sockaddr_to_string(&addr_str, &listener->addr, 1);
-    gpr_asprintf(&name, "tcp-server-listener:%s/clone-%d", addr_str, i);
+    addr_str = grpc_sockaddr_to_string(&listener->addr, true);
+    gpr_asprintf(&name, "tcp-server-listener:%s/clone-%d", addr_str.c_str(), i);
     sp = static_cast<grpc_tcp_listener*>(gpr_malloc(sizeof(grpc_tcp_listener)));
     sp->next = listener->next;
     listener->next = sp;
@@ -388,7 +391,6 @@ static grpc_error* clone_port(grpc_tcp_listener* listener, unsigned count) {
     while (listener->server->tail->next != nullptr) {
       listener->server->tail = listener->server->tail->next;
     }
-    gpr_free(addr_str);
     gpr_free(name);
   }
 
@@ -546,7 +548,7 @@ static void tcp_server_unref(grpc_tcp_server* s) {
   if (gpr_unref(&s->refs)) {
     grpc_tcp_server_shutdown_listeners(s);
     gpr_mu_lock(&s->mu);
-    GRPC_CLOSURE_LIST_SCHED(&s->shutdown_starting);
+    grpc_core::ExecCtx::RunList(DEBUG_LOCATION, &s->shutdown_starting);
     gpr_mu_unlock(&s->mu);
     tcp_server_destroy(s);
   }
@@ -622,7 +624,7 @@ class ExternalConnectionHandler : public grpc_core::TcpServerFdHandler {
 
 static grpc_core::TcpServerFdHandler* tcp_server_create_fd_handler(
     grpc_tcp_server* s) {
-  s->fd_handler = grpc_core::New<ExternalConnectionHandler>(s);
+  s->fd_handler = new ExternalConnectionHandler(s);
   return s->fd_handler;
 }
 

@@ -98,7 +98,7 @@ class grpc_channel_security_connector : public grpc_security_connector {
   /// Returns true if completed synchronously, in which case \a error will
   /// be set to indicate the result.  Otherwise, \a on_call_host_checked
   /// will be invoked when complete.
-  virtual bool check_call_host(grpc_core::StringView host,
+  virtual bool check_call_host(absl::string_view host,
                                grpc_auth_context* auth_context,
                                grpc_closure* on_call_host_checked,
                                grpc_error** error) = 0;
@@ -138,7 +138,7 @@ class grpc_channel_security_connector : public grpc_security_connector {
  private:
   grpc_core::RefCountedPtr<grpc_channel_credentials> channel_creds_;
   grpc_core::RefCountedPtr<grpc_call_credentials> request_metadata_creds_;
-  grpc_core::UniquePtr<grpc_channel_args> channel_args_;
+  std::unique_ptr<grpc_channel_args> channel_args_;
 };
 
 /* --- server_security_connector object. ---
